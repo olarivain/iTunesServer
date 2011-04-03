@@ -57,6 +57,7 @@
 		00B3F8C4132C70F3003A4FCD /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
 		00C76DC513492CE20057F9E6 /* libmedia-management-common-i386.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = "libmedia-management-common-i386.a"; sourceTree = SOURCE_ROOT; };
 		00C76DC613492CE20057F9E6 /* libmedia-management-common-x86_64.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = "libmedia-management-common-x86_64.a"; sourceTree = SOURCE_ROOT; };
+		00C76DCB13492E430057F9E6 /* getContent.scpt */ = {isa = PBXFileReference; lastKnownFileType = file; path = getContent.scpt; sourceTree = "<group>"; };
 		00E35DC1132C048E00D25EFF /* HttpMethod.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HttpMethod.h; sourceTree = "<group>"; };
 		00E35DC2132C048E00D25EFF /* HTTPServe.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HTTPServe.h; sourceTree = "<group>"; };
 		00E35DC3132C048E00D25EFF /* Request.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Request.h; sourceTree = "<group>"; };
@@ -107,6 +108,7 @@
 				002A0A4E13243E1500320A06 /* CLIServer */,
 				002A0A4B13243E1500320A06 /* Frameworks */,
 				002A0A4913243E1500320A06 /* Products */,
+				00C76DCA13492E430057F9E6 /* Scripts */,
 			);
 			sourceTree = "<group>";
 		};
@@ -169,6 +171,14 @@
 				00375DA913490E5300496365 /* ScriptRepository.m */,
 			);
 			path = itunes;
+			sourceTree = "<group>";
+		};
+		00C76DCA13492E430057F9E6 /* Scripts */ = {
+			isa = PBXGroup;
+			children = (
+				00C76DCB13492E430057F9E6 /* getContent.scpt */,
+			);
+			path = Scripts;
 			sourceTree = "<group>";
 		};
 		00E35DBF132C048E00D25EFF /* httpserve */ = {
