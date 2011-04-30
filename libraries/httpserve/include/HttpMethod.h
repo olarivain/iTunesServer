@@ -16,5 +16,5 @@ typedef enum HttpMethod
 } HttpMethod;
 
 
-enum HttpMethod methodFromString(NSString *method);
+enum HSHttpMethod methodFromString(NSString *method);
 NSString* stringFromMethod(HttpMethod method);

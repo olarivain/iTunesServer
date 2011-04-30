@@ -47,7 +47,7 @@ static ScriptRepository *sharedInstance;
 #pragma mark - Convenience private methods
 - (NSString *) pathForKey: (NSString*) key andPrefix: (NSString*) prefix 
 {
-  return [NSString stringWithFormat:@"%@/%@.scpt", prefix, key];
+  return [NSString stringWithFormat:@"%@/%@.app", prefix, key];
 }
 
 - (NSString*) globalPathForKey: (NSString*) key 
@@ -73,7 +73,7 @@ static ScriptRepository *sharedInstance;
   // check if script has already been instantiated
   @synchronized(self) {
     NSAppleScript *script = [scripts objectForKey: key];
-    if(script == nil){
+//    if(script == nil){
   
       // no match, figure out script path
       NSString *path = [self globalPathForKey: key];
@@ -98,8 +98,14 @@ static ScriptRepository *sharedInstance;
       }
       
       // cache and return
-      [scripts setObject:script forKey:key];
-    }
+//      [scripts setObject:script forKey:key];
+      
+      if(![script isCompiled])
+      {
+        NSDictionary *errors = nil;
+        [script compileAndReturnError: &errors];
+      }
+//    }
     return script;
   }
 }

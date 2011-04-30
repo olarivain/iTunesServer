@@ -1,22 +1,21 @@
 //
-//  PhonyResource.h
+//  MusicResource.h
 //  CLIServer
 //
-//  Created by Kra on 3/12/11.
+//  Created by Kra on 4/3/11.
 //  Copyright 2011 kra. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
-#import "RestResource.h"
-
 @class iTunesContentRepository;
 @class ContentAssembler;
-@interface MovieResource : NSObject<HSRestResource> 
+
+@interface MusicResource : NSObject<HSRestResource> 
 {
-  @private
+@private
   iTunesContentRepository *repository;
 //  ContentAssembler *contentAssembler;
-    
+  
 }
 
 - (NSArray*) resourceDescriptors;

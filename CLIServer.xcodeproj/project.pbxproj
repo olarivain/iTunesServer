@@ -9,18 +9,15 @@
 /* Begin PBXBuildFile section */
 		002A0A4D13243E1500320A06 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 002A0A4C13243E1500320A06 /* Foundation.framework */; };
 		002A0A5013243E1500320A06 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 002A0A4F13243E1500320A06 /* main.m */; };
-		00323D68132C1A35003BED87 /* libhttpserve-i386.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 00323D66132C1A35003BED87 /* libhttpserve-i386.a */; };
-		00323D69132C1A35003BED87 /* libhttpserve-x86_64.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 00323D67132C1A35003BED87 /* libhttpserve-x86_64.a */; };
-		00323D90132C1B25003BED87 /* liblibjson-i386.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 00323D8E132C1B25003BED87 /* liblibjson-i386.a */; };
-		00323D91132C1B25003BED87 /* liblibjson-x86_64.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 00323D8F132C1B25003BED87 /* liblibjson-x86_64.a */; };
 		00375DAA13490E5300496365 /* ScriptRepository.m in Sources */ = {isa = PBXBuildFile; fileRef = 00375DA913490E5300496365 /* ScriptRepository.m */; };
 		00978201132C803A00F5E563 /* Automator.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 00978200132C803A00F5E563 /* Automator.framework */; };
+		00A6305E135E8C5C0084BB4F /* libmedia-management-common-x86_64.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 00A6305C135E8BFA0084BB4F /* libmedia-management-common-x86_64.a */; };
 		00B3F8BD132C6601003A4FCD /* MovieResource.m in Sources */ = {isa = PBXBuildFile; fileRef = 00B3F8BC132C6601003A4FCD /* MovieResource.m */; };
 		00B3F8C1132C6624003A4FCD /* iTunesContentRepository.m in Sources */ = {isa = PBXBuildFile; fileRef = 00B3F8C0132C6624003A4FCD /* iTunesContentRepository.m */; };
 		00B3F8C3132C70B6003A4FCD /* ApplicationServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 00B3F8C2132C70B6003A4FCD /* ApplicationServices.framework */; };
 		00B3F8C5132C70F3003A4FCD /* AppKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 00B3F8C4132C70F3003A4FCD /* AppKit.framework */; };
-		00C76DC713492CE20057F9E6 /* libmedia-management-common-i386.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 00C76DC513492CE20057F9E6 /* libmedia-management-common-i386.a */; };
-		00C76DC813492CE20057F9E6 /* libmedia-management-common-x86_64.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 00C76DC613492CE20057F9E6 /* libmedia-management-common-x86_64.a */; };
+		00C76DCE13492FA70057F9E6 /* MusicResource.m in Sources */ = {isa = PBXBuildFile; fileRef = 00C76DCD13492FA70057F9E6 /* MusicResource.m */; };
+		00DCDF5D136CBC92002A37F6 /* libhttpserve.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 00DCDF5C136CBC92002A37F6 /* libhttpserve.a */; };
 		00E35DD9132C04ED00D25EFF /* CoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 00E35DD8132C04ED00D25EFF /* CoreServices.framework */; };
 /* End PBXBuildFile section */
 
@@ -42,28 +39,30 @@
 		002A0A4F13243E1500320A06 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		002A0A5213243E1500320A06 /* CLIServer-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "CLIServer-Prefix.pch"; sourceTree = "<group>"; };
 		002A0A5313243E1500320A06 /* CLIServer.1 */ = {isa = PBXFileReference; lastKnownFileType = text.man; path = CLIServer.1; sourceTree = "<group>"; };
-		00323D66132C1A35003BED87 /* libhttpserve-i386.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "libhttpserve-i386.a"; sourceTree = "<group>"; };
-		00323D67132C1A35003BED87 /* libhttpserve-x86_64.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "libhttpserve-x86_64.a"; sourceTree = "<group>"; };
 		00323D8E132C1B25003BED87 /* liblibjson-i386.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "liblibjson-i386.a"; sourceTree = "<group>"; };
 		00323D8F132C1B25003BED87 /* liblibjson-x86_64.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "liblibjson-x86_64.a"; sourceTree = "<group>"; };
 		00375DA813490E5300496365 /* ScriptRepository.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScriptRepository.h; sourceTree = "<group>"; };
 		00375DA913490E5300496365 /* ScriptRepository.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ScriptRepository.m; sourceTree = "<group>"; };
 		00978200132C803A00F5E563 /* Automator.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Automator.framework; path = System/Library/Frameworks/Automator.framework; sourceTree = SDKROOT; };
+		00A63057135E8B860084BB4F /* libhttpserve-x86_64.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "libhttpserve-x86_64.a"; sourceTree = "<group>"; };
+		00A63059135E8B860084BB4F /* libhttpserve-x86_64.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "libhttpserve-x86_64.a"; sourceTree = "<group>"; };
+		00A6305C135E8BFA0084BB4F /* libmedia-management-common-x86_64.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libmedia-management-common-x86_64.a"; path = "libraries/libmedia-management-common-x86_64.a"; sourceTree = "<group>"; };
 		00B3F8BB132C6601003A4FCD /* MovieResource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MovieResource.h; sourceTree = "<group>"; };
 		00B3F8BC132C6601003A4FCD /* MovieResource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MovieResource.m; sourceTree = "<group>"; };
 		00B3F8BF132C6624003A4FCD /* iTunesContentRepository.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = iTunesContentRepository.h; sourceTree = "<group>"; };
 		00B3F8C0132C6624003A4FCD /* iTunesContentRepository.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = iTunesContentRepository.m; sourceTree = "<group>"; };
 		00B3F8C2132C70B6003A4FCD /* ApplicationServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ApplicationServices.framework; path = System/Library/Frameworks/ApplicationServices.framework; sourceTree = SDKROOT; };
 		00B3F8C4132C70F3003A4FCD /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
-		00C76DC513492CE20057F9E6 /* libmedia-management-common-i386.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = "libmedia-management-common-i386.a"; sourceTree = SOURCE_ROOT; };
-		00C76DC613492CE20057F9E6 /* libmedia-management-common-x86_64.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = "libmedia-management-common-x86_64.a"; sourceTree = SOURCE_ROOT; };
 		00C76DCB13492E430057F9E6 /* getContent.scpt */ = {isa = PBXFileReference; lastKnownFileType = file; path = getContent.scpt; sourceTree = "<group>"; };
+		00C76DCC13492FA70057F9E6 /* MusicResource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MusicResource.h; sourceTree = "<group>"; };
+		00C76DCD13492FA70057F9E6 /* MusicResource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MusicResource.m; sourceTree = "<group>"; };
+		00DCDF5C136CBC92002A37F6 /* libhttpserve.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libhttpserve.a; sourceTree = SOURCE_ROOT; };
 		00E35DC1132C048E00D25EFF /* HttpMethod.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HttpMethod.h; sourceTree = "<group>"; };
-		00E35DC2132C048E00D25EFF /* HTTPServe.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HTTPServe.h; sourceTree = "<group>"; };
+		00E35DC2132C048E00D25EFF /* HSHTTPServe.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HSHTTPServe.h; sourceTree = "<group>"; };
 		00E35DC3132C048E00D25EFF /* Request.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Request.h; sourceTree = "<group>"; };
 		00E35DC4132C048E00D25EFF /* RequestHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RequestHandler.h; sourceTree = "<group>"; };
-		00E35DC5132C048E00D25EFF /* ResourceDescriptor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ResourceDescriptor.h; sourceTree = "<group>"; };
-		00E35DC6132C048E00D25EFF /* Response.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Response.h; sourceTree = "<group>"; };
+		00E35DC5132C048E00D25EFF /* HSResourceDescriptor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HSResourceDescriptor.h; sourceTree = "<group>"; };
+		00E35DC6132C048E00D25EFF /* HSResponse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HSResponse.h; sourceTree = "<group>"; };
 		00E35DC7132C048E00D25EFF /* ResponseCode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ResponseCode.h; sourceTree = "<group>"; };
 		00E35DC8132C048E00D25EFF /* RestResource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RestResource.h; sourceTree = "<group>"; };
 		00E35DCD132C048E00D25EFF /* JSON.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSON.h; sourceTree = "<group>"; };
@@ -82,17 +81,13 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				00C76DC713492CE20057F9E6 /* libmedia-management-common-i386.a in Frameworks */,
-				00C76DC813492CE20057F9E6 /* libmedia-management-common-x86_64.a in Frameworks */,
 				00978201132C803A00F5E563 /* Automator.framework in Frameworks */,
 				00B3F8C5132C70F3003A4FCD /* AppKit.framework in Frameworks */,
 				00B3F8C3132C70B6003A4FCD /* ApplicationServices.framework in Frameworks */,
 				00E35DD9132C04ED00D25EFF /* CoreServices.framework in Frameworks */,
 				002A0A4D13243E1500320A06 /* Foundation.framework in Frameworks */,
-				00323D68132C1A35003BED87 /* libhttpserve-i386.a in Frameworks */,
-				00323D69132C1A35003BED87 /* libhttpserve-x86_64.a in Frameworks */,
-				00323D90132C1B25003BED87 /* liblibjson-i386.a in Frameworks */,
-				00323D91132C1B25003BED87 /* liblibjson-x86_64.a in Frameworks */,
+				00A6305E135E8C5C0084BB4F /* libmedia-management-common-x86_64.a in Frameworks */,
+				00DCDF5D136CBC92002A37F6 /* libhttpserve.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -123,8 +118,8 @@
 		002A0A4B13243E1500320A06 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				00C76DC513492CE20057F9E6 /* libmedia-management-common-i386.a */,
-				00C76DC613492CE20057F9E6 /* libmedia-management-common-x86_64.a */,
+				00DCDF5C136CBC92002A37F6 /* libhttpserve.a */,
+				00A6305C135E8BFA0084BB4F /* libmedia-management-common-x86_64.a */,
 				00E35DBF132C048E00D25EFF /* httpserve */,
 				00E35DCA132C048E00D25EFF /* json */,
 				00E35DD8132C04ED00D25EFF /* CoreServices.framework */,
@@ -136,7 +131,7 @@
 		002A0A4E13243E1500320A06 /* CLIServer */ = {
 			isa = PBXGroup;
 			children = (
-				00B3F8BE132C6611003A4FCD /* itunes */,
+				00B3F8BE132C6611003A4FCD /* repository */,
 				00B3F8BA132C6601003A4FCD /* resource */,
 				002A0A4F13243E1500320A06 /* main.m */,
 				002A0A5313243E1500320A06 /* CLIServer.1 */,
@@ -153,16 +148,34 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		00A63056135E8B860084BB4F /* debug */ = {
+			isa = PBXGroup;
+			children = (
+				00A63057135E8B860084BB4F /* libhttpserve-x86_64.a */,
+			);
+			path = debug;
+			sourceTree = "<group>";
+		};
+		00A63058135E8B860084BB4F /* release */ = {
+			isa = PBXGroup;
+			children = (
+				00A63059135E8B860084BB4F /* libhttpserve-x86_64.a */,
+			);
+			path = release;
+			sourceTree = "<group>";
+		};
 		00B3F8BA132C6601003A4FCD /* resource */ = {
 			isa = PBXGroup;
 			children = (
 				00B3F8BB132C6601003A4FCD /* MovieResource.h */,
 				00B3F8BC132C6601003A4FCD /* MovieResource.m */,
+				00C76DCC13492FA70057F9E6 /* MusicResource.h */,
+				00C76DCD13492FA70057F9E6 /* MusicResource.m */,
 			);
 			path = resource;
 			sourceTree = "<group>";
 		};
-		00B3F8BE132C6611003A4FCD /* itunes */ = {
+		00B3F8BE132C6611003A4FCD /* repository */ = {
 			isa = PBXGroup;
 			children = (
 				00B3F8BF132C6624003A4FCD /* iTunesContentRepository.h */,
@@ -170,6 +183,7 @@
 				00375DA813490E5300496365 /* ScriptRepository.h */,
 				00375DA913490E5300496365 /* ScriptRepository.m */,
 			);
+			name = repository;
 			path = itunes;
 			sourceTree = "<group>";
 		};
@@ -184,8 +198,8 @@
 		00E35DBF132C048E00D25EFF /* httpserve */ = {
 			isa = PBXGroup;
 			children = (
-				00323D66132C1A35003BED87 /* libhttpserve-i386.a */,
-				00323D67132C1A35003BED87 /* libhttpserve-x86_64.a */,
+				00A63056135E8B860084BB4F /* debug */,
+				00A63058135E8B860084BB4F /* release */,
 				00E35DC0132C048E00D25EFF /* include */,
 			);
 			name = httpserve;
@@ -196,11 +210,11 @@
 			isa = PBXGroup;
 			children = (
 				00E35DC1132C048E00D25EFF /* HttpMethod.h */,
-				00E35DC2132C048E00D25EFF /* HTTPServe.h */,
+				00E35DC2132C048E00D25EFF /* HSHTTPServe.h */,
 				00E35DC3132C048E00D25EFF /* Request.h */,
 				00E35DC4132C048E00D25EFF /* RequestHandler.h */,
-				00E35DC5132C048E00D25EFF /* ResourceDescriptor.h */,
-				00E35DC6132C048E00D25EFF /* Response.h */,
+				00E35DC5132C048E00D25EFF /* HSResourceDescriptor.h */,
+				00E35DC6132C048E00D25EFF /* HSResponse.h */,
 				00E35DC7132C048E00D25EFF /* ResponseCode.h */,
 				00E35DC8132C048E00D25EFF /* RestResource.h */,
 			);
@@ -292,6 +306,7 @@
 				00B3F8BD132C6601003A4FCD /* MovieResource.m in Sources */,
 				00B3F8C1132C6624003A4FCD /* iTunesContentRepository.m in Sources */,
 				00375DAA13490E5300496365 /* ScriptRepository.m in Sources */,
+				00C76DCE13492FA70057F9E6 /* MusicResource.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -346,7 +361,11 @@
 					"\"$(SRCROOT)/libraries/json\"",
 					"\"$(SRCROOT)\"",
 					"/Users/olarivain/Library/Developer/Xcode/DerivedData/iTunesServeWorkspace-gdxtkgyggbibwjhhjbsbgncjwxri/Build/Products/Debug",
+					"\"$(SRCROOT)/libraries/httpserve/debug\"",
+					"\"$(SRCROOT)/libraries/httpserve/release\"",
+					"\"$(SRCROOT)/libraries\"",
 				);
+				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				USER_HEADER_SEARCH_PATHS = "/Users/olarivain/Development/XCode\\ 4/MediaManagementCommon/MediaManagementCommon/**";
 			};
@@ -368,6 +387,9 @@
 					"\"$(SRCROOT)/libraries/json\"",
 					"\"$(SRCROOT)\"",
 					"/Users/olarivain/Library/Developer/Xcode/DerivedData/iTunesServeWorkspace-gdxtkgyggbibwjhhjbsbgncjwxri/Build/Products/Debug",
+					"\"$(SRCROOT)/libraries/httpserve/debug\"",
+					"\"$(SRCROOT)/libraries/httpserve/release\"",
+					"\"$(SRCROOT)/libraries\"",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				USER_HEADER_SEARCH_PATHS = "/Users/olarivain/Development/XCode\\ 4/MediaManagementCommon/MediaManagementCommon/**";

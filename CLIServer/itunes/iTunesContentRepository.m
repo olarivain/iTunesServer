@@ -79,6 +79,7 @@
   // at last, call the event in AppleScript
   NSDictionary *error = nil;
   NSAppleEventDescriptor *response = [appleScript executeAppleEvent:event error:&error];
+  NSLog(@"error: %@", error);
   return response;
 }
 
@@ -125,7 +126,7 @@
     
     [array addObject:content];
   }
- 
+
   return array;
 }
 
@@ -133,6 +134,30 @@
 {
   NSAppleEventDescriptor *descriptor = [self descriptor:READ_SCRIPTS methodName:@"GetContent" andParameters: [NSArray arrayWithObject: @"Movies"]];
   return [self arrayWithResponse: descriptor andContentKind:MOVIE];
+  
+}
+
+- (NSArray*) allMusic
+{
+  NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
+  NSAppleEventDescriptor *descriptor = [self descriptor:READ_SCRIPTS methodName:@"GetContent" andParameters: [NSArray arrayWithObject: @"Music"]];
+  NSArray *response = [self arrayWithResponse: descriptor andContentKind:MUSIC];
+  [pool drain];
+  [pool release];
+  
+  return response;
+}
+
+- (NSArray*) allPodcasts
+{
+  NSAppleEventDescriptor *descriptor = [self descriptor:READ_SCRIPTS methodName:@"GetContent" andParameters: [NSArray arrayWithObject: @"Podcasts"]];
+  return [self arrayWithResponse: descriptor andContentKind:PODCAST];
+}
+
+- (NSArray*) alliTunesU
+{
+  NSAppleEventDescriptor *descriptor = [self descriptor:READ_SCRIPTS methodName:@"GetContent" andParameters: [NSArray arrayWithObject: @"iTunes U"]];
+  return [self arrayWithResponse: descriptor andContentKind:ITUNES_U];
 }
 
 

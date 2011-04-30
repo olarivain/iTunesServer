@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 
 
-@protocol RestResource <NSObject>
+@protocol HSRestResource <NSObject>
 
 - (NSArray*) resourceDescriptors;
 

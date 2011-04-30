@@ -11,20 +11,20 @@
 #import "HttpMethod.h"
 #import "RestResource.h"
 
-@interface ResourceDescriptor : NSObject {
+@interface HSResourceDescriptor : NSObject {
 @private
   NSString *path;
   HttpMethod method;
   SEL selector;
-  id<RestResource> resource;
+  id<HSRestResource> resource;
 }
 
-+ (id) descriptorWithPath: (NSString*) resourcePath resource: (id<RestResource>) resource andSelector: (SEL) sel;
-+ (id) descriptorWithPath: (NSString*) resourcePath resource: (id<RestResource>) resource selector: (SEL) sel andMethod: (HttpMethod) resourceMethod;
++ (id) descriptorWithPath: (NSString*) resourcePath resource: (id<HSRestResource>) resource andSelector: (SEL) sel;
++ (id) descriptorWithPath: (NSString*) resourcePath resource: (id<HSRestResource>) resource selector: (SEL) sel andMethod: (HttpMethod) resourceMethod;
 
 @property (readwrite, retain) NSString *path;
 @property (readwrite, assign) HttpMethod method;
 @property (readwrite, assign) SEL selector;
-@property (readwrite, retain) id<RestResource> resource;
+@property (readwrite, retain) id<HSRestResource> resource;
 
 @end

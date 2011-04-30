@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-@class RequestHandlerRegistry;
+@class HSRequestHandlerRegistry;
 
 /*
  * <p>HTTPServe is the class implenting the server.<br/>
@@ -34,9 +34,9 @@
  * are actually Protocols that you should implement. 
  * </p>
  */
-@class HTTPConnection;
+@class HSHTTPConnection;
 
-@interface HTTPServe : NSObject<NSNetServiceDelegate>
+@interface HSHTTPServe : NSObject<NSNetServiceDelegate>
 {
 @private
   uint16_t port;
@@ -46,14 +46,14 @@
 
   BOOL bonjourEnabled;
   NSMutableArray *connections;
-  RequestHandlerRegistry *handlerRegistry;
+  HSRequestHandlerRegistry *handlerRegistry;
 }
 
-- (HTTPServe*) initWithPort: (int) port;
+- (HSHTTPServe*) initWithPort: (int) port;
 - (id)initWithPort: (int) listenPort bonjourEnabled: (BOOL) bonjour;
 - (void) start;
 - (void) stop;
 
-- (void) connectionHandled: (HTTPConnection*) connection;
+- (void) connectionHandled: (HSHTTPConnection*) connection;
 
 @end

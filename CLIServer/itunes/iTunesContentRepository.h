@@ -16,5 +16,8 @@
 }
 
 - (NSArray*) allMovies;
+- (NSArray*) allMusic;
+- (NSArray*) allPodcasts;
+- (NSArray*) alliTunesU;
 
 @end

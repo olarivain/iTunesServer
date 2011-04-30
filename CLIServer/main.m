@@ -7,11 +7,12 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "HTTPServe.h"
+#import "HSHTTPServe.h"
+
 int main (int argc, const char * argv[])
 {
   NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
-  HTTPServe *server = [[HTTPServe alloc] initWithPort: 2048];
+  HSHTTPServe *server = [[HSHTTPServe alloc] initWithPort: 2048];
   [server start];
   [[NSRunLoop currentRunLoop] run]; // this will not return
   [server stop];
