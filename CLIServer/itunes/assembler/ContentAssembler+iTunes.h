@@ -11,6 +11,7 @@
 #import "ContentAssembler.h"
 
 @interface ContentAssembler(iTunes)
+- (NSArray*) createContentListWithPlaylist: (iTunesPlaylist*) playlist;
 - (Content*) createContentWithiTunesItem: (iTunesItem*) item andSpecialKind: (iTunesESpK) specialKind;
 
 @end

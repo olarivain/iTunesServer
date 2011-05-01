@@ -51,11 +51,13 @@
 
 - (HSResponse*) allMusic: (NSDictionary*) params
 {
+  NSLog(@"begin request handler");
   HSResponse *response = [HSResponse response];
   NSArray *content = [repository allMusic];
   
   NSData *data = [contentAssembler writeObject: content];
   [response setContent: data];
+  NSLog(@"end request handler");
   return response;
 }
 

@@ -102,18 +102,12 @@
 
 - (NSArray*) contentArrayWithPlaylist: (iTunesPlaylist*) playlist;
 {
-  // grab all tracks, instantiate content array with a relevant capacity and then convert all those guys.
-  NSArray *tracks = [playlist tracks];
-  NSMutableArray *array = [NSMutableArray arrayWithCapacity:[tracks count]];
+  NSLog(@"Assembler begin");
+  
   
   ContentAssembler *assembler = [ContentAssembler sharedInstance];
-  iTunesESpK specialKind = [playlist specialKind];
-  for(iTunesTrack *track in tracks)
-  {
-    Content *content = [assembler createContentWithiTunesItem:track andSpecialKind:specialKind];
-    [array addObject:content];
-  }
-
+  NSArray *array = [assembler createContentListWithPlaylist: playlist];
+    NSLog(@"Assembler end");
   return array;
 }
 
@@ -126,8 +120,10 @@
 
 - (NSArray*) allMusic
 {
+  NSLog(@"allMusic begin");
   iTunesPlaylist *musicPlaylist = [self music];
   NSArray *music = [self contentArrayWithPlaylist: musicPlaylist];
+  NSLog(@"allMusic end");
   return music;
 }
 

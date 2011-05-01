@@ -70,4 +70,21 @@
   return kind;
 }
 
+- (NSArray*) createContentListWithPlaylist:(iTunesPlaylist *)playlist {
+  // grab all tracks, instantiate content array with a relevant capacity and then convert all those guys.
+  NSArray *tracks = [[playlist tracks] get];
+  NSLog(@"Assembler got tracks");
+  NSMutableArray *array = [NSMutableArray arrayWithCapacity:[tracks count]];
+  
+  iTunesESpK specialKind = [playlist specialKind];
+  for(iTunesTrack *track in tracks)
+  {
+    Content *content = [self createContentWithiTunesItem:track andSpecialKind:specialKind];
+    [array addObject:content];
+  }
+  
+  return array;
+
+}
+
 @end
