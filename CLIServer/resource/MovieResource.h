@@ -15,7 +15,7 @@
 {
   @private
   iTunesContentRepository *repository;
-//  ContentAssembler *contentAssembler;
+  ContentAssembler *contentAssembler;
     
 }
 

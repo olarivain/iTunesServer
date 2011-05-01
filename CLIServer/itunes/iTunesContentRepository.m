@@ -7,123 +7,110 @@
 //
 
 #import "iTunesContentRepository.h"
-#import "ScriptRepository.h"
 #import "Content.h"
+#import "ContentAssembler+iTunes.h"
 
-@interface iTunesContentRepository(private)
-- (NSAppleEventDescriptor*) descriptor: (NSString*) scriptKey methodName: (NSString*) methodName andParameters: (NSArray*) params;
+
+@interface iTunesContentRepository()
+- (iTunesPlaylist*) music;
+- (iTunesPlaylist*) movies;
+- (iTunesPlaylist*) shows;
+- (iTunesPlaylist*) playlistWithSpecialKind: (iTunesESpK) specialKind;
 @end
 
 @implementation iTunesContentRepository
 
 - (id)init
 {
-    self = [super init];
-    if (self) {
-        // Initialization code here.
-    }
-    
-    return self;
+  self = [super init];
+  if (self) {
+    iTunes = [[SBApplication applicationWithBundleIdentifier:@"com.apple.iTunes"] retain];
+    [iTunes setDelegate: self];
+  }
+  
+  return self;
 }
 
 - (void)dealloc
 {
-    [super dealloc];
+  [iTunes release];
+  [super dealloc];
 }
    
-#pragma mark - Generic apple script execution methods
-- (NSAppleEventDescriptor*) descriptor: (NSString*) scriptKey methodName: (NSString*) methodName andParameters: (NSArray*) parameters 
+#pragma mark - SBApplicationDelegate method
+- (id) eventDidFail: (const AppleEvent *) event withError: (NSError *) error 
 {
-  // load the script from a resource
-  NSAppleScript *appleScript = [[ScriptRepository sharedInstance] scriptForKey: scriptKey];
-  if(!appleScript)
+  NSLog(@"An event failed");
+  return nil;
+}
+
+#pragma mark - basic accessor to library
+- (iTunesSource *)mainLibrary 
+{
+  // TODO: this is worth stress testing I guess, cause it's actually dereferencing everything
+  NSArray *sources = [[iTunes sources] get];       
+  // filter libraries agains the main one (iTunesESrcLibrary)
+  NSPredicate *filterPredicate = [NSPredicate predicateWithFormat:@"kind == %i", iTunesESrcLibrary];
+  NSArray *libraries = [sources filteredArrayUsingPredicate: filterPredicate];
+  
+  // if we still have at least one object left, return it
+  if ([libraries count] == 0) 
   {
-    // script not found, don't have bother going further.
     return nil;
   }
   
-  // Go through parameters and add them to the list of apple script parameters.
-  int index = 1;
-  NSAppleEventDescriptor *appleScriptParameters = [NSAppleEventDescriptor listDescriptor];
-  for(NSObject *parameter in parameters){
-    // params other than string are NOT supported yet.
-    if(![parameter isKindOfClass:[NSString class]]){
-      break;
-    }
-      
-    NSString *stringParameter = (NSString*) parameter;
-    NSAppleEventDescriptor *appleScriptParameter = [NSAppleEventDescriptor descriptorWithString:stringParameter];
-    [appleScriptParameters insertDescriptor:appleScriptParameter atIndex:index];
-    index++;
+  iTunesSource *source = [[libraries objectAtIndex:0] get];
+  return source;
+}
+
+- (iTunesPlaylist*) playlistWithSpecialKind: (iTunesESpK) specialKind 
+{
+  iTunesSource *mainLibrary = [self mainLibrary];
+  
+  // get playlist list and filter it agains the requested special kind
+  NSArray *playlists = [[mainLibrary playlists] get];
+  NSPredicate *filterPredicate = [NSPredicate predicateWithFormat:@"specialKind == %i", specialKind];
+  NSArray *playlist = [playlists filteredArrayUsingPredicate: filterPredicate];
+  
+  if([playlist count] == 0) 
+  {
+    return nil;
   }
   
-  // create the AppleEvent target
-  ProcessSerialNumber psn = { 0, kCurrentProcess };
-  NSAppleEventDescriptor *target = [NSAppleEventDescriptor descriptorWithDescriptorType:typeProcessSerialNumber
-                                                                                  bytes:&psn
-                                                                                 length:sizeof(ProcessSerialNumber)];
-  // create an NSAppleEventDescriptor with the method name
-  // note that the name must be lowercase (even if it is uppercase in AppleScript)
-  NSAppleEventDescriptor *handler = [NSAppleEventDescriptor descriptorWithString:[methodName lowercaseString]];
+  iTunesPlaylist *requestedPlaylist = [[playlist objectAtIndex:0] get];
+  NSLog(@"request playlist is : %u",   [[requestedPlaylist tracks] count]);
+  return requestedPlaylist;
+}
   
-  // last but not least, create the event for an AppleScript subroutine
-  // set the method name and the list of parameters
-  NSAppleEventDescriptor *event = [NSAppleEventDescriptor appleEventWithEventClass:'ascr'
-                                                                           eventID:'psbr'
-                                                                  targetDescriptor:target
-                                                                          returnID:kAutoGenerateReturnID
-                                                                     transactionID:kAnyTransactionID];
-  [event setParamDescriptor:handler forKeyword:'snam'];
-  [event setParamDescriptor:appleScriptParameters forKeyword:keyDirectObject];
 
-  // at last, call the event in AppleScript
-  NSDictionary *error = nil;
-  NSAppleEventDescriptor *response = [appleScript executeAppleEvent:event error:&error];
-  NSLog(@"error: %@", error);
-  return response;
+- (iTunesPlaylist*) music {
+  iTunesPlaylist *playlist = [self playlistWithSpecialKind:iTunesESpKMusic];
+  return playlist;
+}
+
+- (iTunesPlaylist*) movies {
+  iTunesPlaylist *playlist = [self playlistWithSpecialKind:iTunesESpKMovies];  
+  return playlist;
+}
+
+- (iTunesPlaylist*) shows {
+  iTunesPlaylist *playlist = [self playlistWithSpecialKind:iTunesESpKTVShows];
+  return playlist;
 }
 
 #pragma mark - Repository methods
 
-- (NSArray*) arrayWithResponse: (NSAppleEventDescriptor*) descriptor andContentKind: (ContentKind) kind;
+- (NSArray*) contentArrayWithPlaylist: (iTunesPlaylist*) playlist;
 {
-  NSMutableArray *array = [NSMutableArray arrayWithCapacity:[descriptor numberOfItems]];
-  NSInteger numberOfItems = [descriptor numberOfItems];
-  for(int i = 1; i < numberOfItems +1; i++)
+  // grab all tracks, instantiate content array with a relevant capacity and then convert all those guys.
+  NSArray *tracks = [playlist tracks];
+  NSMutableArray *array = [NSMutableArray arrayWithCapacity:[tracks count]];
+  
+  ContentAssembler *assembler = [ContentAssembler sharedInstance];
+  iTunesESpK specialKind = [playlist specialKind];
+  for(iTunesTrack *track in tracks)
   {
-    NSAppleEventDescriptor *record = [descriptor descriptorAtIndex: i];
-    Content *content = [Content content: kind];
-    
-    NSAppleEventDescriptor *nextRecord = [record descriptorForKeyword:'ID  '];
-    content.contentId = [nextRecord int32Value];
-    
-    nextRecord = [record descriptorForKeyword:'pAlb'];
-    content.album = [nextRecord stringValue];
-    
-    nextRecord = [record descriptorForKeyword:'pArt'];
-    content.artist = [nextRecord stringValue];
-    
-    nextRecord = [record descriptorForKeyword:'pnam'];
-    content.name = [nextRecord stringValue]; 
-    
-    nextRecord = [record descriptorForKeyword:'pDes'];
-    content.description = [nextRecord stringValue];
-    
-    nextRecord = [record descriptorForKeyword:'pGen'];
-    content.genre = [nextRecord stringValue];
-    
-    nextRecord = [record descriptorForKeyword:'pShw'];
-    content.show = [nextRecord stringValue];
-    
-    nextRecord = [record descriptorForKeyword:'pTrN'];
-    content.trackNumber = [nextRecord int32Value]; 
-    
-    nextRecord = [record descriptorForKeyword:'pEpN'];
-    content.episodeNumber = [nextRecord int32Value];
-    
-    nextRecord = [record descriptorForKeyword:'pSeN'];
-    content.season = [nextRecord int32Value];
-    
+    Content *content = [assembler createContentWithiTunesItem:track andSpecialKind:specialKind];
     [array addObject:content];
   }
 
@@ -132,32 +119,26 @@
 
 - (NSArray*) allMovies
 {
-  NSAppleEventDescriptor *descriptor = [self descriptor:READ_SCRIPTS methodName:@"GetContent" andParameters: [NSArray arrayWithObject: @"Movies"]];
-  return [self arrayWithResponse: descriptor andContentKind:MOVIE];
-  
+  iTunesPlaylist *moviesPlaylist = [self movies];
+  NSArray *movies = [self contentArrayWithPlaylist: moviesPlaylist];
+  return  movies;  
 }
 
 - (NSArray*) allMusic
 {
-  NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
-  NSAppleEventDescriptor *descriptor = [self descriptor:READ_SCRIPTS methodName:@"GetContent" andParameters: [NSArray arrayWithObject: @"Music"]];
-  NSArray *response = [self arrayWithResponse: descriptor andContentKind:MUSIC];
-  [pool drain];
-  [pool release];
-  
-  return response;
+  iTunesPlaylist *musicPlaylist = [self music];
+  NSArray *music = [self contentArrayWithPlaylist: musicPlaylist];
+  return music;
 }
 
 - (NSArray*) allPodcasts
 {
-  NSAppleEventDescriptor *descriptor = [self descriptor:READ_SCRIPTS methodName:@"GetContent" andParameters: [NSArray arrayWithObject: @"Podcasts"]];
-  return [self arrayWithResponse: descriptor andContentKind:PODCAST];
+  return [NSArray array];
 }
 
 - (NSArray*) alliTunesU
 {
-  NSAppleEventDescriptor *descriptor = [self descriptor:READ_SCRIPTS methodName:@"GetContent" andParameters: [NSArray arrayWithObject: @"iTunes U"]];
-  return [self arrayWithResponse: descriptor andContentKind:ITUNES_U];
+  return [NSArray array];
 }
 
 

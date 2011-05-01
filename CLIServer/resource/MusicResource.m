@@ -26,7 +26,7 @@
   if (self) 
   {
     repository = [[iTunesContentRepository alloc] init];
-//    contentAssembler = [[ContentAssembler sharedInstance] retain];
+    contentAssembler = [[ContentAssembler sharedInstance] retain];
   }
   
   return self;
@@ -35,7 +35,7 @@
 - (void)dealloc
 {
   [repository release];
-//  [contentAssembler release];
+  [contentAssembler release];
   [super dealloc];
 }
 
@@ -54,8 +54,8 @@
   HSResponse *response = [HSResponse response];
   NSArray *content = [repository allMusic];
   
-//  NSData *data = [contentAssembler writeObject: content];
-//  [response setContent: data];
+  NSData *data = [contentAssembler writeObject: content];
+  [response setContent: data];
   return response;
 }
 

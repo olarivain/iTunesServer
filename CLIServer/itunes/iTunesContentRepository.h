@@ -7,12 +7,12 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "iTunes.h"
 
-
-@interface iTunesContentRepository : NSObject 
+@interface iTunesContentRepository : NSObject<SBApplicationDelegate>
 {
 @private
-    
+  iTunesApplication *iTunes;    
 }
 
 - (NSArray*) allMovies;
