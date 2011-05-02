@@ -8,7 +8,7 @@
 
 #import "ContentAssembler+iTunes.h"
 #import "MMContent.h"
-#import "MMiTunesMediaLibrary.h"
+#import "MMServerMediaLibrary.h"
 
 @interface MMContentAssembler()
 - (MMContentKind) contentKindFromiTunesSpecialKind: (iTunesESpK) specialKind;
@@ -17,12 +17,12 @@
 @implementation MMContentAssembler(iTunes)
 
 #pragma mark - iTunes to MediaManagement objects
-- (MMiTunesMediaLibrary*) createMediaLibrary: (iTunesPlaylist*) playlist
+- (MMServerMediaLibrary*) createMediaLibrary: (iTunesPlaylist*) playlist
 {
   NSArray *tracks = [[playlist tracks] get];
   
   MMContentKind contentKind = [self contentKindFromiTunesSpecialKind: playlist.specialKind];
-  MMiTunesMediaLibrary *library = [MMiTunesMediaLibrary mediaLibraryWithContentKind: contentKind andSize: [tracks count]];
+  MMServerMediaLibrary *library = [MMServerMediaLibrary mediaLibraryWithContentKind: contentKind andSize: [tracks count]];
   
   
   // TODO: this is ridiculously slow, I'll have to figure out a way to make it faster

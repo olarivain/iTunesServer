@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		000758E1136E436F0067644F /* MMiTunesMediaLibrary.m in Sources */ = {isa = PBXBuildFile; fileRef = 000758E0136E436F0067644F /* MMiTunesMediaLibrary.m */; };
 		002A0A4D13243E1500320A06 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 002A0A4C13243E1500320A06 /* Foundation.framework */; };
 		002A0A5013243E1500320A06 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 002A0A4F13243E1500320A06 /* main.m */; };
 		009EE49E136DF641008EEEA5 /* ContentAssembler+iTunes.m in Sources */ = {isa = PBXBuildFile; fileRef = 009EE493136DF641008EEEA5 /* ContentAssembler+iTunes.m */; };
@@ -35,8 +34,6 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		000758DF136E436F0067644F /* MMiTunesMediaLibrary.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MMiTunesMediaLibrary.h; sourceTree = "<group>"; };
-		000758E0136E436F0067644F /* MMiTunesMediaLibrary.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MMiTunesMediaLibrary.m; sourceTree = "<group>"; };
 		002A0A4813243E1500320A06 /* CLIServer */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = CLIServer; sourceTree = BUILT_PRODUCTS_DIR; };
 		002A0A4C13243E1500320A06 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		002A0A4F13243E1500320A06 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -101,18 +98,8 @@
 		000758D8136E42730067644F /* domain */ = {
 			isa = PBXGroup;
 			children = (
-				000758D9136E42730067644F /* library */,
 			);
 			path = domain;
-			sourceTree = "<group>";
-		};
-		000758D9136E42730067644F /* library */ = {
-			isa = PBXGroup;
-			children = (
-				000758DF136E436F0067644F /* MMiTunesMediaLibrary.h */,
-				000758E0136E436F0067644F /* MMiTunesMediaLibrary.m */,
-			);
-			path = library;
 			sourceTree = "<group>";
 		};
 		002A0A3D13243E1400320A06 = {
@@ -345,7 +332,6 @@
 				009EE49F136DF641008EEEA5 /* iTunesContentRepository.m in Sources */,
 				009EE4A0136DF641008EEEA5 /* MovieResource.m in Sources */,
 				009EE4A1136DF641008EEEA5 /* MusicResource.m in Sources */,
-				000758E1136E436F0067644F /* MMiTunesMediaLibrary.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

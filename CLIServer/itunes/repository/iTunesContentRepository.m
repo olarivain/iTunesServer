@@ -98,32 +98,32 @@
 }
 
 #pragma mark - Repository methods
-- (MMiTunesMediaLibrary*) libraryWithPlaylist: (iTunesPlaylist*) playlist
+- (MMServerMediaLibrary*) libraryWithPlaylist: (iTunesPlaylist*) playlist
 {
   MMContentAssembler *assembler = [MMContentAssembler sharedInstance];
-  MMiTunesMediaLibrary *library = [assembler createMediaLibrary: playlist];
+  MMServerMediaLibrary *library = [assembler createMediaLibrary: playlist];
   return library;
 }
 
 
-- (MMiTunesMediaLibrary*) tvShowLibrary
+- (MMServerMediaLibrary*) tvShowLibrary
 {
   iTunesPlaylist *moviesPlaylist = [self shows];
-  MMiTunesMediaLibrary *movies = [self libraryWithPlaylist: moviesPlaylist];  
+  MMServerMediaLibrary *movies = [self libraryWithPlaylist: moviesPlaylist];  
   return movies;
 }
 
-- (MMiTunesMediaLibrary*) movieLibrary
+- (MMServerMediaLibrary*) movieLibrary
 {
   iTunesPlaylist *moviesPlaylist = [self movies];
-  MMiTunesMediaLibrary *movies = [self libraryWithPlaylist: moviesPlaylist];  
+  MMServerMediaLibrary *movies = [self libraryWithPlaylist: moviesPlaylist];  
   return movies;
 }
 
-- (MMiTunesMediaLibrary*) musicLibrary
+- (MMServerMediaLibrary*) musicLibrary
 {
   iTunesPlaylist *musicPlaylist = [self music];
-  MMiTunesMediaLibrary *music = [self libraryWithPlaylist: musicPlaylist];  
+  MMServerMediaLibrary *music = [self libraryWithPlaylist: musicPlaylist];  
   return music;
 }
 
