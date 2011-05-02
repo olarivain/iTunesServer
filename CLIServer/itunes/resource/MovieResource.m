@@ -11,10 +11,11 @@
 
 #import "MovieResource.h"
 
-#import "Content.h"
+#import "MMContent.h"
 #import "iTunesContentRepository.h"
 
-#import "ContentAssembler.h"
+#import "MMContentAssembler.h"
+#import "MMiTunesMediaLibrary.h"
 
 
 @implementation MovieResource
@@ -25,7 +26,7 @@
     if (self) 
     {
       repository = [[iTunesContentRepository alloc] init];
-      contentAssembler = [[ContentAssembler sharedInstance] retain];
+      contentAssembler = [[MMContentAssembler sharedInstance] retain];
     }
     
     return self;
@@ -51,10 +52,11 @@
 - (HSResponse*) allMovies: (NSDictionary*) params
 {
   HSResponse *response = [HSResponse response];
-  NSArray *content = [repository allMovies];
+  MMMediaLibrary *library = [repository movieLibrary];;
   
-  NSData *data = [contentAssembler writeObject: content];
+  NSData *data = [contentAssembler writeLibrary: library];
   [response setContent: data];
+
   return response;
 }
 @end

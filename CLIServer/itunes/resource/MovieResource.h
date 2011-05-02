@@ -10,12 +10,12 @@
 #import "RestResource.h"
 
 @class iTunesContentRepository;
-@class ContentAssembler;
+@class MMContentAssembler;
 @interface MovieResource : NSObject<HSRestResource> 
 {
   @private
   iTunesContentRepository *repository;
-  ContentAssembler *contentAssembler;
+  MMContentAssembler *contentAssembler;
     
 }
 

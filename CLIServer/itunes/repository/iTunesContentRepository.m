@@ -7,7 +7,7 @@
 //
 
 #import "iTunesContentRepository.h"
-#import "Content.h"
+#import "MMContent.h"
 #import "ContentAssembler+iTunes.h"
 
 
@@ -78,11 +78,10 @@
   }
   
   iTunesPlaylist *requestedPlaylist = [[playlist objectAtIndex:0] get];
-  NSLog(@"request playlist is : %u",   [[requestedPlaylist tracks] count]);
   return requestedPlaylist;
 }
   
-
+#pragma mark Concrete accessors (music, movies etc)
 - (iTunesPlaylist*) music {
   iTunesPlaylist *playlist = [self playlistWithSpecialKind:iTunesESpKMusic];
   return playlist;
@@ -99,42 +98,33 @@
 }
 
 #pragma mark - Repository methods
-
-- (NSArray*) contentArrayWithPlaylist: (iTunesPlaylist*) playlist;
+- (MMiTunesMediaLibrary*) libraryWithPlaylist: (iTunesPlaylist*) playlist
 {
-  NSLog(@"Assembler begin");
-  
-  
-  ContentAssembler *assembler = [ContentAssembler sharedInstance];
-  NSArray *array = [assembler createContentListWithPlaylist: playlist];
-    NSLog(@"Assembler end");
-  return array;
+  MMContentAssembler *assembler = [MMContentAssembler sharedInstance];
+  MMiTunesMediaLibrary *library = [assembler createMediaLibrary: playlist];
+  return library;
 }
 
-- (NSArray*) allMovies
+
+- (MMiTunesMediaLibrary*) tvShowLibrary
+{
+  iTunesPlaylist *moviesPlaylist = [self shows];
+  MMiTunesMediaLibrary *movies = [self libraryWithPlaylist: moviesPlaylist];  
+  return movies;
+}
+
+- (MMiTunesMediaLibrary*) movieLibrary
 {
   iTunesPlaylist *moviesPlaylist = [self movies];
-  NSArray *movies = [self contentArrayWithPlaylist: moviesPlaylist];
-  return  movies;  
+  MMiTunesMediaLibrary *movies = [self libraryWithPlaylist: moviesPlaylist];  
+  return movies;
 }
 
-- (NSArray*) allMusic
+- (MMiTunesMediaLibrary*) musicLibrary
 {
-  NSLog(@"allMusic begin");
   iTunesPlaylist *musicPlaylist = [self music];
-  NSArray *music = [self contentArrayWithPlaylist: musicPlaylist];
-  NSLog(@"allMusic end");
+  MMiTunesMediaLibrary *music = [self libraryWithPlaylist: musicPlaylist];  
   return music;
-}
-
-- (NSArray*) allPodcasts
-{
-  return [NSArray array];
-}
-
-- (NSArray*) alliTunesU
-{
-  return [NSArray array];
 }
 
 

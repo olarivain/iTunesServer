@@ -7,18 +7,55 @@
 //
 
 #import "ContentAssembler+iTunes.h"
-#import "Content.h"
+#import "MMContent.h"
+#import "MMiTunesMediaLibrary.h"
 
-@interface ContentAssembler()
-- (ContentKind) contentKindFromiTunesSpecialKind: (iTunesESpK) specialKind;
+@interface MMContentAssembler()
+- (MMContentKind) contentKindFromiTunesSpecialKind: (iTunesESpK) specialKind;
 @end
 
-@implementation ContentAssembler(iTunes)
+@implementation MMContentAssembler(iTunes)
 
-- (Content*) createContentWithiTunesItem: (iTunesTrack*) item andSpecialKind: (iTunesESpK) specialKind
+#pragma mark - iTunes to MediaManagement objects
+- (MMiTunesMediaLibrary*) createMediaLibrary: (iTunesPlaylist*) playlist
 {
-  ContentKind kind = [self contentKindFromiTunesSpecialKind: specialKind];
-  Content *content = [Content content: kind];
+  NSArray *tracks = [[playlist tracks] get];
+  
+  MMContentKind contentKind = [self contentKindFromiTunesSpecialKind: playlist.specialKind];
+  MMiTunesMediaLibrary *library = [MMiTunesMediaLibrary mediaLibraryWithContentKind: contentKind andSize: [tracks count]];
+  
+  
+  // TODO: this is ridiculously slow, I'll have to figure out a way to make it faster
+  iTunesESpK specialKind = [playlist specialKind];
+  for(SBObject *trackObject in tracks)
+  {
+    iTunesTrack *track = [trackObject get];
+    MMContent *content = [self createContentWithiTunesItem:track andSpecialKind:specialKind];
+    [library addContent:content];
+  }
+  
+  return library;
+}
+
+- (NSArray*) createContentListWithPlaylist:(iTunesPlaylist *)playlist {
+  // grab all tracks, instantiate content array with a relevant capacity and then convert all those guys.
+  NSArray *tracks = [[playlist tracks] get];
+  NSMutableArray *array = [NSMutableArray arrayWithCapacity:[tracks count]];
+  
+  iTunesESpK specialKind = [playlist specialKind];
+  for(SBObject *trackObject in tracks)
+  {
+    iTunesTrack *track = [trackObject get];
+    MMContent *content = [self createContentWithiTunesItem:track andSpecialKind:specialKind];
+    [array addObject:content];
+  }
+  return array;
+}
+
+- (MMContent*) createContentWithiTunesItem: (iTunesTrack*) item andSpecialKind: (iTunesESpK) specialKind
+{
+  MMContentKind kind = [self contentKindFromiTunesSpecialKind: specialKind];
+  MMContent *content = [MMContent content: kind];
   
   content.contentId = [item persistentID];
   content.name = [item name]; 
@@ -44,8 +81,9 @@
   return content;
 }
 
-- (ContentKind) contentKindFromiTunesSpecialKind: (iTunesESpK) specialKind {
-  ContentKind kind;
+#pragma mark - Enum converter
+- (MMContentKind) contentKindFromiTunesSpecialKind: (iTunesESpK) specialKind {
+  MMContentKind kind;
   switch(specialKind) {
 
     case iTunesESpKITunesU:
@@ -68,23 +106,6 @@
       break;
   }
   return kind;
-}
-
-- (NSArray*) createContentListWithPlaylist:(iTunesPlaylist *)playlist {
-  // grab all tracks, instantiate content array with a relevant capacity and then convert all those guys.
-  NSArray *tracks = [[playlist tracks] get];
-  NSLog(@"Assembler got tracks");
-  NSMutableArray *array = [NSMutableArray arrayWithCapacity:[tracks count]];
-  
-  iTunesESpK specialKind = [playlist specialKind];
-  for(iTunesTrack *track in tracks)
-  {
-    Content *content = [self createContentWithiTunesItem:track andSpecialKind:specialKind];
-    [array addObject:content];
-  }
-  
-  return array;
-
 }
 
 @end

@@ -12,10 +12,12 @@
 
 #import "MusicResource.h"
 
-#import "Content.h"
+#import "MMContent.h"
 #import "iTunesContentRepository.h"
 
-#import "ContentAssembler.h"
+#import "MMContentAssembler.h"
+#import "MMMediaLibrary.h"
+#import "MMiTunesMediaLibrary.h"
 
 
 @implementation MusicResource
@@ -26,7 +28,7 @@
   if (self) 
   {
     repository = [[iTunesContentRepository alloc] init];
-    contentAssembler = [[ContentAssembler sharedInstance] retain];
+    contentAssembler = [[MMContentAssembler sharedInstance] retain];
   }
   
   return self;
@@ -47,17 +49,13 @@
 }
 
 #pragma mark - Rest resource processing
-
-
 - (HSResponse*) allMusic: (NSDictionary*) params
 {
-  NSLog(@"begin request handler");
   HSResponse *response = [HSResponse response];
-  NSArray *content = [repository allMusic];
+  MMMediaLibrary *library = [repository musicLibrary];
   
-  NSData *data = [contentAssembler writeObject: content];
+  NSData *data = [contentAssembler writeLibrary: library];
   [response setContent: data];
-  NSLog(@"end request handler");
   return response;
 }
 

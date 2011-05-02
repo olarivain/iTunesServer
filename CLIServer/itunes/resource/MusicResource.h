@@ -8,13 +8,13 @@
 
 #import <Foundation/Foundation.h>
 @class iTunesContentRepository;
-@class ContentAssembler;
+@class MMContentAssembler;
 
 @interface MusicResource : NSObject<HSRestResource> 
 {
 @private
   iTunesContentRepository *repository;
-  ContentAssembler *contentAssembler;
+  MMContentAssembler *contentAssembler;
   
 }
 
