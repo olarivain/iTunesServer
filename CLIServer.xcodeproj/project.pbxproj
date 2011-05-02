@@ -95,13 +95,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		000758D8136E42730067644F /* domain */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = domain;
-			sourceTree = "<group>";
-		};
 		002A0A3D13243E1400320A06 = {
 			isa = PBXGroup;
 			children = (
@@ -159,7 +152,6 @@
 			isa = PBXGroup;
 			children = (
 				009EE491136DF641008EEEA5 /* assembler */,
-				000758D8136E42730067644F /* domain */,
 				009EE494136DF641008EEEA5 /* repository */,
 				009EE497136DF641008EEEA5 /* resource */,
 				009EE49C136DF641008EEEA5 /* ScriptingBridge */,
