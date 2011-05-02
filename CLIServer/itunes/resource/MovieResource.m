@@ -12,10 +12,12 @@
 #import "MovieResource.h"
 
 #import "MMContent.h"
+#import "MMContentAssembler.h"
+#import "MMServerMediaLibrary.h"
+
 #import "iTunesContentRepository.h"
 
-#import "MMContentAssembler.h"
-#import "MMiTunesMediaLibrary.h"
+
 
 
 @implementation MovieResource
