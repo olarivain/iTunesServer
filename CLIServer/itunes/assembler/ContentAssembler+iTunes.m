@@ -19,21 +19,36 @@
 #pragma mark - iTunes to MediaManagement objects
 - (MMServerMediaLibrary*) createMediaLibrary: (iTunesPlaylist*) playlist
 {
-  NSArray *tracks = [playlist tracks];
+
+  SBElementArray *tracks = [playlist tracks];
+  
+  NSArray *ids = [tracks arrayByApplyingSelector:@selector(persistentID)];
+  NSArray *names = [tracks arrayByApplyingSelector:@selector(name)];
+  NSArray *genres =[tracks arrayByApplyingSelector:@selector(genre)];
+  NSArray *albums = [tracks arrayByApplyingSelector:@selector(album)];
+  NSArray *artists =[tracks arrayByApplyingSelector:@selector(artist)];
+  NSArray *trackNumbers = [tracks arrayByApplyingSelector:@selector(trackNumber)];
+  NSArray *descriptions = [tracks arrayByApplyingSelector:@selector(objectDescription)];
+  NSArray *shows = [tracks arrayByApplyingSelector:@selector(show)];
+  NSArray *episodes = [tracks arrayByApplyingSelector:@selector(episodeNumber)];
   
   MMContentKind contentKind = [self contentKindFromiTunesSpecialKind: playlist.specialKind];
-  MMServerMediaLibrary *library = [MMServerMediaLibrary mediaLibraryWithContentKind: contentKind andSize: [tracks count]];
+  MMServerMediaLibrary *library = [MMServerMediaLibrary mediaLibraryWithContentKind: contentKind andSize: [ids count]];
   
-  
-  // TODO: this is ridiculously slow, I'll have to figure out a way to make it faster
-  iTunesESpK specialKind = [playlist specialKind];
-  for(SBObject *trackObject in tracks)
+  for(int i = 0; i < [ids count]; i++)
   {
-    iTunesTrack *track = [trackObject get];
-    MMContent *content = [self createContentWithiTunesItem:track andSpecialKind:specialKind];
-    [library addContent:content];
+    MMContent *content = [MMContent content: contentKind];
+    content.contentId = [ids objectAtIndex:i];
+    content.name = [names objectAtIndex:i];
+    content.genre = [genres objectAtIndex:i];
+    content.album = [albums objectAtIndex:i];
+    content.artist = [artists objectAtIndex:i];
+    content.trackNumber = [[trackNumbers objectAtIndex:i] intValue];
+    content.description = [descriptions objectAtIndex:i];
+    content.show = [shows objectAtIndex:i];
+    content.episodeNumber = [[episodes objectAtIndex:i] intValue];
+    [library addContent: content];
   }
-  
   return library;
 }
 
@@ -51,31 +66,36 @@
   return array;
 }
 
-- (MMContent*) createContentWithiTunesItem: (iTunesTrack*) item andSpecialKind: (iTunesESpK) specialKind
+- (MMContent*) createContentWithiTunesItem: (iTunesTrack*) item andSpecialKind: (MMContentKind) kind
 {
-  MMContentKind kind = [self contentKindFromiTunesSpecialKind: specialKind];
+//  MMContentKind kind = [self contentKindFromiTunesSpecialKind: specialKind];
   MMContent *content = [MMContent content: kind];
-  
-  content.contentId = [item persistentID];
-  content.name = [item name]; 
-  content.genre = [item genre];
-  if(kind == MUSIC) {
-    content.album = [item album];
-    content.artist = [item artist];
-    content.trackNumber = [item trackNumber];
-  }
-  
-  if(kind == TV_SHOW || kind == MOVIE) 
+  int retaincount = [item retainCount];
+  if(retaincount != 1)
   {
-    content.description = [item objectDescription];
+    NSLog(@"I have one %i", retaincount);
+    [item release];
   }
-  
-  if(kind == TV_SHOW) 
-  {
-    content.show = [item show];
-    content.episodeNumber = [item episodeNumber];
-    content.season = [item seasonNumber];
-  }
+//  content.contentId = [item persistentID];
+//  content.name = [item name]; 
+//  content.genre = [item genre];
+//  if(kind == MUSIC) {
+//    content.album = [item album];
+//    content.artist = [item artist];
+//    content.trackNumber = [item trackNumber];
+//  }
+//  
+//  if(kind == TV_SHOW || kind == MOVIE) 
+//  {
+//    content.description = [item objectDescription];
+//  }
+//  
+//  if(kind == TV_SHOW) 
+//  {
+//    content.show = [item show];
+//    content.episodeNumber = [item episodeNumber];
+//    content.season = [item seasonNumber];
+//  }
   
   return content;
 }

@@ -9,10 +9,12 @@
 #import <Foundation/Foundation.h>
 #import "iTunes.h"
 #import "MMContentAssembler.h"
+#import "MMContent.h"
+
 @class MMServerMediaLibrary;
 
 @interface MMContentAssembler(iTunes)
 - (MMServerMediaLibrary*) createMediaLibrary: (iTunesPlaylist*) playlist;
 - (NSArray*) createContentListWithPlaylist: (iTunesPlaylist*) playlist;
-- (MMContent*) createContentWithiTunesItem: (iTunesItem*) item andSpecialKind: (iTunesESpK) specialKind;
+- (MMContent*) createContentWithiTunesItem: (iTunesItem*) item andSpecialKind: (MMContentKind) specialKind;
 @end

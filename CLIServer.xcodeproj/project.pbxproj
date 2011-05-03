@@ -19,6 +19,7 @@
 		00B3F8C5132C70F3003A4FCD /* AppKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 00B3F8C4132C70F3003A4FCD /* AppKit.framework */; };
 		00DCDF5D136CBC92002A37F6 /* libhttpserve.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 00DCDF5C136CBC92002A37F6 /* libhttpserve.a */; };
 		00E35DD9132C04ED00D25EFF /* CoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 00E35DD8132C04ED00D25EFF /* CoreServices.framework */; };
+		00FE69A7136FD81300647ED4 /* iTunesUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 00FE69A6136FD81300647ED4 /* iTunesUtil.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -75,6 +76,8 @@
 		00E35DD3132C048E00D25EFF /* SBJsonTokeniser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBJsonTokeniser.h; sourceTree = "<group>"; };
 		00E35DD4132C048E00D25EFF /* SBJsonWriter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBJsonWriter.h; sourceTree = "<group>"; };
 		00E35DD8132C04ED00D25EFF /* CoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreServices.framework; path = System/Library/Frameworks/CoreServices.framework; sourceTree = SDKROOT; };
+		00FE69A5136FD81300647ED4 /* iTunesUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = iTunesUtil.h; sourceTree = "<group>"; };
+		00FE69A6136FD81300647ED4 /* iTunesUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = iTunesUtil.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -155,6 +158,7 @@
 				009EE494136DF641008EEEA5 /* repository */,
 				009EE497136DF641008EEEA5 /* resource */,
 				009EE49C136DF641008EEEA5 /* ScriptingBridge */,
+				00FE69A3136FD7F500647ED4 /* util */,
 			);
 			path = itunes;
 			sourceTree = "<group>";
@@ -272,6 +276,15 @@
 			path = JSON;
 			sourceTree = "<group>";
 		};
+		00FE69A3136FD7F500647ED4 /* util */ = {
+			isa = PBXGroup;
+			children = (
+				00FE69A5136FD81300647ED4 /* iTunesUtil.h */,
+				00FE69A6136FD81300647ED4 /* iTunesUtil.m */,
+			);
+			path = util;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -324,6 +337,7 @@
 				009EE49F136DF641008EEEA5 /* iTunesContentRepository.m in Sources */,
 				009EE4A0136DF641008EEEA5 /* MovieResource.m in Sources */,
 				009EE4A1136DF641008EEEA5 /* MusicResource.m in Sources */,
+				00FE69A7136FD81300647ED4 /* iTunesUtil.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

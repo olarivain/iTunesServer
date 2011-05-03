@@ -10,6 +10,7 @@
 #import "MMContent.h"
 #import "ContentAssembler+iTunes.h"
 
+#import "iTunesUtil.h"
 
 @interface iTunesContentRepository()
 - (iTunesPlaylist*) music;
@@ -47,20 +48,13 @@
 #pragma mark - basic accessor to library
 - (iTunesSource *)mainLibrary 
 {
-  // TODO: this is worth stress testing I guess, cause it's actually dereferencing everything
-  NSArray *sources = [iTunes sources];       
+  NSArray *sources = [iTunes sources]; 
   
-  // get leaks more than my grand mother, hence the "iterate everything and figure out what you need
-  iTunesSource *source;
-  for(iTunesSource *temp in sources) 
-  {
-    if(temp.kind == iTunesESrcLibrary)
-    {
-      source = temp;
-      break;
-    }
-  }
-  return source;
+  NSString *predicateString = [NSString stringWithFormat:@"kind == '%@'", iTunesEnumToString(iTunesESrcLibrary)];
+  NSPredicate *predicate = [NSPredicate predicateWithFormat: predicateString];
+  NSArray *mainSource = [sources filteredArrayUsingPredicate: predicate];
+
+  return [mainSource objectAtIndex:0];
 }
 
 - (iTunesPlaylist*) playlistWithSpecialKind: (iTunesESpK) specialKind 
@@ -68,20 +62,11 @@
   iTunesSource *mainLibrary = [self mainLibrary];
   
   // get playlist list and filter it agains the requested special kind
-  
-  NSArray *playlists = [mainLibrary playlists];
 
-  // get leaks more than my grand mother, hence the "iterate everything and figure out what you need
-  iTunesPlaylist *requestedPlaylist;
-  for(iTunesPlaylist *temp in playlists)
-  {
-    if(temp.specialKind == specialKind)
-    {
-      requestedPlaylist = temp;
-      break;
-    }
-  }
-  return requestedPlaylist;
+  NSString *predicateString = [NSString stringWithFormat:@"specialKind == '%@'", iTunesEnumToString(specialKind)];
+  NSPredicate *predicate = [NSPredicate predicateWithFormat: predicateString];
+  NSArray *playlists = [[mainLibrary playlists] filteredArrayUsingPredicate: predicate];
+  return [playlists objectAtIndex:0];
 }
   
 #pragma mark Concrete accessors (music, movies etc)
