@@ -48,18 +48,18 @@
 - (iTunesSource *)mainLibrary 
 {
   // TODO: this is worth stress testing I guess, cause it's actually dereferencing everything
-  NSArray *sources = [[iTunes sources] get];       
-  // filter libraries agains the main one (iTunesESrcLibrary)
-  NSPredicate *filterPredicate = [NSPredicate predicateWithFormat:@"kind == %i", iTunesESrcLibrary];
-  NSArray *libraries = [sources filteredArrayUsingPredicate: filterPredicate];
+  NSArray *sources = [iTunes sources];       
   
-  // if we still have at least one object left, return it
-  if ([libraries count] == 0) 
+  // get leaks more than my grand mother, hence the "iterate everything and figure out what you need
+  iTunesSource *source;
+  for(iTunesSource *temp in sources) 
   {
-    return nil;
+    if(temp.kind == iTunesESrcLibrary)
+    {
+      source = temp;
+      break;
+    }
   }
-  
-  iTunesSource *source = [[libraries objectAtIndex:0] get];
   return source;
 }
 
@@ -68,16 +68,19 @@
   iTunesSource *mainLibrary = [self mainLibrary];
   
   // get playlist list and filter it agains the requested special kind
-  NSArray *playlists = [[mainLibrary playlists] get];
-  NSPredicate *filterPredicate = [NSPredicate predicateWithFormat:@"specialKind == %i", specialKind];
-  NSArray *playlist = [playlists filteredArrayUsingPredicate: filterPredicate];
   
-  if([playlist count] == 0) 
+  NSArray *playlists = [mainLibrary playlists];
+
+  // get leaks more than my grand mother, hence the "iterate everything and figure out what you need
+  iTunesPlaylist *requestedPlaylist;
+  for(iTunesPlaylist *temp in playlists)
   {
-    return nil;
+    if(temp.specialKind == specialKind)
+    {
+      requestedPlaylist = temp;
+      break;
+    }
   }
-  
-  iTunesPlaylist *requestedPlaylist = [[playlist objectAtIndex:0] get];
   return requestedPlaylist;
 }
   

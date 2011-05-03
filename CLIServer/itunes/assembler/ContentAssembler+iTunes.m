@@ -19,7 +19,7 @@
 #pragma mark - iTunes to MediaManagement objects
 - (MMServerMediaLibrary*) createMediaLibrary: (iTunesPlaylist*) playlist
 {
-  NSArray *tracks = [[playlist tracks] get];
+  NSArray *tracks = [playlist tracks];
   
   MMContentKind contentKind = [self contentKindFromiTunesSpecialKind: playlist.specialKind];
   MMServerMediaLibrary *library = [MMServerMediaLibrary mediaLibraryWithContentKind: contentKind andSize: [tracks count]];
@@ -43,9 +43,8 @@
   NSMutableArray *array = [NSMutableArray arrayWithCapacity:[tracks count]];
   
   iTunesESpK specialKind = [playlist specialKind];
-  for(SBObject *trackObject in tracks)
+  for(iTunesTrack *track in tracks)
   {
-    iTunesTrack *track = [trackObject get];
     MMContent *content = [self createContentWithiTunesItem:track andSpecialKind:specialKind];
     [array addObject:content];
   }
