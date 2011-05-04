@@ -52,54 +52,6 @@
   return library;
 }
 
-- (NSArray*) createContentListWithPlaylist:(iTunesPlaylist *)playlist {
-  // grab all tracks, instantiate content array with a relevant capacity and then convert all those guys.
-  NSArray *tracks = [[playlist tracks] get];
-  NSMutableArray *array = [NSMutableArray arrayWithCapacity:[tracks count]];
-  
-  iTunesESpK specialKind = [playlist specialKind];
-  for(iTunesTrack *track in tracks)
-  {
-    MMContent *content = [self createContentWithiTunesItem:track andSpecialKind:specialKind];
-    [array addObject:content];
-  }
-  return array;
-}
-
-- (MMContent*) createContentWithiTunesItem: (iTunesTrack*) item andSpecialKind: (MMContentKind) kind
-{
-//  MMContentKind kind = [self contentKindFromiTunesSpecialKind: specialKind];
-  MMContent *content = [MMContent content: kind];
-  int retaincount = [item retainCount];
-  if(retaincount != 1)
-  {
-    NSLog(@"I have one %i", retaincount);
-    [item release];
-  }
-//  content.contentId = [item persistentID];
-//  content.name = [item name]; 
-//  content.genre = [item genre];
-//  if(kind == MUSIC) {
-//    content.album = [item album];
-//    content.artist = [item artist];
-//    content.trackNumber = [item trackNumber];
-//  }
-//  
-//  if(kind == TV_SHOW || kind == MOVIE) 
-//  {
-//    content.description = [item objectDescription];
-//  }
-//  
-//  if(kind == TV_SHOW) 
-//  {
-//    content.show = [item show];
-//    content.episodeNumber = [item episodeNumber];
-//    content.season = [item seasonNumber];
-//  }
-  
-  return content;
-}
-
 #pragma mark - Enum converter
 - (MMContentKind) contentKindFromiTunesSpecialKind: (iTunesESpK) specialKind {
   MMContentKind kind;

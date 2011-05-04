@@ -15,6 +15,4 @@
 
 @interface MMContentAssembler(iTunes)
 - (MMServerMediaLibrary*) createMediaLibrary: (iTunesPlaylist*) playlist;
-- (NSArray*) createContentListWithPlaylist: (iTunesPlaylist*) playlist;
-- (MMContent*) createContentWithiTunesItem: (iTunesItem*) item andSpecialKind: (MMContentKind) specialKind;
 @end

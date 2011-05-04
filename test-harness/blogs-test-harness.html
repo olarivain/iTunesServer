@@ -1,0 +1,147 @@
+<html>
+	<head>
+	<title>QA Blogs - Test Harness</title>
+	<style type="text/css">
+		.error {color:red;}
+		.valid {color:orange;}
+		.valid {color:green;}
+		.response {width: 100%; height: 400px;};
+	</style>
+	</head>
+	<body onload="buildRequest()">
+		<script type="text/javascript">
+		var requestedTimestamp;
+		
+		function showResponse(xmlHttpRequest){
+			var responseCode = document.getElementById("responseCode");
+			var receivedTimestamp = new Date();
+			var duration = receivedTimestamp.getTime() - requestedTimestamp.getTime();
+			responseCode.innerHTML = xmlHttpRequest.status + " ("+ xmlHttpRequest.statusText+") in "+ duration +"ms.";
+			if((xmlHttpRequest.status < 200) || (xmlHttpRequest.status > 299)) {
+				responseCode.className = "error";
+			} else{
+				responseCode.className = "valid";
+			}
+			
+			var responseBody = document.getElementById("result");
+			var jsonResponse = document.getElementById("jsonResponse");
+			
+			var json = JSON.parse(xmlHttpRequest.responseText);
+			try{
+				// build response text area
+				responseBody.value = JSON.stringify(json, null, 4);
+			} catch(err) {
+				jsonResponse.innerHTML = "JSON Object is NOT valid, returned error:<br/>"+err;
+				jsonResponse.className="error";
+			}
+			var moreInfo = document.getElementById("moreInfo");
+			try{
+				moreInfo.innerHTML = "There are "+json.content.length+" content elements in the response."
+				moreInfo.className="";
+				
+				var innerHTML = "JSON Object is valid<br/>";
+				jsonResponse.innerHTML = innerHTML;
+				jsonResponse.className="valid";
+			} catch(err) {
+				moreInfo.innerHTML = "Object is valid but does not contain content elements";
+				moreInfo.className="orange";
+				jsonResponse.innerHTML = "JSON Object is valid, but has no entries";
+			}
+	
+	  }
+	  
+	  var AjaxScriptTransport = function() {
+		return {
+          
+          sendRequest: function (url, params){
+            url += "?";
+            //formed url params
+		   for (var key in params){
+		      var value = params[key]
+              url += key+"="+value+"&";
+            }
+            
+            // mark timestamp when we started
+            requestedTimestamp = new Date();
+            var xmlHttpRequest = new XMLHttpRequest();
+            xmlHttpRequest.open("GET", url, true);
+            xmlHttpRequest.setRequestHeader("Content-Type", "application/json");
+            xmlHttpRequest.onreadystatechange = function() {
+              if (xmlHttpRequest.readyState == 4) {
+                showResponse(xmlHttpRequest);
+              }
+            };
+
+            var request = document.getElementById("request");
+            request.innerHTML =  url;
+            
+            var responseCode = document.getElementById("responseCode");
+            responseCode.innerHTML =  "Please wait, loading...";
+            xmlHttpRequest.send(null);
+            
+          }
+        };
+      }
+      function clearParams(){
+        var element = document.getElementById("params");
+        element.value="";
+      }
+      
+      function submitRESTRequest() {        
+		requestedTimestamp = undefined;
+        var body = document.getElementById("result");
+        body.value="";
+        
+        var responseCode = document.getElementById("responseCode");
+        responseCode.innerHTML = "";
+
+        document.getElementById("responseCode").innerHTML="";
+        document.getElementById("responseCode").className="";
+        document.getElementById("jsonResponse").innerHTML="JSON status unknown.";
+        document.getElementById("jsonResponse").className = "";
+		document.getElementById("moreInfo").innerHTML="";
+		document.getElementById("moreInfo").className="";
+        document.getElementById("result").value="";
+		
+		var form = document.getElementById("form");
+		var url = form.request.value;
+		var params = new Object();
+		
+        new AjaxScriptTransport().sendRequest(url, params);
+        return false;
+      }
+      
+      function buildRequest(){
+      	var form = document.getElementById("form");
+      	form.request.value = form.host.value + form.blog.value;
+      }
+      </script>
+		<form id="form" onsubmit="return submitRESTRequest();">
+			Host:<br/>
+			<select name="host" onchange="buildRequest();">
+				<option value="http://localhost:2048" >Local</option>
+				<!--option value="http://blogs.edmunds.com">Prod blogs</option -->
+			</select><br/><br/>
+			Blog: <br/>
+			<select name="blog" onchange="buildRequest();">
+				<option value="/movies" >Movies</option>
+				<option value="/music">Music</option>
+				<option value="/tvshows">TV Shows</option>
+				<option value="/podcasts">Podcasts</option>
+				<option value="/itunesu">iTunes U</option>
+			</select><br/><br/>
+			Request:<br/> <input type="text" size="150" name="request" value="" /><br /><br/> 	
+	  		<input type="submit" />
+		</form>
+		<div style="width: 1180px">
+			<p>Request: <span id="request"></span></p>
+			<p>Response: <span id="responseCode"></span></p>
+			<p id="jsonResponse">JSON status unknown.</p>
+			<p><span id="moreInfo"></span></p>
+		</div>
+		<div style="width: 1180px">
+			<div class="response">JSON Response:<br/><textarea id="result"  readonly rows="60" cols="160"></textarea></div>
+			<div clear:both>&nbsp;</div>
+		</div>
+	</body>
+</html>
