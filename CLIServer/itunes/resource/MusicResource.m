@@ -31,7 +31,7 @@
 #pragma mark - Rest resource processing
 - (HSResponse*) musicLibrary: (NSDictionary*) params
 {
-  HSResponse *response = [HSResponse response];
+  HSResponse *response = [HSResponse jsonResponse];
   MMMediaLibrary *library = [repository musicLibrary];
   
   NSDictionary *data = [contentAssembler writeLibrary: library];

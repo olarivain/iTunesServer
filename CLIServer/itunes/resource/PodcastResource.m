@@ -28,7 +28,7 @@
 
 - (HSResponse*) podcastLibrary: (NSDictionary*) params
 {
-  HSResponse *response = [HSResponse response];
+  HSResponse *response = [HSResponse jsonResponse];
   MMMediaLibrary *library = [repository podcastLibrary];
   
   NSDictionary *dto = [contentAssembler writeLibrary: library];

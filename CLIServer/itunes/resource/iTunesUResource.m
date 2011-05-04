@@ -30,7 +30,7 @@
 
 - (HSResponse*) iTunesULibrary: (NSDictionary*) params
 {
-  HSResponse *response = [HSResponse response];
+  HSResponse *response = [HSResponse jsonResponse];
   MMMediaLibrary *library = [repository iTunesULibrary];
   
   NSDictionary *dto = [contentAssembler writeLibrary: library];

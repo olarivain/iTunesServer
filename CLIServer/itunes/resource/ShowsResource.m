@@ -30,7 +30,7 @@
 
 - (HSResponse*) showsLibrary: (NSDictionary*) params
 {
-  HSResponse *response = [HSResponse response];
+  HSResponse *response = [HSResponse jsonResponse];
   MMMediaLibrary *library = [repository showsLibrary];
   
   NSDictionary *dto = [contentAssembler writeLibrary: library];

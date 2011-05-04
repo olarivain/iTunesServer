@@ -31,7 +31,7 @@
 #pragma mark - Rest resource processing
 - (HSResponse*) movieLibrary: (NSDictionary*) params
 {
-  HSResponse *response = [HSResponse response];
+  HSResponse *response = [HSResponse jsonResponse];
   MMMediaLibrary *library = [repository movieLibrary];;
   
   NSDictionary *dto = [contentAssembler writeLibrary: library];
