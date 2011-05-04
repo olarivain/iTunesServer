@@ -7,7 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "HSHTTPServe.h"
+#import <HTTPServe/HSHTTPServe.h>
 
 int main (int argc, const char * argv[])
 {

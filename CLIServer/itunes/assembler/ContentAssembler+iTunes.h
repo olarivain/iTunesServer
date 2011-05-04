@@ -8,8 +8,8 @@
 
 #import <Foundation/Foundation.h>
 #import "iTunes.h"
-#import "MMContentAssembler.h"
-#import "MMContent.h"
+#import <MediaManagement/MMContentAssembler.h>
+#import <MediaManagement/MMContent.h>
 
 @class MMServerMediaLibrary;
 

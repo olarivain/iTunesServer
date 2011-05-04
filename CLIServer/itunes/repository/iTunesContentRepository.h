@@ -16,7 +16,9 @@
   iTunesApplication *iTunes;    
 }
 
-- (MMServerMediaLibrary*) movieLibrary;
 - (MMServerMediaLibrary*) musicLibrary;
+- (MMServerMediaLibrary*) movieLibrary;
+- (MMServerMediaLibrary*) showsLibrary;
+- (MMServerMediaLibrary*) podcastLibrary;
 
 @end

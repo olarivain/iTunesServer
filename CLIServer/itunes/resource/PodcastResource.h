@@ -1,8 +1,8 @@
 //
-//  PhonyResource.h
+//  PodcastResource.h
 //  CLIServer
 //
-//  Created by Kra on 3/12/11.
+//  Created by Kra on 5/3/11.
 //  Copyright 2011 kra. All rights reserved.
 //
 
@@ -11,14 +11,14 @@
 
 @class iTunesContentRepository;
 @class MMContentAssembler;
-@interface MovieResource : NSObject<HSRestResource> 
+
+@interface PodcastResource : NSObject<HSRestResource> 
 {
-  @private
+@private
   iTunesContentRepository *repository;
   MMContentAssembler *contentAssembler;
-    
+  
 }
 
 - (NSArray*) resourceDescriptors;
-
 @end

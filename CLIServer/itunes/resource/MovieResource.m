@@ -6,14 +6,14 @@
 //  Copyright 2011 kra. All rights reserved.
 //
 
-#import "HSResourceDescriptor.h"
-#import "HSResponse.h"
+#import <HTTPServe/HSResourceDescriptor.h>
+#import <HTTPServe/HSResponse.h>
+
+#import <MediaManagement/MMContent.h>
+#import <MediaManagement/MMContentAssembler.h>
+#import <MediaManagement/MMServerMediaLibrary.h>
 
 #import "MovieResource.h"
-
-#import "MMContent.h"
-#import "MMContentAssembler.h"
-#import "MMServerMediaLibrary.h"
 
 #import "iTunesContentRepository.h"
 
@@ -44,20 +44,20 @@
 #pragma mark - Rest Resource descriptor
 - (NSArray*) resourceDescriptors
 {
-  HSResourceDescriptor *descriptor = [HSResourceDescriptor descriptorWithPath:@"/movies" resource:self andSelector:@selector(allMovies:)];
+  HSResourceDescriptor *descriptor = [HSResourceDescriptor descriptorWithPath:@"/movies" resource:self andSelector:@selector(movieLibrary:)];
   return [NSArray arrayWithObject: descriptor];
 }
 
 #pragma mark - Rest resource processing
 
 
-- (HSResponse*) allMovies: (NSDictionary*) params
+- (HSResponse*) movieLibrary: (NSDictionary*) params
 {
   HSResponse *response = [HSResponse response];
   MMMediaLibrary *library = [repository movieLibrary];;
   
-  NSData *data = [contentAssembler writeLibrary: library];
-  [response setContent: data];
+  NSDictionary *dto = [contentAssembler writeLibrary: library];
+  response.object = dto;
 
   return response;
 }

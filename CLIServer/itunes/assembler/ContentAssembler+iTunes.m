@@ -7,8 +7,8 @@
 //
 
 #import "ContentAssembler+iTunes.h"
-#import "MMContent.h"
-#import "MMServerMediaLibrary.h"
+#import <MediaManagement/MMContent.h>
+#import <MediaManagement/MMServerMediaLibrary.h>
 
 @interface MMContentAssembler()
 - (MMContentKind) contentKindFromiTunesSpecialKind: (iTunesESpK) specialKind;

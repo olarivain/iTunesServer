@@ -7,7 +7,7 @@
 //
 
 #import "iTunesContentRepository.h"
-#import "MMContent.h"
+#import <MediaManagement/MMContent.h>
 #import "ContentAssembler+iTunes.h"
 
 #import "iTunesUtil.h"
@@ -16,6 +16,7 @@
 - (iTunesPlaylist*) music;
 - (iTunesPlaylist*) movies;
 - (iTunesPlaylist*) shows;
+- (iTunesPlaylist*) podcasts;
 - (iTunesPlaylist*) playlistWithSpecialKind: (iTunesESpK) specialKind;
 @end
 
@@ -70,19 +71,28 @@
 }
   
 #pragma mark Concrete accessors (music, movies etc)
-- (iTunesPlaylist*) music {
+- (iTunesPlaylist*) music 
+{
   iTunesPlaylist *playlist = [self playlistWithSpecialKind:iTunesESpKMusic];
   return playlist;
 }
 
-- (iTunesPlaylist*) movies {
+- (iTunesPlaylist*) movies 
+{
   iTunesPlaylist *playlist = [self playlistWithSpecialKind:iTunesESpKMovies];  
   return playlist;
 }
 
-- (iTunesPlaylist*) shows {
+- (iTunesPlaylist*) shows 
+{
   iTunesPlaylist *playlist = [self playlistWithSpecialKind:iTunesESpKTVShows];
   return playlist;
+}
+
+- (iTunesPlaylist*) podcasts 
+{
+  iTunesPlaylist *podcasts = [self playlistWithSpecialKind:iTunesESpKPodcasts];
+  return podcasts;
 }
 
 #pragma mark - Repository methods
@@ -93,8 +103,14 @@
   return library;
 }
 
+- (MMServerMediaLibrary*) podcastLibrary
+{
+  iTunesPlaylist *podcastPlaylist = [self podcasts];
+  MMServerMediaLibrary *podcasts = [self libraryWithPlaylist: podcastPlaylist];  
+  return podcasts;
+}
 
-- (MMServerMediaLibrary*) tvShowLibrary
+- (MMServerMediaLibrary*) showsLibrary
 {
   iTunesPlaylist *moviesPlaylist = [self shows];
   MMServerMediaLibrary *movies = [self libraryWithPlaylist: moviesPlaylist];  
