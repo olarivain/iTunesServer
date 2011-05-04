@@ -1,8 +1,8 @@
 //
-//  PhonyResource.h
+//  ShowsResource.h
 //  CLIServer
 //
-//  Created by Kra on 3/12/11.
+//  Created by Kra on 5/3/11.
 //  Copyright 2011 kra. All rights reserved.
 //
 
@@ -11,8 +11,7 @@
 
 #import "AbstractContentResource.h"
 
-@interface MovieResource : AbstractContentResource<HSRestResource> 
+@interface ShowsResource :  AbstractContentResource<HSRestResource> 
 {
 }
-
 @end

@@ -1,8 +1,8 @@
 //
-//  PhonyResource.m
+//  ShowsResource.m
 //  CLIServer
 //
-//  Created by Kra on 3/12/11.
+//  Created by Kra on 5/3/11.
 //  Copyright 2011 kra. All rights reserved.
 //
 
@@ -12,31 +12,32 @@
 #import <MediaManagement/MMContentAssembler.h>
 #import <MediaManagement/MMMediaLibrary.h>
 
-#import "MovieResource.h"
+#import "ShowsResource.h"
 
 #import "iTunesContentRepository.h"
 
-
-
-
-@implementation MovieResource
+@implementation ShowsResource
 
 #pragma mark - Rest Resource descriptor
 - (NSArray*) resourceDescriptors
 {
-  HSResourceDescriptor *descriptor = [HSResourceDescriptor descriptorWithPath:@"/movies" resource:self andSelector:@selector(movieLibrary:)];
+  HSResourceDescriptor *descriptor = [HSResourceDescriptor descriptorWithPath:@"/shows" resource:self andSelector:@selector(showsLibrary:)];
   return [NSArray arrayWithObject: descriptor];
 }
 
 #pragma mark - Rest resource processing
-- (HSResponse*) movieLibrary: (NSDictionary*) params
+
+
+- (HSResponse*) showsLibrary: (NSDictionary*) params
 {
   HSResponse *response = [HSResponse response];
-  MMMediaLibrary *library = [repository movieLibrary];;
+  MMMediaLibrary *library = [repository showsLibrary];
   
   NSDictionary *dto = [contentAssembler writeLibrary: library];
   response.object = dto;
-
+  
   return response;
 }
+
+
 @end

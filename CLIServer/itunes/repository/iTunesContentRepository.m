@@ -6,8 +6,10 @@
 //  Copyright 2011 kra. All rights reserved.
 //
 
-#import "iTunesContentRepository.h"
 #import <MediaManagement/MMContent.h>
+#import <MediaManagement/MMServerMediaLibrary.h>
+
+#import "iTunesContentRepository.h"
 #import "ContentAssembler+iTunes.h"
 
 #import "iTunesUtil.h"
@@ -103,28 +105,28 @@
   return library;
 }
 
-- (MMServerMediaLibrary*) podcastLibrary
+- (MMMediaLibrary*) podcastLibrary
 {
   iTunesPlaylist *podcastPlaylist = [self podcasts];
   MMServerMediaLibrary *podcasts = [self libraryWithPlaylist: podcastPlaylist];  
   return podcasts;
 }
 
-- (MMServerMediaLibrary*) showsLibrary
+- (MMMediaLibrary*) showsLibrary
 {
   iTunesPlaylist *moviesPlaylist = [self shows];
   MMServerMediaLibrary *movies = [self libraryWithPlaylist: moviesPlaylist];  
   return movies;
 }
 
-- (MMServerMediaLibrary*) movieLibrary
+- (MMMediaLibrary*) movieLibrary
 {
   iTunesPlaylist *moviesPlaylist = [self movies];
   MMServerMediaLibrary *movies = [self libraryWithPlaylist: moviesPlaylist];  
   return movies;
 }
 
-- (MMServerMediaLibrary*) musicLibrary
+- (MMMediaLibrary*) musicLibrary
 {
   iTunesPlaylist *musicPlaylist = [self music];
   MMServerMediaLibrary *music = [self libraryWithPlaylist: musicPlaylist];  

@@ -7,17 +7,12 @@
 //
 
 #import <Foundation/Foundation.h>
-@class iTunesContentRepository;
-@class MMContentAssembler;
+#import <HTTPServe/HSRestResource.h>
 
-@interface MusicResource : NSObject<HSRestResource> 
+#import "AbstractContentResource.h"
+
+@interface MusicResource : AbstractContentResource<HSRestResource> 
 {
-@private
-  iTunesContentRepository *repository;
-  MMContentAssembler *contentAssembler;
-  
 }
-
-- (NSArray*) resourceDescriptors;
 
 @end

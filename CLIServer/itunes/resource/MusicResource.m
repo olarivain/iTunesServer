@@ -11,9 +11,7 @@
 #import <HTTPServe/HSResponse.h>
 
 #import <MediaManagement/MMContentAssembler.h>
-#import <MediaManagement/MMContent.h>
 #import <MediaManagement/MMMediaLibrary.h>
-#import <MediaManagement/MMServerMediaLibrary.h>
 
 #import "MusicResource.h"
 
@@ -22,25 +20,6 @@
 
 
 @implementation MusicResource
-
-- (id)init
-{
-  self = [super init];
-  if (self) 
-  {
-    repository = [[iTunesContentRepository alloc] init];
-    contentAssembler = [[MMContentAssembler sharedInstance] retain];
-  }
-  
-  return self;
-}
-
-- (void)dealloc
-{
-  [repository release];
-  [contentAssembler release];
-  [super dealloc];
-}
 
 #pragma mark - Rest Resource descriptor
 - (NSArray*) resourceDescriptors

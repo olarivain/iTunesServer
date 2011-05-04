@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		00286EED1371183100EAB58A /* iTunesTracksWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = 00286EEC1371183100EAB58A /* iTunesTracksWrapper.m */; };
+		00286EF013711EA900EAB58A /* ShowsResource.m in Sources */ = {isa = PBXBuildFile; fileRef = 00286EEF13711EA900EAB58A /* ShowsResource.m */; };
+		00286EF313711ED800EAB58A /* AbstractContentResource.m in Sources */ = {isa = PBXBuildFile; fileRef = 00286EF213711ED800EAB58A /* AbstractContentResource.m */; };
 		002A0A4D13243E1500320A06 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 002A0A4C13243E1500320A06 /* Foundation.framework */; };
 		002A0A5013243E1500320A06 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 002A0A4F13243E1500320A06 /* main.m */; };
 		00655C3A1371058D00E38887 /* PodcastResource.m in Sources */ = {isa = PBXBuildFile; fileRef = 00655C391371058D00E38887 /* PodcastResource.m */; };
@@ -38,8 +40,12 @@
 
 /* Begin PBXFileReference section */
 		00286EE9137114DC00EAB58A /* blogs-test-harness.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = "blogs-test-harness.html"; sourceTree = "<group>"; };
-		00286EEB1371183100EAB58A /* iTunesTracksWrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; path = iTunesTracksWrapper.h; sourceTree = "<group>"; };
+		00286EEB1371183100EAB58A /* iTunesTracksWrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = iTunesTracksWrapper.h; sourceTree = "<group>"; };
 		00286EEC1371183100EAB58A /* iTunesTracksWrapper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = iTunesTracksWrapper.m; sourceTree = "<group>"; };
+		00286EEE13711EA900EAB58A /* ShowsResource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShowsResource.h; sourceTree = "<group>"; };
+		00286EEF13711EA900EAB58A /* ShowsResource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShowsResource.m; sourceTree = "<group>"; };
+		00286EF113711ED800EAB58A /* AbstractContentResource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AbstractContentResource.h; sourceTree = "<group>"; };
+		00286EF213711ED800EAB58A /* AbstractContentResource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AbstractContentResource.m; sourceTree = "<group>"; };
 		002A0A4813243E1500320A06 /* CLIServer */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = CLIServer; sourceTree = BUILT_PRODUCTS_DIR; };
 		002A0A4C13243E1500320A06 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		002A0A4F13243E1500320A06 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -178,12 +184,16 @@
 		009EE497136DF641008EEEA5 /* resource */ = {
 			isa = PBXGroup;
 			children = (
+				00286EF113711ED800EAB58A /* AbstractContentResource.h */,
+				00286EF213711ED800EAB58A /* AbstractContentResource.m */,
 				009EE498136DF641008EEEA5 /* MovieResource.h */,
 				009EE499136DF641008EEEA5 /* MovieResource.m */,
 				009EE49A136DF641008EEEA5 /* MusicResource.h */,
 				009EE49B136DF641008EEEA5 /* MusicResource.m */,
 				00655C381371058D00E38887 /* PodcastResource.h */,
 				00655C391371058D00E38887 /* PodcastResource.m */,
+				00286EEE13711EA900EAB58A /* ShowsResource.h */,
+				00286EEF13711EA900EAB58A /* ShowsResource.m */,
 			);
 			path = resource;
 			sourceTree = "<group>";
@@ -262,6 +272,8 @@
 				00FE69A7136FD81300647ED4 /* iTunesUtil.m in Sources */,
 				00655C3A1371058D00E38887 /* PodcastResource.m in Sources */,
 				00286EED1371183100EAB58A /* iTunesTracksWrapper.m in Sources */,
+				00286EF013711EA900EAB58A /* ShowsResource.m in Sources */,
+				00286EF313711ED800EAB58A /* AbstractContentResource.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

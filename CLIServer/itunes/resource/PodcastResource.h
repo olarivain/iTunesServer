@@ -9,16 +9,9 @@
 #import <Foundation/Foundation.h>
 #import <HTTPServe/HSRestResource.h>
 
-@class iTunesContentRepository;
-@class MMContentAssembler;
+#import "AbstractContentResource.h"
 
-@interface PodcastResource : NSObject<HSRestResource> 
+@interface PodcastResource : AbstractContentResource<HSRestResource> 
 {
-@private
-  iTunesContentRepository *repository;
-  MMContentAssembler *contentAssembler;
-  
 }
-
-- (NSArray*) resourceDescriptors;
 @end

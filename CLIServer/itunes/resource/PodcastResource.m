@@ -8,35 +8,14 @@
 #import <HTTPServe/HSResourceDescriptor.h>
 #import <HTTPServe/HSResponse.h>
 
-#import <MediaManagement/MMContent.h>
 #import <MediaManagement/MMContentAssembler.h>
-#import <MediaManagement/MMServerMediaLibrary.h>
+#import <MediaManagement/MMMediaLibrary.h>
 
 #import "PodcastResource.h"
 
 #import "iTunesContentRepository.h"
 
 @implementation PodcastResource
-
-- (id)init
-{
-  self = [super init];
-  if (self) 
-  {
-    repository = [[iTunesContentRepository alloc] init];
-    contentAssembler = [[MMContentAssembler sharedInstance] retain];
-  }
-  
-  return self;
-}
-
-- (void)dealloc
-{
-  [repository release];
-  [contentAssembler release];
-  [super dealloc];
-}
-
 #pragma mark - Rest Resource descriptor
 - (NSArray*) resourceDescriptors
 {
