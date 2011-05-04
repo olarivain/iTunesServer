@@ -36,6 +36,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		00286EE9137114DC00EAB58A /* blogs-test-harness.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = "blogs-test-harness.html"; sourceTree = "<group>"; };
 		002A0A4813243E1500320A06 /* CLIServer */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = CLIServer; sourceTree = BUILT_PRODUCTS_DIR; };
 		002A0A4C13243E1500320A06 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		002A0A4F13243E1500320A06 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -81,10 +82,19 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		00286EE8137114DC00EAB58A /* test-harness */ = {
+			isa = PBXGroup;
+			children = (
+				00286EE9137114DC00EAB58A /* blogs-test-harness.html */,
+			);
+			path = "test-harness";
+			sourceTree = "<group>";
+		};
 		002A0A3D13243E1400320A06 = {
 			isa = PBXGroup;
 			children = (
 				002A0A4E13243E1500320A06 /* CLIServer */,
+				00286EE8137114DC00EAB58A /* test-harness */,
 				002A0A4B13243E1500320A06 /* Frameworks */,
 				002A0A4913243E1500320A06 /* Products */,
 			);
