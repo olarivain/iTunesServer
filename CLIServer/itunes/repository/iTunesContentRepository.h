@@ -20,5 +20,6 @@
 - (MMMediaLibrary*) movieLibrary;
 - (MMMediaLibrary*) showsLibrary;
 - (MMMediaLibrary*) podcastLibrary;
+- (MMMediaLibrary*) iTunesULibrary;
 
 @end

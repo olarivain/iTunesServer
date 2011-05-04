@@ -19,6 +19,7 @@
 - (iTunesPlaylist*) movies;
 - (iTunesPlaylist*) shows;
 - (iTunesPlaylist*) podcasts;
+- (iTunesPlaylist*) iTunesU;
 - (iTunesPlaylist*) playlistWithSpecialKind: (iTunesESpK) specialKind;
 @end
 
@@ -97,6 +98,12 @@
   return podcasts;
 }
 
+- (iTunesPlaylist*) iTunesU
+{
+  iTunesPlaylist *iTunesU = [self playlistWithSpecialKind:iTunesESpKITunesU];
+  return iTunesU;
+}
+
 #pragma mark - Repository methods
 - (MMServerMediaLibrary*) libraryWithPlaylist: (iTunesPlaylist*) playlist
 {
@@ -131,6 +138,13 @@
   iTunesPlaylist *musicPlaylist = [self music];
   MMServerMediaLibrary *music = [self libraryWithPlaylist: musicPlaylist];  
   return music;
+}
+
+- (MMMediaLibrary*) iTunesULibrary
+{
+  iTunesPlaylist *iTunesULibrary = [self iTunesU];
+  MMServerMediaLibrary *iTunesU = [self libraryWithPlaylist: iTunesULibrary];  
+  return iTunesU;
 }
 
 
