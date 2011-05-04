@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		00286EED1371183100EAB58A /* iTunesTracksWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = 00286EEC1371183100EAB58A /* iTunesTracksWrapper.m */; };
 		002A0A4D13243E1500320A06 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 002A0A4C13243E1500320A06 /* Foundation.framework */; };
 		002A0A5013243E1500320A06 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 002A0A4F13243E1500320A06 /* main.m */; };
 		00655C3A1371058D00E38887 /* PodcastResource.m in Sources */ = {isa = PBXBuildFile; fileRef = 00655C391371058D00E38887 /* PodcastResource.m */; };
@@ -37,6 +38,8 @@
 
 /* Begin PBXFileReference section */
 		00286EE9137114DC00EAB58A /* blogs-test-harness.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = "blogs-test-harness.html"; sourceTree = "<group>"; };
+		00286EEB1371183100EAB58A /* iTunesTracksWrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; path = iTunesTracksWrapper.h; sourceTree = "<group>"; };
+		00286EEC1371183100EAB58A /* iTunesTracksWrapper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = iTunesTracksWrapper.m; sourceTree = "<group>"; };
 		002A0A4813243E1500320A06 /* CLIServer */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = CLIServer; sourceTree = BUILT_PRODUCTS_DIR; };
 		002A0A4C13243E1500320A06 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		002A0A4F13243E1500320A06 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -198,6 +201,8 @@
 			children = (
 				00FE69A5136FD81300647ED4 /* iTunesUtil.h */,
 				00FE69A6136FD81300647ED4 /* iTunesUtil.m */,
+				00286EEB1371183100EAB58A /* iTunesTracksWrapper.h */,
+				00286EEC1371183100EAB58A /* iTunesTracksWrapper.m */,
 			);
 			path = util;
 			sourceTree = "<group>";
@@ -256,6 +261,7 @@
 				009EE4A1136DF641008EEEA5 /* MusicResource.m in Sources */,
 				00FE69A7136FD81300647ED4 /* iTunesUtil.m in Sources */,
 				00655C3A1371058D00E38887 /* PodcastResource.m in Sources */,
+				00286EED1371183100EAB58A /* iTunesTracksWrapper.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

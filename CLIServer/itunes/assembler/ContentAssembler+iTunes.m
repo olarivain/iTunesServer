@@ -5,10 +5,12 @@
 //  Created by Kra on 4/30/11.
 //  Copyright 2011 kra. All rights reserved.
 //
-
-#import "ContentAssembler+iTunes.h"
 #import <MediaManagement/MMContent.h>
 #import <MediaManagement/MMServerMediaLibrary.h>
+
+#import "ContentAssembler+iTunes.h"
+
+#import "iTunesTracksWrapper.h"
 
 @interface MMContentAssembler()
 - (MMContentKind) contentKindFromiTunesSpecialKind: (iTunesESpK) specialKind;
@@ -22,35 +24,41 @@
 
   SBElementArray *tracks = [playlist tracks];
   
-  NSArray *ids = [tracks arrayByApplyingSelector:@selector(persistentID)];
-  NSArray *names = [tracks arrayByApplyingSelector:@selector(name)];
-  NSArray *genres =[tracks arrayByApplyingSelector:@selector(genre)];
-  NSArray *albums = [tracks arrayByApplyingSelector:@selector(album)];
-  NSArray *artists =[tracks arrayByApplyingSelector:@selector(artist)];
-  NSArray *trackNumbers = [tracks arrayByApplyingSelector:@selector(trackNumber)];
-  NSArray *descriptions = [tracks arrayByApplyingSelector:@selector(objectDescription)];
-  NSArray *shows = [tracks arrayByApplyingSelector:@selector(show)];
-  NSArray *episodes = [tracks arrayByApplyingSelector:@selector(episodeNumber)];
+  iTunesTracksWrapper *wrapper = [iTunesTracksWrapper wrapper];
+  
+  wrapper.ids = [tracks arrayByApplyingSelector:@selector(persistentID)];
+  wrapper.names = [tracks arrayByApplyingSelector:@selector(name)];
+  wrapper.genres =[tracks arrayByApplyingSelector:@selector(genre)];
+  wrapper.albums = [tracks arrayByApplyingSelector:@selector(album)];
+  wrapper.artists =[tracks arrayByApplyingSelector:@selector(artist)];
+  wrapper.trackNumbers = [tracks arrayByApplyingSelector:@selector(trackNumber)];
+  wrapper.descriptions = [tracks arrayByApplyingSelector:@selector(objectDescription)];
+  wrapper.shows = [tracks arrayByApplyingSelector:@selector(show)];
+  wrapper.episodes = [tracks arrayByApplyingSelector:@selector(episodeNumber)];
+  
+  NSUInteger count = [wrapper count];
   
   MMContentKind contentKind = [self contentKindFromiTunesSpecialKind: playlist.specialKind];
-  MMServerMediaLibrary *library = [MMServerMediaLibrary mediaLibraryWithContentKind: contentKind andSize: [ids count]];
+  MMServerMediaLibrary *library = [MMServerMediaLibrary mediaLibraryWithContentKind: contentKind andSize: count];
   
-  for(int i = 0; i < [ids count]; i++)
+  for(int i = 0; i < count; i++)
   {
     MMContent *content = [MMContent content: contentKind];
-    content.contentId = [ids objectAtIndex:i];
-    content.name = [names objectAtIndex:i];
-    content.genre = [genres objectAtIndex:i];
-    content.album = [albums objectAtIndex:i];
-    content.artist = [artists objectAtIndex:i];
-    content.trackNumber = [[trackNumbers objectAtIndex:i] intValue];
-    content.description = [descriptions objectAtIndex:i];
-    content.show = [shows objectAtIndex:i];
-    content.episodeNumber = [[episodes objectAtIndex:i] intValue];
+    content.contentId = [wrapper idForIndex:i]; 
+    content.name = [wrapper nameForIndex:i];
+    content.genre = [wrapper genreForIndex:i];
+    content.album = [wrapper albumForIndex:i];
+    content.artist = [wrapper artistForIndex:i];
+    content.trackNumber = [wrapper trackNumberForIndex:i];
+    content.description = [wrapper descriptionForIndex:i];
+    content.show = [wrapper showForIndex:i];
+    content.season = [wrapper seasonForIndex:i];
+    content.episodeNumber = [wrapper episodeForIndex:i];
     [library addContent: content];
   }
   return library;
 }
+
 
 #pragma mark - Enum converter
 - (MMContentKind) contentKindFromiTunesSpecialKind: (iTunesESpK) specialKind {
