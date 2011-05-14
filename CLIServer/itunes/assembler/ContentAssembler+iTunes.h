@@ -11,8 +11,8 @@
 #import <MediaManagement/MMContentAssembler.h>
 #import <MediaManagement/MMContent.h>
 
-@class MMServerMediaLibrary;
+@class MMPlaylist;
 
 @interface MMContentAssembler(iTunes)
-- (MMServerMediaLibrary*) createMediaLibrary: (iTunesPlaylist*) playlist;
+- (MMPlaylist*) createMediaLibrary: (iTunesPlaylist*) playlist;
 @end

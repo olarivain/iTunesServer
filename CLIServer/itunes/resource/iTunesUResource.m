@@ -10,7 +10,7 @@
 #import <HTTPServe/HSResponse.h>
 
 #import <MediaManagement/MMContentAssembler.h>
-#import <MediaManagement/MMMediaLibrary.h>
+#import <MediaManagement/MMPlaylist.h>
 
 #import "iTunesUResource.h"
 
@@ -31,7 +31,7 @@
 - (HSResponse*) iTunesULibrary: (NSDictionary*) params
 {
   HSResponse *response = [HSResponse jsonResponse];
-  MMMediaLibrary *library = [repository iTunesULibrary];
+  MMPlaylist *library = [repository iTunesULibrary];
   
   NSDictionary *dto = [contentAssembler writeLibrary: library];
   response.object = dto;

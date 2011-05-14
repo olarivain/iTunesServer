@@ -7,7 +7,7 @@
 //
 
 #import <MediaManagement/MMContent.h>
-#import <MediaManagement/MMServerMediaLibrary.h>
+#import <MediaManagement/MMServerPlaylist.h>
 
 #import "iTunesContentRepository.h"
 #import "ContentAssembler+iTunes.h"
@@ -105,45 +105,45 @@
 }
 
 #pragma mark - Repository methods
-- (MMServerMediaLibrary*) libraryWithPlaylist: (iTunesPlaylist*) playlist
+- (MMPlaylist*) libraryWithPlaylist: (iTunesPlaylist*) playlist
 {
   MMContentAssembler *assembler = [MMContentAssembler sharedInstance];
-  MMServerMediaLibrary *library = [assembler createMediaLibrary: playlist];
+  MMPlaylist *library = [assembler createMediaLibrary: playlist];
   return library;
 }
 
-- (MMMediaLibrary*) podcastLibrary
+- (MMPlaylist*) podcastLibrary
 {
   iTunesPlaylist *podcastPlaylist = [self podcasts];
-  MMServerMediaLibrary *podcasts = [self libraryWithPlaylist: podcastPlaylist];  
+  MMPlaylist *podcasts = [self libraryWithPlaylist: podcastPlaylist];  
   return podcasts;
 }
 
-- (MMMediaLibrary*) showsLibrary
+- (MMPlaylist*) showsLibrary
 {
   iTunesPlaylist *moviesPlaylist = [self shows];
-  MMServerMediaLibrary *movies = [self libraryWithPlaylist: moviesPlaylist];  
+  MMPlaylist *movies = [self libraryWithPlaylist: moviesPlaylist];  
   return movies;
 }
 
-- (MMMediaLibrary*) movieLibrary
+- (MMPlaylist*) movieLibrary
 {
   iTunesPlaylist *moviesPlaylist = [self movies];
-  MMServerMediaLibrary *movies = [self libraryWithPlaylist: moviesPlaylist];  
+  MMPlaylist *movies = [self libraryWithPlaylist: moviesPlaylist];  
   return movies;
 }
 
-- (MMMediaLibrary*) musicLibrary
+- (MMPlaylist*) musicLibrary
 {
   iTunesPlaylist *musicPlaylist = [self music];
-  MMServerMediaLibrary *music = [self libraryWithPlaylist: musicPlaylist];  
+  MMPlaylist *music = [self libraryWithPlaylist: musicPlaylist];  
   return music;
 }
 
-- (MMMediaLibrary*) iTunesULibrary
+- (MMPlaylist*) iTunesULibrary
 {
   iTunesPlaylist *iTunesULibrary = [self iTunesU];
-  MMServerMediaLibrary *iTunesU = [self libraryWithPlaylist: iTunesULibrary];  
+  MMPlaylist *iTunesU = [self libraryWithPlaylist: iTunesULibrary];  
   return iTunesU;
 }
 

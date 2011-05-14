@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import "iTunes.h"
-@class MMMediaLibrary;
+@class MMPlaylist;
 
 @interface iTunesContentRepository : NSObject<SBApplicationDelegate>
 {
@@ -16,10 +16,10 @@
   iTunesApplication *iTunes;    
 }
 
-- (MMMediaLibrary*) musicLibrary;
-- (MMMediaLibrary*) movieLibrary;
-- (MMMediaLibrary*) showsLibrary;
-- (MMMediaLibrary*) podcastLibrary;
-- (MMMediaLibrary*) iTunesULibrary;
+- (MMPlaylist*) musicLibrary;
+- (MMPlaylist*) movieLibrary;
+- (MMPlaylist*) showsLibrary;
+- (MMPlaylist*) podcastLibrary;
+- (MMPlaylist*) iTunesULibrary;
 
 @end

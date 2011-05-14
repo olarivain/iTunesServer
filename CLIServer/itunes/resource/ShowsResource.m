@@ -10,7 +10,7 @@
 #import <HTTPServe/HSResponse.h>
 
 #import <MediaManagement/MMContentAssembler.h>
-#import <MediaManagement/MMMediaLibrary.h>
+#import <MediaManagement/MMPlaylist.h>
 
 #import "ShowsResource.h"
 
@@ -31,7 +31,7 @@
 - (HSResponse*) showsLibrary: (NSDictionary*) params
 {
   HSResponse *response = [HSResponse jsonResponse];
-  MMMediaLibrary *library = [repository showsLibrary];
+  MMPlaylist *library = [repository showsLibrary];
   
   NSDictionary *dto = [contentAssembler writeLibrary: library];
   response.object = dto;

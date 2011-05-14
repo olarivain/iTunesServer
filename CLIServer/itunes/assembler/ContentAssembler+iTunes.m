@@ -6,7 +6,7 @@
 //  Copyright 2011 kra. All rights reserved.
 //
 #import <MediaManagement/MMContent.h>
-#import <MediaManagement/MMServerMediaLibrary.h>
+#import <MediaManagement/MMServerPlaylist.h>
 
 #import "ContentAssembler+iTunes.h"
 
@@ -19,7 +19,7 @@
 @implementation MMContentAssembler(iTunes)
 
 #pragma mark - iTunes to MediaManagement objects
-- (MMServerMediaLibrary*) createMediaLibrary: (iTunesPlaylist*) playlist
+- (MMPlaylist*) createMediaLibrary: (iTunesPlaylist*) playlist
 {
 
   SBElementArray *tracks = [playlist tracks];
@@ -39,7 +39,7 @@
   NSUInteger count = [wrapper count];
   
   MMContentKind contentKind = [self contentKindFromiTunesSpecialKind: playlist.specialKind];
-  MMServerMediaLibrary *library = [MMServerMediaLibrary mediaLibraryWithContentKind: contentKind andSize: count];
+  MMPlaylist *library = [MMServerPlaylist playlistWithKind: contentKind andSize: count];
   
   for(int i = 0; i < count; i++)
   {
