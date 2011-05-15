@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 
 
-@interface iTunesTracksWrapper : NSObject {
+@interface iTunesWrapper : NSObject {
   NSArray *ids;
   NSArray *names;
   NSArray *genres;
@@ -20,10 +20,11 @@
   NSArray *shows;
   NSArray *seasons;
   NSArray *episodes;
-
+  NSArray *iTunesKinds;
 }
 
 @property (nonatomic, readwrite, retain) NSArray *ids;
+@property (nonatomic, readwrite, retain) NSArray *iTunesKinds;
 @property (nonatomic, readwrite, retain) NSArray *names;
 @property (nonatomic, readwrite, retain) NSArray *genres;
 @property (nonatomic, readwrite, retain) NSArray *albums;
@@ -39,6 +40,7 @@
 - (NSUInteger) count;
 
 - (NSString *) idForIndex: (NSUInteger) index;
+- (NSNumber *) iTunesKindForIndex: (NSUInteger) index;
 - (NSString *) nameForIndex: (NSUInteger) index;
 - (NSString *) genreForIndex: (NSUInteger) index;
 - (NSString *) albumForIndex: (NSUInteger) index;

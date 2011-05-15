@@ -20,6 +20,8 @@
 - (iTunesPlaylist*) shows;
 - (iTunesPlaylist*) podcasts;
 - (iTunesPlaylist*) iTunesU;
+
+- (iTunesPlaylist*) iTunesPlaylistWithID: (NSString*) persistentId;
 - (iTunesPlaylist*) playlistWithSpecialKind: (iTunesESpK) specialKind;
 @end
 
@@ -104,46 +106,74 @@
   return iTunesU;
 }
 
-#pragma mark - Repository methods
-- (MMPlaylist*) libraryWithPlaylist: (iTunesPlaylist*) playlist
+-(iTunesPlaylist*) iTunesPlaylistWithID: (NSString*) persistentId
+{
+  iTunesSource *mainLibrary = [self mainLibrary];
+  
+  // get playlist list and filter it agains the requested special kind
+  
+  NSString *predicateString = [NSString stringWithFormat:@"persistentID == '%@'", persistentId];
+  NSPredicate *predicate = [NSPredicate predicateWithFormat: predicateString];
+  NSArray *playlists = [[mainLibrary playlists] filteredArrayUsingPredicate: predicate];
+  
+  return [playlists count] > 0 ? [playlists objectAtIndex:0] : nil;
+}
+
+- (MMPlaylist*) playlistWithiTunesPlaylist: (iTunesPlaylist*) playlist
 {
   MMContentAssembler *assembler = [MMContentAssembler sharedInstance];
   MMPlaylist *library = [assembler createMediaLibrary: playlist];
   return library;
 }
 
+#pragma mark - Repository methods
+- (NSArray *) playlistHeaders
+{
+  iTunesSource *source = [self mainLibrary];
+  
+  MMContentAssembler *assembler = [MMContentAssembler sharedInstance];
+  return [assembler createPlaylistHeaders: source];
+}
+
+- (MMPlaylist *) playlistWithPersistentID: (NSString*) persistentID
+{
+  iTunesPlaylist *iTunesPlaylist = [self iTunesPlaylistWithID: persistentID];
+  MMPlaylist *playlist = [self playlistWithiTunesPlaylist: iTunesPlaylist];  
+  return playlist;
+}
+
 - (MMPlaylist*) podcastLibrary
 {
   iTunesPlaylist *podcastPlaylist = [self podcasts];
-  MMPlaylist *podcasts = [self libraryWithPlaylist: podcastPlaylist];  
+  MMPlaylist *podcasts = [self playlistWithiTunesPlaylist: podcastPlaylist];  
   return podcasts;
 }
 
 - (MMPlaylist*) showsLibrary
 {
   iTunesPlaylist *moviesPlaylist = [self shows];
-  MMPlaylist *movies = [self libraryWithPlaylist: moviesPlaylist];  
+  MMPlaylist *movies = [self playlistWithiTunesPlaylist: moviesPlaylist];  
   return movies;
 }
 
 - (MMPlaylist*) movieLibrary
 {
   iTunesPlaylist *moviesPlaylist = [self movies];
-  MMPlaylist *movies = [self libraryWithPlaylist: moviesPlaylist];  
+  MMPlaylist *movies = [self playlistWithiTunesPlaylist: moviesPlaylist];  
   return movies;
 }
 
 - (MMPlaylist*) musicLibrary
 {
   iTunesPlaylist *musicPlaylist = [self music];
-  MMPlaylist *music = [self libraryWithPlaylist: musicPlaylist];  
+  MMPlaylist *music = [self playlistWithiTunesPlaylist: musicPlaylist];  
   return music;
 }
 
 - (MMPlaylist*) iTunesULibrary
 {
   iTunesPlaylist *iTunesULibrary = [self iTunesU];
-  MMPlaylist *iTunesU = [self libraryWithPlaylist: iTunesULibrary];  
+  MMPlaylist *iTunesU = [self playlistWithiTunesPlaylist: iTunesULibrary];  
   return iTunesU;
 }
 

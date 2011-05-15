@@ -16,6 +16,9 @@
   iTunesApplication *iTunes;    
 }
 
+- (NSArray *) playlistHeaders;
+- (MMPlaylist*) playlistWithPersistentID: (NSString *) persistentID;
+
 - (MMPlaylist*) musicLibrary;
 - (MMPlaylist*) movieLibrary;
 - (MMPlaylist*) showsLibrary;

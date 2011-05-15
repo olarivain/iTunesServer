@@ -6,18 +6,18 @@
 //  Copyright 2011 kra. All rights reserved.
 //
 
-#import "iTunesTracksWrapper.h"
+#import "iTunesWrapper.h"
 
-@interface iTunesTracksWrapper()
+@interface iTunesWrapper()
 - (NSString *) string: (NSArray*) array forIndex: (NSUInteger) index;
 - (NSNumber *) number: (NSArray*) array forIndex: (NSUInteger) index;
 @end
 
-@implementation iTunesTracksWrapper
+@implementation iTunesWrapper
 
 + (id) wrapper
 {
-  return [[[iTunesTracksWrapper alloc] init] autorelease];
+  return [[[iTunesWrapper alloc] init] autorelease];
 }
 
 - (id)init
@@ -33,6 +33,7 @@
 - (void)dealloc
 {
   self.ids = nil;
+  self.iTunesKinds = nil;
   self.names = nil;
   self.genres = nil;
   self.albums = nil;
@@ -55,6 +56,7 @@
 @synthesize shows;
 @synthesize seasons;
 @synthesize episodes;
+@synthesize iTunesKinds;
 
 #pragma mark - Count
 - (NSUInteger) count 
@@ -66,6 +68,11 @@
 - (NSString *) idForIndex: (NSUInteger) index
 {
   return [self string:self.ids forIndex:index];
+}
+
+- (NSNumber *) iTunesKindForIndex: (NSUInteger) index
+{
+  return [self number: self.iTunesKinds forIndex: index];
 }
 
 - (NSString *) nameForIndex: (NSUInteger) index

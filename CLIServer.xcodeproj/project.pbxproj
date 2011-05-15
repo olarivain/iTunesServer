@@ -7,12 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		00286EED1371183100EAB58A /* iTunesTracksWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = 00286EEC1371183100EAB58A /* iTunesTracksWrapper.m */; };
+		00286EED1371183100EAB58A /* iTunesWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = 00286EEC1371183100EAB58A /* iTunesWrapper.m */; };
 		00286EF013711EA900EAB58A /* ShowsResource.m in Sources */ = {isa = PBXBuildFile; fileRef = 00286EEF13711EA900EAB58A /* ShowsResource.m */; };
 		00286EF313711ED800EAB58A /* AbstractContentResource.m in Sources */ = {isa = PBXBuildFile; fileRef = 00286EF213711ED800EAB58A /* AbstractContentResource.m */; };
 		00286EF61371238E00EAB58A /* iTunesUResource.m in Sources */ = {isa = PBXBuildFile; fileRef = 00286EF51371238D00EAB58A /* iTunesUResource.m */; };
 		002A0A4D13243E1500320A06 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 002A0A4C13243E1500320A06 /* Foundation.framework */; };
 		002A0A5013243E1500320A06 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 002A0A4F13243E1500320A06 /* main.m */; };
+		0052859A137F3A5500A5AFA3 /* MMLibraryResource.m in Sources */ = {isa = PBXBuildFile; fileRef = 00528599137F3A5500A5AFA3 /* MMLibraryResource.m */; };
 		00655C3A1371058D00E38887 /* PodcastResource.m in Sources */ = {isa = PBXBuildFile; fileRef = 00655C391371058D00E38887 /* PodcastResource.m */; };
 		00655C4E13710E2E00E38887 /* libhttpserve.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 00655C4C13710E2E00E38887 /* libhttpserve.a */; };
 		00655C4F13710E2E00E38887 /* libmedia-management-common.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 00655C4D13710E2E00E38887 /* libmedia-management-common.a */; };
@@ -23,6 +24,7 @@
 		00A74A05136CEB7F0081E54F /* ScriptingBridge.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 00A74A04136CEB7F0081E54F /* ScriptingBridge.framework */; };
 		00B3F8C3132C70B6003A4FCD /* ApplicationServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 00B3F8C2132C70B6003A4FCD /* ApplicationServices.framework */; };
 		00B3F8C5132C70F3003A4FCD /* AppKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 00B3F8C4132C70F3003A4FCD /* AppKit.framework */; };
+		00C35175137F4B9F008B8F95 /* MMPlaylistResource.m in Sources */ = {isa = PBXBuildFile; fileRef = 00C35174137F4B9F008B8F95 /* MMPlaylistResource.m */; };
 		00E35DD9132C04ED00D25EFF /* CoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 00E35DD8132C04ED00D25EFF /* CoreServices.framework */; };
 		00FE69A7136FD81300647ED4 /* iTunesUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 00FE69A6136FD81300647ED4 /* iTunesUtil.m */; };
 /* End PBXBuildFile section */
@@ -41,8 +43,8 @@
 
 /* Begin PBXFileReference section */
 		00286EE9137114DC00EAB58A /* blogs-test-harness.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = "blogs-test-harness.html"; sourceTree = "<group>"; };
-		00286EEB1371183100EAB58A /* iTunesTracksWrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = iTunesTracksWrapper.h; sourceTree = "<group>"; };
-		00286EEC1371183100EAB58A /* iTunesTracksWrapper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = iTunesTracksWrapper.m; sourceTree = "<group>"; };
+		00286EEB1371183100EAB58A /* iTunesWrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = iTunesWrapper.h; sourceTree = "<group>"; };
+		00286EEC1371183100EAB58A /* iTunesWrapper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = iTunesWrapper.m; sourceTree = "<group>"; };
 		00286EEE13711EA900EAB58A /* ShowsResource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShowsResource.h; sourceTree = "<group>"; };
 		00286EEF13711EA900EAB58A /* ShowsResource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShowsResource.m; sourceTree = "<group>"; };
 		00286EF113711ED800EAB58A /* AbstractContentResource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AbstractContentResource.h; sourceTree = "<group>"; };
@@ -54,6 +56,8 @@
 		002A0A4F13243E1500320A06 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		002A0A5213243E1500320A06 /* CLIServer-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "CLIServer-Prefix.pch"; sourceTree = "<group>"; };
 		002A0A5313243E1500320A06 /* CLIServer.1 */ = {isa = PBXFileReference; lastKnownFileType = text.man; path = CLIServer.1; sourceTree = "<group>"; };
+		00528598137F3A5500A5AFA3 /* MMLibraryResource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MMLibraryResource.h; sourceTree = "<group>"; };
+		00528599137F3A5500A5AFA3 /* MMLibraryResource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MMLibraryResource.m; sourceTree = "<group>"; };
 		00655C381371058D00E38887 /* PodcastResource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PodcastResource.h; sourceTree = "<group>"; };
 		00655C391371058D00E38887 /* PodcastResource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PodcastResource.m; sourceTree = "<group>"; };
 		00655C4C13710E2E00E38887 /* libhttpserve.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libhttpserve.a; sourceTree = SOURCE_ROOT; };
@@ -71,6 +75,8 @@
 		00A74A04136CEB7F0081E54F /* ScriptingBridge.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ScriptingBridge.framework; path = System/Library/Frameworks/ScriptingBridge.framework; sourceTree = SDKROOT; };
 		00B3F8C2132C70B6003A4FCD /* ApplicationServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ApplicationServices.framework; path = System/Library/Frameworks/ApplicationServices.framework; sourceTree = SDKROOT; };
 		00B3F8C4132C70F3003A4FCD /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
+		00C35173137F4B9F008B8F95 /* MMPlaylistResource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MMPlaylistResource.h; sourceTree = "<group>"; };
+		00C35174137F4B9F008B8F95 /* MMPlaylistResource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MMPlaylistResource.m; sourceTree = "<group>"; };
 		00E35DD8132C04ED00D25EFF /* CoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreServices.framework; path = System/Library/Frameworks/CoreServices.framework; sourceTree = SDKROOT; };
 		00FE69A5136FD81300647ED4 /* iTunesUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = iTunesUtil.h; sourceTree = "<group>"; };
 		00FE69A6136FD81300647ED4 /* iTunesUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = iTunesUtil.m; sourceTree = "<group>"; };
@@ -199,6 +205,10 @@
 				00286EEF13711EA900EAB58A /* ShowsResource.m */,
 				00286EF41371238D00EAB58A /* iTunesUResource.h */,
 				00286EF51371238D00EAB58A /* iTunesUResource.m */,
+				00528598137F3A5500A5AFA3 /* MMLibraryResource.h */,
+				00528599137F3A5500A5AFA3 /* MMLibraryResource.m */,
+				00C35173137F4B9F008B8F95 /* MMPlaylistResource.h */,
+				00C35174137F4B9F008B8F95 /* MMPlaylistResource.m */,
 			);
 			path = resource;
 			sourceTree = "<group>";
@@ -216,8 +226,8 @@
 			children = (
 				00FE69A5136FD81300647ED4 /* iTunesUtil.h */,
 				00FE69A6136FD81300647ED4 /* iTunesUtil.m */,
-				00286EEB1371183100EAB58A /* iTunesTracksWrapper.h */,
-				00286EEC1371183100EAB58A /* iTunesTracksWrapper.m */,
+				00286EEB1371183100EAB58A /* iTunesWrapper.h */,
+				00286EEC1371183100EAB58A /* iTunesWrapper.m */,
 			);
 			path = util;
 			sourceTree = "<group>";
@@ -276,10 +286,12 @@
 				009EE4A1136DF641008EEEA5 /* MusicResource.m in Sources */,
 				00FE69A7136FD81300647ED4 /* iTunesUtil.m in Sources */,
 				00655C3A1371058D00E38887 /* PodcastResource.m in Sources */,
-				00286EED1371183100EAB58A /* iTunesTracksWrapper.m in Sources */,
+				00286EED1371183100EAB58A /* iTunesWrapper.m in Sources */,
 				00286EF013711EA900EAB58A /* ShowsResource.m in Sources */,
 				00286EF313711ED800EAB58A /* AbstractContentResource.m in Sources */,
 				00286EF61371238E00EAB58A /* iTunesUResource.m in Sources */,
+				0052859A137F3A5500A5AFA3 /* MMLibraryResource.m in Sources */,
+				00C35175137F4B9F008B8F95 /* MMPlaylistResource.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -339,6 +351,10 @@
 					"\"$(SRCROOT)/libraries\"",
 				);
 				ONLY_ACTIVE_ARCH = NO;
+				OTHER_LDFLAGS = (
+					"-Objc",
+					"-all_load",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -362,6 +378,10 @@
 					"\"$(SRCROOT)/libraries/httpserve/debug\"",
 					"\"$(SRCROOT)/libraries/httpserve/release\"",
 					"\"$(SRCROOT)/libraries\"",
+				);
+				OTHER_LDFLAGS = (
+					"-Objc",
+					"-all_load",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};

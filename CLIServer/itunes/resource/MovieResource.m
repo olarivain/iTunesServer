@@ -32,9 +32,9 @@
 - (HSResponse*) movieLibrary: (NSDictionary*) params
 {
   HSResponse *response = [HSResponse jsonResponse];
-  MMPlaylist *library = [repository movieLibrary];;
+  MMPlaylist *library = [repository movieLibrary];
   
-  NSDictionary *dto = [contentAssembler writeLibrary: library];
+  NSDictionary *dto = [contentAssembler writePlaylist: library];
   response.object = dto;
 
   return response;

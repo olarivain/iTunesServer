@@ -10,7 +10,8 @@
 
 #import "ContentAssembler+iTunes.h"
 
-#import "iTunesTracksWrapper.h"
+#import "iTunesWrapper.h"
+#import "iTunes.h"
 
 @interface MMContentAssembler()
 - (MMContentKind) contentKindFromiTunesSpecialKind: (iTunesESpK) specialKind;
@@ -19,12 +20,31 @@
 @implementation MMContentAssembler(iTunes)
 
 #pragma mark - iTunes to MediaManagement objects
+
+- (NSArray *) createPlaylistHeaders: (iTunesSource*) source
+{
+#warning check if this doesn't leak.
+  NSArray *iTunesPlaylists = [[source playlists] get];
+  NSMutableArray *playlists = [NSMutableArray arrayWithCapacity: [iTunesPlaylists count]];
+  for(iTunesPlaylist *iTunesPlaylist in iTunesPlaylists)
+  {
+    iTunesESpK iTunesKind = iTunesPlaylist.specialKind;
+    MMContentKind contentKind = [self contentKindFromiTunesSpecialKind: iTunesKind];
+    MMServerPlaylist *playlist = [MMPlaylist playlistWithKind:contentKind andSize:0];
+    playlist.name = iTunesPlaylist.name;
+    playlist.uniqueId = iTunesPlaylist.persistentID;
+    
+    [playlists addObject: playlist];
+  }
+  return playlists;
+}
+
 - (MMPlaylist*) createMediaLibrary: (iTunesPlaylist*) playlist
 {
 
   SBElementArray *tracks = [playlist tracks];
   
-  iTunesTracksWrapper *wrapper = [iTunesTracksWrapper wrapper];
+  iTunesWrapper *wrapper = [iTunesWrapper wrapper];
   
   wrapper.ids = [tracks arrayByApplyingSelector:@selector(persistentID)];
   wrapper.names = [tracks arrayByApplyingSelector:@selector(name)];

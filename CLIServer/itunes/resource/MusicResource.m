@@ -34,7 +34,7 @@
   HSResponse *response = [HSResponse jsonResponse];
   MMPlaylist *library = [repository musicLibrary];
   
-  NSDictionary *data = [contentAssembler writeLibrary: library];
+  NSDictionary *data = [contentAssembler writePlaylist: library];
   response.object = data;
   return response;
 }
