@@ -19,10 +19,4 @@
 - (NSArray *) playlistHeaders;
 - (MMPlaylist*) playlistWithPersistentID: (NSString *) persistentID;
 
-- (MMPlaylist*) musicLibrary;
-- (MMPlaylist*) movieLibrary;
-- (MMPlaylist*) showsLibrary;
-- (MMPlaylist*) podcastLibrary;
-- (MMPlaylist*) iTunesULibrary;
-
 @end

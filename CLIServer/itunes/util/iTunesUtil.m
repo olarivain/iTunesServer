@@ -17,7 +17,7 @@
   unsigned char second = (iTunesEnum & 0x00FF0000) >> 16;
   unsigned char third = (iTunesEnum & 0x0000FF00) >> 8;
   unsigned char fourth = iTunesEnum & 0x000000FF;
-  return [NSString stringWithFormat:@"%c%c%c%c", first, second, third, fourth];
+  return [NSString stringWithFormat:@"'%c%c%c%c'", first, second, third, fourth];
 }
 
 @end

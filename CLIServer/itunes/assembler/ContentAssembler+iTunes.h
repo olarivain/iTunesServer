@@ -15,5 +15,5 @@
 
 @interface MMContentAssembler(iTunes)
 - (MMPlaylist*) createMediaLibrary: (iTunesPlaylist*) playlist;
-- (NSArray *) createPlaylistHeaders: (iTunesSource*) source;
+- (NSArray *) createPlaylistHeaders: (NSArray*) playlists;
 @end

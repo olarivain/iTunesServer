@@ -6,7 +6,7 @@
 //  Copyright 2011 kra. All rights reserved.
 //
 #import <MediaManagement/MMContent.h>
-#import <MediaManagement/MMServerPlaylist.h>
+#import <MediaManagement/MMGenericPlaylist.h>
 
 #import "ContentAssembler+iTunes.h"
 
@@ -21,16 +21,14 @@
 
 #pragma mark - iTunes to MediaManagement objects
 
-- (NSArray *) createPlaylistHeaders: (iTunesSource*) source
+- (NSArray *) createPlaylistHeaders: (NSArray *) iTunesPlaylists
 {
-#warning check if this doesn't leak.
-  NSArray *iTunesPlaylists = [[source playlists] get];
   NSMutableArray *playlists = [NSMutableArray arrayWithCapacity: [iTunesPlaylists count]];
   for(iTunesPlaylist *iTunesPlaylist in iTunesPlaylists)
   {
     iTunesESpK iTunesKind = iTunesPlaylist.specialKind;
     MMContentKind contentKind = [self contentKindFromiTunesSpecialKind: iTunesKind];
-    MMServerPlaylist *playlist = [MMPlaylist playlistWithKind:contentKind andSize:0];
+    MMPlaylist *playlist = [MMPlaylist playlistWithKind:contentKind andSize:0];
     playlist.name = iTunesPlaylist.name;
     playlist.uniqueId = iTunesPlaylist.persistentID;
     
@@ -59,7 +57,7 @@
   NSUInteger count = [wrapper count];
   
   MMContentKind contentKind = [self contentKindFromiTunesSpecialKind: playlist.specialKind];
-  MMPlaylist *library = [MMServerPlaylist playlistWithKind: contentKind andSize: count];
+  MMPlaylist *library = [MMPlaylist playlistWithKind: contentKind andSize: count];
   
   for(int i = 0; i < count; i++)
   {
@@ -99,6 +97,9 @@
       break;
     case iTunesESpKTVShows:
       kind = TV_SHOW;
+      break;     
+    case iTunesESpKBooks:
+      kind = BOOKS;
       break;     
     default:
       kind = UNKNOWN;
