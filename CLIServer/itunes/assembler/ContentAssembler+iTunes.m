@@ -28,7 +28,7 @@
   {
     iTunesESpK iTunesKind = iTunesPlaylist.specialKind;
     MMContentKind contentKind = [self contentKindFromiTunesSpecialKind: iTunesKind];
-    MMPlaylist *playlist = [MMPlaylist playlistWithKind:contentKind andSize:0];
+    MMPlaylist *playlist = [MMGenericPlaylist playlistWithKind:contentKind andSize:0];
     playlist.name = iTunesPlaylist.name;
     playlist.uniqueId = iTunesPlaylist.persistentID;
     
@@ -57,7 +57,7 @@
   NSUInteger count = [wrapper count];
   
   MMContentKind contentKind = [self contentKindFromiTunesSpecialKind: playlist.specialKind];
-  MMPlaylist *library = [MMPlaylist playlistWithKind: contentKind andSize: count];
+  MMPlaylist *library = [MMGenericPlaylist playlistWithKind: contentKind andSize: count];
   
   for(int i = 0; i < count; i++)
   {
