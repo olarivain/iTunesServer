@@ -78,8 +78,6 @@
           iTunesEnumToString(iTunesESpKPodcasts), nil];
 }
 
-//- (NSString *)
-
 - (NSArray *) playlists
 {
   iTunesSource *mainLibrary = [self mainLibrary];
