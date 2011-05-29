@@ -7,6 +7,7 @@
 //
 
 #import "iTunesWrapper.h"
+#import <ScriptingBridge/ScriptingBridge.h>
 
 @interface iTunesWrapper()
 - (NSString *) string: (NSArray*) array forIndex: (NSUInteger) index;
@@ -18,6 +19,21 @@
 + (id) wrapper
 {
   return [[[iTunesWrapper alloc] init] autorelease];
+}
+
++ (id) wrapperWithArray:(SBElementArray *)array 
+{
+  iTunesWrapper *wrapper = [iTunesWrapper wrapper];
+  wrapper.ids = [array arrayByApplyingSelector:@selector(persistentID)];
+  wrapper.names = [array arrayByApplyingSelector:@selector(name)];
+  wrapper.genres =[array arrayByApplyingSelector:@selector(genre)];
+  wrapper.albums = [array arrayByApplyingSelector:@selector(album)];
+  wrapper.artists =[array arrayByApplyingSelector:@selector(artist)];
+  wrapper.trackNumbers = [array arrayByApplyingSelector:@selector(trackNumber)];
+  wrapper.descriptions = [array arrayByApplyingSelector:@selector(objectDescription)];
+  wrapper.shows = [array arrayByApplyingSelector:@selector(show)];
+  wrapper.episodes = [array arrayByApplyingSelector:@selector(episodeNumber)];
+  return wrapper;
 }
 
 - (id)init

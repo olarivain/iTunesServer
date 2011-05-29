@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
+@class SBElementArray;
 
 @interface iTunesWrapper : NSObject {
   NSArray *ids;
@@ -36,6 +37,7 @@
 @property (nonatomic, readwrite, retain) NSArray *episodes;
 
 + (id) wrapper;
++ (id) wrapperWithArray: (SBElementArray*) array;
 
 - (NSUInteger) count;
 

@@ -39,21 +39,9 @@
 
 - (MMPlaylist*) createMediaLibrary: (iTunesPlaylist*) playlist
 {
-
+  
   SBElementArray *tracks = [playlist tracks];
-  
-  iTunesWrapper *wrapper = [iTunesWrapper wrapper];
-  
-  wrapper.ids = [tracks arrayByApplyingSelector:@selector(persistentID)];
-  wrapper.names = [tracks arrayByApplyingSelector:@selector(name)];
-  wrapper.genres =[tracks arrayByApplyingSelector:@selector(genre)];
-  wrapper.albums = [tracks arrayByApplyingSelector:@selector(album)];
-  wrapper.artists =[tracks arrayByApplyingSelector:@selector(artist)];
-  wrapper.trackNumbers = [tracks arrayByApplyingSelector:@selector(trackNumber)];
-  wrapper.descriptions = [tracks arrayByApplyingSelector:@selector(objectDescription)];
-  wrapper.shows = [tracks arrayByApplyingSelector:@selector(show)];
-  wrapper.episodes = [tracks arrayByApplyingSelector:@selector(episodeNumber)];
-  
+  iTunesWrapper *wrapper = [iTunesWrapper wrapperWithArray: tracks];   
   NSUInteger count = [wrapper count];
   
   MMContentKind contentKind = [self contentKindFromiTunesSpecialKind: playlist.specialKind];
