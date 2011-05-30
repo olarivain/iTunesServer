@@ -24,15 +24,15 @@
 + (id) wrapperWithArray:(SBElementArray *)array 
 {
   iTunesWrapper *wrapper = [iTunesWrapper wrapper];
-  wrapper.ids = [array arrayByApplyingSelector:@selector(persistentID)];
-  wrapper.names = [array arrayByApplyingSelector:@selector(name)];
-  wrapper.genres =[array arrayByApplyingSelector:@selector(genre)];
-  wrapper.albums = [array arrayByApplyingSelector:@selector(album)];
-  wrapper.artists =[array arrayByApplyingSelector:@selector(artist)];
-  wrapper.trackNumbers = [array arrayByApplyingSelector:@selector(trackNumber)];
-  wrapper.descriptions = [array arrayByApplyingSelector:@selector(objectDescription)];
-  wrapper.shows = [array arrayByApplyingSelector:@selector(show)];
-  wrapper.episodes = [array arrayByApplyingSelector:@selector(episodeNumber)];
+  wrapper.ids = [array valueForKey:@"persistentID"];
+  wrapper.names = [array valueForKey:@"name"];
+  wrapper.genres =[array valueForKey:@"genre"];
+  wrapper.albums = [array valueForKey:@"album"];
+  wrapper.artists = [array valueForKey:@"artist"];
+  wrapper.trackNumbers = [array valueForKey:@"trackNumber"];
+  wrapper.descriptions = [array valueForKey:@"objectDescription"];
+  wrapper.shows = [array valueForKey:@"show"];
+  wrapper.episodes = [array valueForKey:@"episodeNumber"];
   return wrapper;
 }
 

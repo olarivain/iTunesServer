@@ -15,8 +15,7 @@
 #import "iTunesUtil.h"
 
 @interface iTunesContentRepository()
-- (iTunesPlaylist*) iTunesPlaylistWithID: (NSString*) persistentId;
-- (iTunesPlaylist*) playlistWithSpecialKind: (iTunesESpK) specialKind;
+- (iTunesPlaylist*) iTunesPlaylistWithID: (NSString*) persistentId andApp: (iTunesApplication*) app;
 @end
 
 @implementation iTunesContentRepository
@@ -24,9 +23,8 @@
 - (id)init
 {
   self = [super init];
-  if (self) {
-    iTunes = [[SBApplication applicationWithBundleIdentifier:@"com.apple.iTunes"] retain];
-    [iTunes setDelegate: self];
+  if (self) 
+  {
   }
   
   return self;
@@ -34,7 +32,6 @@
 
 - (void)dealloc
 {
-  [iTunes release];
   [super dealloc];
 }
    
@@ -46,7 +43,7 @@
 }
 
 #pragma mark - basic accessor to library
-- (iTunesSource *)mainLibrary 
+- (iTunesSource *)mainLibraryWithApp: (iTunesApplication*) iTunes
 {
   NSArray *sources = [iTunes sources]; 
   
@@ -55,17 +52,6 @@
   NSArray *mainSource = [sources filteredArrayUsingPredicate: predicate];
 
   return [mainSource objectAtIndex:0];
-}
-
-- (iTunesPlaylist*) playlistWithSpecialKind: (iTunesESpK) specialKind 
-{
-  iTunesSource *mainLibrary = [self mainLibrary];
-  
-  // get playlist list and filter it agains the requested special kind
-  NSString *predicateString = [NSString stringWithFormat:@"specialKind == %@", iTunesEnumToString(specialKind)];
-  NSPredicate *predicate = [NSPredicate predicateWithFormat: predicateString];
-  NSArray *playlists = [[mainLibrary playlists] filteredArrayUsingPredicate: predicate];
-  return [playlists objectAtIndex:0];
 }
 
 - (NSArray*) handledPlaylistsSpecialKinds
@@ -78,9 +64,9 @@
           iTunesEnumToString(iTunesESpKPodcasts), nil];
 }
 
-- (NSArray *) playlists
+- (NSArray *) playlistsWithApp: (iTunesApplication*) iTunes;
 {
-  iTunesSource *mainLibrary = [self mainLibrary];
+  iTunesSource *mainLibrary = [self mainLibraryWithApp: iTunes];
   
   // get playlist list and filter it agains the requested special kind
   NSMutableString *predicateTemplate = [NSMutableString string];
@@ -98,9 +84,9 @@
   return playlists;
 }
 
--(iTunesPlaylist*) iTunesPlaylistWithID: (NSString*) persistentId
+-(iTunesPlaylist*) iTunesPlaylistWithID: (NSString*) persistentId andApp: (iTunesApplication*) iTunes
 {
-  iTunesSource *mainLibrary = [self mainLibrary];
+  iTunesSource *mainLibrary = [self mainLibraryWithApp: iTunes];
   
   // get playlist list and filter it agains the requested special kind
   
@@ -121,15 +107,27 @@
 #pragma mark - Repository methods
 - (NSArray *) playlistHeaders
 {
-  NSArray *playlists = [self playlists];
+  iTunesApplication *iTunes = [[SBApplication alloc] initWithBundleIdentifier:@"com.apple.iTunes"];
+  [iTunes setDelegate: self];
+  
+  NSArray *playlists = [self playlistsWithApp: iTunes];
   MMContentAssembler *assembler = [MMContentAssembler sharedInstance];
-  return [assembler createPlaylistHeaders: playlists];
+  NSArray *array = [assembler createPlaylistHeaders: playlists];
+  
+  [iTunes release];
+  return array;
 }
 
 - (MMPlaylist *) playlistWithPersistentID: (NSString*) persistentID
 {
-  iTunesPlaylist *iTunesPlaylist = [self iTunesPlaylistWithID: persistentID];
-  MMPlaylist *playlist = [self playlistWithiTunesPlaylist: iTunesPlaylist];  
+  iTunesApplication *iTunes = [[SBApplication alloc] initWithBundleIdentifier:@"com.apple.iTunes"];
+  [iTunes setDelegate: self];
+  
+  iTunesPlaylist *iTunesPlaylist = [self iTunesPlaylistWithID: persistentID andApp: iTunes];
+  MMPlaylist *playlist = [self playlistWithiTunesPlaylist: iTunesPlaylist];
+
+  [iTunes release];
+
   return playlist;
 }
 
