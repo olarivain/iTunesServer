@@ -20,6 +20,7 @@
 		00B3F8C3132C70B6003A4FCD /* ApplicationServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 00B3F8C2132C70B6003A4FCD /* ApplicationServices.framework */; };
 		00B3F8C5132C70F3003A4FCD /* AppKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 00B3F8C4132C70F3003A4FCD /* AppKit.framework */; };
 		00C35175137F4B9F008B8F95 /* MMPlaylistResource.m in Sources */ = {isa = PBXBuildFile; fileRef = 00C35174137F4B9F008B8F95 /* MMPlaylistResource.m */; };
+		00DAEF5A13946BDF00B94A05 /* MMTrackResource.m in Sources */ = {isa = PBXBuildFile; fileRef = 00DAEF5913946BDF00B94A05 /* MMTrackResource.m */; };
 		00E35DD9132C04ED00D25EFF /* CoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 00E35DD8132C04ED00D25EFF /* CoreServices.framework */; };
 		00FE69A7136FD81300647ED4 /* iTunesUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 00FE69A6136FD81300647ED4 /* iTunesUtil.m */; };
 /* End PBXBuildFile section */
@@ -62,6 +63,8 @@
 		00B3F8C4132C70F3003A4FCD /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
 		00C35173137F4B9F008B8F95 /* MMPlaylistResource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MMPlaylistResource.h; sourceTree = "<group>"; };
 		00C35174137F4B9F008B8F95 /* MMPlaylistResource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MMPlaylistResource.m; sourceTree = "<group>"; };
+		00DAEF5813946BDF00B94A05 /* MMTrackResource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MMTrackResource.h; sourceTree = "<group>"; };
+		00DAEF5913946BDF00B94A05 /* MMTrackResource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MMTrackResource.m; sourceTree = "<group>"; };
 		00E35DD8132C04ED00D25EFF /* CoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreServices.framework; path = System/Library/Frameworks/CoreServices.framework; sourceTree = SDKROOT; };
 		00FE69A5136FD81300647ED4 /* iTunesUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = iTunesUtil.h; sourceTree = "<group>"; };
 		00FE69A6136FD81300647ED4 /* iTunesUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = iTunesUtil.m; sourceTree = "<group>"; };
@@ -184,6 +187,8 @@
 				00528599137F3A5500A5AFA3 /* MMLibraryResource.m */,
 				00C35173137F4B9F008B8F95 /* MMPlaylistResource.h */,
 				00C35174137F4B9F008B8F95 /* MMPlaylistResource.m */,
+				00DAEF5813946BDF00B94A05 /* MMTrackResource.h */,
+				00DAEF5913946BDF00B94A05 /* MMTrackResource.m */,
 			);
 			path = resource;
 			sourceTree = "<group>";
@@ -262,6 +267,7 @@
 				00286EF313711ED800EAB58A /* AbstractContentResource.m in Sources */,
 				0052859A137F3A5500A5AFA3 /* MMLibraryResource.m in Sources */,
 				00C35175137F4B9F008B8F95 /* MMPlaylistResource.m in Sources */,
+				00DAEF5A13946BDF00B94A05 /* MMTrackResource.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

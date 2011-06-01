@@ -31,7 +31,7 @@
 - (HSResponse*) libraryHeaders: (HSRequestParameters*) params
 {
   HSResponse *response = [HSResponse jsonResponse];
-  //TODO make this cleaner soon
+
   NSArray *playlists = [repository playlistHeaders];
   
   NSArray *dtos = [contentAssembler writePlaylists: playlists];

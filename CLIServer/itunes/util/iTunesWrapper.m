@@ -33,6 +33,7 @@
   wrapper.descriptions = [array valueForKey:@"objectDescription"];
   wrapper.shows = [array valueForKey:@"show"];
   wrapper.episodes = [array valueForKey:@"episodeNumber"];
+  wrapper.seasons = [array valueForKey:@"seasonNumber"];
   return wrapper;
 }
 
