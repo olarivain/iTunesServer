@@ -148,8 +148,9 @@
 
 - (void) updateContents:(NSArray *)contents
 {
-  iTunesApplication *iTunes = [[SBApplication alloc] initWithBundleIdentifier: ITUNES_BUNDLE_IDENTIFIER];
+  iTunesApplication *iTunes = [[SBApplication alloc] initWithBundleIdentifier:ITUNES_BUNDLE_IDENTIFIER];
   [iTunes setDelegate: self];
+  
 
   for(MMContent *content in contents)
   {

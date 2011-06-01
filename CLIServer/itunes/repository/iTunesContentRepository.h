@@ -7,11 +7,13 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "iTunes.h"
+#import <ScriptingBridge/ScriptingBridge.h>
+
 @class MMPlaylist;
 
 @interface iTunesContentRepository : NSObject<SBApplicationDelegate>
 {
+
 }
 
 - (NSArray *) playlistHeaders;
