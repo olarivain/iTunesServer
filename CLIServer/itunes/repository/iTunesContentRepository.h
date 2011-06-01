@@ -16,5 +16,5 @@
 
 - (NSArray *) playlistHeaders;
 - (MMPlaylist*) playlistWithPersistentID: (NSString *) persistentID;
-
+- (void) updateContents: (NSArray*) contents;
 @end

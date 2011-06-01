@@ -14,8 +14,11 @@
 
 #import "iTunesUtil.h"
 
+#define ITUNES_BUNDLE_IDENTIFIER @"com.apple.iTunes"
+
 @interface iTunesContentRepository()
 - (iTunesPlaylist*) iTunesPlaylistWithID: (NSString*) persistentId andApp: (iTunesApplication*) app;
+- (iTunesTrack*) trackWithContent: (MMContent*) content forApp: (iTunesApplication*) app;
 @end
 
 @implementation iTunesContentRepository
@@ -104,10 +107,22 @@
   return library;
 }
 
+- (iTunesTrack*) trackWithContent: (MMContent*) content forApp: (iTunesApplication*) app 
+{
+  iTunesPlaylist *playlist = [self iTunesPlaylistWithID: content.playlistId  andApp: app];
+  
+  NSString *predicateString = [NSString stringWithFormat:@"persistentID == '%@'", content.contentId];
+  NSPredicate *predicate = [NSPredicate predicateWithFormat: predicateString];
+  NSArray *tracks = [[playlist tracks] filteredArrayUsingPredicate: predicate];
+  
+  return [tracks count] > 0 ? [tracks objectAtIndex:0] : nil;
+
+}
+
 #pragma mark - Repository methods
 - (NSArray *) playlistHeaders
 {
-  iTunesApplication *iTunes = [[SBApplication alloc] initWithBundleIdentifier:@"com.apple.iTunes"];
+  iTunesApplication *iTunes = [[SBApplication alloc] initWithBundleIdentifier:ITUNES_BUNDLE_IDENTIFIER];
   [iTunes setDelegate: self];
   
   NSArray *playlists = [self playlistsWithApp: iTunes];
@@ -120,7 +135,7 @@
 
 - (MMPlaylist *) playlistWithPersistentID: (NSString*) persistentID
 {
-  iTunesApplication *iTunes = [[SBApplication alloc] initWithBundleIdentifier:@"com.apple.iTunes"];
+  iTunesApplication *iTunes = [[SBApplication alloc] initWithBundleIdentifier:ITUNES_BUNDLE_IDENTIFIER];
   [iTunes setDelegate: self];
   
   iTunesPlaylist *iTunesPlaylist = [self iTunesPlaylistWithID: persistentID andApp: iTunes];
@@ -129,6 +144,38 @@
   [iTunes release];
 
   return playlist;
+}
+
+- (void) updateContents:(NSArray *)contents
+{
+  iTunesApplication *iTunes = [[SBApplication alloc] initWithBundleIdentifier: ITUNES_BUNDLE_IDENTIFIER];
+  [iTunes setDelegate: self];
+
+  for(MMContent *content in contents)
+  {
+    iTunesTrack *track = [self trackWithContent: content forApp: iTunes];
+    track.name = content.name;
+    track.comment = content.description;
+    
+    if([content isMusic]) 
+    {
+      track.artist = content.artist;
+      track.album = content.album;
+    }
+    
+    if([content isMovie])
+    {
+      
+    }
+    
+    if([content isTvShow])
+    {
+      track.episodeNumber = [content.episodeNumber intValue];      
+      track.seasonNumber = [content.season intValue];
+      track.show = content.show;
+    }
+  }
+  [iTunes release];
 }
 
 @end
