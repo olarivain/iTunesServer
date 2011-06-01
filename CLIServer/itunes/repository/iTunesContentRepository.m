@@ -8,6 +8,7 @@
 
 #import <MediaManagement/MMContent.h>
 #import <MediaManagement/MMGenericPlaylist.h>
+#import "iTunes.h"
 
 #import "iTunesContentRepository.h"
 #import "ContentAssembler+iTunes.h"
@@ -17,8 +18,8 @@
 #define ITUNES_BUNDLE_IDENTIFIER @"com.apple.iTunes"
 
 @interface iTunesContentRepository()
-- (iTunesPlaylist*) iTunesPlaylistWithID: (NSString*) persistentId andApp: (iTunesApplication*) app;
-- (iTunesTrack*) trackWithContent: (MMContent*) content forApp: (iTunesApplication*) app;
+- (iTunesPlaylist*) iTunesPlaylistWithID: (NSString*) persistentId;
+- (iTunesTrack*) trackWithContent: (MMContent*) content;
 @end
 
 @implementation iTunesContentRepository
@@ -28,6 +29,8 @@
   self = [super init];
   if (self) 
   {
+    iTunes = [[SBApplication alloc] initWithBundleIdentifier:ITUNES_BUNDLE_IDENTIFIER];
+    [iTunes setDelegate: self];
   }
   
   return self;
@@ -35,6 +38,7 @@
 
 - (void)dealloc
 {
+  [iTunes dealloc];
   [super dealloc];
 }
    
@@ -46,7 +50,7 @@
 }
 
 #pragma mark - basic accessor to library
-- (iTunesSource *)mainLibraryWithApp: (iTunesApplication*) iTunes
+- (iTunesSource *)mainLibrary
 {
   NSArray *sources = [iTunes sources]; 
   
@@ -67,9 +71,9 @@
           iTunesEnumToString(iTunesESpKPodcasts), nil];
 }
 
-- (NSArray *) playlistsWithApp: (iTunesApplication*) iTunes;
+- (NSArray *) playlists
 {
-  iTunesSource *mainLibrary = [self mainLibraryWithApp: iTunes];
+  iTunesSource *mainLibrary = [self mainLibrary];
   
   // get playlist list and filter it agains the requested special kind
   NSMutableString *predicateTemplate = [NSMutableString string];
@@ -87,9 +91,9 @@
   return playlists;
 }
 
--(iTunesPlaylist*) iTunesPlaylistWithID: (NSString*) persistentId andApp: (iTunesApplication*) iTunes
+-(iTunesPlaylist*) iTunesPlaylistWithID: (NSString*) persistentId
 {
-  iTunesSource *mainLibrary = [self mainLibraryWithApp: iTunes];
+  iTunesSource *mainLibrary = [self mainLibrary];
   
   // get playlist list and filter it agains the requested special kind
   
@@ -107,25 +111,24 @@
   return library;
 }
 
-- (iTunesTrack*) trackWithContent: (MMContent*) content forApp: (iTunesApplication*) app 
+- (iTunesTrack*) trackWithContent: (MMContent*) content
 {
-  iTunesPlaylist *playlist = [self iTunesPlaylistWithID: content.playlistId  andApp: app];
+  iTunesPlaylist *playlist = [self iTunesPlaylistWithID: content.playlistId];
   
   NSString *predicateString = [NSString stringWithFormat:@"persistentID == '%@'", content.contentId];
   NSPredicate *predicate = [NSPredicate predicateWithFormat: predicateString];
   NSArray *tracks = [[playlist tracks] filteredArrayUsingPredicate: predicate];
   
-  return [tracks count] > 0 ? [tracks objectAtIndex:0] : nil;
+  return [tracks count] > 0 ? [[tracks objectAtIndex:0] get] : nil;
 
 }
 
 #pragma mark - Repository methods
 - (NSArray *) playlistHeaders
 {
-  iTunesApplication *iTunes = [[SBApplication alloc] initWithBundleIdentifier:ITUNES_BUNDLE_IDENTIFIER];
-  [iTunes setDelegate: self];
+
   
-  NSArray *playlists = [self playlistsWithApp: iTunes];
+  NSArray *playlists = [self playlists];
   MMContentAssembler *assembler = [MMContentAssembler sharedInstance];
   NSArray *array = [assembler createPlaylistHeaders: playlists];
   
@@ -135,26 +138,21 @@
 
 - (MMPlaylist *) playlistWithPersistentID: (NSString*) persistentID
 {
-  iTunesApplication *iTunes = [[SBApplication alloc] initWithBundleIdentifier:ITUNES_BUNDLE_IDENTIFIER];
-  [iTunes setDelegate: self];
-  
-  iTunesPlaylist *iTunesPlaylist = [self iTunesPlaylistWithID: persistentID andApp: iTunes];
+  iTunesPlaylist *iTunesPlaylist = [self iTunesPlaylistWithID: persistentID];
   MMPlaylist *playlist = [self playlistWithiTunesPlaylist: iTunesPlaylist];
-
-  [iTunes release];
-
   return playlist;
 }
 
 - (void) updateContents:(NSArray *)contents
 {
-  iTunesApplication *iTunes = [[SBApplication alloc] initWithBundleIdentifier:ITUNES_BUNDLE_IDENTIFIER];
-  [iTunes setDelegate: self];
-  
 
   for(MMContent *content in contents)
   {
-    iTunesTrack *track = [self trackWithContent: content forApp: iTunes];
+    iTunesTrack *track = [self trackWithContent: content];
+    if(track == nil)
+    {
+      NSLog(@"track not found for id : %@", content.contentId);
+    }
     track.name = content.name;
     track.comment = content.description;
     
@@ -176,7 +174,6 @@
       track.show = content.show;
     }
   }
-  [iTunes release];
 }
 
 @end

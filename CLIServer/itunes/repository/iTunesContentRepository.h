@@ -10,10 +10,11 @@
 #import <ScriptingBridge/ScriptingBridge.h>
 
 @class MMPlaylist;
+@class iTunesApplication;
 
 @interface iTunesContentRepository : NSObject<SBApplicationDelegate>
 {
-
+  iTunesApplication *iTunes;
 }
 
 - (NSArray *) playlistHeaders;
