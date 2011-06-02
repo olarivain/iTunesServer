@@ -67,7 +67,8 @@
 
 
 #pragma mark - Enum converter
-- (MMContentKind) contentKindFromiTunesSpecialKind: (iTunesESpK) specialKind {
+- (MMContentKind) contentKindFromiTunesSpecialKind: (iTunesESpK) specialKind 
+{
   MMContentKind kind;
   switch(specialKind) {
 
@@ -95,5 +96,36 @@
   }
   return kind;
 }
+
+- (iTunesESpK) videoKindFromContentKind: (MMContentKind) kind 
+{
+  iTunesESpK specialKind;
+  switch(kind) {
+      
+    case ITUNES_U:
+      specialKind = -1;
+      break;
+    case MOVIE:
+      specialKind = iTunesEVdKMovie;
+      break;
+    case MUSIC:
+      specialKind = -1;
+      break;
+    case PODCAST:
+      specialKind = -1;
+      break;
+    case TV_SHOW:
+      specialKind = iTunesEVdKTVShow;
+      break;     
+    case BOOKS:
+      specialKind = -1;
+      break;     
+    default:
+      specialKind = -1;
+      break;
+  }
+  return specialKind;
+}
+
 
 @end

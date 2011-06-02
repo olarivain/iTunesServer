@@ -153,6 +153,13 @@
     track.name = content.name;
     track.comment = content.description;
     
+    MMContentAssembler *assembler = [MMContentAssembler sharedInstance];
+    iTunesEVdK videoKind = [assembler videoKindFromContentKind: content.kind];
+    if(videoKind != -1) 
+    {
+      track.videoKind = videoKind;
+    }
+    
     if([content isMusic]) 
     {
       track.artist = content.artist;
@@ -163,7 +170,7 @@
     {
       
     }
-    
+
     if([content isTvShow])
     {
       track.episodeNumber = [content.episodeNumber intValue];      

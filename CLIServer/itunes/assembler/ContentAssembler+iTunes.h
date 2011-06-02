@@ -17,4 +17,5 @@
 // itunes -> domain
 - (MMPlaylist*) createMediaLibrary: (iTunesPlaylist*) playlist;
 - (NSArray *) createPlaylistHeaders: (NSArray*) playlists;
+- (iTunesESpK) videoKindFromContentKind: (MMContentKind) kind ;
 @end
