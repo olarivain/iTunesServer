@@ -126,13 +126,10 @@
 #pragma mark - Repository methods
 - (NSArray *) playlistHeaders
 {
-
-  
   NSArray *playlists = [self playlists];
   MMContentAssembler *assembler = [MMContentAssembler sharedInstance];
   NSArray *array = [assembler createPlaylistHeaders: playlists];
   
-  [iTunes release];
   return array;
 }
 
