@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Scheme
+   version = "1.3">
+   <BuildAction
+      parallelizeBuildables = "NO"
+      buildImplicitDependencies = "YES">
+      <BuildActionEntries>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "YES"
+            buildForProfiling = "YES"
+            buildForArchiving = "YES"
+            buildForAnalyzing = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "00E35D90132C032F00D25EFF"
+               BuildableName = "libhttpserve.a"
+               BlueprintName = "httpserve"
+               ReferencedContainer = "container:../HTTPServe/HTTPServe.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "YES"
+            buildForProfiling = "YES"
+            buildForArchiving = "YES"
+            buildForAnalyzing = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "00323DB3132C2A96003BED87"
+               BuildableName = "libmedia-management-common.a"
+               BlueprintName = "media-management-common-x86"
+               ReferencedContainer = "container:../MediaManagementCommon/MediaManagementCommon.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "YES"
+            buildForProfiling = "YES"
+            buildForArchiving = "YES"
+            buildForAnalyzing = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "002A0A4713243E1500320A06"
+               BuildableName = "CLIServer"
+               BlueprintName = "CLIServer"
+               ReferencedContainer = "container:CLIServer.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
+      </BuildActionEntries>
+   </BuildAction>
+   <TestAction
+      selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.GDB"
+      selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.GDB"
+      shouldUseLaunchSchemeArgsEnv = "YES"
+      buildConfiguration = "Debug">
+      <Testables>
+      </Testables>
+   </TestAction>
+   <LaunchAction
+      selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.GDB"
+      selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.GDB"
+      displayScaleIsEnabled = "NO"
+      displayScale = "1.00"
+      launchStyle = "0"
+      useCustomWorkingDirectory = "NO"
+      buildConfiguration = "Debug">
+      <BuildableProductRunnable>
+         <BuildableReference
+            BuildableIdentifier = "primary"
+            BlueprintIdentifier = "002A0A4713243E1500320A06"
+            BuildableName = "CLIServer"
+            BlueprintName = "CLIServer"
+            ReferencedContainer = "container:CLIServer.xcodeproj">
+         </BuildableReference>
+      </BuildableProductRunnable>
+      <AdditionalOptions>
+      </AdditionalOptions>
+   </LaunchAction>
+   <ProfileAction
+      displayScaleIsEnabled = "NO"
+      displayScale = "1.00"
+      shouldUseLaunchSchemeArgsEnv = "YES"
+      savedToolIdentifier = ""
+      useCustomWorkingDirectory = "NO"
+      buildConfiguration = "Release">
+      <BuildableProductRunnable>
+         <BuildableReference
+            BuildableIdentifier = "primary"
+            BlueprintIdentifier = "002A0A4713243E1500320A06"
+            BuildableName = "CLIServer"
+            BlueprintName = "CLIServer"
+            ReferencedContainer = "container:CLIServer.xcodeproj">
+         </BuildableReference>
+      </BuildableProductRunnable>
+   </ProfileAction>
+   <AnalyzeAction
+      buildConfiguration = "Debug">
+   </AnalyzeAction>
+   <ArchiveAction
+      buildConfiguration = "Release"
+      revealArchiveInOrganizer = "YES">
+   </ArchiveAction>
+</Scheme>
