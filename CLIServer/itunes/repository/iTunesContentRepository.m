@@ -145,39 +145,102 @@
 
   for(MMContent *content in contents)
   {
-    iTunesTrack *track = [self trackWithContent: content];
-    if(track == nil)
-    {
-      NSLog(@"track not found for id : %@", content.contentId);
-    }
-    track.name = content.name;
-    track.comment = content.description;
-    
-    MMContentAssembler *assembler = [MMContentAssembler sharedInstance];
-    iTunesEVdK videoKind = [assembler videoKindFromContentKind: content.kind];
-    if(videoKind != -1) 
-    {
-      track.videoKind = videoKind;
-    }
-    
-    if([content isMusic]) 
-    {
-      track.artist = content.artist;
-      track.album = content.album;
-    }
-    
-    if([content isMovie])
-    {
+    BOOL committed = NO;
+    int attempt = 0;
+    do {
+      NSLog(@"Attempt %i", attempt);
+      iTunesTrack *track = [self trackWithContent: content];
+      if(track == nil)
+      {
+        NSLog(@"track not found for id : %@", content.contentId);
+      }
+      track.name = content.name;
+      track.comment = content.description;
       
-    }
+      MMContentAssembler *assembler = [MMContentAssembler sharedInstance];
+      iTunesEVdK videoKind = [assembler videoKindFromContentKind: content.kind];
+      if(videoKind != -1) 
+      {
+        track.videoKind = videoKind;
+      }
+      
+      if([content isMusic]) 
+      {
+        track.artist = content.artist;
+        track.album = content.album;
+      }
+      
+      if([content isMovie])
+      {
+        
+      }
 
-    if([content isTvShow])
-    {
-      track.episodeNumber = [content.episodeNumber intValue];      
-      track.seasonNumber = [content.season intValue];
-      track.show = content.show;
+      if([content isTvShow])
+      {
+        track.episodeNumber = [content.episodeNumber intValue];      
+        track.seasonNumber = [content.season intValue];
+        track.show = content.show;
+      }
+        
+          
+      committed = [content.name isEqualToString: track.name];
+      attempt++;
+    } while(committed && attempt < 5);
+  }
+}
+
+- (BOOL) isCommitted: (MMContent*) content {
+  // sleep
+  [NSThread sleepForTimeInterval: 0.2];
+  iTunesTrack *track = [self trackWithContent: content];
+  
+  if(![content.name isEqualToString: track.name]) {
+    return NO;
+  }
+  if(![content.description isEqualToString: track.comment]) {
+    return NO;
+  }
+  
+  MMContentAssembler *assembler = [MMContentAssembler sharedInstance];
+  iTunesEVdK videoKind = [assembler videoKindFromContentKind: content.kind];
+  if(videoKind != -1) 
+  {
+    if(track.videoKind != videoKind) {
+      return NO;
     }
   }
+  
+  if([content isMusic]) 
+  {
+    if(![content.artist isEqualToString: track.artist]) {
+      return NO;
+    }
+    
+    if(![content.album isEqualToString: content.album]) {
+      return NO;
+    }
+  }
+  
+  if([content isMovie])
+  {
+    
+  }
+  
+  if([content isTvShow])
+  {
+    if(track.episodeNumber != [content.episodeNumber intValue]) {
+      return NO;
+    }
+    if(track.seasonNumber != [content.season intValue]){
+      return NO;
+    }
+    
+    if(track.show != content.show) {
+      return NO;
+    }
+  }
+  
+  return YES;
 }
 
 @end
