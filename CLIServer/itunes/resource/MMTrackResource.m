@@ -50,6 +50,10 @@
   
   NSDictionary *dto = params.parameters;
   MMContent *track = [assembler createContent: dto];
+ 
+#ifdef DEBUG
+  NSLog(@"Updating track %@", track.name);
+#endif
   
   NSArray *tracks = [NSArray arrayWithObject: track];
   [repository updateContents: tracks];

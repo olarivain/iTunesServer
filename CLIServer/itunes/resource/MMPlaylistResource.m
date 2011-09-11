@@ -31,6 +31,11 @@
   HSResponse *response = [HSResponse jsonResponse];
   
   NSString *playlistID = [params.pathParameters objectForKey:@"playlistID"];
+  
+#ifdef DEBUG
+  NSLog(@"Fetching playlist %@", playlistID);
+#endif
+  
   MMPlaylist *playlist = [repository playlistWithPersistentID: playlistID];
   NSDictionary *dto = [contentAssembler writePlaylist: playlist];
   response.object = dto;
