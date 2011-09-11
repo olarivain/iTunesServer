@@ -97,9 +97,9 @@
   return kind;
 }
 
-- (iTunesESpK) videoKindFromContentKind: (MMContentKind) kind 
+- (iTunesEVdK) videoKindFromContentKind: (MMContentKind) kind 
 {
-  iTunesESpK specialKind;
+  iTunesEVdK specialKind;
   switch(kind) {
       
     case ITUNES_U:

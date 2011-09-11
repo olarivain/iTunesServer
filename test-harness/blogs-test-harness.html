@@ -61,11 +61,25 @@
               url += key+"="+value+"&";
             }
             
+            var form = document.getElementById("form");
+            var method = "GET"
+            for(var i = 0; i < form.method.length; i++) {
+            	var input = form.method[i]
+            	if(input.checked) {
+            		method = input.value;
+            		break;
+            	}
+            }
+            
+            var json = form.body.value;
+//            xmlHttpRequest.send(method, json);
+            
             // mark timestamp when we started
             requestedTimestamp = new Date();
             var xmlHttpRequest = new XMLHttpRequest();
-            xmlHttpRequest.open("GET", url, true);
+            xmlHttpRequest.open(method, url, true);
             xmlHttpRequest.setRequestHeader("Content-Type", "application/json");
+            xmlHttpRequest.send(json);
             xmlHttpRequest.onreadystatechange = function() {
               if (xmlHttpRequest.readyState == 4) {
                 showResponse(xmlHttpRequest);
@@ -77,7 +91,6 @@
             
             var responseCode = document.getElementById("responseCode");
             responseCode.innerHTML =  "Please wait, loading...";
-            xmlHttpRequest.send(null);
             
           }
         };
@@ -120,16 +133,18 @@
 			Host:<br/>
 			<select name="host" onchange="buildRequest();">
 				<option value="http://localhost:2048" >Local</option>
-				<!--option value="http://blogs.edmunds.com">Prod blogs</option -->
 			</select><br/><br/>
-			Blog: <br/>
+			Resource: <br/>
 			<select name="blog" onchange="buildRequest();">
-				<option value="/movies" >Movies</option>
-				<option value="/music">Music</option>
-				<option value="/shows">TV Shows</option>
-				<option value="/podcasts">Podcasts</option>
-				<option value="/itunesu">iTunes U</option>
+				<option value="/library" >Library</option>
+				<option value="/playlist/">Playlist</option>
+				<option value="/track/">Update track</option>
 			</select><br/><br/>
+			<input type="radio" name="method" value="GET" checked/>Get<br />
+			<input type="radio" name="method" value="PUT" />Put<br />
+			<input type="radio" name="method" value="POST" />Post<br />
+			<input type="radio" name="method" value="DELETE" />Delete<br /><br/>
+			<textarea name="body" rows="10" cols="80" ></textarea><br /><br/>
 			Request:<br/> <input type="text" size="150" name="request" value="" /><br /><br/> 	
 	  		<input type="submit" />
 		</form>
