@@ -21,7 +21,7 @@
 #pragma mark - Rest Resource descriptor
 - (NSArray*) resourceDescriptors
 {
-  HSResourceDescriptor *descriptor = [HSResourceDescriptor descriptorWithPath: @"/playlist/{playlistID}" resource:self andSelector:@selector(playlist:)];
+  HSResourceDescriptor *descriptor = [HSResourceDescriptor descriptorWithPath: @"/library/{playlistID}" resource:self andSelector:@selector(playlist:)];
   return [NSArray arrayWithObject: descriptor];
 }
 

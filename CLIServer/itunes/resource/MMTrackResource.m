@@ -22,8 +22,8 @@
 #pragma mark - Rest Resource descriptor
 - (NSArray*) resourceDescriptors
 {
-  HSResourceDescriptor *tracksDescriptor = [HSResourceDescriptor descriptorWithPath: @"/tracks" resource:self selector:@selector(updateTracks:) andMethod: POST];
-  HSResourceDescriptor *trackDescriptor = [HSResourceDescriptor descriptorWithPath: @"/track" resource:self selector:@selector(updateTrack:) andMethod: POST];
+  HSResourceDescriptor *trackDescriptor = [HSResourceDescriptor descriptorWithPath: @"/library/{playlistId}/{trackId}" resource:self selector:@selector(updateTrack:) andMethod: POST];
+  HSResourceDescriptor *tracksDescriptor = [HSResourceDescriptor descriptorWithPath: @"/library/{playlistId}/" resource:self selector:@selector(updateTracks:) andMethod: POST];
 
   return [NSArray arrayWithObjects: trackDescriptor, tracksDescriptor, nil];
 }
