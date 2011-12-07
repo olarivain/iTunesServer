@@ -18,7 +18,7 @@
 
 + (id) wrapper
 {
-  return [[[iTunesWrapper alloc] init] autorelease];
+  return [[iTunesWrapper alloc] init];
 }
 
 + (id) wrapperWithArray:(SBElementArray *)array 
@@ -47,21 +47,6 @@
   return self;
 }
 
-- (void)dealloc
-{
-  self.ids = nil;
-  self.iTunesKinds = nil;
-  self.names = nil;
-  self.genres = nil;
-  self.albums = nil;
-  self.artists = nil;
-  self.trackNumbers = nil;
-  self.descriptions = nil;
-  self.shows = nil;
-  self.seasons = nil;
-  self.episodes = nil;
-  [super dealloc];
-}
 
 @synthesize ids;
 @synthesize names;

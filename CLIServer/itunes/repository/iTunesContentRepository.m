@@ -29,18 +29,13 @@
   self = [super init];
   if (self) 
   {
-    iTunes = [[SBApplication alloc] initWithBundleIdentifier:ITUNES_BUNDLE_IDENTIFIER];
+    iTunes = (iTunesApplication *) [[SBApplication alloc] initWithBundleIdentifier:ITUNES_BUNDLE_IDENTIFIER];
     [iTunes setDelegate: self];
   }
   
   return self;
 }
 
-- (void)dealloc
-{
-  [iTunes dealloc];
-  [super dealloc];
-}
    
 #pragma mark - SBApplicationDelegate method
 - (id) eventDidFail: (const AppleEvent *) event withError: (NSError *) error 

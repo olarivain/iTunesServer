@@ -19,17 +19,11 @@
   if (self) 
   {
     repository = [[iTunesContentRepository alloc] init];
-    contentAssembler = [[MMContentAssembler sharedInstance] retain];
+    contentAssembler = [MMContentAssembler sharedInstance];
   }
   
   return self;
 }
 
-- (void)dealloc
-{
-  [repository release];
-  [contentAssembler release];
-  [super dealloc];
-}
 
 @end

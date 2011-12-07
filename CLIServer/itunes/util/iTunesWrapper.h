@@ -24,17 +24,17 @@
   NSArray *iTunesKinds;
 }
 
-@property (nonatomic, readwrite, retain) NSArray *ids;
-@property (nonatomic, readwrite, retain) NSArray *iTunesKinds;
-@property (nonatomic, readwrite, retain) NSArray *names;
-@property (nonatomic, readwrite, retain) NSArray *genres;
-@property (nonatomic, readwrite, retain) NSArray *albums;
-@property (nonatomic, readwrite, retain) NSArray *artists;
-@property (nonatomic, readwrite, retain) NSArray *trackNumbers;
-@property (nonatomic, readwrite, retain) NSArray *descriptions;
-@property (nonatomic, readwrite, retain) NSArray *shows;
-@property (nonatomic, readwrite, retain) NSArray *seasons;
-@property (nonatomic, readwrite, retain) NSArray *episodes;
+@property (nonatomic, readwrite, strong) NSArray *ids;
+@property (nonatomic, readwrite, strong) NSArray *iTunesKinds;
+@property (nonatomic, readwrite, strong) NSArray *names;
+@property (nonatomic, readwrite, strong) NSArray *genres;
+@property (nonatomic, readwrite, strong) NSArray *albums;
+@property (nonatomic, readwrite, strong) NSArray *artists;
+@property (nonatomic, readwrite, strong) NSArray *trackNumbers;
+@property (nonatomic, readwrite, strong) NSArray *descriptions;
+@property (nonatomic, readwrite, strong) NSArray *shows;
+@property (nonatomic, readwrite, strong) NSArray *seasons;
+@property (nonatomic, readwrite, strong) NSArray *episodes;
 
 + (id) wrapper;
 + (id) wrapperWithArray: (SBElementArray*) array;

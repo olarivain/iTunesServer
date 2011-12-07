@@ -11,13 +11,12 @@
 
 int main (int argc, const char * argv[])
 {
-  NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
-  HSHTTPServe *server = [[HSHTTPServe alloc] initWithPort: 2048];
-  [server start];
-  [[NSRunLoop currentRunLoop] run]; // this will not return
-  [server stop];
-  [server release];
-  [pool release];
+  @autoreleasepool {
+    HSHTTPServe *server = [[HSHTTPServe alloc] initWithPort: 2048];
+    [server start];
+    [[NSRunLoop currentRunLoop] run]; // this will not return
+    [server stop];
+  }
   exit(0);
 }
 
