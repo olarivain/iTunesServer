@@ -14,8 +14,6 @@
 		0052859A137F3A5500A5AFA3 /* MMLibraryResource.m in Sources */ = {isa = PBXBuildFile; fileRef = 00528599137F3A5500A5AFA3 /* MMLibraryResource.m */; };
 		009EE49E136DF641008EEEA5 /* ContentAssembler+iTunes.m in Sources */ = {isa = PBXBuildFile; fileRef = 009EE493136DF641008EEEA5 /* ContentAssembler+iTunes.m */; };
 		009EE49F136DF641008EEEA5 /* iTunesContentRepository.m in Sources */ = {isa = PBXBuildFile; fileRef = 009EE496136DF641008EEEA5 /* iTunesContentRepository.m */; };
-		00A3EC2F1396EAE400A64029 /* libhttpserve.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 00A3EC2D1396EAE400A64029 /* libhttpserve.a */; };
-		00A3EC301396EAE400A64029 /* libmedia-management-common.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 00A3EC2E1396EAE400A64029 /* libmedia-management-common.a */; };
 		00A74A05136CEB7F0081E54F /* ScriptingBridge.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 00A74A04136CEB7F0081E54F /* ScriptingBridge.framework */; };
 		00B3F8C3132C70B6003A4FCD /* ApplicationServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 00B3F8C2132C70B6003A4FCD /* ApplicationServices.framework */; };
 		00B3F8C5132C70F3003A4FCD /* AppKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 00B3F8C4132C70F3003A4FCD /* AppKit.framework */; };
@@ -58,8 +56,6 @@
 		009EE495136DF641008EEEA5 /* iTunesContentRepository.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = iTunesContentRepository.h; sourceTree = "<group>"; };
 		009EE496136DF641008EEEA5 /* iTunesContentRepository.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = iTunesContentRepository.m; sourceTree = "<group>"; };
 		009EE49D136DF641008EEEA5 /* iTunes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = iTunes.h; sourceTree = "<group>"; };
-		00A3EC2D1396EAE400A64029 /* libhttpserve.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libhttpserve.a; sourceTree = BUILT_PRODUCTS_DIR; };
-		00A3EC2E1396EAE400A64029 /* libmedia-management-common.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = "libmedia-management-common.a"; sourceTree = SOURCE_ROOT; };
 		00A74A04136CEB7F0081E54F /* ScriptingBridge.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ScriptingBridge.framework; path = System/Library/Frameworks/ScriptingBridge.framework; sourceTree = SDKROOT; };
 		00B3F8C2132C70B6003A4FCD /* ApplicationServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ApplicationServices.framework; path = System/Library/Frameworks/ApplicationServices.framework; sourceTree = SDKROOT; };
 		00B3F8C4132C70F3003A4FCD /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
@@ -77,8 +73,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				00A3EC2F1396EAE400A64029 /* libhttpserve.a in Frameworks */,
-				00A3EC301396EAE400A64029 /* libmedia-management-common.a in Frameworks */,
 				00A74A05136CEB7F0081E54F /* ScriptingBridge.framework in Frameworks */,
 				00B3F8C5132C70F3003A4FCD /* AppKit.framework in Frameworks */,
 				00B3F8C3132C70B6003A4FCD /* ApplicationServices.framework in Frameworks */,
@@ -101,8 +95,6 @@
 		002A0A3D13243E1400320A06 = {
 			isa = PBXGroup;
 			children = (
-				00A3EC2D1396EAE400A64029 /* libhttpserve.a */,
-				00A3EC2E1396EAE400A64029 /* libmedia-management-common.a */,
 				002A0A4E13243E1500320A06 /* CLIServer */,
 				00286EE8137114DC00EAB58A /* test-harness */,
 				002A0A4B13243E1500320A06 /* Frameworks */,
@@ -286,6 +278,10 @@
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
 				CLANG_ENABLE_OBJC_ARC = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"/usr/local/xcodeproducts/MediaManagement-x86/LATEST",
+					/usr/local/xcodeproducts/HTTPServe/LATEST,
+				);
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PREPROCESSOR_DEFINITIONS = DEBUG;
@@ -294,9 +290,20 @@
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				LIBRARY_SEARCH_PATHS = (
+					"/usr/local/xcodeproducts/MediaManagement-x86/LATEST",
+					/usr/local/xcodeproducts/HTTPServe/LATEST,
+				);
 				MACOSX_DEPLOYMENT_TARGET = 10.7;
 				ONLY_ACTIVE_ARCH = YES;
+				OTHER_LDFLAGS = (
+					"-Objc",
+					"-all_load",
+					"-lHTTPServe",
+					"-lMediaManagement-x86",
+				);
 				SDKROOT = macosx;
+				USER_HEADER_SEARCH_PATHS = "/usr/local/xcodeproducts/MediaManagement-x86/LATEST /usr/local/xcodeproducts/HTTPServe/LATEST";
 			};
 			name = Debug;
 		};
@@ -305,20 +312,35 @@
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
 				CLANG_ENABLE_OBJC_ARC = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"/usr/local/xcodeproducts/MediaManagement-x86/LATEST",
+					/usr/local/xcodeproducts/HTTPServe/LATEST,
+				);
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				LIBRARY_SEARCH_PATHS = (
+					"/usr/local/xcodeproducts/MediaManagement-x86/LATEST",
+					/usr/local/xcodeproducts/HTTPServe/LATEST,
+				);
 				MACOSX_DEPLOYMENT_TARGET = 10.7;
+				OTHER_LDFLAGS = (
+					"-Objc",
+					"-all_load",
+					"-lHTTPServe",
+					"-lMediaManagement-x86",
+				);
 				SDKROOT = macosx;
+				USER_HEADER_SEARCH_PATHS = "/usr/local/xcodeproducts/MediaManagement-x86/LATEST /usr/local/xcodeproducts/HTTPServe/LATEST";
 			};
 			name = Release;
 		};
 		002A0A5713243E1500320A06 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = NO;
+				ALWAYS_SEARCH_USER_PATHS = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
 				COPY_PHASE_STRIP = NO;
 				GCC_DYNAMIC_NO_PIC = NO;
@@ -327,21 +349,9 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "CLIServer/CLIServer-Prefix.pch";
 				HEADER_SEARCH_PATHS = "$(TARGET_BUILD_DIR)/usr/local/include";
-				LIBRARY_SEARCH_PATHS = (
-					"$(inherited)",
-					"\"$(SRCROOT)/libraries/httpserve\"",
-					"\"$(SRCROOT)/libraries/json\"",
-					"\"$(SRCROOT)\"",
-					"/Users/olarivain/Library/Developer/Xcode/DerivedData/iTunesServeWorkspace-gdxtkgyggbibwjhhjbsbgncjwxri/Build/Products/Debug",
-					"\"$(SRCROOT)/libraries/httpserve/debug\"",
-					"\"$(SRCROOT)/libraries/httpserve/release\"",
-					"\"$(SRCROOT)/libraries\"",
-				);
+				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				ONLY_ACTIVE_ARCH = NO;
-				OTHER_LDFLAGS = (
-					"-Objc",
-					"-all_load",
-				);
+				OTHER_LDFLAGS = "${inherited}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -349,7 +359,7 @@
 		002A0A5813243E1500320A06 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = NO;
+				ALWAYS_SEARCH_USER_PATHS = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
 				COPY_PHASE_STRIP = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
@@ -358,20 +368,8 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "CLIServer/CLIServer-Prefix.pch";
 				HEADER_SEARCH_PATHS = "$(TARGET_BUILD_DIR)/usr/local/include";
-				LIBRARY_SEARCH_PATHS = (
-					"$(inherited)",
-					"\"$(SRCROOT)/libraries/httpserve\"",
-					"\"$(SRCROOT)/libraries/json\"",
-					"\"$(SRCROOT)\"",
-					"/Users/olarivain/Library/Developer/Xcode/DerivedData/iTunesServeWorkspace-gdxtkgyggbibwjhhjbsbgncjwxri/Build/Products/Debug",
-					"\"$(SRCROOT)/libraries/httpserve/debug\"",
-					"\"$(SRCROOT)/libraries/httpserve/release\"",
-					"\"$(SRCROOT)/libraries\"",
-				);
-				OTHER_LDFLAGS = (
-					"-Objc",
-					"-all_load",
-				);
+				LIBRARY_SEARCH_PATHS = "$(inherited)";
+				OTHER_LDFLAGS = "${inherited}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;
