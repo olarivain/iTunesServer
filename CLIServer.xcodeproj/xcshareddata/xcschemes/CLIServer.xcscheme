@@ -13,34 +13,6 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "00E35D90132C032F00D25EFF"
-               BuildableName = "libhttpserve.a"
-               BlueprintName = "HTTPServe"
-               ReferencedContainer = "container:../httpserve/HTTPServe.xcodeproj">
-            </BuildableReference>
-         </BuildActionEntry>
-         <BuildActionEntry
-            buildForTesting = "YES"
-            buildForRunning = "YES"
-            buildForProfiling = "YES"
-            buildForArchiving = "YES"
-            buildForAnalyzing = "YES">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "00323DB3132C2A96003BED87"
-               BuildableName = "libmedia-management-common.a"
-               BlueprintName = "media-management-common-x86"
-               ReferencedContainer = "container:../MediaManagementCommon/MediaManagementCommon.xcodeproj">
-            </BuildableReference>
-         </BuildActionEntry>
-         <BuildActionEntry
-            buildForTesting = "YES"
-            buildForRunning = "YES"
-            buildForProfiling = "YES"
-            buildForArchiving = "YES"
-            buildForAnalyzing = "YES">
-            <BuildableReference
-               BuildableIdentifier = "primary"
                BlueprintIdentifier = "002A0A4713243E1500320A06"
                BuildableName = "CLIServer"
                BlueprintName = "CLIServer"

@@ -31,3 +31,9 @@ task :release => [:setup, :clean, :build, :deploy] do
 	builder.release
 end
 
+task :macmini => [:release] do
+	builder.release
+	macMiniCmd = "scp /usr/local/xcodeproducts/CLIServer/LATEST/CLIServer kra@MiniMoi.local:/usr/local/bin/"
+	system macMiniCmd
+end
+
