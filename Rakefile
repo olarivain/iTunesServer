@@ -1,8 +1,8 @@
 require 'XCodeDeployer'
 require 'XCodeProduct'
 
-name = "CLIServer"
-products = [XCodeProduct.new(name, name, "Release", ["macosx"], false)]
+name = "iTunesServer"
+products = [XCodeProduct.new("#{name}.app", name, "Release", ["macosx"], false)]
 builder = XCodeDeployer.new(products)
 
 task :setup do

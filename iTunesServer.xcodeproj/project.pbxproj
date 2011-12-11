@@ -1,0 +1,418 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		000CE86B1494536E003002C3 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 000CE86A1494536E003002C3 /* Cocoa.framework */; };
+		000CE8751494536E003002C3 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 000CE8731494536E003002C3 /* InfoPlist.strings */; };
+		000CE8771494536E003002C3 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 000CE8761494536E003002C3 /* main.m */; };
+		000CE87B1494536E003002C3 /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 000CE8791494536E003002C3 /* Credits.rtf */; };
+		000CE87E1494536E003002C3 /* ITSAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 000CE87D1494536E003002C3 /* ITSAppDelegate.m */; };
+		000CE89E14945481003002C3 /* ContentAssembler+iTunes.m in Sources */ = {isa = PBXBuildFile; fileRef = 000CE88A14945481003002C3 /* ContentAssembler+iTunes.m */; };
+		000CE89F14945481003002C3 /* iTunesContentRepository.m in Sources */ = {isa = PBXBuildFile; fileRef = 000CE88D14945481003002C3 /* iTunesContentRepository.m */; };
+		000CE8A014945481003002C3 /* AbstractContentResource.m in Sources */ = {isa = PBXBuildFile; fileRef = 000CE89014945481003002C3 /* AbstractContentResource.m */; };
+		000CE8A114945481003002C3 /* MMLibraryResource.m in Sources */ = {isa = PBXBuildFile; fileRef = 000CE89214945481003002C3 /* MMLibraryResource.m */; };
+		000CE8A214945481003002C3 /* MMPlaylistResource.m in Sources */ = {isa = PBXBuildFile; fileRef = 000CE89414945481003002C3 /* MMPlaylistResource.m */; };
+		000CE8A314945481003002C3 /* MMTrackResource.m in Sources */ = {isa = PBXBuildFile; fileRef = 000CE89614945481003002C3 /* MMTrackResource.m */; };
+		000CE8A414945481003002C3 /* iTunesUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 000CE89B14945481003002C3 /* iTunesUtil.m */; };
+		000CE8A514945481003002C3 /* iTunesWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = 000CE89D14945481003002C3 /* iTunesWrapper.m */; };
+		000CE8AB149454FF003002C3 /* ScriptingBridge.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 000CE8AA149454FF003002C3 /* ScriptingBridge.framework */; };
+		000CE8D914945671003002C3 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 000CE8D814945671003002C3 /* MainMenu.xib */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		000CE8661494536E003002C3 /* iTunesServer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iTunesServer.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		000CE86A1494536E003002C3 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
+		000CE86D1494536E003002C3 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
+		000CE86E1494536E003002C3 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
+		000CE86F1494536E003002C3 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		000CE8721494536E003002C3 /* iTunesServer-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "iTunesServer-Info.plist"; sourceTree = "<group>"; };
+		000CE8741494536E003002C3 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		000CE8761494536E003002C3 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		000CE8781494536E003002C3 /* iTunesServer-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "iTunesServer-Prefix.pch"; sourceTree = "<group>"; };
+		000CE87A1494536E003002C3 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; name = en; path = en.lproj/Credits.rtf; sourceTree = "<group>"; };
+		000CE87C1494536E003002C3 /* ITSAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ITSAppDelegate.h; sourceTree = "<group>"; };
+		000CE87D1494536E003002C3 /* ITSAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ITSAppDelegate.m; sourceTree = "<group>"; };
+		000CE88914945481003002C3 /* ContentAssembler+iTunes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "ContentAssembler+iTunes.h"; sourceTree = "<group>"; };
+		000CE88A14945481003002C3 /* ContentAssembler+iTunes.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "ContentAssembler+iTunes.m"; sourceTree = "<group>"; };
+		000CE88C14945481003002C3 /* iTunesContentRepository.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = iTunesContentRepository.h; sourceTree = "<group>"; };
+		000CE88D14945481003002C3 /* iTunesContentRepository.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = iTunesContentRepository.m; sourceTree = "<group>"; };
+		000CE88F14945481003002C3 /* AbstractContentResource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AbstractContentResource.h; sourceTree = "<group>"; };
+		000CE89014945481003002C3 /* AbstractContentResource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AbstractContentResource.m; sourceTree = "<group>"; };
+		000CE89114945481003002C3 /* MMLibraryResource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MMLibraryResource.h; sourceTree = "<group>"; };
+		000CE89214945481003002C3 /* MMLibraryResource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MMLibraryResource.m; sourceTree = "<group>"; };
+		000CE89314945481003002C3 /* MMPlaylistResource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MMPlaylistResource.h; sourceTree = "<group>"; };
+		000CE89414945481003002C3 /* MMPlaylistResource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MMPlaylistResource.m; sourceTree = "<group>"; };
+		000CE89514945481003002C3 /* MMTrackResource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MMTrackResource.h; sourceTree = "<group>"; };
+		000CE89614945481003002C3 /* MMTrackResource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MMTrackResource.m; sourceTree = "<group>"; };
+		000CE89814945481003002C3 /* iTunes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = iTunes.h; sourceTree = "<group>"; };
+		000CE89A14945481003002C3 /* iTunesUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = iTunesUtil.h; sourceTree = "<group>"; };
+		000CE89B14945481003002C3 /* iTunesUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = iTunesUtil.m; sourceTree = "<group>"; };
+		000CE89C14945481003002C3 /* iTunesWrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = iTunesWrapper.h; sourceTree = "<group>"; };
+		000CE89D14945481003002C3 /* iTunesWrapper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = iTunesWrapper.m; sourceTree = "<group>"; };
+		000CE8AA149454FF003002C3 /* ScriptingBridge.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ScriptingBridge.framework; path = System/Library/Frameworks/ScriptingBridge.framework; sourceTree = SDKROOT; };
+		000CE8D814945671003002C3 /* MainMenu.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MainMenu.xib; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		000CE8631494536E003002C3 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				000CE8AB149454FF003002C3 /* ScriptingBridge.framework in Frameworks */,
+				000CE86B1494536E003002C3 /* Cocoa.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		000CE85B1494536D003002C3 = {
+			isa = PBXGroup;
+			children = (
+				000CE8701494536E003002C3 /* iTunesServer */,
+				000CE8691494536E003002C3 /* Frameworks */,
+				000CE8671494536E003002C3 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		000CE8671494536E003002C3 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				000CE8661494536E003002C3 /* iTunesServer.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		000CE8691494536E003002C3 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				000CE86A1494536E003002C3 /* Cocoa.framework */,
+				000CE8AA149454FF003002C3 /* ScriptingBridge.framework */,
+				000CE86C1494536E003002C3 /* Other Frameworks */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		000CE86C1494536E003002C3 /* Other Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				000CE86D1494536E003002C3 /* AppKit.framework */,
+				000CE86E1494536E003002C3 /* CoreData.framework */,
+				000CE86F1494536E003002C3 /* Foundation.framework */,
+			);
+			name = "Other Frameworks";
+			sourceTree = "<group>";
+		};
+		000CE8701494536E003002C3 /* iTunesServer */ = {
+			isa = PBXGroup;
+			children = (
+				000CE88714945481003002C3 /* Classes */,
+				000CE87C1494536E003002C3 /* ITSAppDelegate.h */,
+				000CE87D1494536E003002C3 /* ITSAppDelegate.m */,
+				000CE8D814945671003002C3 /* MainMenu.xib */,
+				000CE8711494536E003002C3 /* Supporting Files */,
+			);
+			path = iTunesServer;
+			sourceTree = "<group>";
+		};
+		000CE8711494536E003002C3 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				000CE8721494536E003002C3 /* iTunesServer-Info.plist */,
+				000CE8731494536E003002C3 /* InfoPlist.strings */,
+				000CE8761494536E003002C3 /* main.m */,
+				000CE8781494536E003002C3 /* iTunesServer-Prefix.pch */,
+				000CE8791494536E003002C3 /* Credits.rtf */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		000CE88714945481003002C3 /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+				000CE88814945481003002C3 /* assembler */,
+				000CE88B14945481003002C3 /* repository */,
+				000CE88E14945481003002C3 /* resource */,
+				000CE89714945481003002C3 /* ScriptingBridge */,
+				000CE89914945481003002C3 /* util */,
+			);
+			path = Classes;
+			sourceTree = "<group>";
+		};
+		000CE88814945481003002C3 /* assembler */ = {
+			isa = PBXGroup;
+			children = (
+				000CE88914945481003002C3 /* ContentAssembler+iTunes.h */,
+				000CE88A14945481003002C3 /* ContentAssembler+iTunes.m */,
+			);
+			path = assembler;
+			sourceTree = "<group>";
+		};
+		000CE88B14945481003002C3 /* repository */ = {
+			isa = PBXGroup;
+			children = (
+				000CE88C14945481003002C3 /* iTunesContentRepository.h */,
+				000CE88D14945481003002C3 /* iTunesContentRepository.m */,
+			);
+			path = repository;
+			sourceTree = "<group>";
+		};
+		000CE88E14945481003002C3 /* resource */ = {
+			isa = PBXGroup;
+			children = (
+				000CE88F14945481003002C3 /* AbstractContentResource.h */,
+				000CE89014945481003002C3 /* AbstractContentResource.m */,
+				000CE89114945481003002C3 /* MMLibraryResource.h */,
+				000CE89214945481003002C3 /* MMLibraryResource.m */,
+				000CE89314945481003002C3 /* MMPlaylistResource.h */,
+				000CE89414945481003002C3 /* MMPlaylistResource.m */,
+				000CE89514945481003002C3 /* MMTrackResource.h */,
+				000CE89614945481003002C3 /* MMTrackResource.m */,
+			);
+			path = resource;
+			sourceTree = "<group>";
+		};
+		000CE89714945481003002C3 /* ScriptingBridge */ = {
+			isa = PBXGroup;
+			children = (
+				000CE89814945481003002C3 /* iTunes.h */,
+			);
+			path = ScriptingBridge;
+			sourceTree = "<group>";
+		};
+		000CE89914945481003002C3 /* util */ = {
+			isa = PBXGroup;
+			children = (
+				000CE89A14945481003002C3 /* iTunesUtil.h */,
+				000CE89B14945481003002C3 /* iTunesUtil.m */,
+				000CE89C14945481003002C3 /* iTunesWrapper.h */,
+				000CE89D14945481003002C3 /* iTunesWrapper.m */,
+			);
+			path = util;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		000CE8651494536E003002C3 /* iTunesServer */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 000CE8841494536E003002C3 /* Build configuration list for PBXNativeTarget "iTunesServer" */;
+			buildPhases = (
+				000CE8621494536E003002C3 /* Sources */,
+				000CE8631494536E003002C3 /* Frameworks */,
+				000CE8641494536E003002C3 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = iTunesServer;
+			productName = iTunesServer;
+			productReference = 000CE8661494536E003002C3 /* iTunesServer.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		000CE85D1494536D003002C3 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0420;
+				ORGANIZATIONNAME = Edmunds;
+			};
+			buildConfigurationList = 000CE8601494536D003002C3 /* Build configuration list for PBXProject "iTunesServer" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 000CE85B1494536D003002C3;
+			productRefGroup = 000CE8671494536E003002C3 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				000CE8651494536E003002C3 /* iTunesServer */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		000CE8641494536E003002C3 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				000CE8751494536E003002C3 /* InfoPlist.strings in Resources */,
+				000CE87B1494536E003002C3 /* Credits.rtf in Resources */,
+				000CE8D914945671003002C3 /* MainMenu.xib in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		000CE8621494536E003002C3 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				000CE8771494536E003002C3 /* main.m in Sources */,
+				000CE87E1494536E003002C3 /* ITSAppDelegate.m in Sources */,
+				000CE89E14945481003002C3 /* ContentAssembler+iTunes.m in Sources */,
+				000CE89F14945481003002C3 /* iTunesContentRepository.m in Sources */,
+				000CE8A014945481003002C3 /* AbstractContentResource.m in Sources */,
+				000CE8A114945481003002C3 /* MMLibraryResource.m in Sources */,
+				000CE8A214945481003002C3 /* MMPlaylistResource.m in Sources */,
+				000CE8A314945481003002C3 /* MMTrackResource.m in Sources */,
+				000CE8A414945481003002C3 /* iTunesUtil.m in Sources */,
+				000CE8A514945481003002C3 /* iTunesWrapper.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		000CE8731494536E003002C3 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				000CE8741494536E003002C3 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		000CE8791494536E003002C3 /* Credits.rtf */ = {
+			isa = PBXVariantGroup;
+			children = (
+				000CE87A1494536E003002C3 /* en */,
+			);
+			name = Credits.rtf;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		000CE8821494536E003002C3 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = YES;
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = (
+					"/usr/local/xcodeproducts/MediaManagement-x86/LATEST",
+					/usr/local/xcodeproducts/HTTPServe/LATEST,
+				);
+				LIBRARY_SEARCH_PATHS = (
+					"/usr/local/xcodeproducts/MediaManagement-x86/LATEST",
+					/usr/local/xcodeproducts/HTTPServe/LATEST,
+				);
+				MACOSX_DEPLOYMENT_TARGET = 10.7;
+				ONLY_ACTIVE_ARCH = YES;
+				OTHER_LDFLAGS = (
+					"-Objc",
+					"-all_load",
+					"-lHTTPServe",
+					"-lMediaManagement-x86",
+				);
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		000CE8831494536E003002C3 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = YES;
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = (
+					"/usr/local/xcodeproducts/MediaManagement-x86/LATEST",
+					/usr/local/xcodeproducts/HTTPServe/LATEST,
+				);
+				LIBRARY_SEARCH_PATHS = (
+					"/usr/local/xcodeproducts/MediaManagement-x86/LATEST",
+					/usr/local/xcodeproducts/HTTPServe/LATEST,
+				);
+				MACOSX_DEPLOYMENT_TARGET = 10.7;
+				OTHER_LDFLAGS = (
+					"-Objc",
+					"-all_load",
+					"-lHTTPServe",
+					"-lMediaManagement-x86",
+				);
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+		000CE8851494536E003002C3 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "iTunesServer/iTunesServer-Prefix.pch";
+				INFOPLIST_FILE = "iTunesServer/iTunesServer-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		000CE8861494536E003002C3 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "iTunesServer/iTunesServer-Prefix.pch";
+				INFOPLIST_FILE = "iTunesServer/iTunesServer-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		000CE8601494536D003002C3 /* Build configuration list for PBXProject "iTunesServer" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				000CE8821494536E003002C3 /* Debug */,
+				000CE8831494536E003002C3 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		000CE8841494536E003002C3 /* Build configuration list for PBXNativeTarget "iTunesServer" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				000CE8851494536E003002C3 /* Debug */,
+				000CE8861494536E003002C3 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 000CE85D1494536D003002C3 /* Project object */;
+}
