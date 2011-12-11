@@ -11,7 +11,7 @@ products = [appServer]
 allProducts = [appServer, prefPane];
 
 builder = XCodeDeployer.new(products)
-allBuilders = XCodeDeployer.new(allProducts)
+allBuilders = XCodeDeployer.new(allProducts, false)
 
 task :setup do
 	builder.setup
@@ -44,6 +44,7 @@ task :macmini do
   allBuilders.build
   allBuilders.deploy
 	macMiniCmd = "scp -r /usr/local/xcodeproducts/#{name}/LATEST/#{name}.app kra@MiniMoi.local:/Applications/"
+	system macMiniCmd
   macMiniCmd = "scp -r \"/usr/local/xcodeproducts/iTunesServerPrefPane/LATEST/#{prefPaneName}.prefPane\" kra@MiniMoi.local:~/"
 	system macMiniCmd
 end
