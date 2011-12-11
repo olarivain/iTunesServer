@@ -7,9 +7,9 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "AbstractContentResource.h"
+#import "ITSAbstractContentResource.h"
 
-@interface MMTrackResource : AbstractContentResource<HSRestResource>  
+@interface ITSTrackResource : ITSAbstractContentResource<HSRestResource>  
 {
     
 }

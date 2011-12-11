@@ -11,7 +11,7 @@
 
 #define iTunesEnumToString(X) [iTunesUtil iTunesEnumToString: X]
 
-@interface iTunesUtil : NSObject 
+@interface ITSiTunesUtil : NSObject 
 
 + (NSString*) iTunesEnumToString: (unsigned int) iTunesEnum;
 

@@ -10,13 +10,13 @@
 #import <HTTPServe/HSHandlerPath.h>
 #import <HTTPServe/HSRequestParameters.h>
 
-#import "MMPlaylistResource.h"
+#import "ITSPlaylistResource.h"
 
 #import "iTunesContentRepository.h"
 #import "ContentAssembler+iTunes.h"
 
 
-@implementation MMPlaylistResource
+@implementation ITSPlaylistResource
 
 #pragma mark - Rest Resource descriptor
 - (NSArray*) resourceDescriptors

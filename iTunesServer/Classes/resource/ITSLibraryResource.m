@@ -11,14 +11,14 @@
 #import <HTTPServe/HSHandlerPath.h>
 #import <HTTPServe/HSRequestParameters.h>
 
-#import "MMLibraryResource.h"
+#import "ITSLibraryResource.h"
 
 #import "iTunesContentRepository.h"
 #import "ContentAssembler+iTunes.h"
 
 
 
-@implementation MMLibraryResource
+@implementation ITSLibraryResource
 
 #pragma mark - Rest Resource descriptor
 - (NSArray*) resourceDescriptors

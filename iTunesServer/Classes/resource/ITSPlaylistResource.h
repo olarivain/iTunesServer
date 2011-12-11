@@ -1,5 +1,5 @@
 //
-//  MMLibraryResource.h
+//  MMPlaylistResource.h
 //  CLIServer
 //
 //  Created by Kra on 5/14/11.
@@ -9,12 +9,11 @@
 #import <Foundation/Foundation.h>
 #import <HTTPServe/HSRestResource.h>
 
-#import "AbstractContentResource.h"
 
-@interface MMLibraryResource : AbstractContentResource<HSRestResource> 
-{
-@private
-    
+#import "ITSAbstractContentResource.h"
+
+@interface ITSPlaylistResource : ITSAbstractContentResource<HSRestResource> 
+{    
 }
 
 @end

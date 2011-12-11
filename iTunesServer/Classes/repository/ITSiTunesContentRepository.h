@@ -12,7 +12,7 @@
 @class MMPlaylist;
 @class iTunesApplication;
 
-@interface iTunesContentRepository : NSObject<SBApplicationDelegate>
+@interface ITSiTunesContentRepository : NSObject<SBApplicationDelegate>
 {
   iTunesApplication *iTunes;
 }

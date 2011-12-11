@@ -11,7 +11,7 @@
 @class iTunesContentRepository;
 @class MMContentAssembler;
 
-@interface AbstractContentResource : NSObject
+@interface ITSAbstractContentResource : NSObject
 {
   iTunesContentRepository *repository;
   MMContentAssembler *contentAssembler;

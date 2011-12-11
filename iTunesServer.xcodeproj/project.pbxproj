@@ -12,14 +12,14 @@
 		000CE8771494536E003002C3 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 000CE8761494536E003002C3 /* main.m */; };
 		000CE87B1494536E003002C3 /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 000CE8791494536E003002C3 /* Credits.rtf */; };
 		000CE87E1494536E003002C3 /* ITSAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 000CE87D1494536E003002C3 /* ITSAppDelegate.m */; };
-		000CE89E14945481003002C3 /* ContentAssembler+iTunes.m in Sources */ = {isa = PBXBuildFile; fileRef = 000CE88A14945481003002C3 /* ContentAssembler+iTunes.m */; };
-		000CE89F14945481003002C3 /* iTunesContentRepository.m in Sources */ = {isa = PBXBuildFile; fileRef = 000CE88D14945481003002C3 /* iTunesContentRepository.m */; };
-		000CE8A014945481003002C3 /* AbstractContentResource.m in Sources */ = {isa = PBXBuildFile; fileRef = 000CE89014945481003002C3 /* AbstractContentResource.m */; };
-		000CE8A114945481003002C3 /* MMLibraryResource.m in Sources */ = {isa = PBXBuildFile; fileRef = 000CE89214945481003002C3 /* MMLibraryResource.m */; };
-		000CE8A214945481003002C3 /* MMPlaylistResource.m in Sources */ = {isa = PBXBuildFile; fileRef = 000CE89414945481003002C3 /* MMPlaylistResource.m */; };
-		000CE8A314945481003002C3 /* MMTrackResource.m in Sources */ = {isa = PBXBuildFile; fileRef = 000CE89614945481003002C3 /* MMTrackResource.m */; };
-		000CE8A414945481003002C3 /* iTunesUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 000CE89B14945481003002C3 /* iTunesUtil.m */; };
-		000CE8A514945481003002C3 /* iTunesWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = 000CE89D14945481003002C3 /* iTunesWrapper.m */; };
+		000CE89E14945481003002C3 /* MMContentAssembler+iTunes.m in Sources */ = {isa = PBXBuildFile; fileRef = 000CE88A14945481003002C3 /* MMContentAssembler+iTunes.m */; };
+		000CE89F14945481003002C3 /* ITSiTunesContentRepository.m in Sources */ = {isa = PBXBuildFile; fileRef = 000CE88D14945481003002C3 /* ITSiTunesContentRepository.m */; };
+		000CE8A014945481003002C3 /* ITSAbstractContentResource.m in Sources */ = {isa = PBXBuildFile; fileRef = 000CE89014945481003002C3 /* ITSAbstractContentResource.m */; };
+		000CE8A114945481003002C3 /* ITSLibraryResource.m in Sources */ = {isa = PBXBuildFile; fileRef = 000CE89214945481003002C3 /* ITSLibraryResource.m */; };
+		000CE8A214945481003002C3 /* ITSPlaylistResource.m in Sources */ = {isa = PBXBuildFile; fileRef = 000CE89414945481003002C3 /* ITSPlaylistResource.m */; };
+		000CE8A314945481003002C3 /* ITSTrackResource.m in Sources */ = {isa = PBXBuildFile; fileRef = 000CE89614945481003002C3 /* ITSTrackResource.m */; };
+		000CE8A414945481003002C3 /* ITSiTunesUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 000CE89B14945481003002C3 /* ITSiTunesUtil.m */; };
+		000CE8A514945481003002C3 /* ITSiTunesWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = 000CE89D14945481003002C3 /* ITSiTunesWrapper.m */; };
 		000CE8AB149454FF003002C3 /* ScriptingBridge.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 000CE8AA149454FF003002C3 /* ScriptingBridge.framework */; };
 		000CE8D914945671003002C3 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 000CE8D814945671003002C3 /* MainMenu.xib */; };
 /* End PBXBuildFile section */
@@ -37,23 +37,23 @@
 		000CE87A1494536E003002C3 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; name = en; path = en.lproj/Credits.rtf; sourceTree = "<group>"; };
 		000CE87C1494536E003002C3 /* ITSAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ITSAppDelegate.h; sourceTree = "<group>"; };
 		000CE87D1494536E003002C3 /* ITSAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ITSAppDelegate.m; sourceTree = "<group>"; };
-		000CE88914945481003002C3 /* ContentAssembler+iTunes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "ContentAssembler+iTunes.h"; sourceTree = "<group>"; };
-		000CE88A14945481003002C3 /* ContentAssembler+iTunes.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "ContentAssembler+iTunes.m"; sourceTree = "<group>"; };
-		000CE88C14945481003002C3 /* iTunesContentRepository.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = iTunesContentRepository.h; sourceTree = "<group>"; };
-		000CE88D14945481003002C3 /* iTunesContentRepository.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = iTunesContentRepository.m; sourceTree = "<group>"; };
-		000CE88F14945481003002C3 /* AbstractContentResource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AbstractContentResource.h; sourceTree = "<group>"; };
-		000CE89014945481003002C3 /* AbstractContentResource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AbstractContentResource.m; sourceTree = "<group>"; };
-		000CE89114945481003002C3 /* MMLibraryResource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MMLibraryResource.h; sourceTree = "<group>"; };
-		000CE89214945481003002C3 /* MMLibraryResource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MMLibraryResource.m; sourceTree = "<group>"; };
-		000CE89314945481003002C3 /* MMPlaylistResource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MMPlaylistResource.h; sourceTree = "<group>"; };
-		000CE89414945481003002C3 /* MMPlaylistResource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MMPlaylistResource.m; sourceTree = "<group>"; };
-		000CE89514945481003002C3 /* MMTrackResource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MMTrackResource.h; sourceTree = "<group>"; };
-		000CE89614945481003002C3 /* MMTrackResource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MMTrackResource.m; sourceTree = "<group>"; };
+		000CE88914945481003002C3 /* MMContentAssembler+iTunes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MMContentAssembler+iTunes.h"; sourceTree = "<group>"; };
+		000CE88A14945481003002C3 /* MMContentAssembler+iTunes.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "MMContentAssembler+iTunes.m"; sourceTree = "<group>"; };
+		000CE88C14945481003002C3 /* ITSiTunesContentRepository.h */ = {isa = PBXFileReference; fileEncoding = 4; path = ITSiTunesContentRepository.h; sourceTree = "<group>"; };
+		000CE88D14945481003002C3 /* ITSiTunesContentRepository.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ITSiTunesContentRepository.m; sourceTree = "<group>"; };
+		000CE88F14945481003002C3 /* ITSAbstractContentResource.h */ = {isa = PBXFileReference; fileEncoding = 4; path = ITSAbstractContentResource.h; sourceTree = "<group>"; };
+		000CE89014945481003002C3 /* ITSAbstractContentResource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ITSAbstractContentResource.m; sourceTree = "<group>"; };
+		000CE89114945481003002C3 /* ITSLibraryResource.h */ = {isa = PBXFileReference; fileEncoding = 4; path = ITSLibraryResource.h; sourceTree = "<group>"; };
+		000CE89214945481003002C3 /* ITSLibraryResource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ITSLibraryResource.m; sourceTree = "<group>"; };
+		000CE89314945481003002C3 /* ITSPlaylistResource.h */ = {isa = PBXFileReference; fileEncoding = 4; path = ITSPlaylistResource.h; sourceTree = "<group>"; };
+		000CE89414945481003002C3 /* ITSPlaylistResource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ITSPlaylistResource.m; sourceTree = "<group>"; };
+		000CE89514945481003002C3 /* ITSTrackResource.h */ = {isa = PBXFileReference; fileEncoding = 4; path = ITSTrackResource.h; sourceTree = "<group>"; };
+		000CE89614945481003002C3 /* ITSTrackResource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ITSTrackResource.m; sourceTree = "<group>"; };
 		000CE89814945481003002C3 /* iTunes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = iTunes.h; sourceTree = "<group>"; };
-		000CE89A14945481003002C3 /* iTunesUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = iTunesUtil.h; sourceTree = "<group>"; };
-		000CE89B14945481003002C3 /* iTunesUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = iTunesUtil.m; sourceTree = "<group>"; };
-		000CE89C14945481003002C3 /* iTunesWrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = iTunesWrapper.h; sourceTree = "<group>"; };
-		000CE89D14945481003002C3 /* iTunesWrapper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = iTunesWrapper.m; sourceTree = "<group>"; };
+		000CE89A14945481003002C3 /* ITSiTunesUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; path = ITSiTunesUtil.h; sourceTree = "<group>"; };
+		000CE89B14945481003002C3 /* ITSiTunesUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ITSiTunesUtil.m; sourceTree = "<group>"; };
+		000CE89C14945481003002C3 /* ITSiTunesWrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; path = ITSiTunesWrapper.h; sourceTree = "<group>"; };
+		000CE89D14945481003002C3 /* ITSiTunesWrapper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ITSiTunesWrapper.m; sourceTree = "<group>"; };
 		000CE8AA149454FF003002C3 /* ScriptingBridge.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ScriptingBridge.framework; path = System/Library/Frameworks/ScriptingBridge.framework; sourceTree = SDKROOT; };
 		000CE8D814945671003002C3 /* MainMenu.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MainMenu.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -136,6 +136,7 @@
 			isa = PBXGroup;
 			children = (
 				000CE88814945481003002C3 /* assembler */,
+				000CE8E614945CFF003002C3 /* domain */,
 				000CE88B14945481003002C3 /* repository */,
 				000CE88E14945481003002C3 /* resource */,
 				000CE89714945481003002C3 /* ScriptingBridge */,
@@ -147,8 +148,8 @@
 		000CE88814945481003002C3 /* assembler */ = {
 			isa = PBXGroup;
 			children = (
-				000CE88914945481003002C3 /* ContentAssembler+iTunes.h */,
-				000CE88A14945481003002C3 /* ContentAssembler+iTunes.m */,
+				000CE88914945481003002C3 /* MMContentAssembler+iTunes.h */,
+				000CE88A14945481003002C3 /* MMContentAssembler+iTunes.m */,
 			);
 			path = assembler;
 			sourceTree = "<group>";
@@ -156,8 +157,8 @@
 		000CE88B14945481003002C3 /* repository */ = {
 			isa = PBXGroup;
 			children = (
-				000CE88C14945481003002C3 /* iTunesContentRepository.h */,
-				000CE88D14945481003002C3 /* iTunesContentRepository.m */,
+				000CE88C14945481003002C3 /* ITSiTunesContentRepository.h */,
+				000CE88D14945481003002C3 /* ITSiTunesContentRepository.m */,
 			);
 			path = repository;
 			sourceTree = "<group>";
@@ -165,14 +166,14 @@
 		000CE88E14945481003002C3 /* resource */ = {
 			isa = PBXGroup;
 			children = (
-				000CE88F14945481003002C3 /* AbstractContentResource.h */,
-				000CE89014945481003002C3 /* AbstractContentResource.m */,
-				000CE89114945481003002C3 /* MMLibraryResource.h */,
-				000CE89214945481003002C3 /* MMLibraryResource.m */,
-				000CE89314945481003002C3 /* MMPlaylistResource.h */,
-				000CE89414945481003002C3 /* MMPlaylistResource.m */,
-				000CE89514945481003002C3 /* MMTrackResource.h */,
-				000CE89614945481003002C3 /* MMTrackResource.m */,
+				000CE88F14945481003002C3 /* ITSAbstractContentResource.h */,
+				000CE89014945481003002C3 /* ITSAbstractContentResource.m */,
+				000CE89114945481003002C3 /* ITSLibraryResource.h */,
+				000CE89214945481003002C3 /* ITSLibraryResource.m */,
+				000CE89314945481003002C3 /* ITSPlaylistResource.h */,
+				000CE89414945481003002C3 /* ITSPlaylistResource.m */,
+				000CE89514945481003002C3 /* ITSTrackResource.h */,
+				000CE89614945481003002C3 /* ITSTrackResource.m */,
 			);
 			path = resource;
 			sourceTree = "<group>";
@@ -188,12 +189,27 @@
 		000CE89914945481003002C3 /* util */ = {
 			isa = PBXGroup;
 			children = (
-				000CE89A14945481003002C3 /* iTunesUtil.h */,
-				000CE89B14945481003002C3 /* iTunesUtil.m */,
-				000CE89C14945481003002C3 /* iTunesWrapper.h */,
-				000CE89D14945481003002C3 /* iTunesWrapper.m */,
+				000CE89A14945481003002C3 /* ITSiTunesUtil.h */,
+				000CE89B14945481003002C3 /* ITSiTunesUtil.m */,
+				000CE89C14945481003002C3 /* ITSiTunesWrapper.h */,
+				000CE89D14945481003002C3 /* ITSiTunesWrapper.m */,
 			);
 			path = util;
+			sourceTree = "<group>";
+		};
+		000CE8E614945CFF003002C3 /* domain */ = {
+			isa = PBXGroup;
+			children = (
+				000CE8E814945D09003002C3 /* configuration */,
+			);
+			name = domain;
+			sourceTree = "<group>";
+		};
+		000CE8E814945D09003002C3 /* configuration */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = configuration;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -262,14 +278,14 @@
 			files = (
 				000CE8771494536E003002C3 /* main.m in Sources */,
 				000CE87E1494536E003002C3 /* ITSAppDelegate.m in Sources */,
-				000CE89E14945481003002C3 /* ContentAssembler+iTunes.m in Sources */,
-				000CE89F14945481003002C3 /* iTunesContentRepository.m in Sources */,
-				000CE8A014945481003002C3 /* AbstractContentResource.m in Sources */,
-				000CE8A114945481003002C3 /* MMLibraryResource.m in Sources */,
-				000CE8A214945481003002C3 /* MMPlaylistResource.m in Sources */,
-				000CE8A314945481003002C3 /* MMTrackResource.m in Sources */,
-				000CE8A414945481003002C3 /* iTunesUtil.m in Sources */,
-				000CE8A514945481003002C3 /* iTunesWrapper.m in Sources */,
+				000CE89E14945481003002C3 /* MMContentAssembler+iTunes.m in Sources */,
+				000CE89F14945481003002C3 /* ITSiTunesContentRepository.m in Sources */,
+				000CE8A014945481003002C3 /* ITSAbstractContentResource.m in Sources */,
+				000CE8A114945481003002C3 /* ITSLibraryResource.m in Sources */,
+				000CE8A214945481003002C3 /* ITSPlaylistResource.m in Sources */,
+				000CE8A314945481003002C3 /* ITSTrackResource.m in Sources */,
+				000CE8A414945481003002C3 /* ITSiTunesUtil.m in Sources */,
+				000CE8A514945481003002C3 /* ITSiTunesWrapper.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -411,6 +427,7 @@
 				000CE8861494536E003002C3 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

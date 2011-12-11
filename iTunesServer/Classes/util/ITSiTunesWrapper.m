@@ -6,24 +6,24 @@
 //  Copyright 2011 kra. All rights reserved.
 //
 
-#import "iTunesWrapper.h"
+#import "ITSiTunesWrapper.h"
 #import <ScriptingBridge/ScriptingBridge.h>
 
-@interface iTunesWrapper()
+@interface ITSiTunesWrapper()
 - (NSString *) string: (NSArray*) array forIndex: (NSUInteger) index;
 - (NSNumber *) number: (NSArray*) array forIndex: (NSUInteger) index;
 @end
 
-@implementation iTunesWrapper
+@implementation ITSiTunesWrapper
 
 + (id) wrapper
 {
-  return [[iTunesWrapper alloc] init];
+  return [[ITSiTunesWrapper alloc] init];
 }
 
 + (id) wrapperWithArray:(SBElementArray *)array 
 {
-  iTunesWrapper *wrapper = [iTunesWrapper wrapper];
+  ITSiTunesWrapper *wrapper = [ITSiTunesWrapper wrapper];
   wrapper.ids = [array valueForKey:@"persistentID"];
   wrapper.names = [array valueForKey:@"name"];
   wrapper.genres =[array valueForKey:@"genre"];

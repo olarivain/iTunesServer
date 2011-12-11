@@ -8,9 +8,9 @@
 #import <MediaManagement/MMContent.h>
 #import <MediaManagement/MMGenericPlaylist.h>
 
-#import "ContentAssembler+iTunes.h"
+#import "MMContentAssembler+iTunes.h"
 
-#import "iTunesWrapper.h"
+#import "ITSiTunesWrapper.h"
 #import "iTunes.h"
 
 @interface MMContentAssembler()
@@ -41,7 +41,7 @@
 {
   
   SBElementArray *tracks = [playlist tracks];
-  iTunesWrapper *wrapper = [iTunesWrapper wrapperWithArray: tracks];   
+  ITSiTunesWrapper *wrapper = [ITSiTunesWrapper wrapperWithArray: tracks];   
   NSUInteger count = [wrapper count];
   
   MMContentKind contentKind = [self contentKindFromiTunesSpecialKind: playlist.specialKind];

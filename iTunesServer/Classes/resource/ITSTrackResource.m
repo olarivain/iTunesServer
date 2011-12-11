@@ -13,11 +13,11 @@
 #import <HTTPServe/HSRequestParameters.h>
 #import <MediaManagement/MMContent.h>
 
-#import "MMTrackResource.h"
+#import "ITSTrackResource.h"
 #import "iTunesContentRepository.h"
 #import "ContentAssembler+iTunes.h"
 
-@implementation MMTrackResource
+@implementation ITSTrackResource
 
 #pragma mark - Rest Resource descriptor
 - (NSArray*) resourceDescriptors

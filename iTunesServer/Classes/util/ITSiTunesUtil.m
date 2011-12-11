@@ -6,10 +6,10 @@
 //  Copyright 2011 kra. All rights reserved.
 //
 
-#import "iTunesUtil.h"
+#import "ITSiTunesUtil.h"
 
 
-@implementation iTunesUtil
+@implementation ITSiTunesUtil
 
 + (NSString*) iTunesEnumToString: (unsigned int) iTunesEnum
 {

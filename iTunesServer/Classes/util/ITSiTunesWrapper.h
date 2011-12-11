@@ -10,7 +10,7 @@
 
 @class SBElementArray;
 
-@interface iTunesWrapper : NSObject {
+@interface ITSiTunesWrapper : NSObject {
   NSArray *ids;
   NSArray *names;
   NSArray *genres;

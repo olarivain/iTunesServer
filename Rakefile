@@ -33,7 +33,7 @@ end
 
 task :macmini => [:release] do
 	builder.release
-	macMiniCmd = "scp /usr/local/xcodeproducts/CLIServer/LATEST/CLIServer kra@MiniMoi.local:/usr/local/bin/"
+	macMiniCmd = "scp -r /usr/local/xcodeproducts/#{name}/LATEST/#{name}.app kra@MiniMoi.local:/Applications/"
 	system macMiniCmd
 end
 

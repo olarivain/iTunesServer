@@ -7,18 +7,18 @@
 //
 #import <MediaManagement/MMContentAssembler.h>
 
-#import "AbstractContentResource.h"
+#import "ITSAbstractContentResource.h"
 
-#import "iTunesContentRepository.h"
+#import "ITSiTunesContentRepository.h"
 
-@implementation AbstractContentResource
+@implementation ITSAbstractContentResource
 
 - (id)init
 {
   self = [super init];
   if (self) 
   {
-    repository = [[iTunesContentRepository alloc] init];
+    repository = [[ITSiTunesContentRepository alloc] init];
     contentAssembler = [MMContentAssembler sharedInstance];
   }
   

@@ -10,19 +10,19 @@
 #import <MediaManagement/MMGenericPlaylist.h>
 #import "iTunes.h"
 
-#import "iTunesContentRepository.h"
+#import "ITSiTunesContentRepository.h"
 #import "ContentAssembler+iTunes.h"
 
-#import "iTunesUtil.h"
+#import "ITSiTunesUtil.h"
 
 #define ITUNES_BUNDLE_IDENTIFIER @"com.apple.iTunes"
 
-@interface iTunesContentRepository()
+@interface ITSiTunesContentRepository()
 - (iTunesPlaylist*) iTunesPlaylistWithID: (NSString*) persistentId;
 - (iTunesTrack*) trackWithContent: (MMContent*) content;
 @end
 
-@implementation iTunesContentRepository
+@implementation ITSiTunesContentRepository
 
 - (id)init
 {
