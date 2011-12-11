@@ -11,7 +11,7 @@
 #import "iTunes.h"
 
 #import "ITSiTunesContentRepository.h"
-#import "ContentAssembler+iTunes.h"
+#import "MMContentAssembler+iTunes.h"
 
 #import "ITSiTunesUtil.h"
 

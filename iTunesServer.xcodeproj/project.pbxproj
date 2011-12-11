@@ -74,6 +74,7 @@
 		000CE8FE14945F33003002C3 /* iTunesServerPrefPane.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = iTunesServerPrefPane.m; sourceTree = "<group>"; };
 		000CE90014945F33003002C3 /* iTunesServerPrefPane.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = iTunesServerPrefPane.tiff; sourceTree = "<group>"; };
 		000CE90314945F33003002C3 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/iTunesServerPrefPane.xib; sourceTree = "<group>"; };
+		000CE96514947DAD003002C3 /* Rakefile */ = {isa = PBXFileReference; lastKnownFileType = text; path = Rakefile; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -105,6 +106,7 @@
 				000CE8F614945F32003002C3 /* iTunesServerPrefPane */,
 				000CE8691494536E003002C3 /* Frameworks */,
 				000CE8671494536E003002C3 /* Products */,
+				000CE96514947DAD003002C3 /* Rakefile */,
 			);
 			sourceTree = "<group>";
 		};

@@ -2,8 +2,16 @@ require 'XCodeDeployer'
 require 'XCodeProduct'
 
 name = "iTunesServer"
-products = [XCodeProduct.new("#{name}.app", name, "Release", ["macosx"], false)]
+prefPaneName = "iTunes Server"
+
+appServer = XCodeProduct.new("#{name}.app", name, "Release", ["macosx"], false)
+prefPane = XCodeProduct.new("#{prefPaneName}.prefPane", "#{name}PrefPane", "Release", ["macosx"], false)
+
+products = [appServer]
+allProducts = [appServer, prefPane];
+
 builder = XCodeDeployer.new(products)
+allBuilders = XCodeDeployer.new(allProducts)
 
 task :setup do
 	builder.setup
@@ -31,9 +39,12 @@ task :release => [:setup, :clean, :build, :deploy] do
 	builder.release
 end
 
-task :macmini => [:release] do
-	builder.release
+task :macmini do
+  allBuilders.clean
+  allBuilders.build
+  allBuilders.deploy
 	macMiniCmd = "scp -r /usr/local/xcodeproducts/#{name}/LATEST/#{name}.app kra@MiniMoi.local:/Applications/"
+  macMiniCmd = "scp -r \"/usr/local/xcodeproducts/iTunesServerPrefPane/LATEST/#{prefPaneName}.prefPane\" kra@MiniMoi.local:~/"
 	system macMiniCmd
 end
 

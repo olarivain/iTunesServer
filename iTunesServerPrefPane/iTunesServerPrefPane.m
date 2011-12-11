@@ -46,7 +46,7 @@
   isRunning = [self iTunesServerRunningApplication] != nil;
   
   // now we know if it's on or off, update the UI accordingly
-  NSString *runningLabelValue = isRunning ? @"iTunesServer is running" : @"iTunesServer is NOT running";
+  NSString *runningLabelValue = isRunning ? @"Running" : @"Stopped";
   [runningLabel setStringValue: runningLabelValue];
   
   runningLabel.textColor = isRunning ? [NSColor colorWithSRGBRed: 51.0/255.0 green:153.0/255.0 blue: 0.0/255.0 alpha:1] : [NSColor colorWithSRGBRed:191.0/255.0 green:47.0/255.0 blue:55.0/255.0 alpha:1.0];

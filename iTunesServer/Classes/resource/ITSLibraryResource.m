@@ -13,8 +13,8 @@
 
 #import "ITSLibraryResource.h"
 
-#import "iTunesContentRepository.h"
-#import "ContentAssembler+iTunes.h"
+#import "ITSiTunesContentRepository.h"
+#import "MMContentAssembler+iTunes.h"
 
 
 

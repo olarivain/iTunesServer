@@ -8,12 +8,12 @@
 
 #import <Foundation/Foundation.h>
 
-@class iTunesContentRepository;
+@class ITSiTunesContentRepository;
 @class MMContentAssembler;
 
 @interface ITSAbstractContentResource : NSObject
 {
-  iTunesContentRepository *repository;
+  ITSiTunesContentRepository *repository;
   MMContentAssembler *contentAssembler;
   
 }

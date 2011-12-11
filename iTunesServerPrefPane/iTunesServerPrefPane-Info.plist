@@ -29,7 +29,7 @@
 	<key>NSPrefPaneIconFile</key>
 	<string>iTunesServerPrefPane.tiff</string>
 	<key>NSPrefPaneIconLabel</key>
-	<string>iTunesServerPrefPane</string>
+	<string>iTunesServer</string>
 	<key>NSPrincipalClass</key>
 	<string>iTunesServerPrefPane</string>
 </dict>

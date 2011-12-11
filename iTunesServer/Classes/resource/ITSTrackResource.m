@@ -14,8 +14,8 @@
 #import <MediaManagement/MMContent.h>
 
 #import "ITSTrackResource.h"
-#import "iTunesContentRepository.h"
-#import "ContentAssembler+iTunes.h"
+#import "ITSiTunesContentRepository.h"
+#import "MMContentAssembler+iTunes.h"
 
 @implementation ITSTrackResource
 

@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 #import "iTunes.h"
 
-#define iTunesEnumToString(X) [iTunesUtil iTunesEnumToString: X]
+#define iTunesEnumToString(X) [ITSiTunesUtil iTunesEnumToString: X]
 
 @interface ITSiTunesUtil : NSObject 
 
