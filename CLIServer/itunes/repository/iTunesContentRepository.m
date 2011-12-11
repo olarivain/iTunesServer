@@ -140,38 +140,44 @@
 
   for(MMContent *content in contents)
   {
-      iTunesTrack *track = [self trackWithContent: content];
-      if(track == nil)
-      {
-        NSLog(@"track not found for id : %@", content.contentId);
-      }
-      track.name = content.name;
-      track.comment = content.description;
-      
-      MMContentAssembler *assembler = [MMContentAssembler sharedInstance];
-      iTunesEVdK videoKind = [assembler videoKindFromContentKind: content.kind];
-      if(videoKind != -1) 
-      {
-        track.videoKind = videoKind;
-      }
-      
-      if([content isMusic]) 
-      {
-        track.artist = content.artist;
-        track.album = content.album;
-      }
-      
-      if([content isMovie])
-      {
-        
-      }
+    iTunesTrack *track = [self trackWithContent: content];
+    if(track == nil)
+    {
+      NSLog(@"track not found for id : %@", content.contentId);
+    }
+  
+    MMContentAssembler *assembler = [MMContentAssembler sharedInstance];
+    iTunesEVdK specialKind = [assembler videoKindFromContentKind: content.kind];
+    if(specialKind != -1) 
+    {
+      track.videoKind = specialKind;
+      // if the kind has been updated, then we have to refetch 
+      // the track, setting movie/tv show tags will otherwise fail.
+      track = [self trackWithContent: content];
+    }
+  
+    track.name = content.name;
+    track.comment = content.description;
+    
 
-      if([content isTvShow])
-      {
-        track.episodeNumber = [content.episodeNumber intValue];      
-        track.seasonNumber = [content.season intValue];
-        track.show = content.show;
-      }
+    
+    if([content isMusic]) 
+    {
+      track.artist = content.artist;
+      track.album = content.album;
+    }
+    
+    if([content isMovie])
+    {
+      
+    }
+
+    if([content isTvShow])
+    {
+      track.episodeNumber = [content.episodeNumber intValue];      
+      track.seasonNumber = [content.season intValue];
+      track.show = content.show;
+    }
   }
 
 }
