@@ -19,9 +19,4 @@
   return [repository readConfiguration];
 }
 
-- (void) setConfiguration:(ITSConfiguration *)aConfiguration
-{
-  NSLog(@"setting it... %@ %@", aConfiguration.autoScanPath, [NSNumber numberWithInteger: aConfiguration.port]);
-}
-
 @end

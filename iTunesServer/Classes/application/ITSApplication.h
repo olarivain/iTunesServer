@@ -11,6 +11,6 @@
 @class ITSConfiguration;
 
 @interface NSApplication (ITSApplication) 
-@property (nonatomic, readwrite, strong) ITSConfiguration *configuration;
+@property (nonatomic, readonly) ITSConfiguration *configuration;
 
 @end

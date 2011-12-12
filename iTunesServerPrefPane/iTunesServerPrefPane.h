@@ -15,13 +15,11 @@
   IBOutlet __strong NSButton *startStopButton;
   IBOutlet __strong NSProgressIndicator *progressIndicator;
   
-  __strong NSOperationQueue *operationQueue;
+  __strong NSUserDefaults *defaults;
   __strong NSWorkspace *workspace;
   
   BOOL isRunning;
 }
-
-- (void)mainViewDidLoad;
 
 - (IBAction) startStopServer:(id)sender;
 - (IBAction) changeAutomaticImportFolder:(id)sender;

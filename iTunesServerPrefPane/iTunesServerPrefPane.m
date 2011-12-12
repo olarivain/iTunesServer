@@ -9,14 +9,15 @@
 #import <KraCommons/KCBlocks.h>
 #import "iTunesServerPrefPane.h"
 
+#import "ITSDefaults.h"
 #import "iTunesServer.h"
 
-@interface iTunesServerPrefPane()
-- (void) lookUpProcess;
-- (void) startServer;
-- (void) stopServer;
-- (NSRunningApplication *) iTunesServerRunningApplication;
+#define ITUNES_SERVER_APP_NAME @"iTunesServer"
 
+@interface iTunesServerPrefPane()
+- (void) updateRunningLabel;
+
+- (NSRunningApplication *) iTunesServerRunningApplication;
 @end
 
 @implementation iTunesServerPrefPane
@@ -25,35 +26,53 @@
 {
   self = [super initWithBundle: bundle];
   if(self)
-  {
-    operationQueue = [[NSOperationQueue alloc] init];
-    operationQueue.maxConcurrentOperationCount = 1;
+  {    
+    [ITSDefaults bootstrapDefaults: defaults];
   }
   return self;
 }
 
-- (void)mainViewDidLoad
+- (void) observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
 {
-  workspace = [NSWorkspace sharedWorkspace];
-  iTunesServerApplication *anApp = [SBApplication applicationWithBundleIdentifier:@"com.kra.iTunesServer"];
-  iTunesServerITunesServerConfiguration *config = anApp.configuration;
-  NSLog(@"config %@", config.autoScanPath);
-
-  config.port = 4567;
-  config.autoScanPath = @"meh?";
-//  anApp.configuration = config;
+  // status didn't change
+  BOOL isRunningNow = [self iTunesServerRunningApplication] != nil;
+  if(isRunningNow == isRunning)
+  {
+    return;
+  }
+  
+  // figure out if process is running
+  isRunning = isRunningNow;
+  
+  [self updateRunningLabel];
 }
 
+#pragma mark - Lifecycle
 - (void) didSelect
 {
-  [self lookUpProcess];
-}
+  // don't forget to bootsrap user defaults, this might be the first thing the user starts
+  defaults = [NSUserDefaults standardUserDefaults];
+  [defaults addSuiteNamed:@"com.kra.iTunesServer"];
 
-- (void) lookUpProcess 
-{
   // figure out if process is running
   isRunning = [self iTunesServerRunningApplication] != nil;
   
+  [self updateRunningLabel];
+  
+  workspace = [NSWorkspace sharedWorkspace];
+  [workspace addObserver: self forKeyPath: @"runningApplications" options:NSKeyValueObservingOptionNew context: nil];
+}
+
+- (void) willUnselect
+{
+  // release unneeded resources
+  defaults = nil;
+  [workspace removeObserver: self forKeyPath: @"runningApplications"];
+}
+
+#pragma mark - Update the status label
+- (void) updateRunningLabel 
+{
   // now we know if it's on or off, update the UI accordingly
   NSString *runningLabelValue = isRunning ? @"Running" : @"Stopped";
   [runningLabel setStringValue: runningLabelValue];
@@ -62,107 +81,62 @@
   
   NSString *buttonLabel = isRunning ? @"Stop" : @"Start";
   startStopButton.title = buttonLabel;
-}
-
-- (NSRunningApplication *) iTunesServerRunningApplication
-{
-  // browse through list of running processes and search for iTunesServer
-  NSArray *runningApps = [workspace runningApplications];
-  for(NSRunningApplication *runningApp in runningApps)
-  {
-    if([@"iTunesServer" caseInsensitiveCompare: runningApp.localizedName] == NSOrderedSame) 
-    {
-      return runningApp;
-    }
-  }
-
-  return nil;
+  
+  // make sure progrss indicators are not 
+  [progressIndicator setHidden: YES];
+  [startStopButton setEnabled: YES];
 }
 
 #pragma mark - starting stop server
 - (IBAction) startStopServer:(id)sender
 {
   // start or stop server depending on current state
-  if(isRunning) 
-  {
-    [self stopServer];
-  } 
-  else 
-  {
-    [self startServer];
-  }
-}
-
-- (void) startServer
-{
-  // cancel if server is already running
-  if([self iTunesServerRunningApplication] != nil)
+  if(!isRunning && [self iTunesServerRunningApplication] != nil) 
   {
     return;
-  }
-  
+  } 
+
   // start animation
   [progressIndicator setHidden: NO];
   [progressIndicator startAnimation: self];
   
   [startStopButton setEnabled: NO];
   
-  // ask workspace to start app and then refresh ui.
-  // this might take some time to refresh, so throw this out on a background thread
-  KCVoidBlock block = ^{
-    [workspace launchApplication: @"iTunesServer"];
-    [NSThread sleepForTimeInterval: 2];
-    
-    // dispatch UI update on main thread
-    KCVoidBlock uiBlock = ^{
-      [progressIndicator setHidden: YES];
-      
-      [startStopButton setEnabled: YES];
-      [self lookUpProcess];    
-    };
-    
-    DispatchMainThread(uiBlock);
-  };
-  
-  [operationQueue addOperationWithBlock: block];
-
-}
-
-- (void) stopServer
-{
-  // start animation and disable button
-  [progressIndicator setHidden: NO];
-  [progressIndicator startAnimation: self];
-  
-  [startStopButton setEnabled: NO];
- 
-#warning this stuff will be much more suited as an NSWorkspaceDelegate or wahtever the protocol is
-  // ask workspace to stop app and then refresh ui.
-  // this might take some time to refresh, so throw this out on a background thread
-  KCVoidBlock block = ^{
-    // grab reference to running app and terminate it
+  if(!isRunning)
+  {
+    // ask workspace to start app and then refresh ui.
+    // this might take some time to refresh, so throw this out on a background thread
+    [workspace launchApplication: ITUNES_SERVER_APP_NAME];
+  }
+  else
+  {
+    // ask workspace to stop app
+    // Workspace notifications will kick in when app is started and update the ui properly
     NSRunningApplication *runningApp = [self iTunesServerRunningApplication];
     [runningApp terminate];
-    
-    // sleep to be sure UI catches updates
-    [NSThread sleepForTimeInterval: 2];
-    
-    KCVoidBlock uiBlock = ^{
-      [progressIndicator setHidden: YES];
-      [startStopButton setEnabled: YES];
-      [self lookUpProcess];    
-    };
-    
-    DispatchMainThread(uiBlock);
-  };
-  
-  [operationQueue addOperationWithBlock: block];
+  }
 }
 
-#pragma mark - changing automatic import folder
+#pragma mark - changing auto import path
 - (IBAction) changeAutomaticImportFolder:(id)sender
 {
-  NSLog(@"wouhou");
+  
+}
+
+#pragma mark - Running app instance
+- (NSRunningApplication *) iTunesServerRunningApplication
+{
+  // browse through list of running processes and search for iTunesServer
+  NSArray *runningApps = [workspace runningApplications];
+  for(NSRunningApplication *runningApp in runningApps)
+  {
+    if([ITUNES_SERVER_APP_NAME caseInsensitiveCompare: runningApp.localizedName] == NSOrderedSame) 
+    {
+      return runningApp;
+    }
+  }
+  
+  return nil;
 }
 
 @end

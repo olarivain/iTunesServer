@@ -35,6 +35,9 @@
 		003DE0B6149576C3004DC839 /* ITSConfigurationRepository.m in Sources */ = {isa = PBXBuildFile; fileRef = 003DE0B2149576C3004DC839 /* ITSConfigurationRepository.m */; };
 		003DE0B7149576C3004DC839 /* ITSiTunesContentRepository.m in Sources */ = {isa = PBXBuildFile; fileRef = 003DE0B5149576C3004DC839 /* ITSiTunesContentRepository.m */; };
 		003DE0C714958D12004DC839 /* ITSApplication.m in Sources */ = {isa = PBXBuildFile; fileRef = 003DE0C614958D12004DC839 /* ITSApplication.m */; };
+		0062B25D1495A94100160289 /* ITSDefaults.h in Headers */ = {isa = PBXBuildFile; fileRef = 0062B25B1495A94100160289 /* ITSDefaults.h */; };
+		0062B25E1495A94100160289 /* ITSDefaults.m in Sources */ = {isa = PBXBuildFile; fileRef = 0062B25C1495A94100160289 /* ITSDefaults.m */; };
+		0062B25F1495A94100160289 /* ITSDefaults.m in Sources */ = {isa = PBXBuildFile; fileRef = 0062B25C1495A94100160289 /* ITSDefaults.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -87,6 +90,8 @@
 		003DE0B5149576C3004DC839 /* ITSiTunesContentRepository.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ITSiTunesContentRepository.m; sourceTree = "<group>"; };
 		003DE0C514958D12004DC839 /* ITSApplication.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ITSApplication.h; path = application/ITSApplication.h; sourceTree = "<group>"; };
 		003DE0C614958D12004DC839 /* ITSApplication.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ITSApplication.m; path = application/ITSApplication.m; sourceTree = "<group>"; };
+		0062B25B1495A94100160289 /* ITSDefaults.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ITSDefaults.h; path = domain/configuration/ITSDefaults.h; sourceTree = "<group>"; };
+		0062B25C1495A94100160289 /* ITSDefaults.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ITSDefaults.m; path = domain/configuration/ITSDefaults.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -257,6 +262,8 @@
 			children = (
 				000CE97F14955BBB003002C3 /* ITSConfiguration.h */,
 				000CE98014955BBB003002C3 /* ITSConfiguration.m */,
+				0062B25B1495A94100160289 /* ITSDefaults.h */,
+				0062B25C1495A94100160289 /* ITSDefaults.m */,
 			);
 			name = configuration;
 			sourceTree = "<group>";
@@ -319,6 +326,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				000CE98114955BBB003002C3 /* ITSConfiguration.h in Headers */,
+				0062B25D1495A94100160289 /* ITSDefaults.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -440,6 +448,7 @@
 				003DE0B6149576C3004DC839 /* ITSConfigurationRepository.m in Sources */,
 				003DE0B7149576C3004DC839 /* ITSiTunesContentRepository.m in Sources */,
 				003DE0C714958D12004DC839 /* ITSApplication.m in Sources */,
+				0062B25E1495A94100160289 /* ITSDefaults.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -449,6 +458,7 @@
 			files = (
 				000CE8FF14945F33003002C3 /* iTunesServerPrefPane.m in Sources */,
 				000CE98314955BBB003002C3 /* ITSConfiguration.m in Sources */,
+				0062B25F1495A94100160289 /* ITSDefaults.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -596,7 +606,7 @@
 		000CE90614945F33003002C3 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = NO;
+				ALWAYS_SEARCH_USER_PATHS = YES;
 				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
 				GCC_ENABLE_OBJC_GC = supported;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -612,7 +622,7 @@
 		000CE90714945F33003002C3 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = NO;
+				ALWAYS_SEARCH_USER_PATHS = YES;
 				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
 				GCC_ENABLE_OBJC_GC = supported;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;

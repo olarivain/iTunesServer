@@ -9,7 +9,7 @@
       
 			<cocoa class="NSApplication"/>
       
-			<property name="configuration" type="iTunesServerConfiguration" code="itco" access="rw" description="the weight of all of the items in the application"/>
+			<property name="configuration" type="iTunesServerConfiguration" code="itco" access="r" description="the weight of all of the items in the application"/>
 
 		</class>
 
