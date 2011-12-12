@@ -8,8 +8,12 @@
 
 #import <Foundation/Foundation.h>
 
-@interface ITSConfigurationRepository : NSObject {
-  NSString *watchedPath;
-}
+@class ITSConfiguration;
 
+@interface ITSConfigurationRepository : NSObject {
+  ITSConfiguration *configuration;
+}
++ (ITSConfigurationRepository *) sharedInstance;
+- (ITSConfiguration *) readConfiguration;
+- (void) test;
 @end

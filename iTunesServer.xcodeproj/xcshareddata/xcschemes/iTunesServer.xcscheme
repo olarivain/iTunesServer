@@ -2,7 +2,7 @@
 <Scheme
    version = "1.3">
    <BuildAction
-      parallelizeBuildables = "NO"
+      parallelizeBuildables = "YES"
       buildImplicitDependencies = "YES">
       <BuildActionEntries>
          <BuildActionEntry
@@ -13,38 +13,10 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "00E010F8149091FB00E3C4F0"
-               BuildableName = "HTTPServe Workspace"
-               BlueprintName = "HTTPServe Workspace"
-               ReferencedContainer = "container:../HTTPServe/HTTPServe.xcodeproj">
-            </BuildableReference>
-         </BuildActionEntry>
-         <BuildActionEntry
-            buildForTesting = "YES"
-            buildForRunning = "YES"
-            buildForProfiling = "YES"
-            buildForArchiving = "YES"
-            buildForAnalyzing = "YES">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "00E0111A1490ACD500E3C4F0"
-               BuildableName = "MediaManagementCommon-Workspace"
-               BlueprintName = "MediaManagementCommon-Workspace"
-               ReferencedContainer = "container:../MediaManagementCommon/MediaManagementCommon.xcodeproj">
-            </BuildableReference>
-         </BuildActionEntry>
-         <BuildActionEntry
-            buildForTesting = "YES"
-            buildForRunning = "YES"
-            buildForProfiling = "YES"
-            buildForArchiving = "YES"
-            buildForAnalyzing = "YES">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "002A0A4713243E1500320A06"
-               BuildableName = "CLIServer"
-               BlueprintName = "CLIServer"
-               ReferencedContainer = "container:CLIServer.xcodeproj">
+               BlueprintIdentifier = "000CE8651494536E003002C3"
+               BuildableName = "iTunesServer.app"
+               BlueprintName = "iTunesServer"
+               ReferencedContainer = "container:iTunesServer.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -59,10 +31,10 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "002A0A4713243E1500320A06"
-            BuildableName = "CLIServer"
-            BlueprintName = "CLIServer"
-            ReferencedContainer = "container:CLIServer.xcodeproj">
+            BlueprintIdentifier = "000CE8651494536E003002C3"
+            BuildableName = "iTunesServer.app"
+            BlueprintName = "iTunesServer"
+            ReferencedContainer = "container:iTunesServer.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
    </TestAction>
@@ -77,10 +49,10 @@
       <BuildableProductRunnable>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "002A0A4713243E1500320A06"
-            BuildableName = "CLIServer"
-            BlueprintName = "CLIServer"
-            ReferencedContainer = "container:CLIServer.xcodeproj">
+            BlueprintIdentifier = "000CE8651494536E003002C3"
+            BuildableName = "iTunesServer.app"
+            BlueprintName = "iTunesServer"
+            ReferencedContainer = "container:iTunesServer.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
       <AdditionalOptions>
@@ -95,10 +67,10 @@
       <BuildableProductRunnable>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "002A0A4713243E1500320A06"
-            BuildableName = "CLIServer"
-            BlueprintName = "CLIServer"
-            ReferencedContainer = "container:CLIServer.xcodeproj">
+            BlueprintIdentifier = "000CE8651494536E003002C3"
+            BuildableName = "iTunesServer.app"
+            BlueprintName = "iTunesServer"
+            ReferencedContainer = "container:iTunesServer.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>

@@ -16,7 +16,7 @@
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification
 {
-  server = [[HSHTTPServe alloc] initWithPort: 2049];
+  server = [[HSHTTPServe alloc] initWithPort: 2048];
   [server start];
 }
 

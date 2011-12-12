@@ -8,6 +8,6 @@
       location = "group:../MediaManagementCommon/MediaManagementCommon.xcodeproj">
    </FileRef>
    <FileRef
-      location = "group:CLIServer.xcodeproj">
+      location = "group:iTunesServer.xcodeproj">
    </FileRef>
 </Workspace>

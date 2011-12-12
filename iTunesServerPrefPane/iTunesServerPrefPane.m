@@ -9,6 +9,8 @@
 #import <KraCommons/KCBlocks.h>
 #import "iTunesServerPrefPane.h"
 
+#import "iTunesServer.h"
+
 @interface iTunesServerPrefPane()
 - (void) lookUpProcess;
 - (void) startServer;
@@ -33,6 +35,13 @@
 - (void)mainViewDidLoad
 {
   workspace = [NSWorkspace sharedWorkspace];
+  iTunesServerApplication *anApp = [SBApplication applicationWithBundleIdentifier:@"com.kra.iTunesServer"];
+  iTunesServerITunesServerConfiguration *config = anApp.configuration;
+  NSLog(@"config %@", config.autoScanPath);
+
+  config.port = 4567;
+  config.autoScanPath = @"meh?";
+//  anApp.configuration = config;
 }
 
 - (void) didSelect

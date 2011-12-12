@@ -13,7 +13,6 @@
 		000CE87B1494536E003002C3 /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 000CE8791494536E003002C3 /* Credits.rtf */; };
 		000CE87E1494536E003002C3 /* ITSAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 000CE87D1494536E003002C3 /* ITSAppDelegate.m */; };
 		000CE89E14945481003002C3 /* MMContentAssembler+iTunes.m in Sources */ = {isa = PBXBuildFile; fileRef = 000CE88A14945481003002C3 /* MMContentAssembler+iTunes.m */; };
-		000CE89F14945481003002C3 /* ITSiTunesContentRepository.m in Sources */ = {isa = PBXBuildFile; fileRef = 000CE88D14945481003002C3 /* ITSiTunesContentRepository.m */; };
 		000CE8A014945481003002C3 /* ITSAbstractContentResource.m in Sources */ = {isa = PBXBuildFile; fileRef = 000CE89014945481003002C3 /* ITSAbstractContentResource.m */; };
 		000CE8A114945481003002C3 /* ITSLibraryResource.m in Sources */ = {isa = PBXBuildFile; fileRef = 000CE89214945481003002C3 /* ITSLibraryResource.m */; };
 		000CE8A214945481003002C3 /* ITSPlaylistResource.m in Sources */ = {isa = PBXBuildFile; fileRef = 000CE89414945481003002C3 /* ITSPlaylistResource.m */; };
@@ -22,13 +21,20 @@
 		000CE8A514945481003002C3 /* ITSiTunesWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = 000CE89D14945481003002C3 /* ITSiTunesWrapper.m */; };
 		000CE8AB149454FF003002C3 /* ScriptingBridge.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 000CE8AA149454FF003002C3 /* ScriptingBridge.framework */; };
 		000CE8D914945671003002C3 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 000CE8D814945671003002C3 /* MainMenu.xib */; };
-		000CE8EB14945DF3003002C3 /* ITSConfigurationRepository.m in Sources */ = {isa = PBXBuildFile; fileRef = 000CE8EA14945DF3003002C3 /* ITSConfigurationRepository.m */; };
 		000CE8F314945F32003002C3 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 000CE86A1494536E003002C3 /* Cocoa.framework */; };
 		000CE8F514945F32003002C3 /* PreferencePanes.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 000CE8F414945F32003002C3 /* PreferencePanes.framework */; };
 		000CE8FB14945F33003002C3 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 000CE8F914945F33003002C3 /* InfoPlist.strings */; };
 		000CE8FF14945F33003002C3 /* iTunesServerPrefPane.m in Sources */ = {isa = PBXBuildFile; fileRef = 000CE8FE14945F33003002C3 /* iTunesServerPrefPane.m */; };
 		000CE90114945F33003002C3 /* iTunesServerPrefPane.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 000CE90014945F33003002C3 /* iTunesServerPrefPane.tiff */; };
 		000CE90414945F33003002C3 /* iTunesServerPrefPane.xib in Resources */ = {isa = PBXBuildFile; fileRef = 000CE90214945F33003002C3 /* iTunesServerPrefPane.xib */; };
+		000CE98114955BBB003002C3 /* ITSConfiguration.h in Headers */ = {isa = PBXBuildFile; fileRef = 000CE97F14955BBB003002C3 /* ITSConfiguration.h */; };
+		000CE98214955BBB003002C3 /* ITSConfiguration.m in Sources */ = {isa = PBXBuildFile; fileRef = 000CE98014955BBB003002C3 /* ITSConfiguration.m */; };
+		000CE98314955BBB003002C3 /* ITSConfiguration.m in Sources */ = {isa = PBXBuildFile; fileRef = 000CE98014955BBB003002C3 /* ITSConfiguration.m */; };
+		000CE98614955DF7003002C3 /* iTunesServer.sdef in Resources */ = {isa = PBXBuildFile; fileRef = 000CE98514955DF7003002C3 /* iTunesServer.sdef */; };
+		000CE991149572D7003002C3 /* ScriptingBridge.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 000CE8AA149454FF003002C3 /* ScriptingBridge.framework */; };
+		003DE0B6149576C3004DC839 /* ITSConfigurationRepository.m in Sources */ = {isa = PBXBuildFile; fileRef = 003DE0B2149576C3004DC839 /* ITSConfigurationRepository.m */; };
+		003DE0B7149576C3004DC839 /* ITSiTunesContentRepository.m in Sources */ = {isa = PBXBuildFile; fileRef = 003DE0B5149576C3004DC839 /* ITSiTunesContentRepository.m */; };
+		003DE0C714958D12004DC839 /* ITSApplication.m in Sources */ = {isa = PBXBuildFile; fileRef = 003DE0C614958D12004DC839 /* ITSApplication.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -46,8 +52,6 @@
 		000CE87D1494536E003002C3 /* ITSAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ITSAppDelegate.m; sourceTree = "<group>"; };
 		000CE88914945481003002C3 /* MMContentAssembler+iTunes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MMContentAssembler+iTunes.h"; sourceTree = "<group>"; };
 		000CE88A14945481003002C3 /* MMContentAssembler+iTunes.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "MMContentAssembler+iTunes.m"; sourceTree = "<group>"; };
-		000CE88C14945481003002C3 /* ITSiTunesContentRepository.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ITSiTunesContentRepository.h; sourceTree = "<group>"; };
-		000CE88D14945481003002C3 /* ITSiTunesContentRepository.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ITSiTunesContentRepository.m; sourceTree = "<group>"; };
 		000CE88F14945481003002C3 /* ITSAbstractContentResource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ITSAbstractContentResource.h; sourceTree = "<group>"; };
 		000CE89014945481003002C3 /* ITSAbstractContentResource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ITSAbstractContentResource.m; sourceTree = "<group>"; };
 		000CE89114945481003002C3 /* ITSLibraryResource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ITSLibraryResource.h; sourceTree = "<group>"; };
@@ -63,8 +67,6 @@
 		000CE89D14945481003002C3 /* ITSiTunesWrapper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ITSiTunesWrapper.m; sourceTree = "<group>"; };
 		000CE8AA149454FF003002C3 /* ScriptingBridge.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ScriptingBridge.framework; path = System/Library/Frameworks/ScriptingBridge.framework; sourceTree = SDKROOT; };
 		000CE8D814945671003002C3 /* MainMenu.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MainMenu.xib; sourceTree = "<group>"; };
-		000CE8E914945DF3003002C3 /* ITSConfigurationRepository.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ITSConfigurationRepository.h; path = domain/configuration/ITSConfigurationRepository.h; sourceTree = "<group>"; };
-		000CE8EA14945DF3003002C3 /* ITSConfigurationRepository.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ITSConfigurationRepository.m; path = domain/configuration/ITSConfigurationRepository.m; sourceTree = "<group>"; };
 		000CE8F214945F32003002C3 /* iTunes Server.prefPane */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "iTunes Server.prefPane"; sourceTree = BUILT_PRODUCTS_DIR; };
 		000CE8F414945F32003002C3 /* PreferencePanes.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = PreferencePanes.framework; path = System/Library/Frameworks/PreferencePanes.framework; sourceTree = SDKROOT; };
 		000CE8F814945F33003002C3 /* iTunesServerPrefPane-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "iTunesServerPrefPane-Info.plist"; sourceTree = "<group>"; };
@@ -75,6 +77,16 @@
 		000CE90014945F33003002C3 /* iTunesServerPrefPane.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = iTunesServerPrefPane.tiff; sourceTree = "<group>"; };
 		000CE90314945F33003002C3 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/iTunesServerPrefPane.xib; sourceTree = "<group>"; };
 		000CE96514947DAD003002C3 /* Rakefile */ = {isa = PBXFileReference; lastKnownFileType = text; path = Rakefile; sourceTree = "<group>"; };
+		000CE97F14955BBB003002C3 /* ITSConfiguration.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ITSConfiguration.h; path = domain/configuration/ITSConfiguration.h; sourceTree = "<group>"; };
+		000CE98014955BBB003002C3 /* ITSConfiguration.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ITSConfiguration.m; path = domain/configuration/ITSConfiguration.m; sourceTree = "<group>"; };
+		000CE98514955DF7003002C3 /* iTunesServer.sdef */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = iTunesServer.sdef; sourceTree = "<group>"; };
+		000CE990149572C9003002C3 /* iTunesServer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = iTunesServer.h; sourceTree = "<group>"; };
+		003DE0B1149576C3004DC839 /* ITSConfigurationRepository.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ITSConfigurationRepository.h; sourceTree = "<group>"; };
+		003DE0B2149576C3004DC839 /* ITSConfigurationRepository.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ITSConfigurationRepository.m; sourceTree = "<group>"; };
+		003DE0B4149576C3004DC839 /* ITSiTunesContentRepository.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ITSiTunesContentRepository.h; sourceTree = "<group>"; };
+		003DE0B5149576C3004DC839 /* ITSiTunesContentRepository.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ITSiTunesContentRepository.m; sourceTree = "<group>"; };
+		003DE0C514958D12004DC839 /* ITSApplication.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ITSApplication.h; path = application/ITSApplication.h; sourceTree = "<group>"; };
+		003DE0C614958D12004DC839 /* ITSApplication.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ITSApplication.m; path = application/ITSApplication.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -91,6 +103,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				000CE991149572D7003002C3 /* ScriptingBridge.framework in Frameworks */,
 				000CE8F314945F32003002C3 /* Cocoa.framework in Frameworks */,
 				000CE8F514945F32003002C3 /* PreferencePanes.framework in Frameworks */,
 			);
@@ -160,6 +173,7 @@
 				000CE8761494536E003002C3 /* main.m */,
 				000CE8781494536E003002C3 /* iTunesServer-Prefix.pch */,
 				000CE8791494536E003002C3 /* Credits.rtf */,
+				000CE98514955DF7003002C3 /* iTunesServer.sdef */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -167,6 +181,7 @@
 		000CE88714945481003002C3 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				003DE0C414958CF6004DC839 /* application */,
 				000CE88814945481003002C3 /* assembler */,
 				000CE8E614945CFF003002C3 /* domain */,
 				000CE88B14945481003002C3 /* repository */,
@@ -189,8 +204,8 @@
 		000CE88B14945481003002C3 /* repository */ = {
 			isa = PBXGroup;
 			children = (
-				000CE88C14945481003002C3 /* ITSiTunesContentRepository.h */,
-				000CE88D14945481003002C3 /* ITSiTunesContentRepository.m */,
+				003DE0B0149576C3004DC839 /* configuration */,
+				003DE0B3149576C3004DC839 /* iTunes */,
 			);
 			path = repository;
 			sourceTree = "<group>";
@@ -240,8 +255,8 @@
 		000CE8E814945D09003002C3 /* configuration */ = {
 			isa = PBXGroup;
 			children = (
-				000CE8E914945DF3003002C3 /* ITSConfigurationRepository.h */,
-				000CE8EA14945DF3003002C3 /* ITSConfigurationRepository.m */,
+				000CE97F14955BBB003002C3 /* ITSConfiguration.h */,
+				000CE98014955BBB003002C3 /* ITSConfiguration.m */,
 			);
 			name = configuration;
 			sourceTree = "<group>";
@@ -249,6 +264,7 @@
 		000CE8F614945F32003002C3 /* iTunesServerPrefPane */ = {
 			isa = PBXGroup;
 			children = (
+				000CE990149572C9003002C3 /* iTunesServer.h */,
 				000CE8FD14945F33003002C3 /* iTunesServerPrefPane.h */,
 				000CE8FE14945F33003002C3 /* iTunesServerPrefPane.m */,
 				000CE90014945F33003002C3 /* iTunesServerPrefPane.tiff */,
@@ -268,6 +284,33 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		003DE0B0149576C3004DC839 /* configuration */ = {
+			isa = PBXGroup;
+			children = (
+				003DE0B1149576C3004DC839 /* ITSConfigurationRepository.h */,
+				003DE0B2149576C3004DC839 /* ITSConfigurationRepository.m */,
+			);
+			path = configuration;
+			sourceTree = "<group>";
+		};
+		003DE0B3149576C3004DC839 /* iTunes */ = {
+			isa = PBXGroup;
+			children = (
+				003DE0B4149576C3004DC839 /* ITSiTunesContentRepository.h */,
+				003DE0B5149576C3004DC839 /* ITSiTunesContentRepository.m */,
+			);
+			path = iTunes;
+			sourceTree = "<group>";
+		};
+		003DE0C414958CF6004DC839 /* application */ = {
+			isa = PBXGroup;
+			children = (
+				003DE0C514958D12004DC839 /* ITSApplication.h */,
+				003DE0C614958D12004DC839 /* ITSApplication.m */,
+			);
+			name = application;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -275,6 +318,7 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				000CE98114955BBB003002C3 /* ITSConfiguration.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -352,6 +396,7 @@
 				000CE8751494536E003002C3 /* InfoPlist.strings in Resources */,
 				000CE87B1494536E003002C3 /* Credits.rtf in Resources */,
 				000CE8D914945671003002C3 /* MainMenu.xib in Resources */,
+				000CE98614955DF7003002C3 /* iTunesServer.sdef in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -385,14 +430,16 @@
 				000CE8771494536E003002C3 /* main.m in Sources */,
 				000CE87E1494536E003002C3 /* ITSAppDelegate.m in Sources */,
 				000CE89E14945481003002C3 /* MMContentAssembler+iTunes.m in Sources */,
-				000CE89F14945481003002C3 /* ITSiTunesContentRepository.m in Sources */,
 				000CE8A014945481003002C3 /* ITSAbstractContentResource.m in Sources */,
 				000CE8A114945481003002C3 /* ITSLibraryResource.m in Sources */,
 				000CE8A214945481003002C3 /* ITSPlaylistResource.m in Sources */,
 				000CE8A314945481003002C3 /* ITSTrackResource.m in Sources */,
 				000CE8A414945481003002C3 /* ITSiTunesUtil.m in Sources */,
 				000CE8A514945481003002C3 /* ITSiTunesWrapper.m in Sources */,
-				000CE8EB14945DF3003002C3 /* ITSConfigurationRepository.m in Sources */,
+				000CE98214955BBB003002C3 /* ITSConfiguration.m in Sources */,
+				003DE0B6149576C3004DC839 /* ITSConfigurationRepository.m in Sources */,
+				003DE0B7149576C3004DC839 /* ITSiTunesContentRepository.m in Sources */,
+				003DE0C714958D12004DC839 /* ITSApplication.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -401,6 +448,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				000CE8FF14945F33003002C3 /* iTunesServerPrefPane.m in Sources */,
+				000CE98314955BBB003002C3 /* ITSConfiguration.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -605,6 +653,7 @@
 				000CE90714945F33003002C3 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

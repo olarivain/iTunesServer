@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE dictionary SYSTEM "file://localhost/System/Library/DTDs/sdef.dtd">
+<dictionary title="iTunesServer Terminology" xmlns:xi="http://www.w3.org/2001/XInclude">
+  <suite name="iTunesServer Config Suite" code="abcd" description="iTunesServer Configuration specific classes.">
+    <cocoa name="NSCoreSuite"/>
+
+    <class name="application" code="capp" 
+      description="Our simple application class." >
+      
+			<cocoa class="NSApplication"/>
+      
+			<property name="configuration" type="iTunesServerConfiguration" code="itco" access="rw" description="the weight of all of the items in the application"/>
+
+		</class>
+
+    
+    <!-- Configuration object definition -->
+    <class name="iTunesServerConfiguration" code="itsc" description="iTunes Configuration Object">
+        <cocoa class="ITSConfiguration"/>
+        <property name="port" code="port" type="integer"
+          description="The port on which iTunes Server runs.">
+          <cocoa key="port"/>
+        </property>
+      
+        <property name="autoScanEnabled" code="ause" type="integer"
+          description="Whether Auto Import is enabled">
+          <cocoa key="autoScanEnabled"/>
+        </property>
+      
+        <property name="autoScanPath" code="ausp" type="text" access="rw"
+          description="The folder monitored for autoimport.">
+          <cocoa key="autoScanPath"/>
+        </property>
+      
+        <property name="startOnLogin" code="stol" type="integer"
+          description="Whether server should start when user logs in.">
+          <cocoa key="startOnLogin"/>
+        </property>        
+    </class>
+    
+    <!-- Command definitions -->
+    <!-- command name="readConfiguration" code="aevtread" description="Grabs the configuration">
+      <cocoa class="ITSConfigurationCommand"/>
+      <result type="record" description="The count."/>
+    </command -->
+
+  </suite>
+  <!--
+   Contains one or more suite XML elements.
+   -->
+</dictionary>
