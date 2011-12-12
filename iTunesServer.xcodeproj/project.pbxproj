@@ -38,6 +38,9 @@
 		0062B25D1495A94100160289 /* ITSDefaults.h in Headers */ = {isa = PBXBuildFile; fileRef = 0062B25B1495A94100160289 /* ITSDefaults.h */; };
 		0062B25E1495A94100160289 /* ITSDefaults.m in Sources */ = {isa = PBXBuildFile; fileRef = 0062B25C1495A94100160289 /* ITSDefaults.m */; };
 		0062B25F1495A94100160289 /* ITSDefaults.m in Sources */ = {isa = PBXBuildFile; fileRef = 0062B25C1495A94100160289 /* ITSDefaults.m */; };
+		0062B2981495DA7000160289 /* ITSFolderItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 0062B2951495DA7000160289 /* ITSFolderItem.m */; };
+		0062B2991495DA7000160289 /* ITSFolderScanner.m in Sources */ = {isa = PBXBuildFile; fileRef = 0062B2971495DA7000160289 /* ITSFolderScanner.m */; };
+		0062B29C1495DA8600160289 /* ITSFolderItemList.m in Sources */ = {isa = PBXBuildFile; fileRef = 0062B29B1495DA8600160289 /* ITSFolderItemList.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -92,6 +95,12 @@
 		003DE0C614958D12004DC839 /* ITSApplication.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ITSApplication.m; path = application/ITSApplication.m; sourceTree = "<group>"; };
 		0062B25B1495A94100160289 /* ITSDefaults.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ITSDefaults.h; path = domain/configuration/ITSDefaults.h; sourceTree = "<group>"; };
 		0062B25C1495A94100160289 /* ITSDefaults.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ITSDefaults.m; path = domain/configuration/ITSDefaults.m; sourceTree = "<group>"; };
+		0062B2941495DA7000160289 /* ITSFolderItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ITSFolderItem.h; sourceTree = "<group>"; };
+		0062B2951495DA7000160289 /* ITSFolderItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ITSFolderItem.m; sourceTree = "<group>"; };
+		0062B2961495DA7000160289 /* ITSFolderScanner.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ITSFolderScanner.h; sourceTree = "<group>"; };
+		0062B2971495DA7000160289 /* ITSFolderScanner.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ITSFolderScanner.m; sourceTree = "<group>"; };
+		0062B29A1495DA8600160289 /* ITSFolderItemList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ITSFolderItemList.h; sourceTree = "<group>"; };
+		0062B29B1495DA8600160289 /* ITSFolderItemList.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ITSFolderItemList.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -253,6 +262,7 @@
 			isa = PBXGroup;
 			children = (
 				000CE8E814945D09003002C3 /* configuration */,
+				0062B2931495DA7000160289 /* scanner */,
 			);
 			name = domain;
 			sourceTree = "<group>";
@@ -316,6 +326,20 @@
 				003DE0C614958D12004DC839 /* ITSApplication.m */,
 			);
 			name = application;
+			sourceTree = "<group>";
+		};
+		0062B2931495DA7000160289 /* scanner */ = {
+			isa = PBXGroup;
+			children = (
+				0062B2941495DA7000160289 /* ITSFolderItem.h */,
+				0062B2951495DA7000160289 /* ITSFolderItem.m */,
+				0062B29A1495DA8600160289 /* ITSFolderItemList.h */,
+				0062B29B1495DA8600160289 /* ITSFolderItemList.m */,
+				0062B2961495DA7000160289 /* ITSFolderScanner.h */,
+				0062B2971495DA7000160289 /* ITSFolderScanner.m */,
+			);
+			name = scanner;
+			path = domain/scanner;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -449,6 +473,9 @@
 				003DE0B7149576C3004DC839 /* ITSiTunesContentRepository.m in Sources */,
 				003DE0C714958D12004DC839 /* ITSApplication.m in Sources */,
 				0062B25E1495A94100160289 /* ITSDefaults.m in Sources */,
+				0062B2981495DA7000160289 /* ITSFolderItem.m in Sources */,
+				0062B2991495DA7000160289 /* ITSFolderScanner.m in Sources */,
+				0062B29C1495DA8600160289 /* ITSFolderItemList.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
