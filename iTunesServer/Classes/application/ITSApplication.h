@@ -11,6 +11,6 @@
 @class ITSConfiguration;
 
 @interface NSApplication (ITSApplication) 
-@property (nonatomic, readonly) ITSConfiguration *configuration;
+-(void) updateConfig:(NSScriptCommand *)command;
 
 @end

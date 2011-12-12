@@ -120,7 +120,9 @@
 #pragma mark - changing auto import path
 - (IBAction) changeAutomaticImportFolder:(id)sender
 {
-  
+  iTunesServerApplication *theApp = [SBApplication applicationWithBundleIdentifier: @"com.kra.iTunesServer"];
+  NSLog(@"the app %@", theApp);
+  [theApp updateConfig];
 }
 
 #pragma mark - Running app instance

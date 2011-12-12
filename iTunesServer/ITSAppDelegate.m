@@ -29,6 +29,7 @@
   server = [[HSHTTPServe alloc] initWithPort: (int) port];
   [server start];
 
+
   // start file manager monitor here if needed
 }
 
@@ -51,6 +52,11 @@
   }
   
   return nil;
-}                    
+}     
+
+- (void) updateConfig
+{
+#warning implement configuration update here
+}
                               
 @end

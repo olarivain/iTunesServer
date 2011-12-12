@@ -16,4 +16,6 @@
 
 @property (assign) IBOutlet NSWindow *window;
 
+- (void) updateConfig;
+
 @end
