@@ -8,15 +8,22 @@
 
 #import "ITSApplication.h"
 
+#import "ITSConfigurationRepository.h"
 #import "ITSAppDelegate.h"
 
 @implementation NSApplication (ITSApplication)
 
--(void) updateConfig:(NSScriptCommand *)command
+-(id) reloadConfiguration:(NSScriptCommand *)command
 {
   ITSAppDelegate *theDelegate = (ITSAppDelegate *) self.delegate;
-  [theDelegate updateConfig];
+  [theDelegate reloadConfiguration];
   return nil;
+}
+
+- (ITSConfiguration *) configuration
+{
+  ITSConfigurationRepository *repository = [ITSConfigurationRepository sharedInstance];
+  return [repository readConfiguration];
 }
 
 @end

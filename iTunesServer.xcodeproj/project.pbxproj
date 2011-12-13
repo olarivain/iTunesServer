@@ -41,7 +41,8 @@
 		0062B2981495DA7000160289 /* ITSFolderItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 0062B2951495DA7000160289 /* ITSFolderItem.m */; };
 		0062B2991495DA7000160289 /* ITSFolderScanner.m in Sources */ = {isa = PBXBuildFile; fileRef = 0062B2971495DA7000160289 /* ITSFolderScanner.m */; };
 		0062B29C1495DA8600160289 /* ITSFolderItemList.m in Sources */ = {isa = PBXBuildFile; fileRef = 0062B29B1495DA8600160289 /* ITSFolderItemList.m */; };
-		0062B29F1495E60800160289 /* ITSScriptCommand.m in Sources */ = {isa = PBXBuildFile; fileRef = 0062B29E1495E60800160289 /* ITSScriptCommand.m */; };
+		00D3E226149732BC003EC047 /* ITSConfigurationRepository.h in Headers */ = {isa = PBXBuildFile; fileRef = 003DE0B1149576C3004DC839 /* ITSConfigurationRepository.h */; };
+		00D3E227149732BC003EC047 /* ITSConfigurationRepository.m in Sources */ = {isa = PBXBuildFile; fileRef = 003DE0B2149576C3004DC839 /* ITSConfigurationRepository.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -102,8 +103,6 @@
 		0062B2971495DA7000160289 /* ITSFolderScanner.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ITSFolderScanner.m; sourceTree = "<group>"; };
 		0062B29A1495DA8600160289 /* ITSFolderItemList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ITSFolderItemList.h; sourceTree = "<group>"; };
 		0062B29B1495DA8600160289 /* ITSFolderItemList.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ITSFolderItemList.m; sourceTree = "<group>"; };
-		0062B29D1495E60800160289 /* ITSScriptCommand.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ITSScriptCommand.h; path = application/ITSScriptCommand.h; sourceTree = "<group>"; };
-		0062B29E1495E60800160289 /* ITSScriptCommand.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ITSScriptCommand.m; path = application/ITSScriptCommand.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -327,8 +326,6 @@
 			children = (
 				003DE0C514958D12004DC839 /* ITSApplication.h */,
 				003DE0C614958D12004DC839 /* ITSApplication.m */,
-				0062B29D1495E60800160289 /* ITSScriptCommand.h */,
-				0062B29E1495E60800160289 /* ITSScriptCommand.m */,
 			);
 			name = application;
 			sourceTree = "<group>";
@@ -356,6 +353,7 @@
 			files = (
 				000CE98114955BBB003002C3 /* ITSConfiguration.h in Headers */,
 				0062B25D1495A94100160289 /* ITSDefaults.h in Headers */,
+				00D3E226149732BC003EC047 /* ITSConfigurationRepository.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -481,7 +479,6 @@
 				0062B2981495DA7000160289 /* ITSFolderItem.m in Sources */,
 				0062B2991495DA7000160289 /* ITSFolderScanner.m in Sources */,
 				0062B29C1495DA8600160289 /* ITSFolderItemList.m in Sources */,
-				0062B29F1495E60800160289 /* ITSScriptCommand.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -492,6 +489,7 @@
 				000CE8FF14945F33003002C3 /* iTunesServerPrefPane.m in Sources */,
 				000CE98314955BBB003002C3 /* ITSConfiguration.m in Sources */,
 				0062B25F1495A94100160289 /* ITSDefaults.m in Sources */,
+				00D3E227149732BC003EC047 /* ITSConfigurationRepository.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -646,7 +644,11 @@
 				GCC_PREFIX_HEADER = "iTunesServerPrefPane/iTunesServerPrefPane-Prefix.pch";
 				INFOPLIST_FILE = "iTunesServerPrefPane/iTunesServerPrefPane-Info.plist";
 				INSTALL_PATH = "$(HOME)/Library/PreferencePanes";
-				OTHER_LDFLAGS = "";
+				OTHER_LDFLAGS = (
+					"-Objc",
+					"-all_load",
+					"-lKraCommons-x86",
+				);
 				PRODUCT_NAME = "iTunes Server";
 				WRAPPER_EXTENSION = prefPane;
 			};
@@ -662,7 +664,11 @@
 				GCC_PREFIX_HEADER = "iTunesServerPrefPane/iTunesServerPrefPane-Prefix.pch";
 				INFOPLIST_FILE = "iTunesServerPrefPane/iTunesServerPrefPane-Info.plist";
 				INSTALL_PATH = "$(HOME)/Library/PreferencePanes";
-				OTHER_LDFLAGS = "";
+				OTHER_LDFLAGS = (
+					"-Objc",
+					"-all_load",
+					"-lKraCommons-x86",
+				);
 				PRODUCT_NAME = "iTunes Server";
 				WRAPPER_EXTENSION = prefPane;
 			};

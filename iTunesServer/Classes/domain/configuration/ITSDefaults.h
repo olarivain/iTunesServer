@@ -8,6 +8,12 @@
 
 #import <Foundation/Foundation.h>
 
+#define AUTO_IMPORT_KEY @"autoScanEnabled"
+#define AUTO_IMPORT_PATH_KEY @"autoScanPath"
+#define ITUNES_SERVER_PORT_KEY @"port"
+#define START_ON_LOGIN_KEY @"starOnLogin"
+
+
 @interface ITSDefaults : NSObject
 
 + (void) bootstrapDefaults: (NSUserDefaults *) defaults;

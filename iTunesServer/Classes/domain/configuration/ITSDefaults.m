@@ -21,10 +21,9 @@
   }
   
   NSMutableDictionary *dictionary = [NSMutableDictionary dictionaryWithCapacity: 4];
-  [dictionary setObject: [NSNumber numberWithInteger: 2048] forKey: @"port"];
-  [dictionary setObject: [NSNumber numberWithInteger: 0] forKey: @"autoScanEnabled"];
-  [dictionary setObject: @"" forKey: @"autoScanPath"];
-  [dictionary setObject: [NSNumber numberWithInteger: 1] forKey: @"starOnLogin"];
+  [dictionary setObject: [NSNumber numberWithInteger: 2048] forKey: ITUNES_SERVER_PORT_KEY];
+  [dictionary setObject: [NSNumber numberWithInteger: 0] forKey: AUTO_IMPORT_KEY];
+  [dictionary setObject: [NSNumber numberWithInteger: 1] forKey: START_ON_LOGIN_KEY];
   
   [defaults registerDefaults: dictionary];
   [defaults setObject: [NSNumber numberWithInteger: 1] forKey: BOOSTRAPPED_KEY];

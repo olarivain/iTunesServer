@@ -13,7 +13,11 @@
 @interface ITSConfigurationRepository : NSObject {
   ITSConfiguration *configuration;
 }
+
 + (ITSConfigurationRepository *) sharedInstance;
+
 - (ITSConfiguration *) readConfiguration;
-- (void) test;
+- (ITSConfiguration *) saveConfiguration;
+- (ITSConfiguration *) forceReload;
+
 @end

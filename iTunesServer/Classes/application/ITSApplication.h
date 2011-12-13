@@ -11,6 +11,9 @@
 @class ITSConfiguration;
 
 @interface NSApplication (ITSApplication) 
--(void) updateConfig:(NSScriptCommand *)command;
+
+-(id) reloadConfiguration:(NSScriptCommand *)command;
+
+@property (nonatomic, readonly) ITSConfiguration *configuration;
 
 @end

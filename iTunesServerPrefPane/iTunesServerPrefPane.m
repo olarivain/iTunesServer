@@ -7,17 +7,27 @@
 //
 
 #import <KraCommons/KCBlocks.h>
+#import <KraCommons/NSArray+BoundSafe.h>
+#import <KraCommons/NSDictionary+NilSafe.h>
 #import "iTunesServerPrefPane.h"
 
 #import "ITSDefaults.h"
 #import "iTunesServer.h"
 
+#import "ITSConfiguration.h"
+#import "ITSConfigurationRepository.h"
+
 #define ITUNES_SERVER_APP_NAME @"iTunesServer"
+#define ITUNES_SERVER_BUNDLE_ID @"com.kra.iTunesServer"
 
 @interface iTunesServerPrefPane()
 - (void) updateRunningLabel;
 
 - (NSRunningApplication *) iTunesServerRunningApplication;
+- (void) updateAccordingToConfiguration;
+- (void) didPickFolder: (NSInteger) result withPanel: (NSOpenPanel *) panel;
+
+- (void) saveConfiguration;
 @end
 
 @implementation iTunesServerPrefPane
@@ -27,11 +37,14 @@
   self = [super initWithBundle: bundle];
   if(self)
   {    
+    NSUserDefaults *defaults = [[NSUserDefaults alloc] init];
+    [defaults addSuiteNamed: @"com.kra.iTunesShared"];
     [ITSDefaults bootstrapDefaults: defaults];
   }
   return self;
 }
 
+// we observe workspace's runningApplications key
 - (void) observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
 {
   // status didn't change
@@ -51,22 +64,22 @@
 - (void) didSelect
 {
   // don't forget to bootsrap user defaults, this might be the first thing the user starts
-  defaults = [NSUserDefaults standardUserDefaults];
-  [defaults addSuiteNamed:@"com.kra.iTunesServer"];
+  configuration = [[ITSConfigurationRepository sharedInstance] readConfiguration];
+  
 
+  workspace = [NSWorkspace sharedWorkspace];
+  [workspace addObserver: self forKeyPath: @"runningApplications" options:NSKeyValueObservingOptionNew context: nil];
+  
   // figure out if process is running
   isRunning = [self iTunesServerRunningApplication] != nil;
   
   [self updateRunningLabel];
-  
-  workspace = [NSWorkspace sharedWorkspace];
-  [workspace addObserver: self forKeyPath: @"runningApplications" options:NSKeyValueObservingOptionNew context: nil];
+  [self updateAccordingToConfiguration];
 }
 
 - (void) willUnselect
 {
   // release unneeded resources
-  defaults = nil;
   [workspace removeObserver: self forKeyPath: @"runningApplications"];
 }
 
@@ -117,12 +130,85 @@
   }
 }
 
-#pragma mark - changing auto import path
+#pragma mark - initialize UI according to configuration
+- (void) updateAccordingToConfiguration 
+{
+  // figure out if we're using auto import
+  BOOL autoImport = configuration.autoScanEnabled;
+  autoImportCheckBox.state = autoImport ? NSOnState : NSOffState;
+  
+  // update text field accordingly
+  [automaticImportTextField setEnabled: autoImport];
+  NSString *path = configuration.autoScanPath;
+  path = path == nil ? @"" : path;
+  [automaticImportTextField setStringValue: path];
+  
+  // and enable button accordingly
+  [autoImportPathButton setEnabled: autoImport];
+}
+
+#pragma mark - Auto Import
+#pragma mark toggle
+- (IBAction) toggleAutoImport:(id)sender
+{ 
+  // trigger folder picker if on and no path defined
+  BOOL autoImport = autoImportCheckBox.state == NSOnState;
+  
+  [autoImportPathButton setEnabled: autoImport];
+  [automaticImportTextField setEnabled: autoImport];
+  
+  NSString *path = configuration.autoScanPath;
+  if(autoImport && [path length] == 0)
+  {
+    [self changeAutomaticImportFolder: nil];
+    // and return here, we don't wan't the code after that running
+    return;
+  }
+  
+  configuration.autoScanEnabled = autoImport;
+  [self saveConfiguration];
+}
+#pragma mark path
 - (IBAction) changeAutomaticImportFolder:(id)sender
 {
-  iTunesServerApplication *theApp = [SBApplication applicationWithBundleIdentifier: @"com.kra.iTunesServer"];
-  NSLog(@"the app %@", theApp);
-  [theApp updateConfig];
+  NSOpenPanel *panel = [NSOpenPanel openPanel];
+  panel.canChooseFiles = NO;
+  panel.canChooseDirectories = YES;
+  panel.canCreateDirectories = YES;
+  panel.allowsMultipleSelection = NO;
+  
+  
+  NSString *currentPath = configuration.autoScanPath;
+  if([currentPath length] == 0)
+  {
+    currentPath = @"~/";
+  }
+  
+  NSString *urlScheme = [NSString stringWithFormat: @"file://%@", [currentPath stringByExpandingTildeInPath]];
+  [panel setDirectoryURL: [NSURL URLWithString: urlScheme]];
+  
+  KCIntegerBlock completion = ^(NSInteger result){
+    [self didPickFolder: result withPanel: panel];
+  };
+  
+  NSWindow *window = [NSApplication sharedApplication].keyWindow;
+  [panel beginSheetModalForWindow: window  completionHandler: completion];
+}
+
+- (void) didPickFolder: (NSInteger) result withPanel: (NSOpenPanel *) panel
+{
+  if(result != NSFileHandlingPanelOKButton)
+  {
+    return;
+  }
+  NSArray *urls = panel.URLs;
+  NSURL *url = [urls boundSafeObjectAtIndex: 0];
+  NSString *path = [url path];
+  // configuration is enabled if we got here
+  configuration.autoScanEnabled = YES;
+  configuration.autoScanPath = path;
+  
+  [self saveConfiguration];
 }
 
 #pragma mark - Running app instance
@@ -139,6 +225,25 @@
   }
   
   return nil;
+}
+
+#pragma mark - Scripting Bridge
+- (void) saveConfiguration
+{
+//  BOOL autoImport = autoImportCheckBox.state == NSOnState;
+//  NSString *path = [automaticImportTextField stringValue];
+////  NSInteger port = 
+//  [defaults setBool: autoImport  forKey: AUTO_IMPORT_KEY];
+//  [defaults setObject: path forKey: AUTO_IMPORT_PATH_KEY];
+//  [defaults synchronize];
+  [[ITSConfigurationRepository sharedInstance] saveConfiguration];
+  iTunesServerApplication *application = (iTunesServerApplication *) [SBApplication applicationWithBundleIdentifier: ITUNES_SERVER_BUNDLE_ID];
+  if(!application.isRunning)
+  {
+    return;
+  }
+  
+  [application reloadConfiguration];
 }
 
 @end

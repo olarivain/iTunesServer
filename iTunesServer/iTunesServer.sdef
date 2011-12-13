@@ -8,15 +8,19 @@
       description="Our simple application class." >
       
 			<cocoa class="NSApplication"/>
+      <property name="configuration" code="itac" description="Configuration singleton"
+                type="Configuration">
+        <cocoa method="configuration" />
+      </property>
       
-      <!--responds-to command="updateConfig">
-        <cocoa method="updateConfig"/>
-      </responds-to -->
+      <responds-to name="reloadConfiguration">
+        <cocoa method="reloadConfiguration:" />
+      </responds-to>
 		</class>
 
     
     <!-- Configuration object definition -->
-<!--    <class name="iTunesServerConfiguration" code="itsc" description="iTunes Configuration Object">
+    <class name="Configuration" code="itsc" description="iTunes Configuration Object">
         <cocoa class="ITSConfiguration"/>
         <property name="port" code="port" type="integer"
           description="The port on which iTunes Server runs.">
@@ -38,15 +42,10 @@
           <cocoa key="startOnLogin"/>
         </property>        
     </class>
- -->
     
-    <class name="ITSScriptCommand" code="capp" description="The cmd.">
-      <cocoa class="ITSScriptCommand"/>
-    </class>
     
     <!-- Command definitions -->
-    <command name="updateConfig" code="aevtitsu" description="ReloadConfig">
-      <cocoa class="ITSScriptCommand" />
+    <command name="reloadConfiguration" code="aevtitsu" description="Reloads the config, restarting the server if needed">
     </command>
 
   </suite>

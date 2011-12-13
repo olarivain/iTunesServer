@@ -6,11 +6,17 @@
 //  Copyright (c) 2011 Edmunds. All rights reserved.
 //
 
+#import <KraCommons/NSDictionary+NilSafe.h>
 #import "ITSConfigurationRepository.h"
 
 #import "ITSConfiguration.h"
+#import "ITSDefaults.h"
 
 static ITSConfigurationRepository *sharedInstance;
+
+@interface ITSConfigurationRepository()
+- (void) loadConfiguration;
+@end
 
 @implementation ITSConfigurationRepository
 
@@ -29,16 +35,51 @@ static ITSConfigurationRepository *sharedInstance;
   static dispatch_once_t onceToken;
   dispatch_once(&onceToken, ^{
     configuration = [ITSConfiguration configuration];
-    configuration.port = 6969;
-    configuration.autoScanPath = @"Mes couilles sur ton nez";
+    [self loadConfiguration];
   });
 
   return configuration;
 }
 
-- (void) test
+- (void) loadConfiguration
 {
-  NSLog(@"hooooo yeah!");
+  NSUserDefaults *defaults = [[NSUserDefaults alloc] init];
+  [defaults addSuiteNamed:@"com.kra.iTunesServerShared"];
+  
+  NSDictionary *dict = [defaults persistentDomainForName: @"com.kra.iTunesServer"];
+  
+  configuration.port = [dict integerForKey: ITUNES_SERVER_PORT_KEY];
+  configuration.autoScanEnabled = [dict integerForKey: AUTO_IMPORT_KEY];
+  configuration.autoScanPath = [dict objectForKey: AUTO_IMPORT_PATH_KEY];
+  configuration.startOnLogin = [dict integerForKey: START_ON_LOGIN_KEY];
+}
+
+- (ITSConfiguration *) saveConfiguration
+{
+  [self readConfiguration];
+  NSMutableDictionary *dictionary = [NSMutableDictionary dictionaryWithCapacity: 4];
+  [dictionary setInteger: configuration.port forKey: ITUNES_SERVER_PORT_KEY];
+  [dictionary setInteger: configuration.autoScanEnabled forKey: AUTO_IMPORT_KEY];
+  [dictionary setObject:  configuration.autoScanPath forKey: AUTO_IMPORT_PATH_KEY];
+  [dictionary setInteger: configuration.startOnLogin forKey: START_ON_LOGIN_KEY];
+  
+  NSUserDefaults *defaults = [[NSUserDefaults alloc] init];
+  [defaults addSuiteNamed:@"com.kra.iTunesServerShared"];
+  
+  [defaults setPersistentDomain: dictionary forName: @"com.kra.iTunesServer"];
+  return configuration;
+}
+
+- (ITSConfiguration *) forceReload
+{
+  if(configuration == nil)
+  {
+    return [self readConfiguration];
+  }
+  
+  [self loadConfiguration];
+  
+  return configuration;
 }
 
 @end

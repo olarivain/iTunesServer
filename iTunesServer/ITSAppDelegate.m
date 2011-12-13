@@ -11,9 +11,10 @@
 #import "ITSAppDelegate.h"
 
 #import "ITSDefaults.h"
+#import "ITSConfigurationRepository.h"
+#import "ITSConfiguration.h"
 
 @interface ITSAppDelegate()
-- (NSRunningApplication *) iTunesServerRunningApplication;
 @end
 
 @implementation ITSAppDelegate
@@ -22,10 +23,15 @@
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification
 {  
-  NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+  NSUserDefaults *defaults = [[NSUserDefaults alloc] init];
+  [defaults addSuiteNamed:@"com.kra.iTunesServerShared"];
+  
   [ITSDefaults bootstrapDefaults: defaults];
   
-  NSInteger port = [defaults integerForKey: @"port"];
+    ITSConfigurationRepository *repository = [ITSConfigurationRepository sharedInstance];
+  ITSConfiguration *configuration = [repository readConfiguration];
+  
+  NSInteger port = configuration.port;
   server = [[HSHTTPServe alloc] initWithPort: (int) port];
   [server start];
 
@@ -36,27 +42,24 @@
 - (void) applicationWillTerminate:(NSNotification *)notification 
 {
   [server stop];
-}
+}    
 
-- (NSRunningApplication *) iTunesServerRunningApplication
+- (void) reloadConfiguration
 {
-  NSWorkspace *workspace = [NSWorkspace sharedWorkspace];
-  // browse through list of running processes and search for iTunesServer
-  NSArray *runningApps = [workspace runningApplications];
-  for(NSRunningApplication *runningApp in runningApps)
-  {
-    if([ITUNES_SERVER_APP_NAME caseInsensitiveCompare: runningApp.localizedName] == NSOrderedSame) 
-    {
-      return runningApp;
-    }
-  }
+  ITSConfigurationRepository *repository = [ITSConfigurationRepository sharedInstance];
+  ITSConfiguration *configuration = [repository forceReload];
   
-  return nil;
-}     
+  // TODO enable
+//  if(configuration.port != server.port)
+//  {
+//    [server stop];
+//    server = [[HSHTTPServe alloc] initWithPort: (int) port];
+//    [server start];
+//  }
 
-- (void) updateConfig
-{
-#warning implement configuration update here
+  
+  NSLog(@"ok %i %@.", configuration.autoScanEnabled, configuration.autoScanPath);
+  
 }
                               
 @end

@@ -49,3 +49,9 @@ task :macmini do
 	system macMiniCmd
 end
 
+task :sdef do
+  builder.clean
+  builder.build
+  builder.deploy
+  system "sdef /usr/local/xcodeproducts/iTunesServer/LATEST/iTunesServer.app/ | sdp -fh --basename iTunesServer -o iTunesServerPrefPane"
+end

@@ -8,14 +8,18 @@
 
 #import <PreferencePanes/PreferencePanes.h>
 
+@class ITSConfiguration;
+
 @interface iTunesServerPrefPane : NSPreferencePane 
 {
   IBOutlet __strong NSTextField *runningLabel;
   IBOutlet __strong NSTextField *automaticImportTextField;
   IBOutlet __strong NSButton *startStopButton;
   IBOutlet __strong NSProgressIndicator *progressIndicator;
+  IBOutlet __strong NSButton *autoImportCheckBox;
+  IBOutlet __strong NSButton *autoImportPathButton;
   
-  __strong NSUserDefaults *defaults;
+  __strong ITSConfiguration *configuration;
   __strong NSWorkspace *workspace;
   
   BOOL isRunning;
@@ -23,5 +27,6 @@
 
 - (IBAction) startStopServer:(id)sender;
 - (IBAction) changeAutomaticImportFolder:(id)sender;
+- (IBAction) toggleAutoImport:(id)sender;
 
 @end
