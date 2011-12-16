@@ -15,7 +15,8 @@
 @implementation ITSFolderItem
 
 @synthesize itemId;
-@synthesize lastModificationDate;
+@synthesize name;
+@synthesize lastKnownModificationDate;
 @synthesize lastKnownSize;
 @synthesize changed;
 
@@ -30,6 +31,7 @@
   if(self)
   {
     itemId = anId;
+    name = [itemId lastPathComponent];
     [self updateWithAttributes: anAttributes];
   }
   return self;
@@ -39,8 +41,26 @@
 {
   attributes = anAattributes;
   
-  // TODO: do verification here, and update values
-  changed = YES;
+  // file is busy, don't touch it
+  BOOL busy = [[attributes objectForKey: NSFileBusy] boolValue];
+  NSDate *modificationDate = [attributes objectForKey: NSFileModificationDate];
+  NSNumber *size = [attributes objectForKey: NSFileSize];
+  
+  BOOL dateChanged = [modificationDate timeIntervalSinceDate: lastKnownModificationDate] != 0;
+  BOOL sizeChanged = lastKnownSize != nil && ![size isEqualToNumber: lastKnownSize];
+  
+  // file has changed if any of the previous attributes has changed
+  // during the first pass, the file will be considered changed, due to stored attributes being nil.
+  // this is perfect because we can't make an assumption off the first pass.
+  changed = dateChanged || busy || sizeChanged;
+
+  lastKnownSize = size;
+  lastKnownModificationDate = modificationDate;
+}
+
+- (void) logStatus
+{
+  NSLog(@"file %@ has been changed: %i", itemId, changed);
 }
 
 @end

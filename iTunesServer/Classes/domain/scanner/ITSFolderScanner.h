@@ -16,7 +16,11 @@
   __strong ITSFolderItemList *folderItemList;
   __strong NSTimer *timer;
   __strong NSString *path;
+  __strong NSString *destinationPath;
+  BOOL isRunning;
 }
+
++ (ITSFolderScanner *) folderScannerWithScannedPath: (NSString *) aPath;
 
 - (void) start;
 - (void) stop;

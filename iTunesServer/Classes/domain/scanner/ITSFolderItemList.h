@@ -20,6 +20,7 @@
 @property (nonatomic, readonly) NSArray *items;
 
 - (void) addOrUpdateFile: (NSString *) file withAttributes: (NSDictionary *) attributes;
-- (void) moveAllFiles;
+- (NSArray *) folderItemsToMove;
+- (void) removeFolderItems: (NSArray *) items;
 
 @end

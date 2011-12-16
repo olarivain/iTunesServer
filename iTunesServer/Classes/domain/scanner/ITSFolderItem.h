@@ -13,20 +13,25 @@
   __strong NSDictionary *attributes;
   
   __strong NSString *itemId;
-  __strong NSDate *lastModificationDate;
+  __strong NSString *name;
+  __strong NSDate *lastKnownModificationDate;
   
-  NSInteger lastKnownSize;
+  __strong NSString *destionationPath;
+  
+  NSNumber *lastKnownSize;
   
   BOOL changed;
 }
 
 @property (nonatomic, readonly) NSString *itemId;
-@property (nonatomic, readonly) NSInteger lastKnownSize;
-@property (nonatomic, readonly) NSDate *lastModificationDate;
+@property (nonatomic, readonly) NSString *name;
+@property (nonatomic, readonly) NSNumber *lastKnownSize;
+@property (nonatomic, readonly) NSDate *lastKnownModificationDate;
 @property (nonatomic, readonly) BOOL changed;
 
 + (ITSFolderItem *) folderItemWithId: (NSString *) anId andAttributes: (NSDictionary *) anAttributes;
 
 - (void) updateWithAttributes: (NSDictionary *) attributes;
+- (void) logStatus;
 
 @end

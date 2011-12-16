@@ -9,9 +9,11 @@
 #import <Cocoa/Cocoa.h>
 
 @class HSHTTPServe;
+@class ITSFolderScanner;
 
 @interface ITSAppDelegate : NSObject <NSApplicationDelegate> {
   __strong HSHTTPServe *server;
+  __strong ITSFolderScanner *folderScanner;
 }
 
 @property (assign) IBOutlet NSWindow *window;

@@ -6,26 +6,71 @@
 //  Copyright (c) 2011 Edmunds. All rights reserved.
 //
 
-#define SCAN_INTERVAL 10
+#import <KraCommons/NSArray+BoundSafe.h>
 #import "ITSFolderScanner.h"
 
 #import "ITSFolderItemList.h"
+#import "ITSFolderItem.h"
+
+#define SCAN_INTERVAL 10
 
 @interface ITSFolderScanner()
+- (id) initWithPath: (NSString *) aPath;
 - (void) timerFired: (NSTimer *) timer;
+- (void) extractDestinationPath;
 @end
 
 @implementation ITSFolderScanner
 
-- (id) init
++ (ITSFolderScanner *) folderScannerWithScannedPath: (NSString *) aPath {
+  return [[ITSFolderScanner alloc] initWithPath: aPath];
+}
+
+- (id) initWithPath: (NSString *) aPath
 {
   self = [super init];
   if(self)
   {
     fileManager = [[NSFileManager alloc] init];
     fileManager.delegate = self;
+    [self setScannedPath: aPath];
+    
+    [self extractDestinationPath];
   }
   return self;
+}
+
+- (void) extractDestinationPath
+{
+  // kindly ask itunes for it's DB locatin, from there we'll derive the Auto import folder
+  CFArrayRef recentLibraries = CFPreferencesCopyAppValue((CFStringRef)@"iTunesRecentDatabasePaths",(CFStringRef)@"com.apple.iApps");
+  NSArray *libraryPaths = (__bridge NSArray*)recentLibraries;
+  NSString *libraryPath = [libraryPaths boundSafeObjectAtIndex: 0];
+  
+  // path is invalid, get the hell out
+  if(libraryPath == nil)
+  {
+    [self setScannedPath: nil];
+    return;
+  }
+  
+  // build destination path
+  NSString *libraryFolder = [[libraryPath stringByExpandingTildeInPath] stringByDeletingLastPathComponent];
+  NSString *automaticallyImportPath = [NSString stringWithFormat: @"%@/iTunes Music/Automatically Add to iTunes/", libraryFolder];
+  
+  // ask file manager if destination exists and is a folder, if not, get the hell out
+  BOOL isFolder = NO;
+  if(![fileManager fileExistsAtPath: automaticallyImportPath isDirectory: &isFolder] && !isFolder)
+  {
+    [self setScannedPath: nil];
+    return;
+  }
+  
+  // Now, we can set the destination path
+  destinationPath = automaticallyImportPath;
+  
+  // clean up friggin' CF objets
+  CFRelease(recentLibraries);
 }
 
 - (void) setScannedPath:(NSString *)aPath
@@ -54,19 +99,61 @@
 
 - (void) timerFired:(NSTimer *)timer
 {
+  // make sure another instance of the timer isn't running
+  if(isRunning)
+  {
+    return;
+  }
+  // lock ourselves for later timer calls
+  isRunning = YES;
+  NSLog(@"Scanning: %@", path);
+  // scan source folder
   NSDirectoryEnumerator *directoryEnumerator = [fileManager enumeratorAtPath: path];
   NSString *file;
   while(file = [directoryEnumerator nextObject])
   {
+    NSString *itemId = [NSString stringWithFormat:@"%@/%@", path, file];
+    NSLog(@"Adding folder item: %@", itemId);
+
     NSDictionary *dictionary = [directoryEnumerator fileAttributes];
-    [folderItemList addOrUpdateFile: file withAttributes: dictionary];
+    [folderItemList addOrUpdateFile: itemId withAttributes: dictionary];
   };
   
-  [folderItemList moveAllFiles];
+  // ask folder item list which folder should be moved
+  NSArray *movableItems = [folderItemList folderItemsToMove];
+  
+  // now move them
+  for(ITSFolderItem *item in movableItems)
+  {
+    NSLog(@"Moving %@", item.itemId);
+    // move item with file manager
+    NSError *error = nil;
+    NSString *fullDestinationPath = [NSString stringWithFormat:@"%@/%@", destinationPath, item.name];
+    [fileManager moveItemAtPath: item.itemId toPath: fullDestinationPath error: &error];
+    // log error if any
+    if(error)
+    {
+      NSLog(@"*** FATAL *** Could not move item %@", item.itemId);
+      NSLog(@"%@", error.localizedDescription);
+    }
+  }
+
+  // don't forget to remove moved items
+  [folderItemList removeFolderItems: movableItems];
+  
+  // flip switch back on
+  isRunning = NO;
+  NSLog(@"Done scanning.");
 }
 
 - (void) start
 {
+  if(destinationPath == nil)
+  {
+    NSLog(@"*** FATAL no destination path for auto import");
+    return;
+  }
+  
   timer = [NSTimer scheduledTimerWithTimeInterval: 10 
                                            target: self 
                                          selector: @selector(timerFired:) 

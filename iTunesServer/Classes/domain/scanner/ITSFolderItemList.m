@@ -49,9 +49,27 @@
   [items addObject: item];
 }
 
-- (void) moveAllFiles
+- (NSArray *) folderItemsToMove
 {
-  NSLog(@"moving not implemented yet");
+  NSMutableArray *movableItems = [NSMutableArray arrayWithCapacity: [items count]];
+  for(ITSFolderItem *item in items)
+  {
+    if(item.changed)
+    {
+      continue;
+    }
+    [movableItems addObject: item];
+  }
+  
+  return movableItems;
+}
+
+- (void) removeFolderItems: (NSArray *) removedItems
+{
+  for(ITSFolderItem *item in removedItems)
+  {
+    [items removeObject: item];
+  }
 }
 
 @end

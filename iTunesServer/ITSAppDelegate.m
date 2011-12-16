@@ -14,7 +14,10 @@
 #import "ITSConfigurationRepository.h"
 #import "ITSConfiguration.h"
 
+#import "ITSFolderScanner.h"
+
 @interface ITSAppDelegate()
+- (void) launchServices;
 @end
 
 @implementation ITSAppDelegate
@@ -23,20 +26,20 @@
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification
 {  
+  // bootstrap defaults as needed.
   NSUserDefaults *defaults = [[NSUserDefaults alloc] init];
   [defaults addSuiteNamed:@"com.kra.iTunesServerShared"];
-  
   [ITSDefaults bootstrapDefaults: defaults];
   
-    ITSConfigurationRepository *repository = [ITSConfigurationRepository sharedInstance];
+  // read configuration and instantiate server
+  ITSConfigurationRepository *repository = [ITSConfigurationRepository sharedInstance];
   ITSConfiguration *configuration = [repository readConfiguration];
+  server = [[HSHTTPServe alloc] initWithPort: (int) configuration.port];
   
-  NSInteger port = configuration.port;
-  server = [[HSHTTPServe alloc] initWithPort: (int) port];
-  [server start];
-
-
-  // start file manager monitor here if needed
+  folderScanner = [ITSFolderScanner folderScannerWithScannedPath: configuration.autoScanPath];
+  
+  // then start services as needed
+  [self launchServices];
 }
 
 - (void) applicationWillTerminate:(NSNotification *)notification 
@@ -44,22 +47,42 @@
   [server stop];
 }    
 
-- (void) reloadConfiguration
+- (void) launchServices
 {
   ITSConfigurationRepository *repository = [ITSConfigurationRepository sharedInstance];
-  ITSConfiguration *configuration = [repository forceReload];
+  ITSConfiguration *configuration = [repository readConfiguration];
   
-  // TODO enable
+//  // TODO enable when port has been been made public
 //  if(configuration.port != server.port)
 //  {
 //    [server stop];
-//    server = [[HSHTTPServe alloc] initWithPort: (int) port];
+//    server = [[HSHTTPServe alloc] initWithPort: (int) configuration.port];
 //    [server start];
 //  }
+//  
+//  NSInteger port = configuration.port;
+//  server = [[HSHTTPServe alloc] initWithPort: (int) port];
+  [server start];
+  
+  if(configuration.autoScanEnabled)
+  {
+    [folderScanner setScannedPath: configuration.autoScanPath];
+    [folderScanner start];
+  }
+  else
+  {
+    [folderScanner stop];
+  }
+}
 
+- (void) reloadConfiguration
+{
+  // force reload the configuration, so it's in sync with what's been updated by pref pane
+  ITSConfigurationRepository *repository = [ITSConfigurationRepository sharedInstance];
+  [repository forceReload];
   
-  NSLog(@"ok %i %@.", configuration.autoScanEnabled, configuration.autoScanPath);
-  
+  // and restart services
+  [self launchServices];
 }
                               
 @end
