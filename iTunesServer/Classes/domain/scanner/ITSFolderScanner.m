@@ -112,6 +112,11 @@
   NSString *file;
   while(file = [directoryEnumerator nextObject])
   {
+    // just ignore dot file
+    if ([file hasPrefix: @"."])
+    {
+      continue;
+    }
     NSString *itemId = [NSString stringWithFormat:@"%@/%@", path, file];
     NSLog(@"Adding folder item: %@", itemId);
 
