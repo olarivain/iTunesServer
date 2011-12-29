@@ -8,13 +8,13 @@
 
 #import "ITSEncoder.h"
 
-#import "ITSTitleList.h"
+#import <MediaManagement/MMTitleList.h>
 
 static ITSEncoder *sharedEncoder;
 
 @interface ITSEncoder()
 - (void) performScanAtPath: (NSString *) path;
-- (ITSTitleList *) readTitleListFromLastScanWithPath: (NSString *) path;
+- (MMTitleList *) readTitleListFromLastScanWithPath: (NSString *) path;
 @end
 
 @implementation ITSEncoder
@@ -47,7 +47,7 @@ static ITSEncoder *sharedEncoder;
 
 #pragma mark - Scanning content
 #pragma mark Schedule a Scan
-- (ITSTitleList *) scanPath: (NSString *) path
+- (MMTitleList *) scanPath: (NSString *) path
 {
   // abort eary for nonsensical data
   if([path length] == 0 || ![fileManager fileExistsAtPath: path])
@@ -69,7 +69,7 @@ static ITSEncoder *sharedEncoder;
   
   // go ahead an tell libhb to do the scan
   [self performScanAtPath: path];
-  ITSTitleList *titleList = [self readTitleListFromLastScanWithPath: path];
+  MMTitleList *titleList = [self readTitleListFromLastScanWithPath: path];
  
   // flip the synchronization switch so other threads can resume
   scanInProgress = NO;
@@ -104,11 +104,12 @@ static ITSEncoder *sharedEncoder;
   }
 }
 
-- (ITSTitleList *) readTitleListFromLastScanWithPath: (NSString *) path
+- (MMTitleList *) readTitleListFromLastScanWithPath: (NSString *) path
 {
   // now, grab the content
   hb_list_t *titles = hb_get_titles(handbrakeScannerHandle);
   
+  // go through all titles, grab 
   int titlesCount = hb_list_count(titles);
   for(int i = 0; i < titlesCount; i++)
   {
@@ -123,7 +124,7 @@ static ITSEncoder *sharedEncoder;
 //    NSString *contentName = metadata == NULL ? nil : [NSString stringWithUTF8String: metadata->name];
     
   }
-  return [ITSTitleList titleList];
+  return [MMTitleList titleList];
 }
 
 #pragma mark Scanner timers

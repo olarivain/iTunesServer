@@ -10,7 +10,7 @@
 
 #import "hb.h"
 
-@class ITSTitleList;
+@class MMTitleList;
 
 @interface ITSEncoder : NSObject
 {
@@ -22,6 +22,6 @@
 
 + (ITSEncoder *) sharedEncoder;
 
-- (ITSTitleList *) scanPath: (NSString *) path;
+- (MMTitleList *) scanPath: (NSString *) path;
 
 @end

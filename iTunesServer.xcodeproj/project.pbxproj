@@ -13,10 +13,6 @@
 		000CE87B1494536E003002C3 /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 000CE8791494536E003002C3 /* Credits.rtf */; };
 		000CE87E1494536E003002C3 /* ITSAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 000CE87D1494536E003002C3 /* ITSAppDelegate.m */; };
 		000CE89E14945481003002C3 /* MMContentAssembler+iTunes.m in Sources */ = {isa = PBXBuildFile; fileRef = 000CE88A14945481003002C3 /* MMContentAssembler+iTunes.m */; };
-		000CE8A014945481003002C3 /* ITSAbstractContentResource.m in Sources */ = {isa = PBXBuildFile; fileRef = 000CE89014945481003002C3 /* ITSAbstractContentResource.m */; };
-		000CE8A114945481003002C3 /* ITSLibraryResource.m in Sources */ = {isa = PBXBuildFile; fileRef = 000CE89214945481003002C3 /* ITSLibraryResource.m */; };
-		000CE8A214945481003002C3 /* ITSPlaylistResource.m in Sources */ = {isa = PBXBuildFile; fileRef = 000CE89414945481003002C3 /* ITSPlaylistResource.m */; };
-		000CE8A314945481003002C3 /* ITSTrackResource.m in Sources */ = {isa = PBXBuildFile; fileRef = 000CE89614945481003002C3 /* ITSTrackResource.m */; };
 		000CE8A414945481003002C3 /* ITSiTunesUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 000CE89B14945481003002C3 /* ITSiTunesUtil.m */; };
 		000CE8A514945481003002C3 /* ITSiTunesWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = 000CE89D14945481003002C3 /* ITSiTunesWrapper.m */; };
 		000CE8AB149454FF003002C3 /* ScriptingBridge.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 000CE8AA149454FF003002C3 /* ScriptingBridge.framework */; };
@@ -32,7 +28,6 @@
 		000CE98314955BBB003002C3 /* ITSConfiguration.m in Sources */ = {isa = PBXBuildFile; fileRef = 000CE98014955BBB003002C3 /* ITSConfiguration.m */; };
 		000CE98614955DF7003002C3 /* iTunesServer.sdef in Resources */ = {isa = PBXBuildFile; fileRef = 000CE98514955DF7003002C3 /* iTunesServer.sdef */; };
 		000CE991149572D7003002C3 /* ScriptingBridge.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 000CE8AA149454FF003002C3 /* ScriptingBridge.framework */; };
-		001F2EFF14A8061C00086BB8 /* ITSEncodeResource.m in Sources */ = {isa = PBXBuildFile; fileRef = 001F2EFE14A8061C00086BB8 /* ITSEncodeResource.m */; };
 		001F2F3B14A80AF700086BB8 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 001F2F3A14A80AF700086BB8 /* libz.dylib */; };
 		001F2F3D14A80B1B00086BB8 /* libstdc++.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 001F2F3C14A80B1B00086BB8 /* libstdc++.dylib */; };
 		001F2F3F14A80B3700086BB8 /* libbz2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 001F2F3E14A80B3700086BB8 /* libbz2.dylib */; };
@@ -74,11 +69,12 @@
 		001F2FD614A81AFE00086BB8 /* libx264.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 001F2FB414A81AFE00086BB8 /* libx264.a */; };
 		001F2FD714A81AFE00086BB8 /* libxml2.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 001F2FB514A81AFE00086BB8 /* libxml2.a */; };
 		001F2FDB14A81C3800086BB8 /* ITSEncoder.m in Sources */ = {isa = PBXBuildFile; fileRef = 001F2FDA14A81C3800086BB8 /* ITSEncoder.m */; };
-		001F2FDE14A9102300086BB8 /* ITSTitle.m in Sources */ = {isa = PBXBuildFile; fileRef = 001F2FDD14A9102300086BB8 /* ITSTitle.m */; };
-		001F2FE114A9107400086BB8 /* ITSSoundTrack.m in Sources */ = {isa = PBXBuildFile; fileRef = 001F2FE014A9107300086BB8 /* ITSSoundTrack.m */; };
-		001F2FE414A9109700086BB8 /* ITSSubtitleTrack.m in Sources */ = {isa = PBXBuildFile; fileRef = 001F2FE314A9109700086BB8 /* ITSSubtitleTrack.m */; };
-		001F2FF514A9422E00086BB8 /* ITSTitleList.m in Sources */ = {isa = PBXBuildFile; fileRef = 001F2FF414A9422E00086BB8 /* ITSTitleList.m */; };
 		001F2FF914A9447300086BB8 /* ITSEncodingRepository.m in Sources */ = {isa = PBXBuildFile; fileRef = 001F2FF814A9447300086BB8 /* ITSEncodingRepository.m */; };
+		0023635C14ACF7350084A054 /* ITSAbstractContentResource.m in Sources */ = {isa = PBXBuildFile; fileRef = 0023635214ACF7340084A054 /* ITSAbstractContentResource.m */; };
+		0023635D14ACF7350084A054 /* ITSLibraryResource.m in Sources */ = {isa = PBXBuildFile; fileRef = 0023635414ACF7340084A054 /* ITSLibraryResource.m */; };
+		0023635E14ACF7350084A054 /* ITSPlaylistResource.m in Sources */ = {isa = PBXBuildFile; fileRef = 0023635614ACF7350084A054 /* ITSPlaylistResource.m */; };
+		0023635F14ACF7350084A054 /* ITSTrackResource.m in Sources */ = {isa = PBXBuildFile; fileRef = 0023635814ACF7350084A054 /* ITSTrackResource.m */; };
+		0023636014ACF7350084A054 /* ITSEncodeResource.m in Sources */ = {isa = PBXBuildFile; fileRef = 0023635B14ACF7350084A054 /* ITSEncodeResource.m */; };
 		003DE0B6149576C3004DC839 /* ITSConfigurationRepository.m in Sources */ = {isa = PBXBuildFile; fileRef = 003DE0B2149576C3004DC839 /* ITSConfigurationRepository.m */; };
 		003DE0B7149576C3004DC839 /* ITSiTunesContentRepository.m in Sources */ = {isa = PBXBuildFile; fileRef = 003DE0B5149576C3004DC839 /* ITSiTunesContentRepository.m */; };
 		003DE0C714958D12004DC839 /* ITSApplication.m in Sources */ = {isa = PBXBuildFile; fileRef = 003DE0C614958D12004DC839 /* ITSApplication.m */; };
@@ -107,14 +103,6 @@
 		000CE87D1494536E003002C3 /* ITSAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ITSAppDelegate.m; sourceTree = "<group>"; };
 		000CE88914945481003002C3 /* MMContentAssembler+iTunes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MMContentAssembler+iTunes.h"; sourceTree = "<group>"; };
 		000CE88A14945481003002C3 /* MMContentAssembler+iTunes.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "MMContentAssembler+iTunes.m"; sourceTree = "<group>"; };
-		000CE88F14945481003002C3 /* ITSAbstractContentResource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ITSAbstractContentResource.h; sourceTree = "<group>"; };
-		000CE89014945481003002C3 /* ITSAbstractContentResource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ITSAbstractContentResource.m; sourceTree = "<group>"; };
-		000CE89114945481003002C3 /* ITSLibraryResource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ITSLibraryResource.h; sourceTree = "<group>"; };
-		000CE89214945481003002C3 /* ITSLibraryResource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ITSLibraryResource.m; sourceTree = "<group>"; };
-		000CE89314945481003002C3 /* ITSPlaylistResource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ITSPlaylistResource.h; sourceTree = "<group>"; };
-		000CE89414945481003002C3 /* ITSPlaylistResource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ITSPlaylistResource.m; sourceTree = "<group>"; };
-		000CE89514945481003002C3 /* ITSTrackResource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ITSTrackResource.h; sourceTree = "<group>"; };
-		000CE89614945481003002C3 /* ITSTrackResource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ITSTrackResource.m; sourceTree = "<group>"; };
 		000CE89814945481003002C3 /* iTunes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = iTunes.h; sourceTree = "<group>"; };
 		000CE89A14945481003002C3 /* ITSiTunesUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ITSiTunesUtil.h; sourceTree = "<group>"; };
 		000CE89B14945481003002C3 /* ITSiTunesUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ITSiTunesUtil.m; sourceTree = "<group>"; };
@@ -147,8 +135,6 @@
 		001F2EF714A805F500086BB8 /* lang.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = lang.h; sourceTree = "<group>"; };
 		001F2EF814A805F500086BB8 /* ports.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ports.h; sourceTree = "<group>"; };
 		001F2EF914A805F500086BB8 /* project.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = project.h; sourceTree = "<group>"; };
-		001F2EFD14A8061C00086BB8 /* ITSEncodeResource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ITSEncodeResource.h; sourceTree = "<group>"; };
-		001F2EFE14A8061C00086BB8 /* ITSEncodeResource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ITSEncodeResource.m; sourceTree = "<group>"; };
 		001F2F3A14A80AF700086BB8 /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
 		001F2F3C14A80B1B00086BB8 /* libstdc++.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libstdc++.dylib"; path = "usr/lib/libstdc++.dylib"; sourceTree = SDKROOT; };
 		001F2F3E14A80B3700086BB8 /* libbz2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libbz2.dylib; path = usr/lib/libbz2.dylib; sourceTree = SDKROOT; };
@@ -193,16 +179,18 @@
 		001F2FB514A81AFE00086BB8 /* libxml2.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libxml2.a; sourceTree = "<group>"; };
 		001F2FD914A81C3800086BB8 /* ITSEncoder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ITSEncoder.h; path = domain/encoder/ITSEncoder.h; sourceTree = "<group>"; };
 		001F2FDA14A81C3800086BB8 /* ITSEncoder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ITSEncoder.m; path = domain/encoder/ITSEncoder.m; sourceTree = "<group>"; };
-		001F2FDC14A9102300086BB8 /* ITSTitle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ITSTitle.h; path = domain/encoder/ITSTitle.h; sourceTree = "<group>"; };
-		001F2FDD14A9102300086BB8 /* ITSTitle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ITSTitle.m; path = domain/encoder/ITSTitle.m; sourceTree = "<group>"; };
-		001F2FDF14A9107300086BB8 /* ITSSoundTrack.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ITSSoundTrack.h; path = domain/encoder/ITSSoundTrack.h; sourceTree = "<group>"; };
-		001F2FE014A9107300086BB8 /* ITSSoundTrack.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ITSSoundTrack.m; path = domain/encoder/ITSSoundTrack.m; sourceTree = "<group>"; };
-		001F2FE214A9109600086BB8 /* ITSSubtitleTrack.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ITSSubtitleTrack.h; path = domain/encoder/ITSSubtitleTrack.h; sourceTree = "<group>"; };
-		001F2FE314A9109700086BB8 /* ITSSubtitleTrack.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ITSSubtitleTrack.m; path = domain/encoder/ITSSubtitleTrack.m; sourceTree = "<group>"; };
-		001F2FF314A9422E00086BB8 /* ITSTitleList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ITSTitleList.h; path = domain/encoder/ITSTitleList.h; sourceTree = "<group>"; };
-		001F2FF414A9422E00086BB8 /* ITSTitleList.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ITSTitleList.m; path = domain/encoder/ITSTitleList.m; sourceTree = "<group>"; };
 		001F2FF714A9447300086BB8 /* ITSEncodingRepository.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ITSEncodingRepository.h; path = iTunesServer/Classes/repository/encoder/ITSEncodingRepository.h; sourceTree = SOURCE_ROOT; };
 		001F2FF814A9447300086BB8 /* ITSEncodingRepository.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ITSEncodingRepository.m; path = iTunesServer/Classes/repository/encoder/ITSEncodingRepository.m; sourceTree = SOURCE_ROOT; };
+		0023635114ACF7340084A054 /* ITSAbstractContentResource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ITSAbstractContentResource.h; sourceTree = "<group>"; };
+		0023635214ACF7340084A054 /* ITSAbstractContentResource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ITSAbstractContentResource.m; sourceTree = "<group>"; };
+		0023635314ACF7340084A054 /* ITSLibraryResource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ITSLibraryResource.h; sourceTree = "<group>"; };
+		0023635414ACF7340084A054 /* ITSLibraryResource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ITSLibraryResource.m; sourceTree = "<group>"; };
+		0023635514ACF7340084A054 /* ITSPlaylistResource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ITSPlaylistResource.h; sourceTree = "<group>"; };
+		0023635614ACF7350084A054 /* ITSPlaylistResource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ITSPlaylistResource.m; sourceTree = "<group>"; };
+		0023635714ACF7350084A054 /* ITSTrackResource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ITSTrackResource.h; sourceTree = "<group>"; };
+		0023635814ACF7350084A054 /* ITSTrackResource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ITSTrackResource.m; sourceTree = "<group>"; };
+		0023635A14ACF7350084A054 /* ITSEncodeResource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ITSEncodeResource.h; sourceTree = "<group>"; };
+		0023635B14ACF7350084A054 /* ITSEncodeResource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ITSEncodeResource.m; sourceTree = "<group>"; };
 		003DE0B1149576C3004DC839 /* ITSConfigurationRepository.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ITSConfigurationRepository.h; sourceTree = "<group>"; };
 		003DE0B2149576C3004DC839 /* ITSConfigurationRepository.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ITSConfigurationRepository.m; sourceTree = "<group>"; };
 		003DE0B4149576C3004DC839 /* ITSiTunesContentRepository.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ITSiTunesContentRepository.h; sourceTree = "<group>"; };
@@ -392,16 +380,8 @@
 		000CE88E14945481003002C3 /* resource */ = {
 			isa = PBXGroup;
 			children = (
-				000CE88F14945481003002C3 /* ITSAbstractContentResource.h */,
-				000CE89014945481003002C3 /* ITSAbstractContentResource.m */,
-				000CE89114945481003002C3 /* ITSLibraryResource.h */,
-				000CE89214945481003002C3 /* ITSLibraryResource.m */,
-				000CE89314945481003002C3 /* ITSPlaylistResource.h */,
-				000CE89414945481003002C3 /* ITSPlaylistResource.m */,
-				000CE89514945481003002C3 /* ITSTrackResource.h */,
-				000CE89614945481003002C3 /* ITSTrackResource.m */,
-				001F2EFD14A8061C00086BB8 /* ITSEncodeResource.h */,
-				001F2EFE14A8061C00086BB8 /* ITSEncodeResource.m */,
+				0023635014ACF7340084A054 /* content */,
+				0023635914ACF7350084A054 /* encoder */,
 			);
 			path = resource;
 			sourceTree = "<group>";
@@ -544,14 +524,6 @@
 			children = (
 				001F2FD914A81C3800086BB8 /* ITSEncoder.h */,
 				001F2FDA14A81C3800086BB8 /* ITSEncoder.m */,
-				001F2FDC14A9102300086BB8 /* ITSTitle.h */,
-				001F2FDD14A9102300086BB8 /* ITSTitle.m */,
-				001F2FF314A9422E00086BB8 /* ITSTitleList.h */,
-				001F2FF414A9422E00086BB8 /* ITSTitleList.m */,
-				001F2FDF14A9107300086BB8 /* ITSSoundTrack.h */,
-				001F2FE014A9107300086BB8 /* ITSSoundTrack.m */,
-				001F2FE214A9109600086BB8 /* ITSSubtitleTrack.h */,
-				001F2FE314A9109700086BB8 /* ITSSubtitleTrack.m */,
 			);
 			name = encoder;
 			sourceTree = "<group>";
@@ -564,6 +536,30 @@
 			);
 			name = encoder;
 			path = iTunes;
+			sourceTree = "<group>";
+		};
+		0023635014ACF7340084A054 /* content */ = {
+			isa = PBXGroup;
+			children = (
+				0023635114ACF7340084A054 /* ITSAbstractContentResource.h */,
+				0023635214ACF7340084A054 /* ITSAbstractContentResource.m */,
+				0023635314ACF7340084A054 /* ITSLibraryResource.h */,
+				0023635414ACF7340084A054 /* ITSLibraryResource.m */,
+				0023635514ACF7340084A054 /* ITSPlaylistResource.h */,
+				0023635614ACF7350084A054 /* ITSPlaylistResource.m */,
+				0023635714ACF7350084A054 /* ITSTrackResource.h */,
+				0023635814ACF7350084A054 /* ITSTrackResource.m */,
+			);
+			path = content;
+			sourceTree = "<group>";
+		};
+		0023635914ACF7350084A054 /* encoder */ = {
+			isa = PBXGroup;
+			children = (
+				0023635A14ACF7350084A054 /* ITSEncodeResource.h */,
+				0023635B14ACF7350084A054 /* ITSEncodeResource.m */,
+			);
+			path = encoder;
 			sourceTree = "<group>";
 		};
 		003DE0B0149576C3004DC839 /* configuration */ = {
@@ -728,10 +724,6 @@
 				000CE8771494536E003002C3 /* main.m in Sources */,
 				000CE87E1494536E003002C3 /* ITSAppDelegate.m in Sources */,
 				000CE89E14945481003002C3 /* MMContentAssembler+iTunes.m in Sources */,
-				000CE8A014945481003002C3 /* ITSAbstractContentResource.m in Sources */,
-				000CE8A114945481003002C3 /* ITSLibraryResource.m in Sources */,
-				000CE8A214945481003002C3 /* ITSPlaylistResource.m in Sources */,
-				000CE8A314945481003002C3 /* ITSTrackResource.m in Sources */,
 				000CE8A414945481003002C3 /* ITSiTunesUtil.m in Sources */,
 				000CE8A514945481003002C3 /* ITSiTunesWrapper.m in Sources */,
 				000CE98214955BBB003002C3 /* ITSConfiguration.m in Sources */,
@@ -742,13 +734,13 @@
 				0062B2981495DA7000160289 /* ITSFolderItem.m in Sources */,
 				0062B2991495DA7000160289 /* ITSFolderScanner.m in Sources */,
 				0062B29C1495DA8600160289 /* ITSFolderItemList.m in Sources */,
-				001F2EFF14A8061C00086BB8 /* ITSEncodeResource.m in Sources */,
 				001F2FDB14A81C3800086BB8 /* ITSEncoder.m in Sources */,
-				001F2FDE14A9102300086BB8 /* ITSTitle.m in Sources */,
-				001F2FE114A9107400086BB8 /* ITSSoundTrack.m in Sources */,
-				001F2FE414A9109700086BB8 /* ITSSubtitleTrack.m in Sources */,
-				001F2FF514A9422E00086BB8 /* ITSTitleList.m in Sources */,
 				001F2FF914A9447300086BB8 /* ITSEncodingRepository.m in Sources */,
+				0023635C14ACF7350084A054 /* ITSAbstractContentResource.m in Sources */,
+				0023635D14ACF7350084A054 /* ITSLibraryResource.m in Sources */,
+				0023635E14ACF7350084A054 /* ITSPlaylistResource.m in Sources */,
+				0023635F14ACF7350084A054 /* ITSTrackResource.m in Sources */,
+				0023636014ACF7350084A054 /* ITSEncodeResource.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
