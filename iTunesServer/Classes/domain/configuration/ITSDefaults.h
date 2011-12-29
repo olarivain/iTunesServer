@@ -12,7 +12,7 @@
 #define AUTO_IMPORT_PATH_KEY @"autoScanPath"
 #define ITUNES_SERVER_PORT_KEY @"port"
 #define START_ON_LOGIN_KEY @"starOnLogin"
-
+#define ENCODING_RESOURCE_PATH_KEY @"encodingResourcePath"
 
 @interface ITSDefaults : NSObject
 

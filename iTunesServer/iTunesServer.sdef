@@ -40,7 +40,11 @@
         <property name="startOnLogin" code="stol" type="integer"
           description="Whether server should start when user logs in.">
           <cocoa key="startOnLogin"/>
-        </property>        
+        </property> 
+        <property name="encodingResourcePath" code="ecrp" type="text"
+          description="Encoding resource path">
+          <cocoa key="encodingResourcePath"/>
+        </property>
     </class>
     
     

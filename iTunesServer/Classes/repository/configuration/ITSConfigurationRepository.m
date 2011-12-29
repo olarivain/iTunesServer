@@ -52,6 +52,7 @@ static ITSConfigurationRepository *sharedInstance;
   configuration.autoScanEnabled = [dict integerForKey: AUTO_IMPORT_KEY];
   configuration.autoScanPath = [dict objectForKey: AUTO_IMPORT_PATH_KEY];
   configuration.startOnLogin = [dict integerForKey: START_ON_LOGIN_KEY];
+  configuration.encodingResourcePath = [dict objectForKey: ENCODING_RESOURCE_PATH_KEY];
 }
 
 - (ITSConfiguration *) saveConfiguration
@@ -62,6 +63,7 @@ static ITSConfigurationRepository *sharedInstance;
   [dictionary setInteger: configuration.autoScanEnabled forKey: AUTO_IMPORT_KEY];
   [dictionary setObject:  configuration.autoScanPath forKey: AUTO_IMPORT_PATH_KEY];
   [dictionary setInteger: configuration.startOnLogin forKey: START_ON_LOGIN_KEY];
+  [dictionary setObject: configuration.encodingResourcePath forKey:ENCODING_RESOURCE_PATH_KEY];
   
   NSUserDefaults *defaults = [[NSUserDefaults alloc] init];
   [defaults addSuiteNamed:@"com.kra.iTunesServerShared"];

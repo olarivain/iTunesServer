@@ -16,6 +16,8 @@
   __strong NSString *autoScanPath;
   
   BOOL startOnLogin;
+  
+  __strong NSString *encodingResourcePath;
 }
 
 + (ITSConfiguration *) configuration;
@@ -24,5 +26,6 @@
 @property (nonatomic, readwrite, assign) BOOL autoScanEnabled;
 @property (nonatomic, readwrite, strong) NSString *autoScanPath;
 @property (nonatomic, readwrite, assign) BOOL startOnLogin;
+@property (nonatomic, readwrite, strong) NSString *encodingResourcePath;
 
 @end

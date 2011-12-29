@@ -12,22 +12,40 @@
 #import <HTTPServe/HSRequestParameters.h>
 
 #import "ITSEncodeResource.h"
-#import "hb.h"
+
+#import "ITSEncoder.h"
+#import "ITSEncodingRepository.h"
 
 @implementation ITSEncodeResource
 
 - (NSArray*) resourceDescriptors 
 {
-  HSResourceDescriptor *descriptor = [HSResourceDescriptor descriptorWithPath: @"/encoder" resource:self andSelector:@selector(encoder:)];
-  return [NSArray arrayWithObject: descriptor];
+  HSResourceDescriptor *listResource = [HSResourceDescriptor descriptorWithPath: @"/encoder" resource:self andSelector:@selector(listResources:)];
+  HSResourceDescriptor *scanResource = [HSResourceDescriptor descriptorWithPath: @"/encoder/{resourceId}" resource:self andSelector:@selector(scanResource:)];
+  
+  return [NSArray arrayWithObjects: listResource, scanResource, nil];
 }
 
-- (HSResponse *) encoder: (HSRequestParameters*) params
+- (HSResponse *) listResources: (HSRequestParameters*) params
 {
-  hb_handle_t *handle = hb_init(0, 0);
-  hb_dvd_set_dvdnav(true);
-  hb_scan( handle, [@"/Users/olarivain/Movies/ALIAS S5D3.dvdmedia/" UTF8String], 0, 10, 1 , 1 );
-  HSResponse *response = [HSResponse NOT_FOUND_RESPONSE];
+  // ask repository for available resources
+  ITSEncodingRepository *repository = [ITSEncodingRepository sharedInstance];
+  NSArray *resources = [repository availableResources];
+  
+  // and just return them, as is
+  HSResponse *response = [HSResponse jsonResponse];
+  response.object = resources;
+  return response;
+}
+
+- (HSResponse *) scanResource: (HSRequestParameters *) params
+{
+  ITSEncoder *encoder = [ITSEncoder sharedEncoder];
+  NSString *encodedResourceId = [params.pathParameters objectForKey: @"resourceId"];
+  NSString *resourceId = [encodedResourceId stringByReplacingPercentEscapesUsingEncoding: NSUTF8StringEncoding];
+  [encoder scanPath: resourceId];
+  return  [HSResponse emptyResponse];
+
 }
 
 @end

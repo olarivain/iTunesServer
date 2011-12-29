@@ -34,7 +34,15 @@
   // read configuration and instantiate server
   ITSConfigurationRepository *repository = [ITSConfigurationRepository sharedInstance];
   ITSConfiguration *configuration = [repository readConfiguration];
-  server = [[HSHTTPServe alloc] initWithPort: (int) configuration.port];
+  int port = (int) configuration.port;
+#if DEVELOPMENT == 1
+  // override "random port" to 2048 when debugging.
+  if(port == 0)
+  {
+    port = 2048;
+  }
+#endif
+  server = [[HSHTTPServe alloc] initWithPort: port];
   
   folderScanner = [ITSFolderScanner folderScannerWithScannedPath: configuration.autoScanPath];
   

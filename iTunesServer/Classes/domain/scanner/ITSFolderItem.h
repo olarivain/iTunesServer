@@ -33,5 +33,5 @@
 
 - (void) updateWithAttributes: (NSDictionary *) attributes;
 - (void) logStatus;
-
+- (BOOL) exists;
 @end

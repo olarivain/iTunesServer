@@ -10,15 +10,16 @@
 
 @implementation ITSConfiguration
 
-@synthesize port;
-@synthesize startOnLogin;
-@synthesize autoScanEnabled;
-@synthesize autoScanPath;
-
 + (ITSConfiguration *) configuration
 {
   return [[ITSConfiguration alloc] init];
 }
+
+@synthesize port;
+@synthesize startOnLogin;
+@synthesize autoScanEnabled;
+@synthesize autoScanPath;
+@synthesize encodingResourcePath;
 
 - (id) objectSpecifier
 { 

@@ -23,4 +23,6 @@
 - (NSArray *) folderItemsToMove;
 - (void) removeFolderItems: (NSArray *) items;
 
+- (void) removeOrphans;
+
 @end

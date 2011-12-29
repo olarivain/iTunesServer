@@ -18,6 +18,7 @@
   IBOutlet __strong NSProgressIndicator *progressIndicator;
   IBOutlet __strong NSButton *autoImportCheckBox;
   IBOutlet __strong NSButton *autoImportPathButton;
+  IBOutlet __strong NSTextField *encodingResourceTextField;
   
   __strong ITSConfiguration *configuration;
   __strong NSWorkspace *workspace;
@@ -28,5 +29,6 @@
 - (IBAction) startStopServer:(id)sender;
 - (IBAction) changeAutomaticImportFolder:(id)sender;
 - (IBAction) toggleAutoImport:(id)sender;
+- (IBAction) changeEncodingResourceFolder:(id)sender;
 
 @end

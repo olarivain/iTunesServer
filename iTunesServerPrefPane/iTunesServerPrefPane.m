@@ -26,6 +26,7 @@
 - (NSRunningApplication *) iTunesServerRunningApplication;
 - (void) updateAccordingToConfiguration;
 - (void) didPickFolder: (NSInteger) result withPanel: (NSOpenPanel *) panel;
+- (void) didPickEncodingFolder: (NSInteger) result withPanel: (NSOpenPanel *) panel;
 
 - (void) saveConfiguration;
 @end
@@ -145,6 +146,11 @@
   
   // and enable button accordingly
   [autoImportPathButton setEnabled: autoImport];
+  
+  // update text field accordingly
+  NSString *encodingPath = configuration.encodingResourcePath;
+  encodingPath = encodingPath == nil ? @"" : encodingPath;
+  [encodingResourceTextField setStringValue: encodingPath];
 }
 
 #pragma mark - Auto Import
@@ -225,6 +231,48 @@
   }
   
   return nil;
+}
+
+#pragma mark - Encoding resource folder
+- (IBAction) changeEncodingResourceFolder:(id)sender
+{
+  NSOpenPanel *panel = [NSOpenPanel openPanel];
+  panel.canChooseFiles = NO;
+  panel.canChooseDirectories = YES;
+  panel.canCreateDirectories = YES;
+  panel.allowsMultipleSelection = NO;
+  
+  
+  NSString *currentPath = configuration.encodingResourcePath;
+  if([currentPath length] == 0)
+  {
+    currentPath = @"~/";
+  }
+  
+  NSString *urlScheme = [NSString stringWithFormat: @"file://%@", [currentPath stringByExpandingTildeInPath]];
+  [panel setDirectoryURL: [NSURL URLWithString: urlScheme]];
+  
+  KCIntegerBlock completion = ^(NSInteger result){
+    [self didPickEncodingFolder: result withPanel: panel];
+  };
+  
+  NSWindow *window = [NSApplication sharedApplication].keyWindow;
+  [panel beginSheetModalForWindow: window  completionHandler: completion];
+}
+
+- (void) didPickEncodingFolder: (NSInteger) result withPanel: (NSOpenPanel *) panel
+{
+  if(result != NSFileHandlingPanelOKButton)
+  {
+    return;
+  }
+  NSArray *urls = panel.URLs;
+  NSURL *url = [urls boundSafeObjectAtIndex: 0];
+  NSString *path = [url path];
+
+  configuration.encodingResourcePath = path;
+  
+  [self saveConfiguration];
 }
 
 #pragma mark - Scripting Bridge

@@ -74,6 +74,11 @@
 		001F2FD614A81AFE00086BB8 /* libx264.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 001F2FB414A81AFE00086BB8 /* libx264.a */; };
 		001F2FD714A81AFE00086BB8 /* libxml2.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 001F2FB514A81AFE00086BB8 /* libxml2.a */; };
 		001F2FDB14A81C3800086BB8 /* ITSEncoder.m in Sources */ = {isa = PBXBuildFile; fileRef = 001F2FDA14A81C3800086BB8 /* ITSEncoder.m */; };
+		001F2FDE14A9102300086BB8 /* ITSTitle.m in Sources */ = {isa = PBXBuildFile; fileRef = 001F2FDD14A9102300086BB8 /* ITSTitle.m */; };
+		001F2FE114A9107400086BB8 /* ITSSoundTrack.m in Sources */ = {isa = PBXBuildFile; fileRef = 001F2FE014A9107300086BB8 /* ITSSoundTrack.m */; };
+		001F2FE414A9109700086BB8 /* ITSSubtitleTrack.m in Sources */ = {isa = PBXBuildFile; fileRef = 001F2FE314A9109700086BB8 /* ITSSubtitleTrack.m */; };
+		001F2FF514A9422E00086BB8 /* ITSTitleList.m in Sources */ = {isa = PBXBuildFile; fileRef = 001F2FF414A9422E00086BB8 /* ITSTitleList.m */; };
+		001F2FF914A9447300086BB8 /* ITSEncodingRepository.m in Sources */ = {isa = PBXBuildFile; fileRef = 001F2FF814A9447300086BB8 /* ITSEncodingRepository.m */; };
 		003DE0B6149576C3004DC839 /* ITSConfigurationRepository.m in Sources */ = {isa = PBXBuildFile; fileRef = 003DE0B2149576C3004DC839 /* ITSConfigurationRepository.m */; };
 		003DE0B7149576C3004DC839 /* ITSiTunesContentRepository.m in Sources */ = {isa = PBXBuildFile; fileRef = 003DE0B5149576C3004DC839 /* ITSiTunesContentRepository.m */; };
 		003DE0C714958D12004DC839 /* ITSApplication.m in Sources */ = {isa = PBXBuildFile; fileRef = 003DE0C614958D12004DC839 /* ITSApplication.m */; };
@@ -188,6 +193,16 @@
 		001F2FB514A81AFE00086BB8 /* libxml2.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libxml2.a; sourceTree = "<group>"; };
 		001F2FD914A81C3800086BB8 /* ITSEncoder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ITSEncoder.h; path = domain/encoder/ITSEncoder.h; sourceTree = "<group>"; };
 		001F2FDA14A81C3800086BB8 /* ITSEncoder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ITSEncoder.m; path = domain/encoder/ITSEncoder.m; sourceTree = "<group>"; };
+		001F2FDC14A9102300086BB8 /* ITSTitle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ITSTitle.h; path = domain/encoder/ITSTitle.h; sourceTree = "<group>"; };
+		001F2FDD14A9102300086BB8 /* ITSTitle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ITSTitle.m; path = domain/encoder/ITSTitle.m; sourceTree = "<group>"; };
+		001F2FDF14A9107300086BB8 /* ITSSoundTrack.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ITSSoundTrack.h; path = domain/encoder/ITSSoundTrack.h; sourceTree = "<group>"; };
+		001F2FE014A9107300086BB8 /* ITSSoundTrack.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ITSSoundTrack.m; path = domain/encoder/ITSSoundTrack.m; sourceTree = "<group>"; };
+		001F2FE214A9109600086BB8 /* ITSSubtitleTrack.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ITSSubtitleTrack.h; path = domain/encoder/ITSSubtitleTrack.h; sourceTree = "<group>"; };
+		001F2FE314A9109700086BB8 /* ITSSubtitleTrack.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ITSSubtitleTrack.m; path = domain/encoder/ITSSubtitleTrack.m; sourceTree = "<group>"; };
+		001F2FF314A9422E00086BB8 /* ITSTitleList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ITSTitleList.h; path = domain/encoder/ITSTitleList.h; sourceTree = "<group>"; };
+		001F2FF414A9422E00086BB8 /* ITSTitleList.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ITSTitleList.m; path = domain/encoder/ITSTitleList.m; sourceTree = "<group>"; };
+		001F2FF714A9447300086BB8 /* ITSEncodingRepository.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ITSEncodingRepository.h; path = iTunesServer/Classes/repository/encoder/ITSEncodingRepository.h; sourceTree = SOURCE_ROOT; };
+		001F2FF814A9447300086BB8 /* ITSEncodingRepository.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ITSEncodingRepository.m; path = iTunesServer/Classes/repository/encoder/ITSEncodingRepository.m; sourceTree = SOURCE_ROOT; };
 		003DE0B1149576C3004DC839 /* ITSConfigurationRepository.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ITSConfigurationRepository.h; sourceTree = "<group>"; };
 		003DE0B2149576C3004DC839 /* ITSConfigurationRepository.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ITSConfigurationRepository.m; sourceTree = "<group>"; };
 		003DE0B4149576C3004DC839 /* ITSiTunesContentRepository.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ITSiTunesContentRepository.h; sourceTree = "<group>"; };
@@ -270,10 +285,6 @@
 		000CE85B1494536D003002C3 = {
 			isa = PBXGroup;
 			children = (
-				001F2F4A14A80CB300086BB8 /* libiconv.dylib */,
-				001F2F4814A80C6E00086BB8 /* AudioToolbox.framework */,
-				001F2F4614A80C4D00086BB8 /* CoreAudioKit.framework */,
-				001F2F4414A80C4200086BB8 /* CoreAudio.framework */,
 				000CE8701494536E003002C3 /* iTunesServer */,
 				000CE8F614945F32003002C3 /* iTunesServerPrefPane */,
 				000CE8691494536E003002C3 /* Frameworks */,
@@ -294,13 +305,17 @@
 		000CE8691494536E003002C3 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				001F2F3E14A80B3700086BB8 /* libbz2.dylib */,
-				001F2F3C14A80B1B00086BB8 /* libstdc++.dylib */,
-				001F2F3A14A80AF700086BB8 /* libz.dylib */,
 				001F2EED14A805F500086BB8 /* HandBrake */,
+				001F2F4814A80C6E00086BB8 /* AudioToolbox.framework */,
+				001F2F4614A80C4D00086BB8 /* CoreAudioKit.framework */,
+				001F2F4414A80C4200086BB8 /* CoreAudio.framework */,
 				000CE86A1494536E003002C3 /* Cocoa.framework */,
 				000CE8AA149454FF003002C3 /* ScriptingBridge.framework */,
 				000CE8F414945F32003002C3 /* PreferencePanes.framework */,
+				001F2F3E14A80B3700086BB8 /* libbz2.dylib */,
+				001F2F3C14A80B1B00086BB8 /* libstdc++.dylib */,
+				001F2F3A14A80AF700086BB8 /* libz.dylib */,
+				001F2F4A14A80CB300086BB8 /* libiconv.dylib */,
 				000CE86C1494536E003002C3 /* Other Frameworks */,
 			);
 			name = Frameworks;
@@ -368,6 +383,7 @@
 			isa = PBXGroup;
 			children = (
 				003DE0B0149576C3004DC839 /* configuration */,
+				001F2FF614A9444E00086BB8 /* encoder */,
 				003DE0B3149576C3004DC839 /* iTunes */,
 			);
 			path = repository;
@@ -528,8 +544,26 @@
 			children = (
 				001F2FD914A81C3800086BB8 /* ITSEncoder.h */,
 				001F2FDA14A81C3800086BB8 /* ITSEncoder.m */,
+				001F2FDC14A9102300086BB8 /* ITSTitle.h */,
+				001F2FDD14A9102300086BB8 /* ITSTitle.m */,
+				001F2FF314A9422E00086BB8 /* ITSTitleList.h */,
+				001F2FF414A9422E00086BB8 /* ITSTitleList.m */,
+				001F2FDF14A9107300086BB8 /* ITSSoundTrack.h */,
+				001F2FE014A9107300086BB8 /* ITSSoundTrack.m */,
+				001F2FE214A9109600086BB8 /* ITSSubtitleTrack.h */,
+				001F2FE314A9109700086BB8 /* ITSSubtitleTrack.m */,
 			);
 			name = encoder;
+			sourceTree = "<group>";
+		};
+		001F2FF614A9444E00086BB8 /* encoder */ = {
+			isa = PBXGroup;
+			children = (
+				001F2FF714A9447300086BB8 /* ITSEncodingRepository.h */,
+				001F2FF814A9447300086BB8 /* ITSEncodingRepository.m */,
+			);
+			name = encoder;
+			path = iTunes;
 			sourceTree = "<group>";
 		};
 		003DE0B0149576C3004DC839 /* configuration */ = {
@@ -710,6 +744,11 @@
 				0062B29C1495DA8600160289 /* ITSFolderItemList.m in Sources */,
 				001F2EFF14A8061C00086BB8 /* ITSEncodeResource.m in Sources */,
 				001F2FDB14A81C3800086BB8 /* ITSEncoder.m in Sources */,
+				001F2FDE14A9102300086BB8 /* ITSTitle.m in Sources */,
+				001F2FE114A9107400086BB8 /* ITSSoundTrack.m in Sources */,
+				001F2FE414A9109700086BB8 /* ITSSubtitleTrack.m in Sources */,
+				001F2FF514A9422E00086BB8 /* ITSTitleList.m in Sources */,
+				001F2FF914A9447300086BB8 /* ITSEncodingRepository.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -795,6 +834,7 @@
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.7;
 				ONLY_ACTIVE_ARCH = YES;
+				OTHER_CFLAGS = "-DDEVELOPMENT";
 				OTHER_LDFLAGS = (
 					"-Objc",
 					"-lHTTPServe",

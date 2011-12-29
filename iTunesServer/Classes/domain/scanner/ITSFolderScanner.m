@@ -106,7 +106,9 @@
   }
   // lock ourselves for later timer calls
   isRunning = YES;
+#if DEBUG_FOLDER_SCANNER == 1
   NSLog(@"Scanning: %@", path);
+#endif
   // scan source folder
   NSDirectoryEnumerator *directoryEnumerator = [fileManager enumeratorAtPath: path];
   NSString *file;
@@ -118,7 +120,9 @@
       continue;
     }
     NSString *itemId = [NSString stringWithFormat:@"%@/%@", path, file];
+#if DEBUG_FOLDER_SCANNER == 1
     NSLog(@"Adding folder item: %@", itemId);
+#endif
 
     NSDictionary *dictionary = [directoryEnumerator fileAttributes];
     [folderItemList addOrUpdateFile: itemId withAttributes: dictionary];
@@ -126,11 +130,14 @@
   
   // ask folder item list which folder should be moved
   NSArray *movableItems = [folderItemList folderItemsToMove];
+  NSMutableArray *movedItems = [NSMutableArray arrayWithArray: movableItems];
   
   // now move them
   for(ITSFolderItem *item in movableItems)
   {
+#if DEBUG_FOLDER_SCANNER == 1
     NSLog(@"Moving %@", item.itemId);
+#endif
     // move item with file manager
     NSError *error = nil;
     NSString *fullDestinationPath = [NSString stringWithFormat:@"%@/%@", destinationPath, item.name];
@@ -141,14 +148,24 @@
       NSLog(@"*** FATAL *** Could not move item %@", item.itemId);
       NSLog(@"%@", error.localizedDescription);
     }
+    else 
+    {
+      [movedItems addObject: item];
+    }
   }
 
   // don't forget to remove moved items
-  [folderItemList removeFolderItems: movableItems];
+  [folderItemList removeFolderItems: movedItems];
   
-  // flip switch back on
+  // remove items that don't exist anymore
+  [folderItemList removeOrphans];
+  
+  // flip running switch back on
   isRunning = NO;
+#if DEBUG_FOLDER_SCANNER == 1
   NSLog(@"Done scanning.");
+#endif
+  
 }
 
 - (void) start
@@ -159,6 +176,7 @@
     return;
   }
   
+  NSLog(@"Starting folder scanner at path: %@", path);
   timer = [NSTimer scheduledTimerWithTimeInterval: 10 
                                            target: self 
                                          selector: @selector(timerFired:) 

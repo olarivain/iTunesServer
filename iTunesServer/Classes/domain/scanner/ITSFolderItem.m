@@ -37,6 +37,7 @@
   return self;
 }
 
+#pragma mark - Update item status
 - (void) updateWithAttributes:(NSDictionary *) anAattributes
 {
   attributes = anAattributes;
@@ -58,6 +59,14 @@
   lastKnownModificationDate = modificationDate;
 }
 
+#pragma mark - Whether an item still exists on disk
+- (BOOL) exists
+{
+  NSFileManager *fileManager = [NSFileManager defaultManager];
+  return [fileManager fileExistsAtPath: itemId];
+}
+
+#pragma mark - Debug convenience
 - (void) logStatus
 {
   NSLog(@"file %@ has been changed: %i", itemId, changed);
