@@ -11,6 +11,8 @@
 #import <HTTPServe/HSHandlerPath.h>
 #import <HTTPServe/HSRequestParameters.h>
 
+#import <MediaManagement/MMTitleAssembler.h>
+
 #import "ITSEncodeResource.h"
 
 #import "ITSEncoder.h"
@@ -31,11 +33,12 @@
 {
   // ask repository for available resources
   ITSEncodingRepository *repository = [ITSEncodingRepository sharedInstance];
-  NSArray *resources = [repository availableResources];
+  NSArray *resources = [repository availableTitleLists];
   
-  // and just return them, as is
+  // assemble and return
+  MMTitleAssembler *assembler = [MMTitleAssembler sharedInstance];
   HSResponse *response = [HSResponse jsonResponse];
-  response.object = resources;
+  response.object = [assembler writeTitleLists: resources];
   return response;
 }
 
@@ -50,8 +53,12 @@
   // and ask encoder to scan that for us.
   MMTitleList *titleList = [encoder scanPath: resourceId];
   
+  MMTitleAssembler *assembler = [MMTitleAssembler sharedInstance];
+  HSResponse *response = [HSResponse jsonResponse];
+  response.object = [assembler writeTitleList: titleList];
+  
   // now, assemble that to JSON and return it.
-  return  [HSResponse emptyResponse];
+  return response;
 }
 
 - (HSResponse *) scheduleEncodeResource: (HSRequestParameters *) params

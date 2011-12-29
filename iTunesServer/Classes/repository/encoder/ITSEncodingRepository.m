@@ -6,6 +6,8 @@
 //  Copyright (c) 2011 Edmunds. All rights reserved.
 //
 
+#import <MediaManagement/MMTitleList.h>
+
 #import "ITSEncodingRepository.h"
 
 #import "ITSConfigurationRepository.h"
@@ -30,7 +32,7 @@ static ITSEncodingRepository *sharedInstance;
   return sharedInstance;
 }
 
-- (NSArray *) availableResources
+- (NSArray *) availableTitleLists
 {
   ITSConfiguration *configuration = [[ITSConfigurationRepository sharedInstance] readConfiguration];
   
@@ -51,7 +53,8 @@ static ITSEncodingRepository *sharedInstance;
   if([self isDVDAtPath: path])
   {
     // it is, add the folder to the resources and GTFO
-    [result addObject: path];
+    MMTitleList *titleList = [MMTitleList titleListWithId: path];
+    [result addObject: titleList];
     return;
   }
   
@@ -99,7 +102,8 @@ static ITSEncodingRepository *sharedInstance;
     }
     
     // otherwise, just add file
-    [result addObject: fullPath];
+    MMTitleList *titleList = [MMTitleList titleListWithId: fullPath];
+    [result addObject: titleList];
   }
 }
 

@@ -9,6 +9,7 @@
 #import "ITSEncoder.h"
 
 #import <MediaManagement/MMTitleList.h>
+#import <MediaManagement/MMTitle.h>
 
 static ITSEncoder *sharedEncoder;
 
@@ -111,20 +112,33 @@ static ITSEncoder *sharedEncoder;
   
   // go through all titles, grab 
   int titlesCount = hb_list_count(titles);
+  if(titlesCount == 0)
+  {
+    return nil;
+  }
+  
+  MMTitleList *titleList = [MMTitleList titleListWithId: path];
   for(int i = 0; i < titlesCount; i++)
   {
-//    hb_title_t *title = hb_list_item(titles, i);
-//    int type = title->type;
-//    NSString *name = [NSString stringWithUTF8String: title->name];
-//    NSInteger index = (NSInteger) title->index;
-//    NSInteger hours = (NSInteger) title->hours;
-//    NSInteger minutes = (NSInteger) title->minutes;
-//    NSInteger seconds = (NSInteger) title->seconds;
-//    hb_metadata_t *metadata = title->metadata;
-//    NSString *contentName = metadata == NULL ? nil : [NSString stringWithUTF8String: metadata->name];
+    // grab next title
+    hb_title_t *hbTitle = hb_list_item(titles, i);
+    // make sure we have content that makes sense.
+    if(hbTitle == NULL)
+    {
+      continue;
+    }
+
+    // now read basic fields and create Title object from them
+    NSInteger index = (NSInteger) hbTitle->index;
     
+    hb_list_t *chapterList = hbTitle->list_chapter;
+    NSInteger chapterCount = chapterList == NULL ? 0 : (NSInteger) hb_list_count(chapterList);
+    
+    NSInteger duration = hbTitle->duration;
+    MMTitle *mmTitle = [MMTitle titleWithIndex: index chapterCount: chapterCount andDuration: duration];
+    [titleList addtitle: mmTitle];
   }
-  return [MMTitleList titleList];
+  return titleList;
 }
 
 #pragma mark Scanner timers

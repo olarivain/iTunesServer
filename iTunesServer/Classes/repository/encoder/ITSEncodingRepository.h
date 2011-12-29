@@ -12,6 +12,6 @@
 
 + (ITSEncodingRepository *) sharedInstance;
 
-- (NSArray *) availableResources;
+- (NSArray *) availableTitleLists;
 
 @end
