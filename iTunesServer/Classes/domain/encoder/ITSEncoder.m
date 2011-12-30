@@ -10,12 +10,15 @@
 
 #import <MediaManagement/MMTitleList.h>
 #import <MediaManagement/MMTitle.h>
+#import "MMAudioTrack+MMAudioTrack_Handbrake.h"
 
 static ITSEncoder *sharedEncoder;
 
 @interface ITSEncoder()
 - (void) performScanAtPath: (NSString *) path;
 - (MMTitleList *) readTitleListFromLastScanWithPath: (NSString *) path;
+- (NSArray *) soundTracksFromHBTitle: (hb_title_t *) hbTitle;
+- (NSArray *) subtitleTracksFromHBTitle: (hb_title_t *) hbTitle;
 @end
 
 @implementation ITSEncoder
@@ -50,7 +53,7 @@ static ITSEncoder *sharedEncoder;
 #pragma mark Schedule a Scan
 - (MMTitleList *) scanPath: (NSString *) path
 {
-  // abort eary for nonsensical data
+  // abort early for nonsensical data
   if([path length] == 0 || ![fileManager fileExistsAtPath: path])
   {
     return nil;
@@ -131,14 +134,76 @@ static ITSEncoder *sharedEncoder;
     // now read basic fields and create Title object from them
     NSInteger index = (NSInteger) hbTitle->index;
     
-    hb_list_t *chapterList = hbTitle->list_chapter;
-    NSInteger chapterCount = chapterList == NULL ? 0 : (NSInteger) hb_list_count(chapterList);
-    
     NSInteger duration = hbTitle->duration;
-    MMTitle *mmTitle = [MMTitle titleWithIndex: index chapterCount: chapterCount andDuration: duration];
+    MMTitle *mmTitle = [MMTitle titleWithIndex: index andDuration: duration];
     [titleList addtitle: mmTitle];
+    
+    NSArray *soundTracks = [self soundTracksFromHBTitle: hbTitle];
+    for(MMAudioTrack *soundtrack in soundTracks)
+    {
+      [mmTitle addAudioTrack: soundtrack];
+    }
+
+    NSArray *subtitleTracks = [self subtitleTracksFromHBTitle: hbTitle];
+    for(MMSubtitleTrack *subtitleTrack in subtitleTracks)
+    {
+      [mmTitle addSubtitleTrack: subtitleTrack];
+    }
   }
   return titleList;
+}
+
+#pragma mark Extracting soundtracks
+- (NSArray *) soundTracksFromHBTitle: (hb_title_t *) hbTitle
+{
+  // grab audio list from hb list, check for null first thing
+  hb_list_t *hbSoundTracks = hbTitle->list_audio;
+  if(hbSoundTracks == NULL)
+  {
+    return nil;
+  }
+  
+  // iterate of audio tracks, and build MMAudioTrack wrappers.
+  int soundTracksCount = hb_list_count(hbSoundTracks);
+
+  NSMutableArray *audioTracks = [NSMutableArray arrayWithCapacity: soundTracksCount];
+  for(int j = 0; j < soundTracksCount; j++)
+  {
+    hb_audio_t *hbAudioTrack = hb_list_item(hbSoundTracks, j);
+    // same old, same old, C code, check for null before dereferencing anything
+    if(hbAudioTrack == NULL)
+    {
+      continue;
+    }
+    
+    hb_audio_config_t audioConfig = hbAudioTrack->config;
+    
+    // audio track index
+    NSInteger index = (NSInteger) audioConfig.in.track;
+    
+    // audio config: codec, channel layout and LFE
+    NSInteger codec = (NSInteger) audioConfig.in.codec;
+    NSInteger channelLayout = (NSInteger) audioConfig.in.channel_layout;
+    
+    // audio track language (ISO 4 char code)
+    const char *isoLanguageCodeChar = audioConfig.lang.iso639_2;
+    NSString *isoLanguageCode = isoLanguageCodeChar == NULL ? nil : [NSString stringWithCString: isoLanguageCodeChar encoding: NSUTF8StringEncoding];
+    
+    // now we can build the audio track and add it to the returned list
+    MMAudioTrack *audioTrack = [MMAudioTrack audiotTrackWithHandbrakeIndex: index 
+                                                                     codec: codec 
+                                                             channelLayout: channelLayout
+                                                               andLanguage: isoLanguageCode];
+    [audioTracks addObject: audioTrack];
+  }
+  
+  return audioTracks;
+}
+
+#pragma mark Extracting subtitle tracks
+- (NSArray *) subtitleTracksFromHBTitle: (hb_title_t *) hbTitle
+{
+  return nil;
 }
 
 #pragma mark Scanner timers

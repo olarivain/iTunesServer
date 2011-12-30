@@ -84,6 +84,7 @@
 		0062B2981495DA7000160289 /* ITSFolderItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 0062B2951495DA7000160289 /* ITSFolderItem.m */; };
 		0062B2991495DA7000160289 /* ITSFolderScanner.m in Sources */ = {isa = PBXBuildFile; fileRef = 0062B2971495DA7000160289 /* ITSFolderScanner.m */; };
 		0062B29C1495DA8600160289 /* ITSFolderItemList.m in Sources */ = {isa = PBXBuildFile; fileRef = 0062B29B1495DA8600160289 /* ITSFolderItemList.m */; };
+		00823F9A14AE7A7900CEDDEB /* MMAudioTrack+MMAudioTrack_Handbrake.m in Sources */ = {isa = PBXBuildFile; fileRef = 00823F9914AE7A7900CEDDEB /* MMAudioTrack+MMAudioTrack_Handbrake.m */; };
 		00D3E226149732BC003EC047 /* ITSConfigurationRepository.h in Headers */ = {isa = PBXBuildFile; fileRef = 003DE0B1149576C3004DC839 /* ITSConfigurationRepository.h */; };
 		00D3E227149732BC003EC047 /* ITSConfigurationRepository.m in Sources */ = {isa = PBXBuildFile; fileRef = 003DE0B2149576C3004DC839 /* ITSConfigurationRepository.m */; };
 /* End PBXBuildFile section */
@@ -205,6 +206,8 @@
 		0062B2971495DA7000160289 /* ITSFolderScanner.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ITSFolderScanner.m; sourceTree = "<group>"; };
 		0062B29A1495DA8600160289 /* ITSFolderItemList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ITSFolderItemList.h; sourceTree = "<group>"; };
 		0062B29B1495DA8600160289 /* ITSFolderItemList.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ITSFolderItemList.m; sourceTree = "<group>"; };
+		00823F9814AE7A7900CEDDEB /* MMAudioTrack+MMAudioTrack_Handbrake.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "MMAudioTrack+MMAudioTrack_Handbrake.h"; path = "domain/encoder/MMAudioTrack+MMAudioTrack_Handbrake.h"; sourceTree = "<group>"; };
+		00823F9914AE7A7900CEDDEB /* MMAudioTrack+MMAudioTrack_Handbrake.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "MMAudioTrack+MMAudioTrack_Handbrake.m"; path = "domain/encoder/MMAudioTrack+MMAudioTrack_Handbrake.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -524,6 +527,8 @@
 			children = (
 				001F2FD914A81C3800086BB8 /* ITSEncoder.h */,
 				001F2FDA14A81C3800086BB8 /* ITSEncoder.m */,
+				00823F9814AE7A7900CEDDEB /* MMAudioTrack+MMAudioTrack_Handbrake.h */,
+				00823F9914AE7A7900CEDDEB /* MMAudioTrack+MMAudioTrack_Handbrake.m */,
 			);
 			name = encoder;
 			sourceTree = "<group>";
@@ -741,6 +746,7 @@
 				0023635E14ACF7350084A054 /* ITSPlaylistResource.m in Sources */,
 				0023635F14ACF7350084A054 /* ITSTrackResource.m in Sources */,
 				0023636014ACF7350084A054 /* ITSEncodeResource.m in Sources */,
+				00823F9A14AE7A7900CEDDEB /* MMAudioTrack+MMAudioTrack_Handbrake.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -826,7 +832,10 @@
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.7;
 				ONLY_ACTIVE_ARCH = YES;
-				OTHER_CFLAGS = "-DDEVELOPMENT";
+				OTHER_CFLAGS = (
+					"-D__LIBHB__",
+					"-DDEVELOPMENT",
+				);
 				OTHER_LDFLAGS = (
 					"-Objc",
 					"-lHTTPServe",
@@ -867,6 +876,7 @@
 					"/usr/local/xcodeproducts/KraCommons-x86/LATEST",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.7;
+				OTHER_CFLAGS = "-D__LIBHB__";
 				OTHER_LDFLAGS = (
 					"-Objc",
 					"-lHTTPServe",
