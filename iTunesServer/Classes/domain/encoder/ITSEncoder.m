@@ -10,6 +10,7 @@
 
 #import <MediaManagement/MMTitleList.h>
 #import <MediaManagement/MMTitle.h>
+#import <MediaManagement/MMSubtitleTrack.h>
 #import "MMAudioTrack+MMAudioTrack_Handbrake.h"
 
 static ITSEncoder *sharedEncoder;
@@ -203,7 +204,37 @@ static ITSEncoder *sharedEncoder;
 #pragma mark Extracting subtitle tracks
 - (NSArray *) subtitleTracksFromHBTitle: (hb_title_t *) hbTitle
 {
-  return nil;
+  hb_list_t *hbSubtitleTracks = hbTitle->list_subtitle;
+  // sanity check on C pointer
+  if(hbSubtitleTracks == NULL)
+  {
+    return nil;
+  }
+  
+  int subtitleTracksCount = hb_list_count(hbSubtitleTracks);
+  
+  // extract single subtitle track now
+  NSMutableArray *subtitleTracks = [NSMutableArray arrayWithCapacity: subtitleTracksCount];
+  for(int i = 0; i < subtitleTracksCount; i++)
+  {
+    hb_subtitle_t *hbSubtitleTrack = hb_list_item(hbSubtitleTracks, i);
+    if(hbSubtitleTrack == NULL)
+    {
+      continue;
+    }
+    
+    // extract index, type (vobsub/text) and language
+    NSInteger index = (NSInteger) hbSubtitleTrack->track;
+    MMSubtitleType type = hbSubtitleTrack->format == PICTURESUB ? SUBTITLE_VOBSUB : SUBTITLE_CLOSED_CAPTION;
+    const char *isoLangChar = hbSubtitleTrack->iso639_2;
+    NSString *language = isoLangChar == NULL ? nil : [NSString stringWithCString: isoLangChar encoding: NSUTF8StringEncoding];
+    
+    // now build subtitle track and add it to returned list
+    MMSubtitleTrack *subtitleTrack = [MMSubtitleTrack subtitleTrackWithIndex: index language: language andType: type];
+    [subtitleTracks addObject: subtitleTrack];
+  }
+  
+  return subtitleTracks;
 }
 
 #pragma mark Scanner timers
