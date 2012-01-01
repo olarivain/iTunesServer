@@ -11,7 +11,7 @@ products = [appServer]
 allProducts = [appServer, prefPane];
 
 builder = XCodeDeployer.new(products)
-allBuilders = XCodeDeployer.new(allProducts, false)
+allBuilders = XCodeDeployer.new(allProducts, true)
 
 task :setup do
 	builder.setup
