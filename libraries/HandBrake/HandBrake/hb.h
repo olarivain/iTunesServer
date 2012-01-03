@@ -8,6 +8,14 @@ extern "C" {
 #include "project.h"
 #include "common.h"
 
+#ifdef __APPLE__
+#include <CoreServices/CoreServices.h> // for Gestalt
+#include <AudioToolbox/AudioToolbox.h>
+#include <dlfcn.h>
+#endif
+/* Whether the Core Audio HE-AAC encoder is available on the system. */
+int encca_haac_available();
+
 /* hb_init()
    Initializes a libhb session (launches his own thread, detects CPUs,
    etc) */
@@ -28,11 +36,6 @@ int           hb_get_build( hb_handle_t * );
    negative value otherwise. */
 int           hb_check_update( hb_handle_t * h, char ** version );
 
-/* hb_set_cpu_count()
-   Force libhb to act as if you had X CPU(s).
-   Default is to use the detected count (see also hb_get_cpu_count() in
-   ports.h) */
-void          hb_set_cpu_count( hb_handle_t *, int );
 
 char *        hb_dvd_name( char * path );
 void          hb_dvd_set_dvdnav( int enable );
@@ -85,10 +88,10 @@ typedef struct hb_interjob_s
 {
     int last_job;          /* job->sequence_id & 0xFFFFFF */
     int frame_count;       /* number of frames counted by sync */
-    uint64_t total_time;   /* real length in 90khz (i.e. / 90000 */
-    int render_dropped;    /* frames droped by telecine */
-    int vrate;             /* initial assigned vrate */
-    int vrate_base;        /* initial assigned vrate_base */
+    int out_frame_count;   /* number of frames counted by render */
+    uint64_t total_time;   /* real length in 90kHz ticks (i.e. seconds / 90000) */
+    int vrate;             /* actual measured output vrate from 1st pass */
+    int vrate_base;        /* actual measured output vrate_base from 1st pass */
 
     hb_subtitle_t *select_subtitle; /* foreign language scan subtitle */
 } hb_interjob_t;

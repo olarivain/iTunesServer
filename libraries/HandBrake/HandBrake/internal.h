@@ -15,8 +15,10 @@ typedef enum hb_debug_level_s
     HB_HOUSEKEEPING_LOG = 2, // stuff we hate scrolling through  
     HB_GRANULAR_LOG     = 3  // sample-by-sample
 } hb_debug_level_t;
+void hb_valog( hb_debug_level_t level, const char * prefix, const char * log, va_list args) HB_WPRINTF(3,0);
 void hb_deep_log( hb_debug_level_t level, char * log, ... ) HB_WPRINTF(2,3);
 void hb_error( char * fmt, ...) HB_WPRINTF(1,2);
+void hb_hexdump( hb_debug_level_t level, const char * label, const uint8_t * data, int len );
 
 int  hb_list_bytes( hb_list_t * );
 void hb_list_seebytes( hb_list_t * l, uint8_t * dst, int size );
@@ -69,6 +71,8 @@ struct hb_buffer_s
     int           id;           // ID of the track that the packet comes from
     int64_t       start;        // Video and subtitle packets: start time of frame/subtitle
     int64_t       stop;         // Video and subtitle packets: stop time of frame/subtitle
+    int64_t       pcr;
+    uint8_t       discontinuity;
     int           new_chap;     // Video packets: if non-zero, is the index of the chapter whose boundary was crossed
 
 #define HB_FRAME_IDR    0x01
@@ -91,7 +95,6 @@ struct hb_buffer_s
     int           y;
     int           width;
     int           height;
-    hb_buffer_t * next_subpicture;
 
     // Video packets (after processing by the hb_sync_video work-object):
     //   A (copy of a) PICTURESUB subtitle packet that needs to be burned into this video packet by the hb_render work-object.
@@ -108,6 +111,7 @@ void hb_buffer_pool_free( void );
 
 hb_buffer_t * hb_buffer_init( int size );
 void          hb_buffer_realloc( hb_buffer_t *, int size );
+void          hb_buffer_reduce( hb_buffer_t * b, int size );
 void          hb_buffer_close( hb_buffer_t ** );
 void          hb_buffer_copy_settings( hb_buffer_t * dst,
                                        const hb_buffer_t * src );
@@ -126,6 +130,8 @@ void          hb_fifo_push( hb_fifo_t *, hb_buffer_t * );
 void          hb_fifo_push_wait( hb_fifo_t *, hb_buffer_t * );
 int           hb_fifo_full_wait( hb_fifo_t * f );
 void          hb_fifo_push_head( hb_fifo_t *, hb_buffer_t * );
+void          hb_fifo_push_list_element( hb_fifo_t *fifo, hb_buffer_t *buffer_list );
+hb_buffer_t * hb_fifo_get_list_element( hb_fifo_t *fifo );
 void          hb_fifo_close( hb_fifo_t ** );
 void          hb_fifo_flush( hb_fifo_t * f );
 
@@ -168,9 +174,9 @@ hb_thread_t * hb_scan_init( hb_handle_t *, volatile int * die,
                             const char * path, int title_index, 
                             hb_list_t * list_title, int preview_count, 
                             int store_previews, uint64_t min_duration );
-hb_thread_t * hb_work_init( hb_list_t * jobs, int cpu_count,
+hb_thread_t * hb_work_init( hb_list_t * jobs,
                             volatile int * die, int * error, hb_job_t ** job );
-hb_thread_t  * hb_reader_init( hb_job_t * );
+void ReadLoop( void * _w );
 hb_work_object_t * hb_muxer_init( hb_job_t * );
 hb_work_object_t * hb_get_work( int );
 hb_work_object_t * hb_codec_decoder( int );
@@ -186,16 +192,18 @@ hb_work_object_t * hb_sync_init( hb_job_t * job );
  **********************************************************************/
 typedef struct {
     int64_t last_scr;       /* unadjusted SCR from most recent pack */
+    int64_t scr_delta;
     int64_t last_pts;       /* last pts we saw */
     int     scr_changes;    /* number of SCR discontinuities */
     int     dts_drops;      /* number of drops because DTS too far from SCR */
+    int     new_chap;
 } hb_psdemux_t;
 
-typedef int (*hb_muxer_t)(hb_buffer_t *, hb_list_t *, hb_psdemux_t*);
+typedef void (*hb_muxer_t)(hb_buffer_t *, hb_list_t *, hb_psdemux_t*);
 
-int hb_demux_ps( hb_buffer_t * ps_buf, hb_list_t * es_list, hb_psdemux_t * );
-int hb_demux_ss( hb_buffer_t * ps_buf, hb_list_t * es_list, hb_psdemux_t * );
-int hb_demux_null( hb_buffer_t * ps_buf, hb_list_t * es_list, hb_psdemux_t * );
+void hb_demux_ps( hb_buffer_t * ps_buf, hb_list_t * es_list, hb_psdemux_t * );
+void hb_demux_ts( hb_buffer_t * ps_buf, hb_list_t * es_list, hb_psdemux_t * );
+void hb_demux_null( hb_buffer_t * ps_buf, hb_list_t * es_list, hb_psdemux_t * );
 
 extern const hb_muxer_t hb_demux[];
 
@@ -227,7 +235,7 @@ hb_title_t * hb_dvd_title_scan( hb_dvd_t *, int title, uint64_t min_duration );
 int          hb_dvd_start( hb_dvd_t *, hb_title_t *title, int chapter );
 void         hb_dvd_stop( hb_dvd_t * );
 int          hb_dvd_seek( hb_dvd_t *, float );
-int          hb_dvd_read( hb_dvd_t *, hb_buffer_t * );
+hb_buffer_t * hb_dvd_read( hb_dvd_t * );
 int          hb_dvd_chapter( hb_dvd_t * );
 int          hb_dvd_is_break( hb_dvd_t * d );
 void         hb_dvd_close( hb_dvd_t ** );
@@ -243,27 +251,25 @@ void          hb_bd_stop( hb_bd_t * d );
 int           hb_bd_seek( hb_bd_t * d, float f );
 int           hb_bd_seek_pts( hb_bd_t * d, uint64_t pts );
 int           hb_bd_seek_chapter( hb_bd_t * d, int chapter );
-int           hb_bd_read( hb_bd_t * d, hb_buffer_t * b );
+hb_buffer_t * hb_bd_read( hb_bd_t * d );
 int           hb_bd_chapter( hb_bd_t * d );
 void          hb_bd_close( hb_bd_t ** _d );
 void          hb_bd_set_angle( hb_bd_t * d, int angle );
 int           hb_bd_main_feature( hb_bd_t * d, hb_list_t * list_title );
 
 hb_stream_t * hb_bd_stream_open( hb_title_t *title );
-hb_stream_t * hb_stream_open( char * path, hb_title_t *title );
+void hb_ts_stream_reset(hb_stream_t *stream);
+hb_stream_t * hb_stream_open( char * path, hb_title_t *title, int scan );
 void		 hb_stream_close( hb_stream_t ** );
-hb_title_t * hb_stream_title_scan( hb_stream_t *);
-int          hb_stream_read( hb_stream_t *, hb_buffer_t *);
+hb_title_t * hb_stream_title_scan( hb_stream_t *, hb_title_t *);
+hb_buffer_t * hb_stream_read( hb_stream_t * );
 int          hb_stream_seek( hb_stream_t *, float );
 int          hb_stream_seek_ts( hb_stream_t * stream, int64_t ts );
 int          hb_stream_seek_chapter( hb_stream_t *, int );
 int          hb_stream_chapter( hb_stream_t * );
 
-int          hb_ts_decode_pkt( hb_stream_t *stream, const uint8_t * pkt, hb_buffer_t *obuf );
+hb_buffer_t * hb_ts_decode_pkt( hb_stream_t *stream, const uint8_t * pkt );
 
-
-void       * hb_ffmpeg_context( int codec_param );
-void       * hb_ffmpeg_avstream( int codec_param );
 
 #define STR4_TO_UINT32(p) \
     ((((const uint8_t*)(p))[0] << 24) | \
@@ -274,7 +280,7 @@ void       * hb_ffmpeg_avstream( int codec_param );
 /***********************************************************************
  * Work objects
  **********************************************************************/
-#define HB_CONFIG_MAX_SIZE 8192
+#define HB_CONFIG_MAX_SIZE (2*8192)
 union hb_esconfig_u
 {
 
@@ -302,7 +308,7 @@ union hb_esconfig_u
     {
         uint8_t bytes[HB_CONFIG_MAX_SIZE];
         int     length;
-    } aac;
+    } extradata;
 
     struct
     {
@@ -348,15 +354,15 @@ enum
     WORK_DECDCA,
     WORK_DECAVCODEC,
     WORK_DECAVCODECV,
-    WORK_DECAVCODECVI,
-    WORK_DECAVCODECAI,
     WORK_DECLPCM,
     WORK_ENCFAAC,
     WORK_ENCLAME,
     WORK_ENCVORBIS,
     WORK_ENC_CA_AAC,
-    WORK_ENCAC3,
-    WORK_MUX
+    WORK_ENC_CA_HAAC,
+    WORK_ENCAVCODEC_AUDIO,
+    WORK_MUX,
+    WORK_READER
 };
 
 enum
@@ -379,6 +385,8 @@ enum
 #ifndef PIC_FLAG_PROGRESSIVE_FRAME
 #define PIC_FLAG_PROGRESSIVE_FRAME 16
 #endif
+
+#define PIC_FLAG_REPEAT_FRAME 512
 
 extern hb_work_object_t * hb_objects;
 
