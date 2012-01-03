@@ -24,7 +24,7 @@
 {
   HSResourceDescriptor *listResource = [HSResourceDescriptor descriptorWithPath: @"/encoder" resource:self andSelector:@selector(listResources:)];
   HSResourceDescriptor *scanResource = [HSResourceDescriptor descriptorWithPath: @"/encoder/{resourceId}" resource:self andSelector:@selector(scanResource:)];
-  HSResourceDescriptor *scheduleEncodeResource = [HSResourceDescriptor descriptorWithPath: @"/encoder/{resourceId}" resource:self selector:@selector(scheduleEncodeResource:) andMethod: POST];
+  HSResourceDescriptor *scheduleEncodeResource = [HSResourceDescriptor descriptorWithPath: @"/encoder/{resourceId}" resource:self selector:@selector(scheduleResourceForEncode:) andMethod: POST];
   
   return [NSArray arrayWithObjects: listResource, scanResource, scheduleEncodeResource, nil];
 }
@@ -61,9 +61,15 @@
   return response;
 }
 
-- (HSResponse *) scheduleEncodeResource: (HSRequestParameters *) params
+- (HSResponse *) scheduleResourceForEncode: (HSRequestParameters *) params
 {
-  NSLog(@"We have an encoder here");
+  // rebuild title list from JSON object
+  MMTitleAssembler *assembler = [MMTitleAssembler sharedInstance];
+  MMTitleList *titleList = [assembler createTitleList: params.parameters];
+  
+  // pass it to the encoder to schedule it.
+  ITSEncoder *encoder = [ITSEncoder sharedEncoder];
+  [encoder scheduleTitleList: titleList];
   HSResponse *response = [HSResponse jsonResponse];
   response.object = params.pathParameters;
   

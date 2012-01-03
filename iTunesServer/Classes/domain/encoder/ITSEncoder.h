@@ -16,12 +16,21 @@
 {
   __strong NSFileManager *fileManager;
   hb_handle_t *handbrakeScannerHandle;
+  hb_handle_t *handbrakeEncodingHandle;
+  
+  NSMutableArray *scheduledTitles;
+  
   BOOL scanInProgress;
   BOOL scanIsDone;
+  
+  BOOL encoderScanInProgress;
+  BOOL encoderScanIsDone;
 }
 
 + (ITSEncoder *) sharedEncoder;
 
 - (MMTitleList *) scanPath: (NSString *) path;
+
+- (void) scheduleTitleList: (MMTitleList *) titleList;
 
 @end
