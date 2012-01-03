@@ -34,40 +34,6 @@
 		001F2F4914A80C6E00086BB8 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 001F2F4814A80C6E00086BB8 /* AudioToolbox.framework */; };
 		001F2F4B14A80CB300086BB8 /* libiconv.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 001F2F4A14A80CB300086BB8 /* libiconv.dylib */; };
 		001F2F8414A80E7200086BB8 /* libhb.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 001F2F8314A80E7200086BB8 /* libhb.a */; };
-		001F2FB614A81AFE00086BB8 /* liba52.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 001F2F9414A81AFE00086BB8 /* liba52.a */; };
-		001F2FB714A81AFE00086BB8 /* libass.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 001F2F9514A81AFE00086BB8 /* libass.a */; };
-		001F2FB814A81AFE00086BB8 /* libavcodec.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 001F2F9614A81AFE00086BB8 /* libavcodec.a */; };
-		001F2FB914A81AFE00086BB8 /* libavcore.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 001F2F9714A81AFE00086BB8 /* libavcore.a */; };
-		001F2FBA14A81AFE00086BB8 /* libavdevice.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 001F2F9814A81AFE00086BB8 /* libavdevice.a */; };
-		001F2FBB14A81AFE00086BB8 /* libavfilter.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 001F2F9914A81AFE00086BB8 /* libavfilter.a */; };
-		001F2FBC14A81AFE00086BB8 /* libavformat.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 001F2F9A14A81AFE00086BB8 /* libavformat.a */; };
-		001F2FBD14A81AFE00086BB8 /* libavutil.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 001F2F9B14A81AFE00086BB8 /* libavutil.a */; };
-		001F2FBE14A81AFE00086BB8 /* libbluray.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 001F2F9C14A81AFE00086BB8 /* libbluray.a */; };
-		001F2FBF14A81AFE00086BB8 /* libdca.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 001F2F9D14A81AFE00086BB8 /* libdca.a */; };
-		001F2FC014A81AFE00086BB8 /* libdvdnav.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 001F2F9E14A81AFE00086BB8 /* libdvdnav.a */; };
-		001F2FC114A81AFE00086BB8 /* libdvdnavmini.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 001F2F9F14A81AFE00086BB8 /* libdvdnavmini.a */; };
-		001F2FC214A81AFE00086BB8 /* libdvdread.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 001F2FA014A81AFE00086BB8 /* libdvdread.a */; };
-		001F2FC314A81AFE00086BB8 /* libfaac.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 001F2FA114A81AFE00086BB8 /* libfaac.a */; };
-		001F2FC414A81AFE00086BB8 /* libfaad.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 001F2FA214A81AFE00086BB8 /* libfaad.a */; };
-		001F2FC514A81AFE00086BB8 /* libfontconfig.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 001F2FA314A81AFE00086BB8 /* libfontconfig.a */; };
-		001F2FC614A81AFE00086BB8 /* libfreetype.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 001F2FA414A81AFE00086BB8 /* libfreetype.a */; };
-		001F2FC714A81AFE00086BB8 /* libmkv.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 001F2FA514A81AFE00086BB8 /* libmkv.a */; };
-		001F2FC814A81AFE00086BB8 /* libmp3lame.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 001F2FA614A81AFE00086BB8 /* libmp3lame.a */; };
-		001F2FC914A81AFE00086BB8 /* libmp4ff.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 001F2FA714A81AFE00086BB8 /* libmp4ff.a */; };
-		001F2FCA14A81AFE00086BB8 /* libmp4v2.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 001F2FA814A81AFE00086BB8 /* libmp4v2.a */; };
-		001F2FCB14A81AFE00086BB8 /* libmpeg2.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 001F2FA914A81AFE00086BB8 /* libmpeg2.a */; };
-		001F2FCC14A81AFE00086BB8 /* libmpeg2convert.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 001F2FAA14A81AFE00086BB8 /* libmpeg2convert.a */; };
-		001F2FCD14A81AFE00086BB8 /* libogg.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 001F2FAB14A81AFE00086BB8 /* libogg.a */; };
-		001F2FCE14A81AFE00086BB8 /* libsamplerate.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 001F2FAC14A81AFE00086BB8 /* libsamplerate.a */; };
-		001F2FCF14A81AFE00086BB8 /* libswscale.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 001F2FAD14A81AFE00086BB8 /* libswscale.a */; };
-		001F2FD014A81AFE00086BB8 /* libtheora.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 001F2FAE14A81AFE00086BB8 /* libtheora.a */; };
-		001F2FD114A81AFE00086BB8 /* libtheoradec.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 001F2FAF14A81AFE00086BB8 /* libtheoradec.a */; };
-		001F2FD214A81AFE00086BB8 /* libtheoraenc.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 001F2FB014A81AFE00086BB8 /* libtheoraenc.a */; };
-		001F2FD314A81AFE00086BB8 /* libvorbis.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 001F2FB114A81AFE00086BB8 /* libvorbis.a */; };
-		001F2FD414A81AFE00086BB8 /* libvorbisenc.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 001F2FB214A81AFE00086BB8 /* libvorbisenc.a */; };
-		001F2FD514A81AFE00086BB8 /* libvorbisfile.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 001F2FB314A81AFE00086BB8 /* libvorbisfile.a */; };
-		001F2FD614A81AFE00086BB8 /* libx264.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 001F2FB414A81AFE00086BB8 /* libx264.a */; };
-		001F2FD714A81AFE00086BB8 /* libxml2.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 001F2FB514A81AFE00086BB8 /* libxml2.a */; };
 		001F2FDB14A81C3800086BB8 /* ITSEncoder.m in Sources */ = {isa = PBXBuildFile; fileRef = 001F2FDA14A81C3800086BB8 /* ITSEncoder.m */; };
 		001F2FF914A9447300086BB8 /* ITSEncodingRepository.m in Sources */ = {isa = PBXBuildFile; fileRef = 001F2FF814A9447300086BB8 /* ITSEncodingRepository.m */; };
 		0023635C14ACF7350084A054 /* ITSAbstractContentResource.m in Sources */ = {isa = PBXBuildFile; fileRef = 0023635214ACF7340084A054 /* ITSAbstractContentResource.m */; };
@@ -87,6 +53,39 @@
 		00823F9A14AE7A7900CEDDEB /* MMAudioTrack+MMAudioTrack_Handbrake.m in Sources */ = {isa = PBXBuildFile; fileRef = 00823F9914AE7A7900CEDDEB /* MMAudioTrack+MMAudioTrack_Handbrake.m */; };
 		00D3E226149732BC003EC047 /* ITSConfigurationRepository.h in Headers */ = {isa = PBXBuildFile; fileRef = 003DE0B1149576C3004DC839 /* ITSConfigurationRepository.h */; };
 		00D3E227149732BC003EC047 /* ITSConfigurationRepository.m in Sources */ = {isa = PBXBuildFile; fileRef = 003DE0B2149576C3004DC839 /* ITSConfigurationRepository.m */; };
+		00DB3EA014B30A1E00B5963C /* liba52.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 00DB3E7F14B30A1E00B5963C /* liba52.a */; };
+		00DB3EA114B30A1E00B5963C /* libass.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 00DB3E8014B30A1E00B5963C /* libass.a */; };
+		00DB3EA214B30A1E00B5963C /* libavcodec.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 00DB3E8114B30A1E00B5963C /* libavcodec.a */; };
+		00DB3EA314B30A1E00B5963C /* libavdevice.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 00DB3E8214B30A1E00B5963C /* libavdevice.a */; };
+		00DB3EA414B30A1E00B5963C /* libavfilter.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 00DB3E8314B30A1E00B5963C /* libavfilter.a */; };
+		00DB3EA514B30A1E00B5963C /* libavformat.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 00DB3E8414B30A1E00B5963C /* libavformat.a */; };
+		00DB3EA614B30A1E00B5963C /* libavutil.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 00DB3E8514B30A1E00B5963C /* libavutil.a */; };
+		00DB3EA714B30A1E00B5963C /* libbluray.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 00DB3E8614B30A1E00B5963C /* libbluray.a */; };
+		00DB3EA814B30A1E00B5963C /* libdca.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 00DB3E8714B30A1E00B5963C /* libdca.a */; };
+		00DB3EA914B30A1E00B5963C /* libdvdnav.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 00DB3E8814B30A1E00B5963C /* libdvdnav.a */; };
+		00DB3EAA14B30A1E00B5963C /* libdvdnavmini.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 00DB3E8914B30A1E00B5963C /* libdvdnavmini.a */; };
+		00DB3EAB14B30A1E00B5963C /* libdvdread.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 00DB3E8A14B30A1E00B5963C /* libdvdread.a */; };
+		00DB3EAC14B30A1E00B5963C /* libfaac.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 00DB3E8B14B30A1E00B5963C /* libfaac.a */; };
+		00DB3EAD14B30A1E00B5963C /* libfontconfig.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 00DB3E8C14B30A1E00B5963C /* libfontconfig.a */; };
+		00DB3EAE14B30A1E00B5963C /* libfreetype.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 00DB3E8D14B30A1E00B5963C /* libfreetype.a */; };
+		00DB3EAF14B30A1E00B5963C /* libfribidi.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 00DB3E8E14B30A1E00B5963C /* libfribidi.a */; };
+		00DB3EB014B30A1E00B5963C /* libmkv.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 00DB3E8F14B30A1E00B5963C /* libmkv.a */; };
+		00DB3EB114B30A1E00B5963C /* libmp3lame.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 00DB3E9014B30A1E00B5963C /* libmp3lame.a */; };
+		00DB3EB214B30A1E00B5963C /* libmp4v2.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 00DB3E9114B30A1E00B5963C /* libmp4v2.a */; };
+		00DB3EB314B30A1E00B5963C /* libmpeg2.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 00DB3E9214B30A1E00B5963C /* libmpeg2.a */; };
+		00DB3EB414B30A1E00B5963C /* libmpeg2convert.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 00DB3E9314B30A1E00B5963C /* libmpeg2convert.a */; };
+		00DB3EB514B30A1E00B5963C /* libogg.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 00DB3E9414B30A1E00B5963C /* libogg.a */; };
+		00DB3EB614B30A1E00B5963C /* libpostproc.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 00DB3E9514B30A1E00B5963C /* libpostproc.a */; };
+		00DB3EB714B30A1E00B5963C /* libsamplerate.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 00DB3E9614B30A1E00B5963C /* libsamplerate.a */; };
+		00DB3EB814B30A1E00B5963C /* libswscale.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 00DB3E9714B30A1E00B5963C /* libswscale.a */; };
+		00DB3EB914B30A1E00B5963C /* libtheora.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 00DB3E9814B30A1E00B5963C /* libtheora.a */; };
+		00DB3EBA14B30A1E00B5963C /* libtheoradec.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 00DB3E9914B30A1E00B5963C /* libtheoradec.a */; };
+		00DB3EBB14B30A1E00B5963C /* libtheoraenc.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 00DB3E9A14B30A1E00B5963C /* libtheoraenc.a */; };
+		00DB3EBC14B30A1E00B5963C /* libvorbis.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 00DB3E9B14B30A1E00B5963C /* libvorbis.a */; };
+		00DB3EBD14B30A1E00B5963C /* libvorbisenc.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 00DB3E9C14B30A1E00B5963C /* libvorbisenc.a */; };
+		00DB3EBE14B30A1E00B5963C /* libvorbisfile.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 00DB3E9D14B30A1E00B5963C /* libvorbisfile.a */; };
+		00DB3EBF14B30A1E00B5963C /* libx264.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 00DB3E9E14B30A1E00B5963C /* libx264.a */; };
+		00DB3EC014B30A1E00B5963C /* libxml2.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 00DB3E9F14B30A1E00B5963C /* libxml2.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -144,40 +143,6 @@
 		001F2F4814A80C6E00086BB8 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		001F2F4A14A80CB300086BB8 /* libiconv.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libiconv.dylib; path = usr/lib/libiconv.dylib; sourceTree = SDKROOT; };
 		001F2F8314A80E7200086BB8 /* libhb.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libhb.a; sourceTree = "<group>"; };
-		001F2F9414A81AFE00086BB8 /* liba52.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = liba52.a; sourceTree = "<group>"; };
-		001F2F9514A81AFE00086BB8 /* libass.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libass.a; sourceTree = "<group>"; };
-		001F2F9614A81AFE00086BB8 /* libavcodec.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libavcodec.a; sourceTree = "<group>"; };
-		001F2F9714A81AFE00086BB8 /* libavcore.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libavcore.a; sourceTree = "<group>"; };
-		001F2F9814A81AFE00086BB8 /* libavdevice.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libavdevice.a; sourceTree = "<group>"; };
-		001F2F9914A81AFE00086BB8 /* libavfilter.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libavfilter.a; sourceTree = "<group>"; };
-		001F2F9A14A81AFE00086BB8 /* libavformat.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libavformat.a; sourceTree = "<group>"; };
-		001F2F9B14A81AFE00086BB8 /* libavutil.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libavutil.a; sourceTree = "<group>"; };
-		001F2F9C14A81AFE00086BB8 /* libbluray.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libbluray.a; sourceTree = "<group>"; };
-		001F2F9D14A81AFE00086BB8 /* libdca.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libdca.a; sourceTree = "<group>"; };
-		001F2F9E14A81AFE00086BB8 /* libdvdnav.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libdvdnav.a; sourceTree = "<group>"; };
-		001F2F9F14A81AFE00086BB8 /* libdvdnavmini.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libdvdnavmini.a; sourceTree = "<group>"; };
-		001F2FA014A81AFE00086BB8 /* libdvdread.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libdvdread.a; sourceTree = "<group>"; };
-		001F2FA114A81AFE00086BB8 /* libfaac.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libfaac.a; sourceTree = "<group>"; };
-		001F2FA214A81AFE00086BB8 /* libfaad.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libfaad.a; sourceTree = "<group>"; };
-		001F2FA314A81AFE00086BB8 /* libfontconfig.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libfontconfig.a; sourceTree = "<group>"; };
-		001F2FA414A81AFE00086BB8 /* libfreetype.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libfreetype.a; sourceTree = "<group>"; };
-		001F2FA514A81AFE00086BB8 /* libmkv.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libmkv.a; sourceTree = "<group>"; };
-		001F2FA614A81AFE00086BB8 /* libmp3lame.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libmp3lame.a; sourceTree = "<group>"; };
-		001F2FA714A81AFE00086BB8 /* libmp4ff.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libmp4ff.a; sourceTree = "<group>"; };
-		001F2FA814A81AFE00086BB8 /* libmp4v2.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libmp4v2.a; sourceTree = "<group>"; };
-		001F2FA914A81AFE00086BB8 /* libmpeg2.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libmpeg2.a; sourceTree = "<group>"; };
-		001F2FAA14A81AFE00086BB8 /* libmpeg2convert.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libmpeg2convert.a; sourceTree = "<group>"; };
-		001F2FAB14A81AFE00086BB8 /* libogg.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libogg.a; sourceTree = "<group>"; };
-		001F2FAC14A81AFE00086BB8 /* libsamplerate.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libsamplerate.a; sourceTree = "<group>"; };
-		001F2FAD14A81AFE00086BB8 /* libswscale.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libswscale.a; sourceTree = "<group>"; };
-		001F2FAE14A81AFE00086BB8 /* libtheora.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libtheora.a; sourceTree = "<group>"; };
-		001F2FAF14A81AFE00086BB8 /* libtheoradec.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libtheoradec.a; sourceTree = "<group>"; };
-		001F2FB014A81AFE00086BB8 /* libtheoraenc.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libtheoraenc.a; sourceTree = "<group>"; };
-		001F2FB114A81AFE00086BB8 /* libvorbis.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libvorbis.a; sourceTree = "<group>"; };
-		001F2FB214A81AFE00086BB8 /* libvorbisenc.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libvorbisenc.a; sourceTree = "<group>"; };
-		001F2FB314A81AFE00086BB8 /* libvorbisfile.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libvorbisfile.a; sourceTree = "<group>"; };
-		001F2FB414A81AFE00086BB8 /* libx264.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libx264.a; sourceTree = "<group>"; };
-		001F2FB514A81AFE00086BB8 /* libxml2.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libxml2.a; sourceTree = "<group>"; };
 		001F2FD914A81C3800086BB8 /* ITSEncoder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ITSEncoder.h; path = domain/encoder/ITSEncoder.h; sourceTree = "<group>"; };
 		001F2FDA14A81C3800086BB8 /* ITSEncoder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ITSEncoder.m; path = domain/encoder/ITSEncoder.m; sourceTree = "<group>"; };
 		001F2FF714A9447300086BB8 /* ITSEncodingRepository.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ITSEncodingRepository.h; path = iTunesServer/Classes/repository/encoder/ITSEncodingRepository.h; sourceTree = SOURCE_ROOT; };
@@ -208,6 +173,39 @@
 		0062B29B1495DA8600160289 /* ITSFolderItemList.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ITSFolderItemList.m; sourceTree = "<group>"; };
 		00823F9814AE7A7900CEDDEB /* MMAudioTrack+MMAudioTrack_Handbrake.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "MMAudioTrack+MMAudioTrack_Handbrake.h"; path = "domain/encoder/MMAudioTrack+MMAudioTrack_Handbrake.h"; sourceTree = "<group>"; };
 		00823F9914AE7A7900CEDDEB /* MMAudioTrack+MMAudioTrack_Handbrake.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "MMAudioTrack+MMAudioTrack_Handbrake.m"; path = "domain/encoder/MMAudioTrack+MMAudioTrack_Handbrake.m"; sourceTree = "<group>"; };
+		00DB3E7F14B30A1E00B5963C /* liba52.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = liba52.a; sourceTree = "<group>"; };
+		00DB3E8014B30A1E00B5963C /* libass.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libass.a; sourceTree = "<group>"; };
+		00DB3E8114B30A1E00B5963C /* libavcodec.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libavcodec.a; sourceTree = "<group>"; };
+		00DB3E8214B30A1E00B5963C /* libavdevice.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libavdevice.a; sourceTree = "<group>"; };
+		00DB3E8314B30A1E00B5963C /* libavfilter.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libavfilter.a; sourceTree = "<group>"; };
+		00DB3E8414B30A1E00B5963C /* libavformat.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libavformat.a; sourceTree = "<group>"; };
+		00DB3E8514B30A1E00B5963C /* libavutil.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libavutil.a; sourceTree = "<group>"; };
+		00DB3E8614B30A1E00B5963C /* libbluray.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libbluray.a; sourceTree = "<group>"; };
+		00DB3E8714B30A1E00B5963C /* libdca.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libdca.a; sourceTree = "<group>"; };
+		00DB3E8814B30A1E00B5963C /* libdvdnav.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libdvdnav.a; sourceTree = "<group>"; };
+		00DB3E8914B30A1E00B5963C /* libdvdnavmini.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libdvdnavmini.a; sourceTree = "<group>"; };
+		00DB3E8A14B30A1E00B5963C /* libdvdread.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libdvdread.a; sourceTree = "<group>"; };
+		00DB3E8B14B30A1E00B5963C /* libfaac.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libfaac.a; sourceTree = "<group>"; };
+		00DB3E8C14B30A1E00B5963C /* libfontconfig.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libfontconfig.a; sourceTree = "<group>"; };
+		00DB3E8D14B30A1E00B5963C /* libfreetype.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libfreetype.a; sourceTree = "<group>"; };
+		00DB3E8E14B30A1E00B5963C /* libfribidi.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libfribidi.a; sourceTree = "<group>"; };
+		00DB3E8F14B30A1E00B5963C /* libmkv.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libmkv.a; sourceTree = "<group>"; };
+		00DB3E9014B30A1E00B5963C /* libmp3lame.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libmp3lame.a; sourceTree = "<group>"; };
+		00DB3E9114B30A1E00B5963C /* libmp4v2.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libmp4v2.a; sourceTree = "<group>"; };
+		00DB3E9214B30A1E00B5963C /* libmpeg2.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libmpeg2.a; sourceTree = "<group>"; };
+		00DB3E9314B30A1E00B5963C /* libmpeg2convert.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libmpeg2convert.a; sourceTree = "<group>"; };
+		00DB3E9414B30A1E00B5963C /* libogg.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libogg.a; sourceTree = "<group>"; };
+		00DB3E9514B30A1E00B5963C /* libpostproc.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libpostproc.a; sourceTree = "<group>"; };
+		00DB3E9614B30A1E00B5963C /* libsamplerate.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libsamplerate.a; sourceTree = "<group>"; };
+		00DB3E9714B30A1E00B5963C /* libswscale.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libswscale.a; sourceTree = "<group>"; };
+		00DB3E9814B30A1E00B5963C /* libtheora.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libtheora.a; sourceTree = "<group>"; };
+		00DB3E9914B30A1E00B5963C /* libtheoradec.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libtheoradec.a; sourceTree = "<group>"; };
+		00DB3E9A14B30A1E00B5963C /* libtheoraenc.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libtheoraenc.a; sourceTree = "<group>"; };
+		00DB3E9B14B30A1E00B5963C /* libvorbis.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libvorbis.a; sourceTree = "<group>"; };
+		00DB3E9C14B30A1E00B5963C /* libvorbisenc.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libvorbisenc.a; sourceTree = "<group>"; };
+		00DB3E9D14B30A1E00B5963C /* libvorbisfile.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libvorbisfile.a; sourceTree = "<group>"; };
+		00DB3E9E14B30A1E00B5963C /* libx264.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libx264.a; sourceTree = "<group>"; };
+		00DB3E9F14B30A1E00B5963C /* libxml2.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libxml2.a; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -223,40 +221,39 @@
 				000CE8AB149454FF003002C3 /* ScriptingBridge.framework in Frameworks */,
 				000CE86B1494536E003002C3 /* Cocoa.framework in Frameworks */,
 				001F2F8414A80E7200086BB8 /* libhb.a in Frameworks */,
-				001F2FB614A81AFE00086BB8 /* liba52.a in Frameworks */,
-				001F2FB714A81AFE00086BB8 /* libass.a in Frameworks */,
-				001F2FB814A81AFE00086BB8 /* libavcodec.a in Frameworks */,
-				001F2FB914A81AFE00086BB8 /* libavcore.a in Frameworks */,
-				001F2FBA14A81AFE00086BB8 /* libavdevice.a in Frameworks */,
-				001F2FBB14A81AFE00086BB8 /* libavfilter.a in Frameworks */,
-				001F2FBC14A81AFE00086BB8 /* libavformat.a in Frameworks */,
-				001F2FBD14A81AFE00086BB8 /* libavutil.a in Frameworks */,
-				001F2FBE14A81AFE00086BB8 /* libbluray.a in Frameworks */,
-				001F2FBF14A81AFE00086BB8 /* libdca.a in Frameworks */,
-				001F2FC014A81AFE00086BB8 /* libdvdnav.a in Frameworks */,
-				001F2FC114A81AFE00086BB8 /* libdvdnavmini.a in Frameworks */,
-				001F2FC214A81AFE00086BB8 /* libdvdread.a in Frameworks */,
-				001F2FC314A81AFE00086BB8 /* libfaac.a in Frameworks */,
-				001F2FC414A81AFE00086BB8 /* libfaad.a in Frameworks */,
-				001F2FC514A81AFE00086BB8 /* libfontconfig.a in Frameworks */,
-				001F2FC614A81AFE00086BB8 /* libfreetype.a in Frameworks */,
-				001F2FC714A81AFE00086BB8 /* libmkv.a in Frameworks */,
-				001F2FC814A81AFE00086BB8 /* libmp3lame.a in Frameworks */,
-				001F2FC914A81AFE00086BB8 /* libmp4ff.a in Frameworks */,
-				001F2FCA14A81AFE00086BB8 /* libmp4v2.a in Frameworks */,
-				001F2FCB14A81AFE00086BB8 /* libmpeg2.a in Frameworks */,
-				001F2FCC14A81AFE00086BB8 /* libmpeg2convert.a in Frameworks */,
-				001F2FCD14A81AFE00086BB8 /* libogg.a in Frameworks */,
-				001F2FCE14A81AFE00086BB8 /* libsamplerate.a in Frameworks */,
-				001F2FCF14A81AFE00086BB8 /* libswscale.a in Frameworks */,
-				001F2FD014A81AFE00086BB8 /* libtheora.a in Frameworks */,
-				001F2FD114A81AFE00086BB8 /* libtheoradec.a in Frameworks */,
-				001F2FD214A81AFE00086BB8 /* libtheoraenc.a in Frameworks */,
-				001F2FD314A81AFE00086BB8 /* libvorbis.a in Frameworks */,
-				001F2FD414A81AFE00086BB8 /* libvorbisenc.a in Frameworks */,
-				001F2FD514A81AFE00086BB8 /* libvorbisfile.a in Frameworks */,
-				001F2FD614A81AFE00086BB8 /* libx264.a in Frameworks */,
-				001F2FD714A81AFE00086BB8 /* libxml2.a in Frameworks */,
+				00DB3EA014B30A1E00B5963C /* liba52.a in Frameworks */,
+				00DB3EA114B30A1E00B5963C /* libass.a in Frameworks */,
+				00DB3EA214B30A1E00B5963C /* libavcodec.a in Frameworks */,
+				00DB3EA314B30A1E00B5963C /* libavdevice.a in Frameworks */,
+				00DB3EA414B30A1E00B5963C /* libavfilter.a in Frameworks */,
+				00DB3EA514B30A1E00B5963C /* libavformat.a in Frameworks */,
+				00DB3EA614B30A1E00B5963C /* libavutil.a in Frameworks */,
+				00DB3EA714B30A1E00B5963C /* libbluray.a in Frameworks */,
+				00DB3EA814B30A1E00B5963C /* libdca.a in Frameworks */,
+				00DB3EA914B30A1E00B5963C /* libdvdnav.a in Frameworks */,
+				00DB3EAA14B30A1E00B5963C /* libdvdnavmini.a in Frameworks */,
+				00DB3EAB14B30A1E00B5963C /* libdvdread.a in Frameworks */,
+				00DB3EAC14B30A1E00B5963C /* libfaac.a in Frameworks */,
+				00DB3EAD14B30A1E00B5963C /* libfontconfig.a in Frameworks */,
+				00DB3EAE14B30A1E00B5963C /* libfreetype.a in Frameworks */,
+				00DB3EAF14B30A1E00B5963C /* libfribidi.a in Frameworks */,
+				00DB3EB014B30A1E00B5963C /* libmkv.a in Frameworks */,
+				00DB3EB114B30A1E00B5963C /* libmp3lame.a in Frameworks */,
+				00DB3EB214B30A1E00B5963C /* libmp4v2.a in Frameworks */,
+				00DB3EB314B30A1E00B5963C /* libmpeg2.a in Frameworks */,
+				00DB3EB414B30A1E00B5963C /* libmpeg2convert.a in Frameworks */,
+				00DB3EB514B30A1E00B5963C /* libogg.a in Frameworks */,
+				00DB3EB614B30A1E00B5963C /* libpostproc.a in Frameworks */,
+				00DB3EB714B30A1E00B5963C /* libsamplerate.a in Frameworks */,
+				00DB3EB814B30A1E00B5963C /* libswscale.a in Frameworks */,
+				00DB3EB914B30A1E00B5963C /* libtheora.a in Frameworks */,
+				00DB3EBA14B30A1E00B5963C /* libtheoradec.a in Frameworks */,
+				00DB3EBB14B30A1E00B5963C /* libtheoraenc.a in Frameworks */,
+				00DB3EBC14B30A1E00B5963C /* libvorbis.a in Frameworks */,
+				00DB3EBD14B30A1E00B5963C /* libvorbisenc.a in Frameworks */,
+				00DB3EBE14B30A1E00B5963C /* libvorbisfile.a in Frameworks */,
+				00DB3EBF14B30A1E00B5963C /* libx264.a in Frameworks */,
+				00DB3EC014B30A1E00B5963C /* libxml2.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -484,40 +481,39 @@
 		001F2F0514A80A8B00086BB8 /* contrib */ = {
 			isa = PBXGroup;
 			children = (
-				001F2F9414A81AFE00086BB8 /* liba52.a */,
-				001F2F9514A81AFE00086BB8 /* libass.a */,
-				001F2F9614A81AFE00086BB8 /* libavcodec.a */,
-				001F2F9714A81AFE00086BB8 /* libavcore.a */,
-				001F2F9814A81AFE00086BB8 /* libavdevice.a */,
-				001F2F9914A81AFE00086BB8 /* libavfilter.a */,
-				001F2F9A14A81AFE00086BB8 /* libavformat.a */,
-				001F2F9B14A81AFE00086BB8 /* libavutil.a */,
-				001F2F9C14A81AFE00086BB8 /* libbluray.a */,
-				001F2F9D14A81AFE00086BB8 /* libdca.a */,
-				001F2F9E14A81AFE00086BB8 /* libdvdnav.a */,
-				001F2F9F14A81AFE00086BB8 /* libdvdnavmini.a */,
-				001F2FA014A81AFE00086BB8 /* libdvdread.a */,
-				001F2FA114A81AFE00086BB8 /* libfaac.a */,
-				001F2FA214A81AFE00086BB8 /* libfaad.a */,
-				001F2FA314A81AFE00086BB8 /* libfontconfig.a */,
-				001F2FA414A81AFE00086BB8 /* libfreetype.a */,
-				001F2FA514A81AFE00086BB8 /* libmkv.a */,
-				001F2FA614A81AFE00086BB8 /* libmp3lame.a */,
-				001F2FA714A81AFE00086BB8 /* libmp4ff.a */,
-				001F2FA814A81AFE00086BB8 /* libmp4v2.a */,
-				001F2FA914A81AFE00086BB8 /* libmpeg2.a */,
-				001F2FAA14A81AFE00086BB8 /* libmpeg2convert.a */,
-				001F2FAB14A81AFE00086BB8 /* libogg.a */,
-				001F2FAC14A81AFE00086BB8 /* libsamplerate.a */,
-				001F2FAD14A81AFE00086BB8 /* libswscale.a */,
-				001F2FAE14A81AFE00086BB8 /* libtheora.a */,
-				001F2FAF14A81AFE00086BB8 /* libtheoradec.a */,
-				001F2FB014A81AFE00086BB8 /* libtheoraenc.a */,
-				001F2FB114A81AFE00086BB8 /* libvorbis.a */,
-				001F2FB214A81AFE00086BB8 /* libvorbisenc.a */,
-				001F2FB314A81AFE00086BB8 /* libvorbisfile.a */,
-				001F2FB414A81AFE00086BB8 /* libx264.a */,
-				001F2FB514A81AFE00086BB8 /* libxml2.a */,
+				00DB3E7F14B30A1E00B5963C /* liba52.a */,
+				00DB3E8014B30A1E00B5963C /* libass.a */,
+				00DB3E8114B30A1E00B5963C /* libavcodec.a */,
+				00DB3E8214B30A1E00B5963C /* libavdevice.a */,
+				00DB3E8314B30A1E00B5963C /* libavfilter.a */,
+				00DB3E8414B30A1E00B5963C /* libavformat.a */,
+				00DB3E8514B30A1E00B5963C /* libavutil.a */,
+				00DB3E8614B30A1E00B5963C /* libbluray.a */,
+				00DB3E8714B30A1E00B5963C /* libdca.a */,
+				00DB3E8814B30A1E00B5963C /* libdvdnav.a */,
+				00DB3E8914B30A1E00B5963C /* libdvdnavmini.a */,
+				00DB3E8A14B30A1E00B5963C /* libdvdread.a */,
+				00DB3E8B14B30A1E00B5963C /* libfaac.a */,
+				00DB3E8C14B30A1E00B5963C /* libfontconfig.a */,
+				00DB3E8D14B30A1E00B5963C /* libfreetype.a */,
+				00DB3E8E14B30A1E00B5963C /* libfribidi.a */,
+				00DB3E8F14B30A1E00B5963C /* libmkv.a */,
+				00DB3E9014B30A1E00B5963C /* libmp3lame.a */,
+				00DB3E9114B30A1E00B5963C /* libmp4v2.a */,
+				00DB3E9214B30A1E00B5963C /* libmpeg2.a */,
+				00DB3E9314B30A1E00B5963C /* libmpeg2convert.a */,
+				00DB3E9414B30A1E00B5963C /* libogg.a */,
+				00DB3E9514B30A1E00B5963C /* libpostproc.a */,
+				00DB3E9614B30A1E00B5963C /* libsamplerate.a */,
+				00DB3E9714B30A1E00B5963C /* libswscale.a */,
+				00DB3E9814B30A1E00B5963C /* libtheora.a */,
+				00DB3E9914B30A1E00B5963C /* libtheoradec.a */,
+				00DB3E9A14B30A1E00B5963C /* libtheoraenc.a */,
+				00DB3E9B14B30A1E00B5963C /* libvorbis.a */,
+				00DB3E9C14B30A1E00B5963C /* libvorbisenc.a */,
+				00DB3E9D14B30A1E00B5963C /* libvorbisfile.a */,
+				00DB3E9E14B30A1E00B5963C /* libx264.a */,
+				00DB3E9F14B30A1E00B5963C /* libxml2.a */,
 			);
 			path = contrib;
 			sourceTree = "<group>";
@@ -833,7 +829,6 @@
 				MACOSX_DEPLOYMENT_TARGET = 10.7;
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_CFLAGS = (
-					"-D__LIBHB__",
 					"-DDEVELOPMENT",
 				);
 				OTHER_LDFLAGS = (
@@ -901,6 +896,10 @@
 					"$(inherited)",
 					"\"$(SRCROOT)/libraries/HandBrake\"",
 					"\"$(SRCROOT)/libraries/HandBrake/contrib\"",
+				);
+				OTHER_CFLAGS = (
+					"-DDEVELOPMENT",
+					"-D__LIBHB__",
 				);
 				OTHER_LDFLAGS = "${inherited}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
