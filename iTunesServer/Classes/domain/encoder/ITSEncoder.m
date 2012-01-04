@@ -11,17 +11,31 @@
 #import <MediaManagement/MMTitleList.h>
 #import <MediaManagement/MMTitle.h>
 #import <MediaManagement/MMSubtitleTrack.h>
+
 #import "MMAudioTrack+MMAudioTrack_Handbrake.h"
+#import "MMTitle+MMTitle_Handbrake.h"
 
 static ITSEncoder *sharedEncoder;
 
 @interface ITSEncoder()
+// scanning/extracting content from a scan
 - (void) performScanAtPath: (NSString *) path withHandbrakeHandle: (hb_handle_t *) handle;
 - (MMTitleList *) readTitleListFromLastScanWithPath: (NSString *) path withHandbrakeHandle: (hb_handle_t *) handle;
 - (NSArray *) soundTracksFromHBTitle: (hb_title_t *) hbTitle;
 - (NSArray *) subtitleTracksFromHBTitle: (hb_title_t *) hbTitle;
 
+// scheduling encodes
 - (void) performScheduleTitleListForEncode: (MMTitleList *) titleList;
+- (void) setupVideoParametersFromTitle: (MMTitle *) title 
+                    withHandbrakeTitle: (hb_title_t *) handbrakeTitle 
+                        toHandbrakeJob: (hb_job_t *) job;
+- (void) addAudioTracksFromTitle: (MMTitle *) title 
+              withHandbrakeTitle: (hb_title_t *) handbrakeTitle 
+                  toHandbrakeJob: (hb_job_t *) job;
+- (void) addSubtitleTracksFromTitle: (MMTitle *) title 
+                 withHandbrakeTitle: (hb_title_t *) handbrakeTitle 
+                     toHandbrakeJob: (hb_job_t *) job
+;
 @end
 
 @implementation ITSEncoder
@@ -150,8 +164,8 @@ static ITSEncoder *sharedEncoder;
     // now read basic fields and create Title object from them
     NSInteger index = (NSInteger) hbTitle->index;
     
-    NSInteger duration = hbTitle->duration;
-    MMTitle *mmTitle = [MMTitle titleWithIndex: index andDuration: duration];
+    NSInteger duration = (NSInteger) hbTitle->duration;
+    MMTitle *mmTitle = [MMTitle titleWithIndex: index andHandbrakeDuration: duration];
     [titleList addtitle: mmTitle];
     
     NSArray *soundTracks = [self soundTracksFromHBTitle: hbTitle];
@@ -296,16 +310,11 @@ static ITSEncoder *sharedEncoder;
   
   encoderScanInProgress = NO;
 }
-static void hb_cli_error_handler ( const char *errmsg )
-{
-  fprintf( stderr, "ERROR: %s\n", errmsg );
-}
-
 
 #pragma mark actual schedule (libhb)
 - (void) performScheduleTitleListForEncode: (MMTitleList *) titleList
 {
-      hb_register_error_handler(&hb_cli_error_handler);
+
   // grab the handbrake title list first, and make sure it actually exist.
   hb_list_t *titles = hb_get_titles(handbrakeEncodingHandle);
   if(titles == NULL)
@@ -317,94 +326,68 @@ static void hb_cli_error_handler ( const char *errmsg )
   int jobIndex = hb_count(handbrakeEncodingHandle) ;
   // schedule every selected title
   NSArray *selectedTitles = titleList.selectedTitles;
-  for(MMTitle *title in titleList.titles)
+  for(MMTitle *title in selectedTitles)
   {
-    // skip if index is beyond count, just in case the data somehow got corrupted.
-//    if(title.index > titlesCount)
-//    {
-//      continue;
-//    }
+    // grab the position of the title in the hb_list (different than title index, 
+    // which could be the DVD title on VIDEO_TS content)
+    NSInteger titlePosition = [titleList indexOfTitle: title];
+    
+    // skip if position is beyond count, just in case the data somehow got corrupted.
+    // We don't want a stupid out of bounds index, do we?
+    if(titlePosition > titlesCount)
+    {
+      continue;
+    }
 
-    hb_title_t *handbrakeTitle = hb_list_item(titles, 0);
+    hb_title_t *handbrakeTitle = hb_list_item(titles, (int) titlePosition);
+    
     // the job that will be submitted
     hb_job_t *job = handbrakeTitle->job;
     
     // enqueue the job as the last one
     job->sequence_id = jobIndex;
     job->title = handbrakeTitle;
-    
-    // encode all chapters
+    // output file name
+    NSString *fileName = [titleList.name stringByDeletingPathExtension];
+    NSString *file = [NSString stringWithFormat: @"/Users/olarivain/Movies/output/%@-%i.m4v", fileName, title.index];
+    job->file = [file cStringUsingEncoding: NSUTF8StringEncoding];
+    // encode all chapters, client side doesn't do any of that fancy stuff
+#if DEBUG_ENCODER == 1
+    // except in debug mode, just encode a minute, 'cause I'm tired of waiting 45 minutes
+    // for my tests to go through :)
+    job->pts_to_start = 300 * 90000;
+    job->pts_to_stop = 420 * 90000;
+#else
     job->chapter_start = 1;
     job->chapter_end = hb_list_count(handbrakeTitle->list_chapter);
-//    
-    // and mark them in mp4 file
-    job->chapter_markers = 0;
+#endif
+    // and mark them in resulting file
+    job->chapter_markers = 1;
     
     // we want to produce an mp4 file (of course)
     job->mux = HB_MUX_MP4;
-    
-    // set video codec to x264 (of course)
-    job->vcodec = HB_VCODEC_X264;
-    job->vquality = -1;
-    job->vbitrate = 1500;
-    job->width = 720;
-    job->height = 480;
-    job->cfr = 1;
-    job->angle = 1;
-    job->anamorphic.mode = 0;
-    
-    job->keep_ratio = 1;
-    job->pass = 0;
+    // for now, no large file is needed
     job->largeFileSize = 0;
+    
+    // fuck HTTP optimization, we don't need that in our use case
     job->mp4_optimize = 0;
-    job->crop[0] = 0;
-    job->crop[1] = 0;
-    job->crop[2] = 0;
-    job->crop[3] = 0;
+    
+    // setup video params
+    [self setupVideoParametersFromTitle: title
+                     withHandbrakeTitle: handbrakeTitle
+                         toHandbrakeJob: job];
 
-    hb_audio_config_t * audio = NULL;
-    audio = (hb_audio_config_t *) calloc(1, sizeof(*audio));
-    hb_audio_config_init(audio);
-    audio->in.track = 1;
-    /* We go ahead and assign values to our audio->out.<properties> */
-    audio->out.track = audio->in.track;
-    audio->out.dynamic_range_compression = 0.7f;
-    audio->out.codec = HB_ACODEC_FAAC;
-    audio->out.mixdown = HB_AMIXDOWN_STEREO;
-    audio->out.bitrate = 128;
-    audio->out.samplerate = 44000;
+    // then add audio tracks to the job
+    [self addAudioTracksFromTitle: title 
+               withHandbrakeTitle: handbrakeTitle 
+                   toHandbrakeJob: job];
     
-    hb_audio_add( job, audio );
-    free(audio);
+    // and last but not least, add subtitle tracks to the job
+    [self addSubtitleTracksFromTitle: title 
+                  withHandbrakeTitle: handbrakeTitle 
+                      toHandbrakeJob: job];
 
-//    for( int i = 0; i < audiotrack_count; i++ )
-//    {
-//      hb_audio_t * temp_audio = (hb_audio_t*) hb_list_item( job->list_audio, 0 );
-//      hb_list_rem(job->list_audio, temp_audio);
-//    }    
-//    hb_list_add(job->list_audio, hb_list_item(handbrakeTitle->list_audio, 0));
-////    job->acodec_copy_mask = 0;
-////    job->acodec_copy_mask |= HB_ACODEC_FFAAC;
-    
-//    int subtitle_count = hb_list_count(job->list_subtitle);
-//    for( int i = 0; i < subtitle_count; i++ )
-//    {
-//      hb_subtitle_t * temp_subtitle = (hb_subtitle_t*) hb_list_item( job->list_subtitle, 0 );
-//      hb_list_rem(job->list_subtitle, temp_subtitle);
-//    }
-    
-    // advanced H264 options
-    NSString *options = @"ref=2:bframes=2:subq=6:mixed-refs=0:weightb=0:8x8dct=0:trellis=0";
-    job->advanced_opts = (char *)calloc(1024, 0); /* Fixme, this just leaks */
-//    strcpy(job->advanced_opts, [options cStringUsingEncoding: NSUTF8StringEncoding]);
-    
-    // output file name
-    NSString *file = [NSString stringWithFormat: @"/Users/olarivain/%@-%i.m4v", titleList.name, title.index];
-    job->file = [file cStringUsingEncoding: NSUTF8StringEncoding];
-    
-    job->filters = hb_list_init();
-    job->indepth_scan = 0;
-
+    // and add to encoding queue
     hb_add(handbrakeEncodingHandle, job);
     jobIndex++;
   }
@@ -415,15 +398,179 @@ static void hb_cli_error_handler ( const char *errmsg )
   {
     hb_start(handbrakeEncodingHandle);
   }
+}
+
+- (void) setupVideoParametersFromTitle: (MMTitle *) title 
+                    withHandbrakeTitle: (hb_title_t *) handbrakeTitle 
+                        toHandbrakeJob: (hb_job_t *) job
+{
+  // set video codec to x264 (of course)
+  job->vcodec = HB_VCODEC_X264;
+  job->vquality = 20.5;
+  job->vbitrate = -1;
   
-//  NSRunLoop *runLoop = [NSRunLoop currentRunLoop];
-//  while([runLoop runMode:NSDefaultRunLoopMode beforeDate:[NSDate dateWithTimeIntervalSinceNow:0.2]])
-//  {
-//    hb_state_t scannerState;
-//    hb_get_state(handbrakeEncodingHandle, &scannerState);
-//    NSLog(@"state %i with error %i", scannerState.state, scannerState.param.workdone);
-//  }
+  // single pass, since we're doing constant quality
+  job->pass = 0;
   
+  // advanced H264 options, copied over from handbrake.
+  NSString *options = @"ref=2:bframes=2:subq=6:mixed-refs=0:weightb=0:8x8dct=0:trellis=0";
+  job->advanced_opts = (char *)calloc([options length] + 1, 1); /* Fixme, this just leaks */
+  strcpy(job->advanced_opts, [options cStringUsingEncoding: NSUTF8StringEncoding]);
+  
+  //    Just checking if job template is properly prefilled
+  //    job->width = 720;
+  //    job->height = 480;
+  NSLog(@"duration: %llu", handbrakeTitle->duration /90000);
+  NSLog(@"Width/Height: %i*%i", job->width, job->height);
+  // we want a constant framerate
+  job->cfr = 1;
+  
+  //    Just checking if the job template is properly filled
+  NSLog(@"Anamorphic mode: %i", job->anamorphic.mode);
+  //    job->anamorphic.mode = 0;
+  
+  // we definitely want to keep the aspect ratio
+  job->keep_ratio = 1;
+  
+  //Just checking if crop settings defaults are OK
+  NSLog(@"crop settings: %i %i %i %i", job->crop[0], job->crop[1], job->crop[2], job->crop[3]);
+  //    job->crop[0] = 0;
+  //    job->crop[1] = 0;
+  //    job->crop[2] = 0;
+  //    job->crop[3] = 0;
+  
+  // for now, skip filters
+  job->filters = hb_list_init();
+}
+
+- (void) addAudioTracksFromTitle: (MMTitle *) title 
+              withHandbrakeTitle: (hb_title_t *) handbrakeTitle 
+                  toHandbrakeJob: (hb_job_t *) job
+{
+  // first, free up the job's audio list.
+  int jobAudioTrackCount = hb_list_count(job->list_audio);
+  for(int i = 0; i < jobAudioTrackCount; i++)
+  {
+    hb_audio_t *toRemove =hb_list_item(job->list_audio, 0);
+    hb_list_rem(job->list_audio, toRemove);
+  }
+  
+  int audioTrackCount = hb_list_count(handbrakeTitle->list_audio);
+  // now, go through all selected audio tracks and add them
+  NSArray *selectedAudioTracks = title.selectedAudioTracks;
+  for(MMAudioTrack *selectedAudioTrack in selectedAudioTracks)
+  {
+    // same thing than with titles, grab the hb audio track index from MMAudioTrack
+    NSInteger audioIndex = [title indexOfAudioTrack: selectedAudioTrack];
+    // make sure input is safe
+    if(audioIndex > audioTrackCount)
+    {
+      continue;
+    }
+    
+    // let's create audio config now.
+    // first, extract the relevant audio config from hb audio list so we can copy stuff over.
+    hb_audio_config_t *audioTemplateConfig = hb_list_item(handbrakeTitle->list_audio, (int) audioIndex);
+    
+    
+    // now is time to create the schedule audio config.
+    // the first track is always AAC. if input source is not AC3/DTS, then mixdown to stereo AAC.
+    // if it is, the first track must still be AAC, so iThingies will actually play them properly.
+    // So, go on and add AAC audio track to job.
+    // first, basic setup
+    hb_audio_config_t *audio = (hb_audio_config_t *) calloc(1, sizeof(*audio));
+    hb_audio_config_init(audio);
+    
+    // then copy shit over from template
+    audio->in.track = audioTemplateConfig->in.track;
+    audio->out.track = audio->in.track;
+    
+    // drop dynamic range just because the HB guys do it in their tool.
+    audio->out.dynamic_range_compression = 0.7f;
+    
+    // AAC codec, CoreAudio flavor, with Pro Logic II mixdow
+    audio->out.codec = HB_ACODEC_CA_AAC;
+    audio->out.mixdown = HB_AMIXDOWN_DOLBYPLII;
+    
+    // keep sample rate, but drop bitrate to 192kbps
+    audio->out.samplerate = 48000;
+    audio->out.bitrate = hb_get_default_audio_bitrate(HB_ACODEC_CA_AAC, 
+                                                      HB_AMIXDOWN_DOLBYPLII, 
+                                                      audioTemplateConfig->in.samplerate);
+
+    // and schedule that.
+    hb_audio_add(job, audio);
+    // don't forget the clean up, little panda!
+    free(audio);
+    audio = NULL;
+    
+    // track was AC3/DTS, so add the passthrough. Note: we want to do that only if it's actual surround
+    // sound, it's pointless to pass it through if it's stereo, we will be better off with only AAC 
+    // in that case.
+    if(selectedAudioTrack.channelCount > 3 && 
+       (selectedAudioTrack.codec == AUDIO_CODEC_AC3 || selectedAudioTrack.codec == AUDIO_CODEC_DTS))
+    {
+      // same same, init
+      audio = (hb_audio_config_t *) calloc(1, sizeof(*audio));
+      hb_audio_config_init(audio);
+      // then copy shit over
+      audio->in.track = audioTemplateConfig->in.track;
+      audio->out.track = audio->in.track;
+      audio->out.dynamic_range_compression = 0.7f;
+      
+      // pick right passthru codec
+      BOOL isAC3 = selectedAudioTrack.codec == AUDIO_CODEC_AC3;
+      audio->out.codec = isAC3 ? HB_ACODEC_AC3_PASS : HB_ACODEC_DCA_PASS;
+      
+      // passthru, dude!
+      audio->out.mixdown = isAC3 ? HB_ACODEC_AC3 : HB_ACODEC_DCA;
+      
+      // this time, bitrate and samplerate are just copied over.
+      audio->out.bitrate = audioTemplateConfig->in.bitrate;
+      audio->out.samplerate = audioTemplateConfig->in.samplerate;
+      
+      // and schedule audio track
+      hb_audio_add(job, audio);
+      free(audio);
+    }
+  }
+}
+
+- (void) addSubtitleTracksFromTitle: (MMTitle *) title 
+              withHandbrakeTitle: (hb_title_t *) handbrakeTitle 
+                  toHandbrakeJob: (hb_job_t *) job
+{
+  // first, free up the job's subtitle list.
+  int jobSubtitleTrackCount = hb_list_count(job->list_subtitle);
+  for(int i = 0; i < jobSubtitleTrackCount; i++)
+  {
+    hb_subtitle_t *toRemove =hb_list_item(job->list_subtitle, 0);
+    hb_list_rem(job->list_subtitle, toRemove);
+  }
+  
+  int subtitleTrackCount = hb_list_count(handbrakeTitle->list_subtitle);
+  // now, go through all selected subtitl tracks and add them
+  NSArray *selectedSubtitleTracks = title.selectedSubtitleTracks;
+  for(MMSubtitleTrack *selectedSubtitleTrack in selectedSubtitleTracks)
+  {
+    // same thing than with titles, grab the hb audio track index from MMSubtitleTRack
+    NSInteger subtitleIndex = [title indexOfSubtitleTrack: selectedSubtitleTrack];
+    // make sure input is safe
+    if(subtitleIndex > subtitleTrackCount)
+    {
+      continue;
+    }
+
+    // grab subtitle track now
+    hb_subtitle_t * subt = hb_list_item(handbrakeTitle->list_subtitle, (int) subtitleIndex);
+    
+    // passthru for CC, render it otherwise
+    enum subdest destination = selectedSubtitleTrack.type == SUBTITLE_CLOSED_CAPTION ? PASSTHRUSUB : RENDERSUB;
+    subt->config.dest = destination;
+    
+    // and schedule the bastard!
+    hb_subtitle_add(job, &subt->config, (int) subtitleIndex);
+  }
 }
 
 #pragma mark Encoer Scanner timers
@@ -431,19 +578,11 @@ static void hb_cli_error_handler ( const char *errmsg )
 {
   hb_state_t scannerState;
   hb_get_state(handbrakeEncodingHandle, &scannerState);
-//  NSLog(@"state %i with error %i", scannerState.state, scannerState.param.workdone);
   if(scannerState.state == HB_STATE_SCANDONE || scannerState.state == HB_STATE_IDLE)
   {
     encoderScanIsDone = YES;
     [timer invalidate];
   }
-}
-
-- (void) timerCheckEncoding: (NSTimer *) timer
-{
-  hb_state_t scannerState;
-  hb_get_state(handbrakeEncodingHandle, &scannerState);
-  NSLog(@"state: %i", scannerState.state);
 }
 
 @end

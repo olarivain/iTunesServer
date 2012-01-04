@@ -86,6 +86,7 @@
 		00DB3EBE14B30A1E00B5963C /* libvorbisfile.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 00DB3E9D14B30A1E00B5963C /* libvorbisfile.a */; };
 		00DB3EBF14B30A1E00B5963C /* libx264.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 00DB3E9E14B30A1E00B5963C /* libx264.a */; };
 		00DB3EC014B30A1E00B5963C /* libxml2.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 00DB3E9F14B30A1E00B5963C /* libxml2.a */; };
+		00DB3EDB14B40EC000B5963C /* MMTitle+MMTitle_Handbrake.m in Sources */ = {isa = PBXBuildFile; fileRef = 00DB3EDA14B40EBF00B5963C /* MMTitle+MMTitle_Handbrake.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -206,6 +207,8 @@
 		00DB3E9D14B30A1E00B5963C /* libvorbisfile.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libvorbisfile.a; sourceTree = "<group>"; };
 		00DB3E9E14B30A1E00B5963C /* libx264.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libx264.a; sourceTree = "<group>"; };
 		00DB3E9F14B30A1E00B5963C /* libxml2.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libxml2.a; sourceTree = "<group>"; };
+		00DB3ED914B40EBF00B5963C /* MMTitle+MMTitle_Handbrake.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "MMTitle+MMTitle_Handbrake.h"; path = "domain/encoder/MMTitle+MMTitle_Handbrake.h"; sourceTree = "<group>"; };
+		00DB3EDA14B40EBF00B5963C /* MMTitle+MMTitle_Handbrake.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "MMTitle+MMTitle_Handbrake.m"; path = "domain/encoder/MMTitle+MMTitle_Handbrake.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -525,6 +528,8 @@
 				001F2FDA14A81C3800086BB8 /* ITSEncoder.m */,
 				00823F9814AE7A7900CEDDEB /* MMAudioTrack+MMAudioTrack_Handbrake.h */,
 				00823F9914AE7A7900CEDDEB /* MMAudioTrack+MMAudioTrack_Handbrake.m */,
+				00DB3ED914B40EBF00B5963C /* MMTitle+MMTitle_Handbrake.h */,
+				00DB3EDA14B40EBF00B5963C /* MMTitle+MMTitle_Handbrake.m */,
 			);
 			name = encoder;
 			sourceTree = "<group>";
@@ -743,6 +748,7 @@
 				0023635F14ACF7350084A054 /* ITSTrackResource.m in Sources */,
 				0023636014ACF7350084A054 /* ITSEncodeResource.m in Sources */,
 				00823F9A14AE7A7900CEDDEB /* MMAudioTrack+MMAudioTrack_Handbrake.m in Sources */,
+				00DB3EDB14B40EC000B5963C /* MMTitle+MMTitle_Handbrake.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -829,7 +835,9 @@
 				MACOSX_DEPLOYMENT_TARGET = 10.7;
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_CFLAGS = (
+					"-D__LIBHB__",
 					"-DDEVELOPMENT",
+					"-DDEBUG_ENCODER=1",
 				);
 				OTHER_LDFLAGS = (
 					"-Objc",
@@ -897,10 +905,7 @@
 					"\"$(SRCROOT)/libraries/HandBrake\"",
 					"\"$(SRCROOT)/libraries/HandBrake/contrib\"",
 				);
-				OTHER_CFLAGS = (
-					"-DDEVELOPMENT",
-					"-D__LIBHB__",
-				);
+				OTHER_CFLAGS = "${inherited}";
 				OTHER_LDFLAGS = "${inherited}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
@@ -918,6 +923,7 @@
 					"\"$(SRCROOT)/libraries/HandBrake\"",
 					"\"$(SRCROOT)/libraries/HandBrake/contrib\"",
 				);
+				OTHER_CFLAGS = "${inherited}";
 				OTHER_LDFLAGS = "${inherited}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
