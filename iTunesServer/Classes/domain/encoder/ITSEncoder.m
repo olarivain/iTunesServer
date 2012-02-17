@@ -5,15 +5,17 @@
 //  Created by Larivain, Olivier on 12/25/11.
 //  Copyright (c) 2011 Edmunds. All rights reserved.
 //
-
-#import "ITSEncoder.h"
-
 #import <MediaManagement/MMTitleList.h>
 #import <MediaManagement/MMTitle.h>
 #import <MediaManagement/MMSubtitleTrack.h>
 
+#import "ITSEncoder.h"
+
 #import "MMAudioTrack+MMAudioTrack_Handbrake.h"
 #import "MMTitle+MMTitle_Handbrake.h"
+
+#import "ITSConfigurationRepository.h"
+#import "ITSConfiguration.h"
 
 static ITSEncoder *sharedEncoder;
 
@@ -348,8 +350,10 @@ static ITSEncoder *sharedEncoder;
     job->sequence_id = jobIndex;
     job->title = handbrakeTitle;
     // output file name
-    NSString *fileName = [titleList.name stringByDeletingPathExtension];
-    NSString *file = [NSString stringWithFormat: @"/Users/olarivain/Movies/output/%@-%i.m4v", fileName, title.index];
+    
+    ITSConfigurationRepository *configurationRepository = [ITSConfigurationRepository sharedInstance];
+    ITSConfiguration *configuration = [configurationRepository readConfiguration];
+    NSString *file = [NSString stringWithFormat: @"%@/%@-%i.m4v", configuration.autoScanPath, titleList.name, title.index];
     job->file = [file cStringUsingEncoding: NSUTF8StringEncoding];
     // encode all chapters, client side doesn't do any of that fancy stuff
 #if DEBUG_ENCODER == 1
