@@ -54,8 +54,8 @@ static ITSEncoder *sharedEncoder;
   self = [super init];
   if(self)
   {
-    // we want to use dvd nav library
-    hb_dvd_set_dvdnav(false);
+    // we want to use dvdnav library, dvdread crashes on 0 length titles
+    hb_dvd_set_dvdnav(true);
     
     // init hb library  
     // tell it to STFU and to not check for updates.
@@ -114,8 +114,8 @@ static ITSEncoder *sharedEncoder;
     scanIsDone = NO;
   }
   
-  // ask libhb to scan requested content
-  hb_scan(handle, [path UTF8String], 0, 10, 1 , 1 );
+  // ask libhb to scan requested content. At least one preview is required, libhb won't scan otherwise.
+  hb_scan(handle, [path UTF8String], 0, 1, 0, 90000L * 10);
   
   SEL selector = isEncodeScan ? @selector(timerCheckEncodingScanner:) : @selector(timerCheckScanner:);
   
