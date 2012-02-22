@@ -30,7 +30,7 @@ task :build do
 	builder.build
 end
 
-task :deploy do
+task :install do
 	puts "Deploying " + name
 	builder.deploy
 end
@@ -39,7 +39,7 @@ task :release => [:setup, :clean, :build, :deploy] do
 	builder.release
 end
 
-task :macmini do
+task :deploy do
   allBuilders.clean
   allBuilders.build
   allBuilders.deploy
