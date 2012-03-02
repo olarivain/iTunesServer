@@ -667,7 +667,7 @@
 		000CE85D1494536D003002C3 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0420;
+				LastUpgradeCheck = 0430;
 				ORGANIZATIONNAME = Edmunds;
 			};
 			buildConfigurationList = 000CE8601494536D003002C3 /* Build configuration list for PBXProject "iTunesServer" */;
@@ -933,19 +933,29 @@
 		000CE90614945F33003002C3 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALTERNATE_PERMISSIONS_FILES = (
+					x86_64,
+					i386,
+				);
 				ALWAYS_SEARCH_USER_PATHS = YES;
 				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
+				CLANG_ENABLE_OBJC_ARC = NO;
+				CLANG_WARN_OBJCPP_ARC_ABI = YES;
 				GCC_ENABLE_OBJC_GC = supported;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "iTunesServerPrefPane/iTunesServerPrefPane-Prefix.pch";
+				GCC_VERSION = "";
 				INFOPLIST_FILE = "iTunesServerPrefPane/iTunesServerPrefPane-Info.plist";
 				INSTALL_PATH = "$(HOME)/Library/PreferencePanes";
+				ONLY_ACTIVE_ARCH = NO;
 				OTHER_LDFLAGS = (
 					"-Objc",
 					"-all_load",
 					"-lKraCommons-x86",
 				);
 				PRODUCT_NAME = "iTunes Server";
+				SDKROOT = macosx;
+				VALID_ARCHS = "${inherited}";
 				WRAPPER_EXTENSION = prefPane;
 			};
 			name = Debug;
@@ -953,11 +963,18 @@
 		000CE90714945F33003002C3 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALTERNATE_PERMISSIONS_FILES = (
+					x86_64,
+					i386,
+				);
 				ALWAYS_SEARCH_USER_PATHS = YES;
 				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
+				CLANG_ENABLE_OBJC_ARC = NO;
+				CLANG_WARN_OBJCPP_ARC_ABI = YES;
 				GCC_ENABLE_OBJC_GC = supported;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "iTunesServerPrefPane/iTunesServerPrefPane-Prefix.pch";
+				GCC_VERSION = "";
 				INFOPLIST_FILE = "iTunesServerPrefPane/iTunesServerPrefPane-Info.plist";
 				INSTALL_PATH = "$(HOME)/Library/PreferencePanes";
 				OTHER_LDFLAGS = (
@@ -966,6 +983,8 @@
 					"-lKraCommons-x86",
 				);
 				PRODUCT_NAME = "iTunes Server";
+				SDKROOT = macosx;
+				VALID_ARCHS = "${inherited}";
 				WRAPPER_EXTENSION = prefPane;
 			};
 			name = Release;

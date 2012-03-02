@@ -62,8 +62,17 @@
   BOOL isFolder = NO;
   if(![fileManager fileExistsAtPath: automaticallyImportPath isDirectory: &isFolder] && !isFolder)
   {
-    [self setScannedPath: nil];
-    return;
+      
+    automaticallyImportPath = [NSString stringWithFormat: @"%@/iTunes Media/Automatically Add to iTunes/", libraryFolder];
+    if(![fileManager fileExistsAtPath: automaticallyImportPath isDirectory: &isFolder] && !isFolder)
+    {
+      automaticallyImportPath = [NSString stringWithFormat: @"%@/iTunes Media/Automatically Add to iTunes.localized/", libraryFolder];
+      if(![fileManager fileExistsAtPath: automaticallyImportPath isDirectory: &isFolder] && !isFolder)
+      {
+        [self setScannedPath: nil];
+        return;
+      }
+    }
   }
   
   // Now, we can set the destination path

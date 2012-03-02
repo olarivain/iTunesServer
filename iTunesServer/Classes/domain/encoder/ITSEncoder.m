@@ -117,7 +117,7 @@ static ITSEncoder *sharedEncoder;
   }
   
   // ask libhb to scan requested content. At least one preview is required, libhb won't scan otherwise.
-  hb_scan(handle, [path UTF8String], 0, 1, 0, 90000L * 10);
+  hb_scan(handle, [path UTF8String], 0, 30, 0, 90000L * 10);
   
   SEL selector = isEncodeScan ? @selector(timerCheckEncodingScanner:) : @selector(timerCheckScanner:);
   
@@ -354,13 +354,16 @@ static ITSEncoder *sharedEncoder;
     ITSConfigurationRepository *configurationRepository = [ITSConfigurationRepository sharedInstance];
     ITSConfiguration *configuration = [configurationRepository readConfiguration];
     NSString *file = [NSString stringWithFormat: @"%@/%@-%i.m4v", configuration.autoScanPath, titleList.name, title.index];
+    NSLog(@"Outputing to %@", file);
+//    #warning fix output path
+//    NSString *file = [NSString stringWithFormat: @"/Users/olarivain/Movies/%@-%i.m4v", titleList.name, title.index];
     job->file = [file cStringUsingEncoding: NSUTF8StringEncoding];
     // encode all chapters, client side doesn't do any of that fancy stuff
 #if DEBUG_ENCODER == 1
     // except in debug mode, just encode a minute, 'cause I'm tired of waiting 45 minutes
     // for my tests to go through :)
     job->pts_to_start = 300 * 90000;
-    job->pts_to_stop = 420 * 90000;
+    job->pts_to_stop = 60 * 90000;
 #else
     job->chapter_start = 1;
     job->chapter_end = hb_list_count(handbrakeTitle->list_chapter);
@@ -416,35 +419,34 @@ static ITSEncoder *sharedEncoder;
   // single pass, since we're doing constant quality
   job->pass = 0;
   
-  // advanced H264 options, copied over from handbrake.
-  NSString *options = @"ref=2:bframes=2:subq=6:mixed-refs=0:weightb=0:8x8dct=0:trellis=0";
+  // advanced H264 options, copied over from handbrake, corresponds to their high profile
+  NSString *options = @"b-adapt=2:rc-lookahead=50";
   job->advanced_opts = (char *)calloc([options length] + 1, 1); /* Fixme, this just leaks */
   strcpy(job->advanced_opts, [options cStringUsingEncoding: NSUTF8StringEncoding]);
   
-  //    Just checking if job template is properly prefilled
-  //    job->width = 720;
-  //    job->height = 480;
-  NSLog(@"duration: %llu", handbrakeTitle->duration /90000);
-  NSLog(@"Width/Height: %i*%i", job->width, job->height);
-  // we want a constant framerate
-  job->cfr = 1;
+  // we don't want a constant framerate. Whatever the title says, dude.
+  job->cfr = 0;
+  // copy over video frame rate
+  job->vrate = handbrakeTitle->rate;
+  job->vrate_base = handbrakeTitle->rate_base;;
   
-  //    Just checking if the job template is properly filled
-  NSLog(@"Anamorphic mode: %i", job->anamorphic.mode);
-  //    job->anamorphic.mode = 0;
+  // I figured this worked, hope it doesn't break other stuff
+  job->anamorphic.mode = 0;
   
   // we definitely want to keep the aspect ratio
   job->keep_ratio = 1;
+  hb_fix_aspect( job, HB_KEEP_WIDTH );
   
-  //Just checking if crop settings defaults are OK
-  NSLog(@"crop settings: %i %i %i %i", job->crop[0], job->crop[1], job->crop[2], job->crop[3]);
-  //    job->crop[0] = 0;
-  //    job->crop[1] = 0;
-  //    job->crop[2] = 0;
-  //    job->crop[3] = 0;
-  
-  // for now, skip filters
+  // add decomb filters, the easiest and most likely relevant way of deinterlacing
   job->filters = hb_list_init();
+  // and just go with the default decomb settings, I wouldn't know what to put in there anyway.
+  hb_filter_decomb.settings = 0;
+  hb_list_add(job->filters, &hb_filter_decomb);
+  
+  // also add detelecine, as handbrake guys it's harmless when not needed
+  // and vital when needed
+  hb_filter_detelecine.settings = 0;
+  hb_list_add(job->filters, &hb_filter_detelecine);
 }
 
 - (void) addAudioTracksFromTitle: (MMTitle *) title 
