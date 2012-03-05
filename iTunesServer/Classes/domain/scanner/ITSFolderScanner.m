@@ -191,7 +191,7 @@
   
   // then we can start a new timer
   NSLog(@"Starting folder scanner at path: %@", path);
-  timer = [NSTimer scheduledTimerWithTimeInterval: 10 
+  timer = [NSTimer scheduledTimerWithTimeInterval: 60 
                                            target: self 
                                          selector: @selector(timerFired:) 
                                          userInfo: nil 
