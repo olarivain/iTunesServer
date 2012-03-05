@@ -27,6 +27,8 @@ static ITSEncoder *sharedEncoder;
 - (NSArray *) subtitleTracksFromHBTitle: (hb_title_t *) hbTitle;
 
 // scheduling encodes
+- (void) encodeNextTitleList;
+- (void) timerEncodeNextTitleList: (NSTimer *) timer;
 - (void) performScheduleTitleListForEncode: (MMTitleList *) titleList;
 - (void) setupVideoParametersFromTitle: (MMTitle *) title 
                     withHandbrakeTitle: (hb_title_t *) handbrakeTitle 
@@ -66,6 +68,15 @@ static ITSEncoder *sharedEncoder;
     scheduledTitles = [NSMutableArray arrayWithCapacity: 40];
     
     fileManager = [NSFileManager defaultManager];
+    
+    // schedule this sucker on the main loop, since we want it to keep firing always, no matter
+    // what. And we don't care if the main loop is stuck for 3 seconds, there's no UI to it.
+    encoderTimer = [NSTimer timerWithTimeInterval: 2 
+                                           target:self 
+                                         selector: @selector(timerEncodeNextTitleList:) 
+                                         userInfo: nil 
+                                          repeats: YES];
+    [[NSRunLoop mainRunLoop] addTimer: encoderTimer forMode: NSDefaultRunLoopMode];
   }
   
   return self;
@@ -109,9 +120,9 @@ static ITSEncoder *sharedEncoder;
   BOOL isEncodeScan = handle == handbrakeEncodingHandle;
   if(isEncodeScan)
   {
-    encoderScanIsDone = NO;
+    encoderScanIsDone = NO; 
   }
-  else
+  else 
   {
     scanIsDone = NO;
   }
@@ -291,30 +302,59 @@ static ITSEncoder *sharedEncoder;
     return;
   }
   
-  // scheduling encodes require hb_* opaque types, so we have to schedule an encode.
-  // same thing than for the regular scans, this is NOT thread safe, so use the same technique here
-  // than we did for regular scans.
-  // make sure only 1 thread can run a scan at a time
-  NSRunLoop *runLoop = [NSRunLoop currentRunLoop];
-  // this synchronized block should take care of synchronization, unless there's an obvious flaw I'm missing
-  @synchronized(self)
+  @synchronized(self) 
   {
-    while(encoderScanInProgress && [runLoop runMode:NSDefaultRunLoopMode beforeDate:[NSDate dateWithTimeIntervalSinceNow:0.2]])
+    // first, check if we already have that title list scheduled, if we do
+    // replace the scheduled instance with the new one
+    if([scheduledTitles containsObject: titleList]) 
     {
+      NSInteger index = [scheduledTitles indexOfObject: titleList];
+      if(index > -1 && index < [scheduledTitles count]) 
+      {
+        [scheduledTitles replaceObjectAtIndex: index withObject: titleList];
+      }
+    } 
+    // otherwise, just append it to the scheduled list
+    else 
+    {
+      [scheduledTitles addObject: titleList];
     }
-    
-    encoderScanInProgress = YES;
   }
-
-  // perform the scan so the handle is populated with the content
-  [self performScanAtPath: path withHandbrakeHandle: handbrakeEncodingHandle];
-  // and schedule for encoding
-  [self performScheduleTitleListForEncode: titleList];
   
-  encoderScanInProgress = NO;
+  // encoding will be scheduled by the encoding timer, so there isn't anything to do here,
+  // except return.
+  // we can't call encodeNextTitleList because it will block until the dvd has been scanned, 
+  // let'l just let the timer take care of that.
 }
 
 #pragma mark actual schedule (libhb)
+- (void) encodeNextTitleList 
+{  
+  @synchronized(self)
+  {
+    // encoder is busy or nothing to encode, just return
+    if(activeTitleList != nil || [scheduledTitles count] == 0) 
+    {
+      return;
+    }
+    
+    // pop from list to active title
+    activeTitleList = [scheduledTitles objectAtIndex: 0];
+    [scheduledTitles removeObjectAtIndex: 0];
+    
+    // flag the encoder as "we're scheduling something, so don't mess with us here"
+    encodeScheduleInProgress = YES;
+  }
+  
+  // perform the scan so the handle is populated with the content.
+  // this will block until done
+  [self performScanAtPath: activeTitleList.titleListId withHandbrakeHandle: handbrakeEncodingHandle];
+  
+  // and schedule for encoding
+  [self performScheduleTitleListForEncode: activeTitleList];
+  encodeScheduleInProgress = NO;
+}
+
 - (void) performScheduleTitleListForEncode: (MMTitleList *) titleList
 {
 
@@ -400,12 +440,8 @@ static ITSEncoder *sharedEncoder;
     jobIndex++;
   }
   
-  hb_state_t encoderState;
-  hb_get_state(handbrakeEncodingHandle, &encoderState);
-  if(encoderState.state == HB_STATE_IDLE)
-  {
-    hb_start(handbrakeEncodingHandle);
-  }
+  // and start the encoding
+  hb_start(handbrakeEncodingHandle);
 }
 
 - (void) setupVideoParametersFromTitle: (MMTitle *) title 
@@ -589,6 +625,25 @@ static ITSEncoder *sharedEncoder;
   {
     encoderScanIsDone = YES;
     [timer invalidate];
+  }
+}
+
+- (void) timerEncodeNextTitleList: (NSTimer *) timer
+{
+  // don't do anything if a schedule is in progress
+  if(encodeScheduleInProgress)
+  {
+    return;
+  }
+  
+  hb_state_t scannerState;
+  hb_get_state(handbrakeEncodingHandle, &scannerState);
+  
+  // encoder is now idle, so just encode next title (if any)
+  if(scannerState.state == HB_STATE_IDLE)
+  {
+    activeTitleList = nil;
+    [self encodeNextTitleList];
   }
 }
 

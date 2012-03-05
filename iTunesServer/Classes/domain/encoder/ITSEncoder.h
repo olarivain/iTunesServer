@@ -20,6 +20,8 @@
   __strong NSMutableArray *scheduledTitles;
   // title list currently in progress
   __strong MMTitleList *activeTitleList;
+  // timer used to poll the encoding queue
+  __strong NSTimer *encoderTimer;
   
   // hb handles used for scanning and encoding content
   hb_handle_t *handbrakeScannerHandle;
@@ -28,8 +30,8 @@
   BOOL scanInProgress;
   BOOL scanIsDone;
   
-  BOOL encoderScanInProgress;
   BOOL encoderScanIsDone;
+  BOOL encodeScheduleInProgress;
 }
 
 + (ITSEncoder *) sharedEncoder;
