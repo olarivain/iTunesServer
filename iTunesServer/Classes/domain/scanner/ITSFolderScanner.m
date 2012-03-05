@@ -47,6 +47,8 @@
   NSArray *libraryPaths = (__bridge NSArray*)recentLibraries;
   NSString *libraryPath = [libraryPaths boundSafeObjectAtIndex: 0];
   
+  CFRelease(recentLibraries);
+  
   // path is invalid, get the hell out
   if(libraryPath == nil)
   {
@@ -77,9 +79,6 @@
   
   // Now, we can set the destination path
   destinationPath = automaticallyImportPath;
-  
-  // clean up friggin' CF objets
-  CFRelease(recentLibraries);
 }
 
 - (void) setScannedPath:(NSString *)aPath

@@ -38,7 +38,7 @@
   self = [super initWithBundle: bundle];
   if(self)
   {    
-    NSUserDefaults *defaults = [[NSUserDefaults alloc] init];
+    NSUserDefaults *defaults = [[[NSUserDefaults alloc] init] autorelease];
     [defaults addSuiteNamed: @"com.kra.iTunesShared"];
     [ITSDefaults bootstrapDefaults: defaults];
   }

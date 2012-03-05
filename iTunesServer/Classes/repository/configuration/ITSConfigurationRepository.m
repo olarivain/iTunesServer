@@ -15,6 +15,7 @@
 static ITSConfigurationRepository *sharedInstance;
 
 @interface ITSConfigurationRepository()
+@property (nonatomic, readwrite, retain) ITSConfiguration *configuration;
 - (void) loadConfiguration;
 @end
 
@@ -30,11 +31,18 @@ static ITSConfigurationRepository *sharedInstance;
   return sharedInstance;
 }
 
+- (void) dealloc {
+    self.configuration = nil;
+    [super dealloc];
+}
+
+@synthesize configuration;
+
 - (ITSConfiguration *) readConfiguration 
 {
   static dispatch_once_t onceToken;
   dispatch_once(&onceToken, ^{
-    configuration = [ITSConfiguration configuration];
+    self.configuration = [ITSConfiguration configuration];
     [self loadConfiguration];
   });
 
@@ -43,7 +51,7 @@ static ITSConfigurationRepository *sharedInstance;
 
 - (void) loadConfiguration
 {
-  NSUserDefaults *defaults = [[NSUserDefaults alloc] init];
+  NSUserDefaults *defaults = [[[NSUserDefaults alloc] init] autorelease];
   [defaults addSuiteNamed:@"com.kra.iTunesServerShared"];
   
   NSDictionary *dict = [defaults persistentDomainForName: @"com.kra.iTunesServer"];
@@ -65,7 +73,7 @@ static ITSConfigurationRepository *sharedInstance;
   [dictionary setInteger: configuration.startOnLogin forKey: START_ON_LOGIN_KEY];
   [dictionary setObjectNilSafe: configuration.encodingResourcePath forKey:ENCODING_RESOURCE_PATH_KEY];
   
-  NSUserDefaults *defaults = [[NSUserDefaults alloc] init];
+  NSUserDefaults *defaults = [[[NSUserDefaults alloc] init] autorelease];
   [defaults addSuiteNamed:@"com.kra.iTunesServerShared"];
   
   [defaults setPersistentDomain: dictionary forName: @"com.kra.iTunesServer"];

@@ -12,7 +12,13 @@
 
 + (ITSConfiguration *) configuration
 {
-  return [[ITSConfiguration alloc] init];
+  return [[[ITSConfiguration alloc] init] autorelease];
+}
+
+- (void) dealloc {
+    self.autoScanPath = nil;
+    self.encodingResourcePath = nil;
+    [super dealloc];
 }
 
 @synthesize port;
@@ -27,7 +33,7 @@
   NSScriptClassDescription *classDescription = (NSScriptClassDescription*) [application classDescription];
   NSScriptObjectSpecifier *objectSpecifier = [application objectSpecifier];
   
-  NSPropertySpecifier *specifier = [[NSPropertySpecifier alloc] initWithContainerClassDescription: classDescription containerSpecifier: objectSpecifier key:@"configuration"];
+  NSPropertySpecifier *specifier = [[[NSPropertySpecifier alloc] initWithContainerClassDescription: classDescription containerSpecifier: objectSpecifier key:@"configuration"] autorelease];
   return specifier;
 }
 

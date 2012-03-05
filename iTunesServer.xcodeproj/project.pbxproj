@@ -24,7 +24,7 @@
 		000CE90114945F33003002C3 /* iTunesServerPrefPane.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 000CE90014945F33003002C3 /* iTunesServerPrefPane.tiff */; };
 		000CE90414945F33003002C3 /* iTunesServerPrefPane.xib in Resources */ = {isa = PBXBuildFile; fileRef = 000CE90214945F33003002C3 /* iTunesServerPrefPane.xib */; };
 		000CE98114955BBB003002C3 /* ITSConfiguration.h in Headers */ = {isa = PBXBuildFile; fileRef = 000CE97F14955BBB003002C3 /* ITSConfiguration.h */; };
-		000CE98214955BBB003002C3 /* ITSConfiguration.m in Sources */ = {isa = PBXBuildFile; fileRef = 000CE98014955BBB003002C3 /* ITSConfiguration.m */; };
+		000CE98214955BBB003002C3 /* ITSConfiguration.m in Sources */ = {isa = PBXBuildFile; fileRef = 000CE98014955BBB003002C3 /* ITSConfiguration.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		000CE98314955BBB003002C3 /* ITSConfiguration.m in Sources */ = {isa = PBXBuildFile; fileRef = 000CE98014955BBB003002C3 /* ITSConfiguration.m */; };
 		000CE98614955DF7003002C3 /* iTunesServer.sdef in Resources */ = {isa = PBXBuildFile; fileRef = 000CE98514955DF7003002C3 /* iTunesServer.sdef */; };
 		000CE991149572D7003002C3 /* ScriptingBridge.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 000CE8AA149454FF003002C3 /* ScriptingBridge.framework */; };
@@ -40,11 +40,11 @@
 		0023635E14ACF7350084A054 /* ITSPlaylistResource.m in Sources */ = {isa = PBXBuildFile; fileRef = 0023635614ACF7350084A054 /* ITSPlaylistResource.m */; };
 		0023635F14ACF7350084A054 /* ITSTrackResource.m in Sources */ = {isa = PBXBuildFile; fileRef = 0023635814ACF7350084A054 /* ITSTrackResource.m */; };
 		0023636014ACF7350084A054 /* ITSEncodeResource.m in Sources */ = {isa = PBXBuildFile; fileRef = 0023635B14ACF7350084A054 /* ITSEncodeResource.m */; };
-		003DE0B6149576C3004DC839 /* ITSConfigurationRepository.m in Sources */ = {isa = PBXBuildFile; fileRef = 003DE0B2149576C3004DC839 /* ITSConfigurationRepository.m */; };
+		003DE0B6149576C3004DC839 /* ITSConfigurationRepository.m in Sources */ = {isa = PBXBuildFile; fileRef = 003DE0B2149576C3004DC839 /* ITSConfigurationRepository.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		003DE0B7149576C3004DC839 /* ITSiTunesContentRepository.m in Sources */ = {isa = PBXBuildFile; fileRef = 003DE0B5149576C3004DC839 /* ITSiTunesContentRepository.m */; };
 		003DE0C714958D12004DC839 /* ITSApplication.m in Sources */ = {isa = PBXBuildFile; fileRef = 003DE0C614958D12004DC839 /* ITSApplication.m */; };
 		0062B25D1495A94100160289 /* ITSDefaults.h in Headers */ = {isa = PBXBuildFile; fileRef = 0062B25B1495A94100160289 /* ITSDefaults.h */; };
-		0062B25E1495A94100160289 /* ITSDefaults.m in Sources */ = {isa = PBXBuildFile; fileRef = 0062B25C1495A94100160289 /* ITSDefaults.m */; };
+		0062B25E1495A94100160289 /* ITSDefaults.m in Sources */ = {isa = PBXBuildFile; fileRef = 0062B25C1495A94100160289 /* ITSDefaults.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		0062B25F1495A94100160289 /* ITSDefaults.m in Sources */ = {isa = PBXBuildFile; fileRef = 0062B25C1495A94100160289 /* ITSDefaults.m */; };
 		0062B2981495DA7000160289 /* ITSFolderItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 0062B2951495DA7000160289 /* ITSFolderItem.m */; };
 		0062B2991495DA7000160289 /* ITSFolderScanner.m in Sources */ = {isa = PBXBuildFile; fileRef = 0062B2971495DA7000160289 /* ITSFolderScanner.m */; };

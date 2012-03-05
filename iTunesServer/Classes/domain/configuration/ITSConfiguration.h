@@ -13,19 +13,19 @@
   NSInteger port;
   
   BOOL autoScanEnabled;
-  __strong NSString *autoScanPath;
+  NSString *autoScanPath;
   
   BOOL startOnLogin;
   
-  __strong NSString *encodingResourcePath;
+  NSString *encodingResourcePath;
 }
 
 + (ITSConfiguration *) configuration;
 
 @property (nonatomic, readwrite, assign) NSInteger port;
 @property (nonatomic, readwrite, assign) BOOL autoScanEnabled;
-@property (nonatomic, readwrite, strong) NSString *autoScanPath;
+@property (nonatomic, readwrite, retain) NSString *autoScanPath;
 @property (nonatomic, readwrite, assign) BOOL startOnLogin;
-@property (nonatomic, readwrite, strong) NSString *encodingResourcePath;
+@property (nonatomic, readwrite, retain) NSString *encodingResourcePath;
 
 @end
