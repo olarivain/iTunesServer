@@ -43,7 +43,7 @@
 
     NSInteger titleIndex = [titleDto integerForKey: @"index"];
     MMTitle *title = [titleList titleWithIndex: titleIndex];
-    [self updateTitle: title withDto: dto];
+    [self updateTitle: title withDto: titleDto];
   }
   return titleList;
 }
