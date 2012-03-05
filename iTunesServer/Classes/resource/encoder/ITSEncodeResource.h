@@ -7,7 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-#import <HTTPServe/HSRestResource.h>
+#import <YARES/HSRestResource.h>
 
 @interface ITSEncodeResource : NSObject<HSRestResource> 
 

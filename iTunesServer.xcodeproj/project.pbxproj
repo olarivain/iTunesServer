@@ -824,12 +824,12 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				HEADER_SEARCH_PATHS = (
 					"/usr/local/xcodeproducts/MediaManagement-x86/LATEST",
-					/usr/local/xcodeproducts/HTTPServe/LATEST,
+					/usr/local/xcodeproducts/YARES/LATEST,
 					"/usr/local/xcodeproducts/KraCommons-x86/LATEST",
 				);
 				LIBRARY_SEARCH_PATHS = (
 					"/usr/local/xcodeproducts/MediaManagement-x86/LATEST",
-					/usr/local/xcodeproducts/HTTPServe/LATEST,
+					/usr/local/xcodeproducts/YARES/LATEST,
 					"/usr/local/xcodeproducts/KraCommons-x86/LATEST",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.7;
@@ -840,14 +840,11 @@
 					"-DDEBUG_ENCODER=1",
 				);
 				OTHER_LDFLAGS = (
-					"-Objc",
-					"-lHTTPServe",
+					"-ObjC",
+					"-all_load",
+					"-lYARES",
 					"-lMediaManagement-x86",
 					"-lKraCommons-x86",
-					"-force_load",
-					"/usr/local/xcodeproducts/KraCommons-x86/LATEST/libKraCommons-x86.a",
-					"-force_load",
-					/usr/local/xcodeproducts/HTTPServe/LATEST/libHTTPServe.a,
 				);
 				SDKROOT = macosx;
 			};
@@ -870,25 +867,22 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				HEADER_SEARCH_PATHS = (
 					"/usr/local/xcodeproducts/MediaManagement-x86/LATEST",
-					/usr/local/xcodeproducts/HTTPServe/LATEST,
+					/usr/local/xcodeproducts/YARES/LATEST,
 					"/usr/local/xcodeproducts/KraCommons-x86/LATEST",
 				);
 				LIBRARY_SEARCH_PATHS = (
 					"/usr/local/xcodeproducts/MediaManagement-x86/LATEST",
-					/usr/local/xcodeproducts/HTTPServe/LATEST,
+					/usr/local/xcodeproducts/YARES/LATEST,
 					"/usr/local/xcodeproducts/KraCommons-x86/LATEST",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.7;
 				OTHER_CFLAGS = "-D__LIBHB__";
 				OTHER_LDFLAGS = (
-					"-Objc",
-					"-lHTTPServe",
+					"-ObjC",
+					"-all_load",
+					"-lYARES",
 					"-lMediaManagement-x86",
 					"-lKraCommons-x86",
-					"-force_load",
-					"/usr/local/xcodeproducts/KraCommons-x86/LATEST/libKraCommons-x86.a",
-					"-force_load",
-					/usr/local/xcodeproducts/HTTPServe/LATEST/libHTTPServe.a,
 				);
 				SDKROOT = macosx;
 			};

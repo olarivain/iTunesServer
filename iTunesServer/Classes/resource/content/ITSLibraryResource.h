@@ -7,7 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-#import <HTTPServe/HSRestResource.h>
+#import <YARES/HSRestResource.h>
 
 #import "ITSAbstractContentResource.h"
 

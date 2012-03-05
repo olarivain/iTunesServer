@@ -6,10 +6,10 @@
 //  Copyright 2011 kra. All rights reserved.
 //
 
-#import <HTTPServe/HSResourceDescriptor.h>
-#import <HTTPServe/HSResponse.h>
-#import <HTTPServe/HSHandlerPath.h>
-#import <HTTPServe/HSRequestParameters.h>
+#import <YARES/HSResourceDescriptor.h>
+#import <YARES/HSResponse.h>
+#import <YARES/HSHandlerPath.h>
+#import <YARES/HSRequestParameters.h>
 
 #import "ITSLibraryResource.h"
 

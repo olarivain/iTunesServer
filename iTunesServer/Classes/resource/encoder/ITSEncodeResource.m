@@ -6,10 +6,10 @@
 //  Copyright (c) 2011 kra. All rights reserved.
 //
 
-#import <HTTPServe/HSResourceDescriptor.h>
-#import <HTTPServe/HSResponse.h>
-#import <HTTPServe/HSHandlerPath.h>
-#import <HTTPServe/HSRequestParameters.h>
+#import <YARES/HSResourceDescriptor.h>
+#import <YARES/HSResponse.h>
+#import <YARES/HSHandlerPath.h>
+#import <YARES/HSRequestParameters.h>
 
 #import <MediaManagement/MMTitleAssembler.h>
 
@@ -46,7 +46,7 @@
 {
   ITSEncoder *encoder = [ITSEncoder sharedEncoder];
   // passed ressources are double HTTP encoded (/ in path). 
-  // HTTPServe will HTTP escape once by design, take care of the second unescape explicitly here
+  // YARES will HTTP escape once by design, take care of the second unescape explicitly here
   NSString *encodedResourceId = [params.pathParameters objectForKey: @"resourceId"];
   NSString *resourceId = [encodedResourceId stringByReplacingPercentEscapesUsingEncoding: NSUTF8StringEncoding];
   

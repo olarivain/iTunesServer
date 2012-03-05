@@ -6,7 +6,7 @@
 //  Copyright (c) 2011 kra. All rights reserved.
 //
 #define ITUNES_SERVER_APP_NAME @"iTunesServer"
-#import <HTTPServe/HSHTTPServe.h>
+#import <YARES/HSHTTPServe.h>
 
 #import "ITSAppDelegate.h"
 
