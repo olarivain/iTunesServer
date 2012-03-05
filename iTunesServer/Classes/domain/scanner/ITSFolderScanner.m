@@ -127,11 +127,13 @@
     {
       continue;
     }
+    // grab next file
     NSString *itemId = [NSString stringWithFormat:@"%@/%@", path, file];
 #if DEBUG_FOLDER_SCANNER == 1
     NSLog(@"Adding folder item: %@", itemId);
 #endif
 
+    // fetch its attributes and ask folderItemList to update the folder item with them
     NSDictionary *dictionary = [directoryEnumerator fileAttributes];
     [folderItemList addOrUpdateFile: itemId withAttributes: dictionary];
   };
@@ -184,6 +186,10 @@
     return;
   }
   
+  // make sure we cancel current timer, if any, first
+  [self stop];
+  
+  // then we can start a new timer
   NSLog(@"Starting folder scanner at path: %@", path);
   timer = [NSTimer scheduledTimerWithTimeInterval: 10 
                                            target: self 
