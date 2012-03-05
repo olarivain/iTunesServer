@@ -85,6 +85,7 @@
 		00EFC34715046BE2004494EE /* libyasm.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 00EFC31615046BE2004494EE /* libyasm.a */; };
 		00EFC34815046BE2004494EE /* libhb.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 00EFC32415046BE2004494EE /* libhb.a */; };
 		00EFC34915046D03004494EE /* libavutil.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 00EFC2FA15046BE2004494EE /* libavutil.a */; };
+		00EFC3AC15049B90004494EE /* MMTitleAssembler+iTunesServer.m in Sources */ = {isa = PBXBuildFile; fileRef = 00EFC3AB15049B90004494EE /* MMTitleAssembler+iTunesServer.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -206,6 +207,8 @@
 		00EFC32215046BE2004494EE /* ports.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ports.h; sourceTree = "<group>"; };
 		00EFC32315046BE2004494EE /* project.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = project.h; sourceTree = "<group>"; };
 		00EFC32415046BE2004494EE /* libhb.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libhb.a; sourceTree = "<group>"; };
+		00EFC3AA15049B90004494EE /* MMTitleAssembler+iTunesServer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MMTitleAssembler+iTunesServer.h"; sourceTree = "<group>"; };
+		00EFC3AB15049B90004494EE /* MMTitleAssembler+iTunesServer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "MMTitleAssembler+iTunesServer.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -361,6 +364,8 @@
 			children = (
 				000CE88914945481003002C3 /* MMContentAssembler+iTunes.h */,
 				000CE88A14945481003002C3 /* MMContentAssembler+iTunes.m */,
+				00EFC3AA15049B90004494EE /* MMTitleAssembler+iTunesServer.h */,
+				00EFC3AB15049B90004494EE /* MMTitleAssembler+iTunesServer.m */,
 			);
 			path = assembler;
 			sourceTree = "<group>";
@@ -761,6 +766,7 @@
 				0023636014ACF7350084A054 /* ITSEncodeResource.m in Sources */,
 				00823F9A14AE7A7900CEDDEB /* MMAudioTrack+MMAudioTrack_Handbrake.m in Sources */,
 				00DB3EDB14B40EC000B5963C /* MMTitle+MMTitle_Handbrake.m in Sources */,
+				00EFC3AC15049B90004494EE /* MMTitleAssembler+iTunesServer.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1067,6 +1073,7 @@
 				00EFC387150477B1004494EE /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

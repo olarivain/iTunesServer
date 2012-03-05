@@ -12,7 +12,7 @@
 #import <YARES/HSRequestParameters.h>
 
 #import <MediaManagement/MMTitleAssembler.h>
-
+#import "MMTitleAssembler+iTunesServer.h"
 #import "ITSEncodeResource.h"
 
 #import "ITSEncoder.h"
@@ -43,7 +43,7 @@
 }
 
 - (HSResponse *) scanResource: (HSRequestParameters *) params
-{
+{ 
   ITSEncoder *encoder = [ITSEncoder sharedEncoder];
   // passed ressources are double HTTP encoded (/ in path). 
   // YARES will HTTP escape once by design, take care of the second unescape explicitly here
@@ -65,7 +65,7 @@
 {
   // rebuild title list from JSON object
   MMTitleAssembler *assembler = [MMTitleAssembler sharedInstance];
-  MMTitleList *titleList = [assembler createTitleList: params.parameters];
+  MMTitleList *titleList = [assembler updateTitleListWithDto: params.parameters];
   
   // pass it to the encoder to schedule it.
   ITSEncoder *encoder = [ITSEncoder sharedEncoder];

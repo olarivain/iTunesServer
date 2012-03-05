@@ -16,6 +16,7 @@
 
 #import "ITSConfigurationRepository.h"
 #import "ITSConfiguration.h"
+#import "ITSEncodingRepository.h"
 
 static ITSEncoder *sharedEncoder;
 
@@ -163,7 +164,8 @@ static ITSEncoder *sharedEncoder;
     return nil;
   }
   
-  MMTitleList *titleList = [MMTitleList titleListWithId: path];
+  ITSEncodingRepository *encodingRepository = [ITSEncodingRepository sharedInstance];
+  MMTitleList *titleList = [encodingRepository titleListWithId: path];
   for(int i = 0; i < titlesCount; i++)
   {
     // grab next title
@@ -302,6 +304,13 @@ static ITSEncoder *sharedEncoder;
     return;
   }
   
+  // For now, current titlelist can't be updated
+  if([activeTitleList isEqual: titleList])
+  {
+    NSLog(@"Title %@ is already active, skipping.", titleList.titleListId);
+    return;
+  }
+  
   @synchronized(self) 
   {
     // first, check if we already have that title list scheduled, if we do
@@ -341,6 +350,7 @@ static ITSEncoder *sharedEncoder;
     // pop from list to active title
     activeTitleList = [scheduledTitles objectAtIndex: 0];
     [scheduledTitles removeObjectAtIndex: 0];
+    activeTitleList.active = YES;
     
     // flag the encoder as "we're scheduling something, so don't mess with us here"
     encodeScheduleInProgress = YES;
@@ -621,7 +631,7 @@ static ITSEncoder *sharedEncoder;
 {
   hb_state_t scannerState;
   hb_get_state(handbrakeEncodingHandle, &scannerState);
-  if(scannerState.state == HB_STATE_SCANDONE || scannerState.state == HB_STATE_IDLE)
+  if(scannerState.state == HB_STATE_IDLE)
   {
     encoderScanIsDone = YES;
     [timer invalidate];
@@ -642,6 +652,7 @@ static ITSEncoder *sharedEncoder;
   // encoder is now idle, so just encode next title (if any)
   if(scannerState.state == HB_STATE_IDLE)
   {
+    activeTitleList.active = NO;
     activeTitleList = nil;
     [self encodeNextTitleList];
   }

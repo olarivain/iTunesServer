@@ -8,10 +8,15 @@
 
 #import <Foundation/Foundation.h>
 
-@interface ITSEncodingRepository : NSObject
+@class MMTitleList;
+
+@interface ITSEncodingRepository : NSObject 
+{
+  __strong NSMutableArray *availableResource;
+}
 
 + (ITSEncodingRepository *) sharedInstance;
 
 - (NSArray *) availableTitleLists;
-
+- (MMTitleList *) titleListWithId: (NSString *) titleListId;
 @end

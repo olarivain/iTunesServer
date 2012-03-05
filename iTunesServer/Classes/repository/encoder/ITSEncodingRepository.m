@@ -17,8 +17,10 @@ static ITSEncodingRepository *sharedInstance;
 
 
 @interface ITSEncodingRepository()
-- (void) findResourcesAtPath: (NSString *) path withResult: (NSMutableArray *) result;
+- (void) findResourcesAtPath: (NSString *) path;
+- (void) removeOrphanWithPath: (NSString *) path;
 - (BOOL) isDVDAtPath: (NSString *) path;
+- (void) addTitleToAvailableResources: (MMTitleList *) titleList;
 @end
 
 @implementation ITSEncodingRepository
@@ -32,16 +34,78 @@ static ITSEncodingRepository *sharedInstance;
   return sharedInstance;
 }
 
+- (id) init
+{
+  self = [super init];
+  if (self) 
+  {
+    availableResource = [NSMutableArray arrayWithCapacity: 10];
+  }
+  return self;
+}
+
+#pragma mark - Fetching a title list with a given id
+- (MMTitleList *) titleListWithId: (NSString *) titleListId
+{
+  // first, reset the available title list
+  [self availableTitleLists];
+  
+  for(MMTitleList *titleList in availableResource)
+  {
+    if([titleList.titleListId isEqualToString: titleListId])
+    {
+      return titleList;
+    }
+  }
+  
+  return nil;
+}
+
+#pragma mark - Finding available title lists
 - (NSArray *) availableTitleLists
 {
   ITSConfiguration *configuration = [[ITSConfigurationRepository sharedInstance] readConfiguration];
-  
-  NSMutableArray *resources = [NSMutableArray arrayWithCapacity: 10];
-  [self findResourcesAtPath: configuration.encodingResourcePath withResult: resources];
-  return resources;
+
+  @synchronized(self)
+  {
+    [self findResourcesAtPath: configuration.encodingResourcePath];
+  }
+  return availableResource;
 }
 
-- (void) findResourcesAtPath: (NSString *) path withResult: (NSMutableArray *) result 
+#pragma mark - deleting orphan resources
+- (void) removeOrphanWithPath:(NSString *)path
+{
+  NSFileManager *fileManager = [NSFileManager defaultManager];
+  NSMutableArray *orphans = [NSMutableArray arrayWithCapacity: [availableResource count]];
+  // iterate all existing resources
+  for(MMTitleList *orphanCandidate in availableResource)
+  {
+    BOOL isFolder = NO;
+    BOOL exists = [fileManager fileExistsAtPath: orphanCandidate.titleListId isDirectory: &isFolder];
+    // if path doesn't exist anymore, then add it to the orphan list
+    if(!exists)
+    {
+      [orphans addObject: orphanCandidate];
+    }
+  }
+  
+  // finally, remove all orphans from available resources
+  [availableResource removeObjectsInArray: orphans];
+}
+
+#pragma mark - Adding a title list to the available list
+- (void) addTitleToAvailableResources: (MMTitleList *) titleList
+{
+  if([availableResource containsObject: titleList])
+  {
+    return;
+  }
+  [availableResource addObject: titleList];
+}
+
+#pragma mark - Scanning target folder
+- (void) findResourcesAtPath: (NSString *) path
 {
   // make sure input makes sense
   if([path length] == 0)
@@ -49,12 +113,14 @@ static ITSEncodingRepository *sharedInstance;
     return;
   }
   
+  [self removeOrphanWithPath: path];
+  
   // first, check if path is a dvd folder
   if([self isDVDAtPath: path])
   {
     // it is, add the folder to the resources and GTFO
     MMTitleList *titleList = [MMTitleList titleListWithId: path];
-    [result addObject: titleList];
+    [self addTitleToAvailableResources: titleList];
     return;
   }
   
@@ -97,13 +163,13 @@ static ITSEncodingRepository *sharedInstance;
     // recurse on folders/packages, don't add folder to result
     if(isFolder || isPackage)
     {
-      [self findResourcesAtPath: fullPath withResult: result];
+      [self findResourcesAtPath: fullPath];
       continue;
     }
     
     // otherwise, just add file
     MMTitleList *titleList = [MMTitleList titleListWithId: fullPath];
-    [result addObject: titleList];
+    [self addTitleToAvailableResources: titleList];
   }
 }
 
