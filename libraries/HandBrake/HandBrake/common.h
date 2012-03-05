@@ -192,6 +192,7 @@ int           hb_get_audio_encoders_count();
 int hb_mixdown_get_mixdown_from_short_name( const char * short_name );
 const char * hb_mixdown_get_short_name_from_mixdown( int amixdown );
 void hb_autopassthru_apply_settings( hb_job_t * job, hb_title_t * title );
+void hb_autopassthru_print_settings( hb_job_t * job );
 int hb_autopassthru_get_encoder( int in_codec, int copy_mask, int fallback, int muxer );
 int hb_get_best_mixdown( uint32_t codec, int layout, int mixdown );
 int hb_get_default_mixdown( uint32_t codec, int layout );
@@ -454,6 +455,9 @@ struct hb_job_s
 #define HB_INPUT_CH_LAYOUT_GET_DISCRETE_COUNT( a ) ( ( ( a & HB_INPUT_CH_LAYOUT_DISCRETE_FRONT_MASK ) >> 16 ) + ( ( a & HB_INPUT_CH_LAYOUT_DISCRETE_REAR_MASK ) >> 12 ) + ( ( a & HB_INPUT_CH_LAYOUT_DISCRETE_LFE_MASK ) >> 8 ) )
 #define HB_INPUT_CH_LAYOUT_GET_ENCODED_FRONT_COUNT( a )   ( ( a & HB_INPUT_CH_LAYOUT_ENCODED_FRONT_MASK ) >> 4 )
 #define HB_INPUT_CH_LAYOUT_GET_ENCODED_REAR_COUNT( a )   ( ( a & HB_INPUT_CH_LAYOUT_ENCODED_REAR_MASK ) )
+
+/* define an invalid VBR quality compatible with all VBR-capable codecs */
+#define HB_INVALID_AUDIO_QUALITY (-3.)
 
 struct hb_audio_config_s
 {
@@ -905,6 +909,7 @@ typedef void hb_error_handler_t( const char *errmsg );
 extern void hb_register_error_handler( hb_error_handler_t * handler );
 
 char * hb_strdup_printf(const char *fmt, ...) HB_WPRINTF(1, 2);
+char * hb_strncat_dup( const char * s1, const char * s2, size_t n );
 
 int hb_yuv2rgb(int yuv);
 int hb_rgb2yuv(int rgb);
