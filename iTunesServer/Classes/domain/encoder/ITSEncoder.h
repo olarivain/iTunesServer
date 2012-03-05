@@ -14,11 +14,16 @@
 
 @interface ITSEncoder : NSObject
 {
+  // shared file manager
   __strong NSFileManager *fileManager;
+  // list of scheduled titles
+  __strong NSMutableArray *scheduledTitles;
+  // title list currently in progress
+  __strong MMTitleList *activeTitleList;
+  
+  // hb handles used for scanning and encoding content
   hb_handle_t *handbrakeScannerHandle;
   hb_handle_t *handbrakeEncodingHandle;
-  
-  NSMutableArray *scheduledTitles;
   
   BOOL scanInProgress;
   BOOL scanIsDone;

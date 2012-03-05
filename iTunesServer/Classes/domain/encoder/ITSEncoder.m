@@ -287,6 +287,7 @@ static ITSEncoder *sharedEncoder;
   // abort early for nonsensical data
   if([path length] == 0 || ![fileManager fileExistsAtPath: path])
   {
+    NSLog(@"title list with path %@ not found, has it been deleted in the meantime?", path);
     return;
   }
   
@@ -354,7 +355,7 @@ static ITSEncoder *sharedEncoder;
     ITSConfigurationRepository *configurationRepository = [ITSConfigurationRepository sharedInstance];
     ITSConfiguration *configuration = [configurationRepository readConfiguration];
     NSString *file = [NSString stringWithFormat: @"%@/%@-%i.m4v", configuration.autoScanPath, titleList.name, title.index];
-    NSLog(@"Outputing to %@", file);
+    NSLog(@"Encoding to %@", file);
 //    #warning fix output path
 //    NSString *file = [NSString stringWithFormat: @"/Users/olarivain/Movies/%@-%i.m4v", titleList.name, title.index];
     job->file = [file cStringUsingEncoding: NSUTF8StringEncoding];
