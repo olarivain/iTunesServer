@@ -11,6 +11,7 @@
 #import "hb.h"
 
 @class MMTitleList;
+@class MMTitle;
 
 @interface ITSEncoder : NSObject
 {
@@ -20,6 +21,7 @@
   __strong NSMutableArray *scheduledTitles;
   // title list currently in progress
   __strong MMTitleList *activeTitleList;
+  __strong MMTitle *activeTitle;
   // timer used to poll the encoding queue
   __strong NSTimer *encoderTimer;
   

@@ -342,15 +342,19 @@ static ITSEncoder *sharedEncoder;
   @synchronized(self)
   {
     // encoder is busy or nothing to encode, just return
-    if(activeTitleList != nil || [scheduledTitles count] == 0) 
+    if([scheduledTitles count] == 0) 
     {
       return;
     }
     
-    // pop from list to active title
-    activeTitleList = [scheduledTitles objectAtIndex: 0];
-    [scheduledTitles removeObjectAtIndex: 0];
-    activeTitleList.active = YES;
+    if(activeTitleList.isCompleted || activeTitleList == nil)
+    {
+      activeTitleList.active = NO;
+      // pop from list to active title
+      activeTitleList = [scheduledTitles objectAtIndex: 0];
+      [scheduledTitles removeObjectAtIndex: 0];
+      activeTitleList.active = YES;
+    }
     
     // flag the encoder as "we're scheduling something, so don't mess with us here"
     encodeScheduleInProgress = YES;
@@ -375,83 +379,79 @@ static ITSEncoder *sharedEncoder;
     return;
   }
   
+  // schedule the next title
+  activeTitle = [activeTitleList nextTitleToEncode];
+  // grab the position of the title in the hb_list (different than title index, 
+  // which could be the DVD title on VIDEO_TS content)
+  NSInteger titlePosition = [titleList indexOfTitle: activeTitle];
+  
+  // skip if position is beyond count, just in case the data somehow got corrupted.
+  // We don't want a stupid out of bounds index, do we?
   int titlesCount = hb_list_count(titles);
-  int jobIndex = hb_count(handbrakeEncodingHandle) ;
-  // schedule every selected title
-  NSArray *selectedTitles = titleList.selectedTitles;
-  for(MMTitle *title in selectedTitles)
+  if(titlePosition > titlesCount)
   {
-    // grab the position of the title in the hb_list (different than title index, 
-    // which could be the DVD title on VIDEO_TS content)
-    NSInteger titlePosition = [titleList indexOfTitle: title];
-    
-    // skip if position is beyond count, just in case the data somehow got corrupted.
-    // We don't want a stupid out of bounds index, do we?
-    if(titlePosition > titlesCount)
-    {
-      continue;
-    }
+    return;
+  }
 
-    hb_title_t *handbrakeTitle = hb_list_item(titles, (int) titlePosition);
-    
-    // the job that will be submitted
-    hb_job_t *job = handbrakeTitle->job;
-    
-    // enqueue the job as the last one
-    job->sequence_id = jobIndex;
-    job->title = handbrakeTitle;
-    // output file name
-    
-    ITSConfigurationRepository *configurationRepository = [ITSConfigurationRepository sharedInstance];
-    ITSConfiguration *configuration = [configurationRepository readConfiguration];
-    NSString *file = [NSString stringWithFormat: @"%@/%@-%i.m4v", configuration.autoScanPath, titleList.name, title.index];
-    NSLog(@"Encoding to %@", file);
+  hb_title_t *handbrakeTitle = hb_list_item(titles, (int) titlePosition);
+  
+  // the job that will be submitted
+  hb_job_t *job = handbrakeTitle->job;
+  
+  // enqueue the job as the last one
+  job->sequence_id = hb_count(handbrakeEncodingHandle);
+  job->title = handbrakeTitle;
+  // output file name
+  
+  ITSConfigurationRepository *configurationRepository = [ITSConfigurationRepository sharedInstance];
+  ITSConfiguration *configuration = [configurationRepository readConfiguration];
+  NSString *file = [NSString stringWithFormat: @"%@/%@-%i.m4v", configuration.autoScanPath, titleList.name, activeTitle.index];
+  NSLog(@"Encoding to %@", file);
 //    #warning fix output path
 //    NSString *file = [NSString stringWithFormat: @"/Users/olarivain/Movies/%@-%i.m4v", titleList.name, title.index];
-    job->file = [file cStringUsingEncoding: NSUTF8StringEncoding];
-    // encode all chapters, client side doesn't do any of that fancy stuff
+  job->file = [file cStringUsingEncoding: NSUTF8StringEncoding];
+  // encode all chapters, client side doesn't do any of that fancy stuff
 #if DEBUG_ENCODER == 1
-    // except in debug mode, just encode a minute, 'cause I'm tired of waiting 45 minutes
-    // for my tests to go through :)
-    job->pts_to_start = 300 * 90000;
-    job->pts_to_stop = 60 * 90000;
+  // except in debug mode, just encode a minute, 'cause I'm tired of waiting 45 minutes
+  // for my tests to go through :)
+  job->pts_to_start = 300 * 90000;
+  job->pts_to_stop = 60 * 90000;
 #else
-    job->chapter_start = 1;
-    job->chapter_end = hb_list_count(handbrakeTitle->list_chapter);
+  job->chapter_start = 1;
+  job->chapter_end = hb_list_count(handbrakeTitle->list_chapter);
 #endif
-    // and mark them in resulting file
-    job->chapter_markers = 1;
-    
-    // we want to produce an mp4 file (of course)
-    job->mux = HB_MUX_MP4;
-    // for now, no large file is needed
-    job->largeFileSize = 0;
-    
-    // fuck HTTP optimization, we don't need that in our use case
-    job->mp4_optimize = 0;
-    
-    // setup video params
-    [self setupVideoParametersFromTitle: title
-                     withHandbrakeTitle: handbrakeTitle
-                         toHandbrakeJob: job];
+  // and mark them in resulting file
+  job->chapter_markers = 1;
+  
+  // we want to produce an mp4 file (of course)
+  job->mux = HB_MUX_MP4;
+  // for now, no large file is needed
+  job->largeFileSize = 0;
+  
+  // fuck HTTP optimization, we don't need that in our use case
+  job->mp4_optimize = 0;
+  
+  // setup video params
+  [self setupVideoParametersFromTitle: activeTitle
+                   withHandbrakeTitle: handbrakeTitle
+                       toHandbrakeJob: job];
 
-    // then add audio tracks to the job
-    [self addAudioTracksFromTitle: title 
-               withHandbrakeTitle: handbrakeTitle 
-                   toHandbrakeJob: job];
-    
-    // and last but not least, add subtitle tracks to the job
-    [self addSubtitleTracksFromTitle: title 
-                  withHandbrakeTitle: handbrakeTitle 
-                      toHandbrakeJob: job];
+  // then add audio tracks to the job
+  [self addAudioTracksFromTitle: activeTitle 
+             withHandbrakeTitle: handbrakeTitle 
+                 toHandbrakeJob: job];
+  
+  // and last but not least, add subtitle tracks to the job
+  [self addSubtitleTracksFromTitle: activeTitle 
+                withHandbrakeTitle: handbrakeTitle 
+                    toHandbrakeJob: job];
 
-    // and add to encoding queue
-    hb_add(handbrakeEncodingHandle, job);
-    jobIndex++;
-  }
+  // and add to encoding queue
+  hb_add(handbrakeEncodingHandle, job);
   
   // and start the encoding
   hb_start(handbrakeEncodingHandle);
+  activeTitle.encoding = YES;
 }
 
 - (void) setupVideoParametersFromTitle: (MMTitle *) title 
@@ -652,8 +652,16 @@ static ITSEncoder *sharedEncoder;
   // encoder is now idle, so just encode next title (if any)
   if(scannerState.state == HB_STATE_IDLE)
   {
-    activeTitleList.active = NO;
-    activeTitleList = nil;
+    // mark current title as completed and not active anymore
+    activeTitle.encoding = NO;
+    activeTitle.completed = YES;
+    activeTitle = nil;
+    
+    if(activeTitleList.isCompleted)
+    {
+      activeTitleList = nil;
+    }
+    
     [self encodeNextTitleList];
   }
 }
