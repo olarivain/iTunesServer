@@ -5,7 +5,7 @@
       location = "group:../KraCommons/KraCommons.xcodeproj">
    </FileRef>
    <FileRef
-      location = "group:../HTTPServe/HTTPServe.xcodeproj">
+      location = "group:../YARES/YARES.xcodeproj">
    </FileRef>
    <FileRef
       location = "group:../MediaManagementCommon/MediaManagementCommon.xcodeproj">
