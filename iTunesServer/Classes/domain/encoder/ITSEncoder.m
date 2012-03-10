@@ -83,6 +83,8 @@ static ITSEncoder *sharedEncoder;
   return self;
 }
 
+@synthesize activeTitle;
+
 #pragma mark - Scanning content
 #pragma mark Schedule a Scan
 - (MMTitleList *) scanPath: (NSString *) path
@@ -411,12 +413,14 @@ static ITSEncoder *sharedEncoder;
   
   NSLog(@"Encoding %@ titile %ld to %@", titleList.titleListId, titlePosition, file);
   job->file = [file cStringUsingEncoding: NSUTF8StringEncoding];
+  activeTitle.targetPath = file;
+  
   // encode all chapters, client side doesn't do any of that fancy stuff
 #if DEBUG_ENCODER == 1
   // Un debug mode, just encode a small chunk, 'cause I'm tired of waiting 45 minutes
   // for my tests to go through :)
   uint64_t debugStart = 300;
-  uint64_t debugDuration = 25;
+  uint64_t debugDuration = 120;
   NSLog(@"Debugger is ON, encoding only %llu seconds starting at %llu", debugDuration, debugStart);
   job->pts_to_start = debugStart * 90000L;
   job->pts_to_stop = debugDuration * 90000L;

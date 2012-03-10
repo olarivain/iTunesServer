@@ -77,6 +77,7 @@
   
   if(configuration.autoScanEnabled)
   {
+    [folderScanner stop];
     [folderScanner setScannedPath: configuration.autoScanPath];
     [folderScanner start];
   }

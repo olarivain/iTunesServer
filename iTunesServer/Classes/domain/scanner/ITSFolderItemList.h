@@ -19,6 +19,8 @@
 @property (nonatomic, readonly) NSString *basePath;
 @property (nonatomic, readonly) NSArray *items;
 
+- (void) udpateBasePath: (NSString *) path;
+
 - (void) addOrUpdateFile: (NSString *) file withAttributes: (NSDictionary *) attributes;
 - (NSArray *) folderItemsToMove;
 - (void) removeFolderItems: (NSArray *) items;

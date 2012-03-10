@@ -39,6 +39,8 @@
 
 + (ITSEncoder *) sharedEncoder;
 
+@property (nonatomic, readonly) MMTitle *activeTitle;
+
 - (MMTitleList *) scanPath: (NSString *) path;
 
 - (void) scheduleTitleList: (MMTitleList *) titleList;

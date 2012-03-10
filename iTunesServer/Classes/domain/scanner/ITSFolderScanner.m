@@ -7,17 +7,24 @@
 //
 
 #import <KraCommons/NSArray+BoundSafe.h>
+#import <MediaManagement/MMTitle.h>
+
 #import "ITSFolderScanner.h"
 
 #import "ITSFolderItemList.h"
 #import "ITSFolderItem.h"
 
-#define SCAN_INTERVAL 60
+#import "ITSEncodingRepository.h"
+#import "ITSEncoder.h"
+
+#define SCAN_INTERVAL 5
 
 @interface ITSFolderScanner()
 - (id) initWithPath: (NSString *) aPath;
 - (void) timerFired: (NSTimer *) timer;
 - (void) extractDestinationPath;
+- (void) updateFolderItemList;
+- (void) moveFolderItems;
 @end
 
 @implementation ITSFolderScanner
@@ -31,6 +38,7 @@
   self = [super init];
   if(self)
   {
+    stopped = YES;
     [self setScannedPath: aPath];
     
     [self extractDestinationPath];
@@ -100,28 +108,26 @@
     return;
   }
   
-#warning this isn't exatly thread safe. fix it
-  // reset know files, these don't make any more sense now
-  folderItemList = [ITSFolderItemList folderItemListWithBasePath: path];
+  // create folder item list if we don't have one already
+  if(folderItemList == nil) 
+  {
+    folderItemList = [ITSFolderItemList folderItemListWithBasePath: path];
+  }
+  else
+  {
+    // otherwise reset it with the new base path
+    // this will drop all existing folder items
+    [folderItemList udpateBasePath: path];
+  }
 }
 
-- (void) timerFired:(NSTimer *)timer
+#pragma mark - Scanning folder for items
+- (void) updateFolderItemList 
 {
-  // make sure another instance of the timer isn't running
-  @synchronized(self)
-  {
-    if(isRunning)
-    {
-      return;
-    } 
-    
-    // lock ourselves for later timer calls
-    isRunning = YES;
-  }
+  // Fetch the encoded list so we can implicitely skip all titles that are currently getting encoded
+  ITSEncoder *encoder = [ITSEncoder sharedEncoder];
+  MMTitle *activeTitle = encoder.activeTitle;
   
-#if DEBUG_FOLDER_SCANNER == 1
-  NSLog(@"Scanning: %@", path);
-#endif
   // scan source folder
   NSFileManager *fileManager = [NSFileManager defaultManager];
   NSDirectoryEnumerator *directoryEnumerator = [fileManager enumeratorAtPath: path];
@@ -133,27 +139,35 @@
     {
       continue;
     }
+    
     // grab next file
     NSString *itemId = [NSString stringWithFormat:@"%@/%@", path, file];
-#if DEBUG_FOLDER_SCANNER == 1
-    NSLog(@"Adding folder item: %@", itemId);
-#endif
-
+    
+    // file is currently getting encoded, skip it too
+    if([itemId caseInsensitiveCompare: activeTitle.targetPath] == NSOrderedSame)
+    {
+      continue;
+    }
+    
     // fetch its attributes and ask folderItemList to update the folder item with them
     NSDictionary *dictionary = [directoryEnumerator fileAttributes];
     [folderItemList addOrUpdateFile: itemId withAttributes: dictionary];
-  };
-  
+  }
+}
+
+#pragma mark - Moving relevant items to the destination
+- (void) moveFolderItems
+{
   // ask folder item list which folder should be moved
   NSArray *movableItems = [folderItemList folderItemsToMove];
   NSMutableArray *movedItems = [NSMutableArray arrayWithArray: movableItems];
   
   // now move them
+  NSFileManager *fileManager = [NSFileManager defaultManager];
   for(ITSFolderItem *item in movableItems)
   {
-#if DEBUG_FOLDER_SCANNER == 1
+    
     NSLog(@"Moving %@", item.itemId);
-#endif
     // move item with file manager
     NSError *error = nil;
     NSString *fullDestinationPath = [NSString stringWithFormat:@"%@/%@", destinationPath, item.name];
@@ -169,21 +183,43 @@
       [movedItems addObject: item];
     }
   }
-
+  
   // don't forget to remove moved items
   [folderItemList removeFolderItems: movedItems];
   
   // remove items that don't exist anymore
   [folderItemList removeOrphans];
   
-  // flip running switch back on
-  isRunning = NO;
-#if DEBUG_FOLDER_SCANNER == 1
-  NSLog(@"Done scanning.");
-#endif
-  
 }
 
+#pragma mark - Timer firing
+- (void) timerFired:(NSTimer *)timer
+{
+  // make sure another instance of the timer isn't running
+  @synchronized(self)
+  {
+    // stopped is here to prevent race conditions in case the timer got fired at the same time the 
+    // scanner was stopped.
+    if(isRunning || stopped)
+    {
+      return;
+    } 
+    
+    // lock ourselves for later timer calls
+    isRunning = YES;
+  }
+  
+  // refresh folder item list
+  [self updateFolderItemList];
+  
+  // move items if needed
+  [self moveFolderItems];
+  
+  // flip running switch back on
+  isRunning = NO;
+}
+
+#pragma mark - Start Stop the scanner
 - (void) start
 {
   if(destinationPath == nil)
@@ -206,8 +242,12 @@
 
 - (void) stop
 {
-  [timer invalidate];
-  timer = nil;
+  @synchronized(self)
+  {
+    stopped = YES;
+    [timer invalidate];
+    timer = nil;
+  }
 }
 
 @end

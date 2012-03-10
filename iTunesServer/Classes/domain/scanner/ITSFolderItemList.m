@@ -34,6 +34,13 @@
 @synthesize basePath;
 @synthesize items;
 
+#pragma mark - Moving the scanned path
+- (void) udpateBasePath: (NSString *) path
+{
+  [items removeAllObjects];
+  basePath = path;
+}
+
 #pragma mark - File item list manipulation
 - (void) addOrUpdateFile: (NSString *) file withAttributes: (NSDictionary *) attributes
 {
@@ -83,9 +90,6 @@
   {
     if(![item exists])
     {
-#if DEBUG_FOLDER_SCANNER == 1
-      NSLog(@"Dropping orphan with ID: %@", item.itemId);
-#endif
       [items removeObject: item];
     }
   }

@@ -17,6 +17,7 @@
   __strong NSString *path;
   __strong NSString *destinationPath;
   BOOL isRunning;
+  BOOL stopped;
 }
 
 + (ITSFolderScanner *) folderScannerWithScannedPath: (NSString *) aPath;
