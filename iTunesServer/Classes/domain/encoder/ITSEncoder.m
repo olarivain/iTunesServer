@@ -370,6 +370,7 @@ static ITSEncoder *sharedEncoder;
   // perform the scan so the handle is populated with the content.
   // this will block until done
   [self performScanAtPath: activeTitleList.titleListId withHandbrakeHandle: handbrakeEncodingHandle];
+  scheduledFirst = YES;
   
   // and schedule for encoding
   [self performScheduleTitleListForEncode: activeTitleList];
@@ -659,7 +660,7 @@ static ITSEncoder *sharedEncoder;
   hb_get_state2(handbrakeEncodingHandle, &scannerState);
   
   // encoder is not idle, so just encode next title (if any)
-  if(scannerState.state != HB_STATE_WORKDONE)
+  if(scannerState.state != HB_STATE_WORKDONE && !(!scheduledFirst && scannerState.state == HB_STATE_IDLE))
   {
       return;
   }

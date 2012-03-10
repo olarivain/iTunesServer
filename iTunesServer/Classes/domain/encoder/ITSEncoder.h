@@ -34,6 +34,7 @@
   
   BOOL encoderScanIsDone;
   BOOL encodeScheduleInProgress;
+  BOOL scheduledFirst;
 }
 
 + (ITSEncoder *) sharedEncoder;
