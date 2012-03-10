@@ -8,7 +8,7 @@
 
 #import "MMTitle+MMTitle_Handbrake.h"
 
-@interface MMTitle()
+@interface MMTitle(MMTitle_HandbrakePrivate)
 - (id) initWithIndex:(NSInteger)index andHandbrakeDuration:(NSInteger)duration;
 @end
 

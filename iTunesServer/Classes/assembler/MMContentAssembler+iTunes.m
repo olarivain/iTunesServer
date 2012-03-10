@@ -13,7 +13,7 @@
 #import "ITSiTunesWrapper.h"
 #import "iTunes.h"
 
-@interface MMContentAssembler()
+@interface MMContentAssembler(iTunesPrivate)
 - (MMContentKind) contentKindFromiTunesSpecialKind: (iTunesESpK) specialKind;
 @end
 

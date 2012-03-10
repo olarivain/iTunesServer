@@ -10,7 +10,7 @@
 
 #import "hb.h"
 
-@interface MMAudioTrack()
+@interface MMAudioTrack(MMAudioTrack_HandbrakePrivate)
 - (MMAudioTrack *) initWithHandbrakeIndex: (NSInteger) index codec: (NSInteger) codec channelLayout: (NSInteger) layout andLanguage: (NSString *) language;
 @end
 
