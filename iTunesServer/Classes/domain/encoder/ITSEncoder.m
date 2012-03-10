@@ -65,7 +65,7 @@ static ITSEncoder *sharedEncoder;
     // init hb library  
     // tell it to STFU and to not check for updates.
     handbrakeScannerHandle = hb_init(HB_DEBUG_NONE, 0);
-    handbrakeEncodingHandle = hb_init(HB_DEBUG_ALL, 0);
+    handbrakeEncodingHandle = hb_init(HB_DEBUG_NONE, 0);
     scheduledTitles = [NSMutableArray arrayWithCapacity: 40];
     
     fileManager = [NSFileManager defaultManager];
@@ -127,9 +127,10 @@ static ITSEncoder *sharedEncoder;
   {
     scanIsDone = NO;
   }
-  
+    
+  uint64_t minDuration = 90000L * 1020L;
   // ask libhb to scan requested content. At least one preview is required, libhb won't scan otherwise.
-  hb_scan(handle, [path UTF8String], 0, 30, 0, 90000L * 10);
+  hb_scan(handle, [path UTF8String], 0, 10, 0, minDuration);
   
   SEL selector = isEncodeScan ? @selector(timerCheckEncodingScanner:) : @selector(timerCheckScanner:);
   
@@ -156,6 +157,10 @@ static ITSEncoder *sharedEncoder;
 {
   // now, grab the content
   hb_list_t *titles = hb_get_titles(handbrakeScannerHandle);
+  if(titles == NULL)
+  {
+    return nil;
+  }
   
   // go through all titles, grab 
   int titlesCount = hb_list_count(titles);
@@ -285,12 +290,14 @@ static ITSEncoder *sharedEncoder;
 - (void) timerCheckScanner: (NSTimer *) timer
 {
   hb_state_t scannerState;
-  hb_get_state(handbrakeScannerHandle, &scannerState);
-  if(scannerState.state == HB_STATE_SCANDONE || scannerState.state == HB_STATE_IDLE)
+  hb_get_state2(handbrakeScannerHandle, &scannerState);
+  if(scannerState.state != HB_STATE_SCANDONE)
   {
-    scanIsDone = YES;
-    [timer invalidate];
+    return;
   }
+  
+  scanIsDone = YES;
+  [timer invalidate];
 }
 
 #pragma mark - Schedule an encode
@@ -630,12 +637,14 @@ static ITSEncoder *sharedEncoder;
 - (void) timerCheckEncodingScanner: (NSTimer *) timer
 {
   hb_state_t scannerState;
-  hb_get_state(handbrakeEncodingHandle, &scannerState);
-  if(scannerState.state == HB_STATE_IDLE)
+  hb_get_state2(handbrakeEncodingHandle, &scannerState);
+  if(scannerState.state != HB_STATE_SCANDONE)
   {
-    encoderScanIsDone = YES;
-    [timer invalidate];
+    return;
   }
+  
+  encoderScanIsDone = YES;
+  [timer invalidate];
 }
 
 - (void) timerEncodeNextTitleList: (NSTimer *) timer
@@ -647,23 +656,29 @@ static ITSEncoder *sharedEncoder;
   }
   
   hb_state_t scannerState;
-  hb_get_state(handbrakeEncodingHandle, &scannerState);
+  hb_get_state2(handbrakeEncodingHandle, &scannerState);
   
-  // encoder is now idle, so just encode next title (if any)
-  if(scannerState.state == HB_STATE_IDLE)
+  // encoder is not idle, so just encode next title (if any)
+  if(scannerState.state != HB_STATE_WORKDONE)
   {
-    // mark current title as completed and not active anymore
-    activeTitle.encoding = NO;
-    activeTitle.completed = YES;
-    activeTitle = nil;
-    
-    if(activeTitleList.isCompleted)
-    {
-      activeTitleList = nil;
-    }
-    
-    [self encodeNextTitleList];
+      return;
   }
+  
+  // mark current title as completed and not active anymore
+  activeTitle.encoding = NO;
+  activeTitle.completed = YES;
+  activeTitle = nil;
+
+  if(activeTitleList.isCompleted)
+  {
+    activeTitleList = nil;
+  }
+
+  [self encodeNextTitleList];
+}
+
+- (void) closeLibHB {
+  hb_global_close();
 }
 
 @end

@@ -15,6 +15,7 @@
 #import "ITSConfiguration.h"
 
 #import "ITSFolderScanner.h"
+#import "ITSEncoder.h"
 
 @interface ITSAppDelegate()
 - (void) launchServices;
@@ -53,6 +54,8 @@
 - (void) applicationWillTerminate:(NSNotification *)notification 
 {
   [server stop];
+  ITSEncoder *encoder = [ITSEncoder sharedEncoder];
+  [encoder closeLibHB];
 }    
 
 - (void) launchServices

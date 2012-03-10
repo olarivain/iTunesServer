@@ -42,4 +42,6 @@
 
 - (void) scheduleTitleList: (MMTitleList *) titleList;
 
+- (void) closeLibHB;
+
 @end

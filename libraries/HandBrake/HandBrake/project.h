@@ -1,7 +1,7 @@
 #ifndef HB_PROJECT_H
 #define HB_PROJECT_H
 
-#define HB_PROJECT_TITLE           "HandBrake rev0 (2012030499)"
+#define HB_PROJECT_TITLE           "HandBrake rev4474 (2012030999)"
 #define HB_PROJECT_NAME            "HandBrake"
 #define HB_PROJECT_NAME_LOWER      "handbrake"
 #define HB_PROJECT_NAME_UPPER      "HANDBRAKE"
@@ -12,13 +12,13 @@
 #define HB_PROJECT_VERSION_MAJOR   0
 #define HB_PROJECT_VERSION_MINOR   9
 #define HB_PROJECT_VERSION_POINT   6
-#define HB_PROJECT_VERSION         "rev0"
-#define HB_PROJECT_VERSION_HEX     0x0000090600000000LL
-#define HB_PROJECT_BUILD           2012030499
+#define HB_PROJECT_VERSION         "rev4474"
+#define HB_PROJECT_VERSION_HEX     0x000009060000117aLL
+#define HB_PROJECT_BUILD           2012030999
 #define HB_PROJECT_REPO_URL        "svn://nowhere.com/project/unknown"
 #define HB_PROJECT_REPO_ROOT       "svn://nowhere.com/project"
 #define HB_PROJECT_REPO_UUID       "00000000-0000-0000-0000-000000000000"
-#define HB_PROJECT_REPO_REV        0
+#define HB_PROJECT_REPO_REV        4474
 #define HB_PROJECT_REPO_DATE       "0000-00-00 00:00:00 -0000"
 #define HB_PROJECT_REPO_OFFICIAL   0
 #define HB_PROJECT_REPO_TYPE       "unofficial"
