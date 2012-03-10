@@ -17,7 +17,7 @@
 #import "ITSEncodingRepository.h"
 #import "ITSEncoder.h"
 
-#define SCAN_INTERVAL 5
+#define SCAN_INTERVAL 60
 
 @interface ITSFolderScanner()
 - (id) initWithPath: (NSString *) aPath;
