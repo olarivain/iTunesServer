@@ -127,7 +127,13 @@ static ITSEncoder *sharedEncoder;
   {
     scanIsDone = NO;
   }
-    
+
+  // stop any in progress scan, we don't want it to mess with us.
+  hb_scan_stop(handle);
+  
+  NSString *logScanType = isEncodeScan ? @"encoder" : @"listing";
+  NSLog(@"Performing scan at path %@ for %@", path, logScanType);
+  
   uint64_t minDuration = 90000L * 1020L;
   // ask libhb to scan requested content. At least one preview is required, libhb won't scan otherwise.
   hb_scan(handle, [path UTF8String], 0, 10, 0, minDuration);
@@ -151,6 +157,7 @@ static ITSEncoder *sharedEncoder;
   while(!(isEncodeScan ? encoderScanIsDone : scanIsDone) && [runLoop runMode:NSDefaultRunLoopMode beforeDate:[NSDate dateWithTimeIntervalSinceNow:0.2]])
   {
   }
+  NSLog(@"Scan finished at path %@ for %@", path, logScanType);
 }
 
 - (MMTitleList *) readTitleListFromLastScanWithPath: (NSString *) path withHandbrakeHandle: (hb_handle_t *) handle
@@ -290,7 +297,7 @@ static ITSEncoder *sharedEncoder;
 - (void) timerCheckScanner: (NSTimer *) timer
 {
   hb_state_t scannerState;
-  hb_get_state2(handbrakeScannerHandle, &scannerState);
+  hb_get_state(handbrakeScannerHandle, &scannerState);
   if(scannerState.state != HB_STATE_SCANDONE)
   {
     return;
@@ -307,34 +314,20 @@ static ITSEncoder *sharedEncoder;
   // abort early for nonsensical data
   if([path length] == 0 || ![fileManager fileExistsAtPath: path])
   {
-    NSLog(@"title list with path %@ not found, has it been deleted in the meantime?", path);
+    NSLog(@"title list with path %@ not found, has it been deleted since it has been scheduled?", path);
     return;
   }
   
-  // For now, current titlelist can't be updated
-  if([activeTitleList isEqual: titleList])
+  // title list has been scheduled already, we don't have anything to do here, just get the hell out
+  if([activeTitleList isEqual: titleList] || [scheduledTitles containsObject: titleList])
   {
-    NSLog(@"Title %@ is already active, skipping.", titleList.titleListId);
+    NSLog(@"Title %@ is already scheduled, title list has been updated.", titleList.titleListId);
     return;
   }
   
   @synchronized(self) 
   {
-    // first, check if we already have that title list scheduled, if we do
-    // replace the scheduled instance with the new one
-    if([scheduledTitles containsObject: titleList]) 
-    {
-      NSInteger index = [scheduledTitles indexOfObject: titleList];
-      if(index > -1 && index < [scheduledTitles count]) 
-      {
-        [scheduledTitles replaceObjectAtIndex: index withObject: titleList];
-      }
-    } 
-    // otherwise, just append it to the scheduled list
-    else 
-    {
       [scheduledTitles addObject: titleList];
-    }
   }
   
   // encoding will be scheduled by the encoding timer, so there isn't anything to do here,
@@ -349,7 +342,7 @@ static ITSEncoder *sharedEncoder;
   @synchronized(self)
   {
     // encoder is busy or nothing to encode, just return
-    if([scheduledTitles count] == 0) 
+    if([scheduledTitles count] == 0 && activeTitleList == nil) 
     {
       return;
     }
@@ -367,6 +360,7 @@ static ITSEncoder *sharedEncoder;
     encodeScheduleInProgress = YES;
   }
   
+  NSLog(@"Scheduling encode for %@ with title %ld", activeTitleList.titleListId, activeTitle.index);
   // perform the scan so the handle is populated with the content.
   // this will block until done
   [self performScanAtPath: activeTitleList.titleListId withHandbrakeHandle: handbrakeEncodingHandle];
@@ -413,17 +407,19 @@ static ITSEncoder *sharedEncoder;
   
   ITSConfigurationRepository *configurationRepository = [ITSConfigurationRepository sharedInstance];
   ITSConfiguration *configuration = [configurationRepository readConfiguration];
-  NSString *file = [NSString stringWithFormat: @"%@/%@-%i.m4v", configuration.autoScanPath, titleList.name, activeTitle.index];
-  NSLog(@"Encoding to %@", file);
-//    #warning fix output path
-//    NSString *file = [NSString stringWithFormat: @"/Users/olarivain/Movies/%@-%i.m4v", titleList.name, title.index];
+  NSString *file = [NSString stringWithFormat: @"%@/%@-%02i.m4v", configuration.autoScanPath, titleList.name, activeTitle.index];
+  
+  NSLog(@"Encoding %@ titile %ld to %@", titleList.titleListId, titlePosition, file);
   job->file = [file cStringUsingEncoding: NSUTF8StringEncoding];
   // encode all chapters, client side doesn't do any of that fancy stuff
 #if DEBUG_ENCODER == 1
-  // except in debug mode, just encode a minute, 'cause I'm tired of waiting 45 minutes
+  // Un debug mode, just encode a small chunk, 'cause I'm tired of waiting 45 minutes
   // for my tests to go through :)
-  job->pts_to_start = 300 * 90000;
-  job->pts_to_stop = 60 * 90000;
+  uint64_t debugStart = 300;
+  uint64_t debugDuration = 25;
+  NSLog(@"Debugger is ON, encoding only %llu seconds starting at %llu", debugDuration, debugStart);
+  job->pts_to_start = debugStart * 90000L;
+  job->pts_to_stop = debugDuration * 90000L;
 #else
   job->chapter_start = 1;
   job->chapter_end = hb_list_count(handbrakeTitle->list_chapter);
@@ -638,7 +634,7 @@ static ITSEncoder *sharedEncoder;
 - (void) timerCheckEncodingScanner: (NSTimer *) timer
 {
   hb_state_t scannerState;
-  hb_get_state2(handbrakeEncodingHandle, &scannerState);
+  hb_get_state(handbrakeEncodingHandle, &scannerState);
   if(scannerState.state != HB_STATE_SCANDONE)
   {
     return;
@@ -657,7 +653,7 @@ static ITSEncoder *sharedEncoder;
   }
   
   hb_state_t scannerState;
-  hb_get_state2(handbrakeEncodingHandle, &scannerState);
+  hb_get_state(handbrakeEncodingHandle, &scannerState);
   
   // encoder is not idle, so just encode next title (if any)
   if(scannerState.state != HB_STATE_WORKDONE && !(!scheduledFirst && scannerState.state == HB_STATE_IDLE))
