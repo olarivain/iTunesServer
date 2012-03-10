@@ -18,14 +18,14 @@
   
   __strong NSString *destionationPath;
   
-  NSNumber *lastKnownSize;
+  NSInteger lastKnownSize;
   
   BOOL changed;
 }
 
 @property (nonatomic, readonly) NSString *itemId;
 @property (nonatomic, readonly) NSString *name;
-@property (nonatomic, readonly) NSNumber *lastKnownSize;
+@property (nonatomic, readonly) NSInteger lastKnownSize;
 @property (nonatomic, readonly) NSDate *lastKnownModificationDate;
 @property (nonatomic, readonly) BOOL changed;
 

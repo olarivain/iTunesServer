@@ -6,6 +6,7 @@
 //  Copyright (c) 2011 kra. All rights reserved.
 //
 
+#import <Foundation/NSFileManager.h>
 #import "ITSFolderItem.h"
 
 @interface ITSFolderItem()
@@ -31,6 +32,7 @@
   if(self)
   {
     itemId = anId;
+    lastKnownSize = 0;
     name = [itemId lastPathComponent];
     [self updateWithAttributes: anAttributes];
   }
@@ -44,12 +46,11 @@
   
   // file is busy, don't touch it
   BOOL busy = [[attributes objectForKey: NSFileBusy] boolValue];
-  NSDate *modificationDate = [attributes objectForKey: NSFileModificationDate];
-  NSNumber *size = [attributes objectForKey: NSFileSize];
+  NSDate *modificationDate = [attributes fileModificationDate];
+  NSInteger size = [attributes fileSize];
   
-  BOOL dateChanged = lastKnownModificationDate == nil ||
-                        [modificationDate timeIntervalSinceDate: lastKnownModificationDate] != 0;
-  BOOL sizeChanged = lastKnownSize == nil || ![size isEqualToNumber: lastKnownSize];
+  BOOL dateChanged = lastKnownModificationDate == nil || [modificationDate timeIntervalSinceDate: lastKnownModificationDate] != 0;
+  BOOL sizeChanged = lastKnownSize == 0 || size != lastKnownSize;
   
   // file has changed if any of the previous attributes has changed
   // during the first pass, the file will be considered changed, due to stored attributes being nil.
