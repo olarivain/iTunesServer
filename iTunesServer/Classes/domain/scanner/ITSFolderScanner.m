@@ -231,6 +231,8 @@
   // make sure we cancel current timer, if any, first
   [self stop];
   
+  stopped = NO;
+  
   // then we can start a new timer
   NSLog(@"Starting folder scanner at path: %@", path);
   timer = [NSTimer scheduledTimerWithTimeInterval: SCAN_INTERVAL
