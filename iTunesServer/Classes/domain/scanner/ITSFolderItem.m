@@ -47,8 +47,9 @@
   NSDate *modificationDate = [attributes objectForKey: NSFileModificationDate];
   NSNumber *size = [attributes objectForKey: NSFileSize];
   
-  BOOL dateChanged = [modificationDate timeIntervalSinceDate: lastKnownModificationDate] != 0;
-  BOOL sizeChanged = lastKnownSize != nil && ![size isEqualToNumber: lastKnownSize];
+  BOOL dateChanged = lastKnownModificationDate == nil ||
+                        [modificationDate timeIntervalSinceDate: lastKnownModificationDate] != 0;
+  BOOL sizeChanged = lastKnownSize == nil || ![size isEqualToNumber: lastKnownSize];
   
   // file has changed if any of the previous attributes has changed
   // during the first pass, the file will be considered changed, due to stored attributes being nil.

@@ -12,7 +12,6 @@
 
 @interface ITSFolderScanner : NSObject<NSFileManagerDelegate>
 {
-  __strong NSFileManager *fileManager;
   __strong ITSFolderItemList *folderItemList;
   __strong NSTimer *timer;
   __strong NSString *path;

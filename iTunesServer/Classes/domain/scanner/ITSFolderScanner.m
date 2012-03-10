@@ -12,7 +12,7 @@
 #import "ITSFolderItemList.h"
 #import "ITSFolderItem.h"
 
-#define SCAN_INTERVAL 10
+#define SCAN_INTERVAL 60
 
 @interface ITSFolderScanner()
 - (id) initWithPath: (NSString *) aPath;
@@ -31,8 +31,6 @@
   self = [super init];
   if(self)
   {
-    fileManager = [[NSFileManager alloc] init];
-    fileManager.delegate = self;
     [self setScannedPath: aPath];
     
     [self extractDestinationPath];
@@ -62,6 +60,7 @@
   
   // ask file manager if destination exists and is a folder, if not, get the hell out
   BOOL isFolder = NO;
+  NSFileManager *fileManager = [NSFileManager defaultManager];
   if(![fileManager fileExistsAtPath: automaticallyImportPath isDirectory: &isFolder] && !isFolder)
   {
       
@@ -92,6 +91,7 @@
   path = aPath;
   
   // first, make sure the path exists and is a folder
+  NSFileManager *fileManager = [NSFileManager defaultManager];
   BOOL isDirectory;
   BOOL exists = [fileManager fileExistsAtPath: aPath isDirectory: &isDirectory];
   if(!exists || !isDirectory)
@@ -108,16 +108,22 @@
 - (void) timerFired:(NSTimer *)timer
 {
   // make sure another instance of the timer isn't running
-  if(isRunning)
+  @synchronized(self)
   {
-    return;
+    if(isRunning)
+    {
+      return;
+    } 
+    
+    // lock ourselves for later timer calls
+    isRunning = YES;
   }
-  // lock ourselves for later timer calls
-  isRunning = YES;
+  
 #if DEBUG_FOLDER_SCANNER == 1
   NSLog(@"Scanning: %@", path);
 #endif
   // scan source folder
+  NSFileManager *fileManager = [NSFileManager defaultManager];
   NSDirectoryEnumerator *directoryEnumerator = [fileManager enumeratorAtPath: path];
   NSString *file;
   while(file = [directoryEnumerator nextObject])
@@ -191,7 +197,7 @@
   
   // then we can start a new timer
   NSLog(@"Starting folder scanner at path: %@", path);
-  timer = [NSTimer scheduledTimerWithTimeInterval: 60 
+  timer = [NSTimer scheduledTimerWithTimeInterval: SCAN_INTERVAL
                                            target: self 
                                          selector: @selector(timerFired:) 
                                          userInfo: nil 
