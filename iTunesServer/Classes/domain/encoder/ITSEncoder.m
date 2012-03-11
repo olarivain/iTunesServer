@@ -95,6 +95,13 @@ static ITSEncoder *sharedEncoder;
     return nil;
   }
   
+  ITSEncodingRepository *repository = [ITSEncodingRepository sharedInstance];
+  MMTitleList *titleList = [repository titleListWithId: path];
+  if([titleList.titles count] > 0)
+  {
+    return titleList;
+  }
+  
   // make sure only 1 thread can run a scan at a time
   NSRunLoop *runLoop = [NSRunLoop currentRunLoop];
   // this synchronized block should take care of synchronization, unless there's an obvious flaw I'm missing
@@ -109,7 +116,8 @@ static ITSEncoder *sharedEncoder;
   
   // go ahead an tell libhb to do the scan
   [self performScanAtPath: path withHandbrakeHandle: handbrakeScannerHandle];
-  MMTitleList *titleList = [self readTitleListFromLastScanWithPath: path withHandbrakeHandle: handbrakeScannerHandle];
+#warning the construct is odd and shouldn't be needed, but I'm tired of fighting regressions so I'll keep it for now
+  titleList = [self readTitleListFromLastScanWithPath: path withHandbrakeHandle: handbrakeScannerHandle];
  
   // flip the synchronization switch so other threads can resume
   scanInProgress = NO;
@@ -420,7 +428,7 @@ static ITSEncoder *sharedEncoder;
   // Un debug mode, just encode a small chunk, 'cause I'm tired of waiting 45 minutes
   // for my tests to go through :)
   uint64_t debugStart = 300;
-  uint64_t debugDuration = 120;
+  uint64_t debugDuration = 240;
   NSLog(@"Debugger is ON, encoding only %llu seconds starting at %llu", debugDuration, debugStart);
   job->pts_to_start = debugStart * 90000L;
   job->pts_to_stop = debugDuration * 90000L;
@@ -659,6 +667,18 @@ static ITSEncoder *sharedEncoder;
   hb_state_t scannerState;
   hb_get_state(handbrakeEncodingHandle, &scannerState);
   
+  // encoder is working, update active title with the progress
+  if(scannerState.state == HB_STATE_WORKING)
+  {
+    // convert progress to percentage
+    activeTitle.progress = (NSInteger) (scannerState.param.working.progress * 100.0f);
+    
+    // and eta to seconds
+    activeTitle.eta = scannerState.param.working.hours * 3600;
+    activeTitle.eta += scannerState.param.working.minutes * 60;
+    activeTitle.eta += scannerState.param.working.seconds;
+  }
+  
   // encoder is not idle, so just encode next title (if any)
   if(scannerState.state != HB_STATE_WORKDONE && !(!scheduledFirst && scannerState.state == HB_STATE_IDLE))
   {
@@ -668,6 +688,8 @@ static ITSEncoder *sharedEncoder;
   // mark current title as completed and not active anymore
   activeTitle.encoding = NO;
   activeTitle.completed = YES;
+  activeTitle.eta = 0;
+  activeTitle.progress = 100;
   activeTitle = nil;
 
   if(activeTitleList.isCompleted)
