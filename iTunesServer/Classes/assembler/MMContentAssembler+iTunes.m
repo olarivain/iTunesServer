@@ -60,6 +60,7 @@
     content.show = [wrapper showForIndex:i];
     content.season = [wrapper seasonForIndex:i];
     content.episodeNumber = [wrapper episodeForIndex:i];
+    content.duration = [wrapper durationForIndex: i];
     [library addContent: content];
   }
   return library;

@@ -11,17 +11,18 @@
 @class SBElementArray;
 
 @interface ITSiTunesWrapper : NSObject {
-  NSArray *ids;
-  NSArray *names;
-  NSArray *genres;
-  NSArray *albums;
-  NSArray *artists;
-  NSArray *trackNumbers;
-  NSArray *descriptions;
-  NSArray *shows;
-  NSArray *seasons;
-  NSArray *episodes;
-  NSArray *iTunesKinds;
+  __strong NSArray *ids;
+  __strong NSArray *names;
+  __strong NSArray *genres;
+  __strong NSArray *albums;
+  __strong NSArray *artists;
+  __strong NSArray *trackNumbers;
+  __strong NSArray *descriptions;
+  __strong NSArray *shows;
+  __strong NSArray *seasons;
+  __strong NSArray *episodes;
+  __strong NSArray *iTunesKinds;
+  __strong NSArray *duration;
 }
 
 @property (nonatomic, readwrite, strong) NSArray *ids;
@@ -35,6 +36,7 @@
 @property (nonatomic, readwrite, strong) NSArray *shows;
 @property (nonatomic, readwrite, strong) NSArray *seasons;
 @property (nonatomic, readwrite, strong) NSArray *episodes;
+@property (nonatomic, readwrite, strong) NSArray *duration;
 
 + (id) wrapper;
 + (id) wrapperWithArray: (SBElementArray*) array;
@@ -44,6 +46,7 @@
 - (NSString *) idForIndex: (NSUInteger) index;
 - (NSNumber *) iTunesKindForIndex: (NSUInteger) index;
 - (NSString *) nameForIndex: (NSUInteger) index;
+- (NSNumber *) durationForIndex: (NSUInteger) index;
 - (NSString *) genreForIndex: (NSUInteger) index;
 - (NSString *) albumForIndex: (NSUInteger) index;
 - (NSString *) artistForIndex: (NSUInteger) index;

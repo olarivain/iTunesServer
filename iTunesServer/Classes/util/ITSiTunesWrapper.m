@@ -34,6 +34,7 @@
   wrapper.shows = [array valueForKey:@"show"];
   wrapper.episodes = [array valueForKey:@"episodeNumber"];
   wrapper.seasons = [array valueForKey:@"seasonNumber"];
+  wrapper.duration = [array valueForKey:@"duration"];
   return wrapper;
 }
 
@@ -59,6 +60,7 @@
 @synthesize seasons;
 @synthesize episodes;
 @synthesize iTunesKinds;
+@synthesize duration;
 
 #pragma mark - Count
 - (NSUInteger) count 
@@ -75,6 +77,11 @@
 - (NSNumber *) iTunesKindForIndex: (NSUInteger) index
 {
   return [self number: self.iTunesKinds forIndex: index];
+}
+
+- (NSNumber *) durationForIndex: (NSUInteger) index
+{
+  return [self number: self.duration forIndex: index];
 }
 
 - (NSString *) nameForIndex: (NSUInteger) index
