@@ -22,11 +22,20 @@
 
 - (NSArray*) resourceDescriptors 
 {
-  HSResourceDescriptor *listResource = [HSResourceDescriptor descriptorWithPath: @"/encoder" resource:self andSelector:@selector(listResources:)];
-  HSResourceDescriptor *scanResource = [HSResourceDescriptor descriptorWithPath: @"/encoder/{resourceId}" resource:self andSelector:@selector(scanResource:)];
-  HSResourceDescriptor *scheduleEncodeResource = [HSResourceDescriptor descriptorWithPath: @"/encoder/{resourceId}" resource:self selector:@selector(scheduleResourceForEncode:) andMethod: POST];
+  HSResourceDescriptor *listResource = [HSResourceDescriptor descriptorWithPath: @"/encoder" 
+                                                                       resource:self 
+                                                                    andSelector:@selector(listResources:)];
   
-  return [NSArray arrayWithObjects: listResource, scanResource, scheduleEncodeResource, nil];
+  HSResourceDescriptor *scanResource = [HSResourceDescriptor descriptorWithPath: @"/encoder/{resourceId}" 
+                                                                       resource:self 
+                                                                    andSelector:@selector(scanResource:)];
+  
+  HSResourceDescriptor *encodeResource = [HSResourceDescriptor descriptorWithPath: @"/encoder/{resourceId}" 
+                                                                                 resource:self 
+                                                                                 selector:@selector(scheduleResourceForEncode:) 
+                                                                                andMethod: POST];
+  
+  return [NSArray arrayWithObjects: listResource, scanResource, encodeResource, nil];
 }
 
 - (HSResponse *) listResources: (HSRequestParameters*) params
