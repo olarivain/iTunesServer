@@ -72,8 +72,6 @@
             }
             
             var json = form.body.value;
-//            xmlHttpRequest.send(method, json);
-            
             // mark timestamp when we started
             requestedTimestamp = new Date();
             var xmlHttpRequest = new XMLHttpRequest();
@@ -118,6 +116,8 @@
 		
 		var form = document.getElementById("form");
 		var url = form.request.value;
+    var subPath = encodeURIComponent(encodeURIComponent(form.subPath.value));
+    url += subPath;
 		var params = new Object();
 		
         new AjaxScriptTransport().sendRequest(url, params);
@@ -127,6 +127,7 @@
       function buildRequest(){
       	var form = document.getElementById("form");
       	form.request.value = form.host.value + form.blog.value;
+        form.subPath.value = "";
       }
       </script>
 		<form id="form" onsubmit="return submitRESTRequest();">
@@ -136,17 +137,22 @@
 			</select><br/><br/>
 			Resource: <br/>
 			<select name="blog" onchange="buildRequest();">
-				<option value="/library" >Library</option>
-				<option value="/library/">Playlist</option>
+				<option value="/library/" >Library</option>
 				<option value="/track/">Update track</option>
+        <option value="/encoder/">Encoder resources</option>
 			</select><br/><br/>
 			<input type="radio" name="method" value="GET" checked/>Get<br />
 			<input type="radio" name="method" value="PUT" />Put<br />
 			<input type="radio" name="method" value="POST" />Post<br />
 			<input type="radio" name="method" value="DELETE" />Delete<br /><br/>
+      Request:<br/> <input type="text" size="150" name="request" value="" /><br />
+      Sub Path (will be double encoded and appended to Request):<br/> <input type="text" size="150" name="subPath" value="" /> <br/> 	
+      Body:<br />
 			<textarea name="body" rows="10" cols="80" ></textarea><br /><br/>
-			Request:<br/> <input type="text" size="150" name="request" value="" /><br /><br/> 	
-	  		<input type="submit" />
+			
+      <input type="submit" />
+
+
 		</form>
 		<div style="width: 1180px">
 			<p>Request: <span id="request"></span></p>
