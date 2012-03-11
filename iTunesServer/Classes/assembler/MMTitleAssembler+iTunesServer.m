@@ -6,7 +6,6 @@
 //  Copyright (c) 2012 Edmunds. All rights reserved.
 //
 
-#import <KraCommons/NSDictionary+NilSafe.h>
 #import <MediaManagement/MMTitleList.h>
 #import <MediaManagement/MMTitle.h>
 #import <MediaManagement/MMAudioTrack.h>
@@ -48,9 +47,12 @@
   NSArray *audioDtos = [dto nullSafeForKey: @"audioTracks"];
   for(NSDictionary *audioDto in audioDtos)
   {
-    BOOL selected = [audioDto integerForKey: @"selected"];
+    // fetch appropriate audio track
     NSInteger index = [audioDto integerForKey: @"index"];
     MMAudioTrack *audioTrack = [title audioTrackWithIndex: index];
+    
+    // and flip selection switch
+    BOOL selected = [audioDto integerForKey: @"selected"];
     if(audioTrack.selected != selected)
     {
       [title selectAudioTrack: audioTrack];
@@ -61,9 +63,12 @@
   NSArray *subtitleDtos = [dto nullSafeForKey: @"subtitleTracks"];
   for(NSDictionary *subtitleDto in subtitleDtos)
   {
-    BOOL selected = [subtitleDto integerForKey: @"selected"];
-    NSInteger index = [dto integerForKey: @"index"];
+    // fetch appropriate subtitle track
+    NSInteger index = [subtitleDto integerForKey: @"index"];
     MMSubtitleTrack *subtitleTrack = [title subtitleTrackWithIndex: index];
+    
+    // and flip selection switch appropriately
+    BOOL selected = [subtitleDto integerForKey: @"selected"];
     if(subtitleTrack.selected !=  selected)
     {
       [title selectSubtitleTrack: subtitleTrack];
