@@ -17,40 +17,28 @@
 #import "ITSEncodingRepository.h"
 
 @interface MMTitleAssembler(iTunesServerPrivate)
-- (void) updateTitle: (MMTitle *) title withDto: (NSDictionary *) dto;
+- (void) updateTitle: (MMTitle *) title WithSelectionDto: (NSDictionary *) dto;
 @end
 
 @implementation MMTitleAssembler (iTunesServer)
 
-- (MMTitleList *) updateTitleListWithDto: (NSDictionary *) dto
-{
-  ITSEncodingRepository *repository = [ITSEncodingRepository sharedInstance];
-  
-  NSString *titleListId = [dto nullSafeForKey: @"id"];
-  MMTitleList *titleList = [repository titleListWithId: titleListId];
-  
-  // title list hasn't been scanned yet, so just trust the user's input with it.
-  if([titleList.titles count] == 0)
-  {
-    [self updateTitleList: titleList withDto: dto];
-    return titleList;
-  }
-  
-  // otherwise update the title with the selection status from the client
+#pragma mark - Updates an MMTitleList with selection status
+- (void) updateTitleList: (MMTitleList *) titleList withSelectionDto: (NSDictionary *) dto
+{  
+  // update the title with the selection status from the client
   NSArray *titleDtos = [dto nullSafeForKey: @"titles"];
   for(NSDictionary *titleDto in titleDtos)
   {
 
     NSInteger titleIndex = [titleDto integerForKey: @"index"];
     MMTitle *title = [titleList titleWithIndex: titleIndex];
-    [self updateTitle: title withDto: titleDto];
+    [self updateTitle: title WithSelectionDto: titleDto];
   }
-  return titleList;
 }
 
-- (void) updateTitle: (MMTitle *) title withDto: (NSDictionary *) dto
+- (void) updateTitle: (MMTitle *) title WithSelectionDto: (NSDictionary *) dto
 {
-  // title is getting encoded, just bail out, we can't update these guys
+  // title is getting encoded, just bail out, we can't update this guy
   if(title.encoding)
   {
     return;

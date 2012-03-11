@@ -12,6 +12,6 @@
 
 @interface MMTitleAssembler (iTunesServer)
 
-- (MMTitleList *) updateTitleListWithDto: (NSDictionary *) dto;
+- (void) updateTitleList: (MMTitleList *) titleList withSelectionDto: (NSDictionary *) dto;
 
 @end
