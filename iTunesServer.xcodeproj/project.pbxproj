@@ -162,6 +162,8 @@
 		0062B2971495DA7000160289 /* ITSFolderScanner.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ITSFolderScanner.m; sourceTree = "<group>"; };
 		0062B29A1495DA8600160289 /* ITSFolderItemList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ITSFolderItemList.h; sourceTree = "<group>"; };
 		0062B29B1495DA8600160289 /* ITSFolderItemList.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ITSFolderItemList.m; sourceTree = "<group>"; };
+		00776E82150C26AC002D96F5 /* blogs-test-harness.html */ = {isa = PBXFileReference; lastKnownFileType = text.html; path = "blogs-test-harness.html"; sourceTree = "<group>"; };
+		00776E83150C26AC002D96F5 /* CLI Load Test.jmx */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = "CLI Load Test.jmx"; sourceTree = "<group>"; };
 		00823F9814AE7A7900CEDDEB /* MMAudioTrack+MMAudioTrack_Handbrake.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "MMAudioTrack+MMAudioTrack_Handbrake.h"; path = "domain/encoder/MMAudioTrack+MMAudioTrack_Handbrake.h"; sourceTree = "<group>"; };
 		00823F9914AE7A7900CEDDEB /* MMAudioTrack+MMAudioTrack_Handbrake.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "MMAudioTrack+MMAudioTrack_Handbrake.m"; path = "domain/encoder/MMAudioTrack+MMAudioTrack_Handbrake.m"; sourceTree = "<group>"; };
 		00DA485D150B3CD30065963F /* liba52.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = liba52.a; sourceTree = "<group>"; };
@@ -287,6 +289,7 @@
 				000CE8F614945F32003002C3 /* iTunesServerPrefPane */,
 				000CE8691494536E003002C3 /* Frameworks */,
 				000CE8671494536E003002C3 /* Products */,
+				00776E81150C26AC002D96F5 /* test-harness */,
 				000CE96514947DAD003002C3 /* Rakefile */,
 			);
 			sourceTree = "<group>";
@@ -558,6 +561,15 @@
 			);
 			name = scanner;
 			path = domain/scanner;
+			sourceTree = "<group>";
+		};
+		00776E81150C26AC002D96F5 /* test-harness */ = {
+			isa = PBXGroup;
+			children = (
+				00776E82150C26AC002D96F5 /* blogs-test-harness.html */,
+				00776E83150C26AC002D96F5 /* CLI Load Test.jmx */,
+			);
+			path = "test-harness";
 			sourceTree = "<group>";
 		};
 		00DA485C150B3CD30065963F /* contrib */ = {
