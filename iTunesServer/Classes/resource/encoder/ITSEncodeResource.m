@@ -44,13 +44,13 @@
 
 - (HSResponse *) scanResource: (HSRequestParameters *) params
 { 
-  ITSEncoder *encoder = [ITSEncoder sharedEncoder];
   // passed ressources are double HTTP encoded (/ in path). 
   // YARES will HTTP escape once by design, take care of the second unescape explicitly here
   NSString *encodedResourceId = [params.pathParameters objectForKey: @"resourceId"];
   NSString *resourceId = [encodedResourceId stringByReplacingPercentEscapesUsingEncoding: NSUTF8StringEncoding];
   
   // and ask encoder to scan that for us.
+  ITSEncoder *encoder = [ITSEncoder sharedEncoder];
   MMTitleList *titleList = [encoder scanPath: resourceId];
   
   MMTitleAssembler *assembler = [MMTitleAssembler sharedInstance];
@@ -63,12 +63,21 @@
 
 - (HSResponse *) scheduleResourceForEncode: (HSRequestParameters *) params
 {
-  // rebuild title list from JSON object
+  NSDictionary *titleListDto = params.parameters;
+  // passed ressources are double HTTP encoded (/ in path). 
+  // YARES will HTTP escape once by design, take care of the second unescape explicitly here
+  NSString *encodedResourceId = [params.pathParameters objectForKey: @"resourceId"];
+  NSString *resourceId = [encodedResourceId stringByReplacingPercentEscapesUsingEncoding: NSUTF8StringEncoding];
+  
+  // Scan first, to be sure we have the right content
+  ITSEncoder *encoder = [ITSEncoder sharedEncoder];
+  MMTitleList *titleList = [encoder scanPath: resourceId];
+  
+  // update title list from JSON object
   MMTitleAssembler *assembler = [MMTitleAssembler sharedInstance];
-  MMTitleList *titleList = [assembler updateTitleListWithDto: params.parameters];
+  [assembler updateTitleList: titleList withSelectionDto: titleListDto];
   
   // pass it to the encoder to schedule it.
-  ITSEncoder *encoder = [ITSEncoder sharedEncoder];
   [encoder scheduleTitleList: titleList];
   HSResponse *response = [HSResponse jsonResponse];
   response.object = params.pathParameters;
