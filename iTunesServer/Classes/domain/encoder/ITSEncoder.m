@@ -374,7 +374,6 @@ static ITSEncoder *sharedEncoder;
   // perform the scan so the handle is populated with the content.
   // this will block until done
   [self performScanAtPath: activeTitleList.titleListId withHandbrakeHandle: handbrakeEncodingHandle];
-  scheduledFirst = YES;
   
   // and schedule for encoding
   [self performScheduleTitleListForEncode: activeTitleList];
@@ -428,7 +427,7 @@ static ITSEncoder *sharedEncoder;
   // Un debug mode, just encode a small chunk, 'cause I'm tired of waiting 45 minutes
   // for my tests to go through :)
   uint64_t debugStart = 300;
-  uint64_t debugDuration = 240;
+  uint64_t debugDuration = 30;
   NSLog(@"Debugger is ON, encoding only %llu seconds starting at %llu", debugDuration, debugStart);
   job->pts_to_start = debugStart * 90000L;
   job->pts_to_stop = debugDuration * 90000L;
@@ -680,7 +679,7 @@ static ITSEncoder *sharedEncoder;
   }
   
   // encoder is not idle, so just encode next title (if any)
-  if(scannerState.state != HB_STATE_WORKDONE && !(!scheduledFirst && scannerState.state == HB_STATE_IDLE))
+  if(scannerState.state != HB_STATE_WORKDONE && scannerState.state != HB_STATE_IDLE)
   {
       return;
   }
