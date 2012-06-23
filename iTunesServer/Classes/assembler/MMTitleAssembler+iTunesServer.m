@@ -74,6 +74,12 @@
       [title selectSubtitleTrack: subtitleTrack];
     }
   }
+    
+  // reset the completed/encoding flags
+  if(title.selected) {
+    title.completed = NO;
+    title.encoding = NO;
+  }
 }
 
 @end

@@ -526,6 +526,7 @@ static ITSEncoder *sharedEncoder;
   int audioTrackCount = hb_list_count(handbrakeTitle->list_audio);
   // now, go through all selected audio tracks and add them
   NSArray *selectedAudioTracks = title.selectedAudioTracks;
+  int index = 0;
   for(MMAudioTrack *selectedAudioTrack in selectedAudioTracks)
   {
     // same thing than with titles, grab the hb audio track index from MMAudioTrack
@@ -550,8 +551,9 @@ static ITSEncoder *sharedEncoder;
     hb_audio_config_init(audio);
     
     // then copy shit over from template
-    audio->in.track = audioTemplateConfig->in.track;
-    audio->out.track = audio->in.track;
+    audio->in.track = audioIndex;
+    audio->out.track = index;
+    index++;
     
     // drop dynamic range just because the HB guys do it in their tool.
     audio->out.dynamic_range_compression = 0.7f;

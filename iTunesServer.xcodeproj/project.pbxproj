@@ -61,7 +61,6 @@
 		00DA4894150B3CD30065963F /* libbluray.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 00DA4864150B3CD30065963F /* libbluray.a */; };
 		00DA4895150B3CD30065963F /* libdca.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 00DA4865150B3CD30065963F /* libdca.a */; };
 		00DA4896150B3CD30065963F /* libdvdnav.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 00DA4866150B3CD30065963F /* libdvdnav.a */; };
-		00DA4897150B3CD30065963F /* libdvdnavmini.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 00DA4867150B3CD30065963F /* libdvdnavmini.a */; };
 		00DA4898150B3CD30065963F /* libdvdread.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 00DA4868150B3CD30065963F /* libdvdread.a */; };
 		00DA4899150B3CD30065963F /* libfaac.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 00DA4869150B3CD30065963F /* libfaac.a */; };
 		00DA489A150B3CD30065963F /* libfontconfig.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 00DA486A150B3CD30065963F /* libfontconfig.a */; };
@@ -240,7 +239,6 @@
 				00DA4894150B3CD30065963F /* libbluray.a in Frameworks */,
 				00DA4895150B3CD30065963F /* libdca.a in Frameworks */,
 				00DA4896150B3CD30065963F /* libdvdnav.a in Frameworks */,
-				00DA4897150B3CD30065963F /* libdvdnavmini.a in Frameworks */,
 				00DA4898150B3CD30065963F /* libdvdread.a in Frameworks */,
 				00DA4899150B3CD30065963F /* libfaac.a in Frameworks */,
 				00DA489A150B3CD30065963F /* libfontconfig.a in Frameworks */,
