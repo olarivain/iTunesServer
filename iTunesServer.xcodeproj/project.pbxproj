@@ -647,23 +647,6 @@
 		};
 /* End PBXHeadersBuildPhase section */
 
-/* Begin PBXLegacyTarget section */
-		00EFC384150477B1004494EE /* Deploy */ = {
-			isa = PBXLegacyTarget;
-			buildArgumentsString = deploy;
-			buildConfigurationList = 00EFC385150477B1004494EE /* Build configuration list for PBXLegacyTarget "Deploy" */;
-			buildPhases = (
-			);
-			buildToolPath = rake;
-			buildWorkingDirectory = "";
-			dependencies = (
-			);
-			name = Deploy;
-			passBuildSettingsInEnvironment = 1;
-			productName = Deploy;
-		};
-/* End PBXLegacyTarget section */
-
 /* Begin PBXNativeTarget section */
 		000CE8651494536E003002C3 /* iTunesServer */ = {
 			isa = PBXNativeTarget;
@@ -724,7 +707,6 @@
 			targets = (
 				000CE8651494536E003002C3 /* iTunesServer */,
 				000CE8F114945F32003002C3 /* iTunesServerPrefPane */,
-				00EFC384150477B1004494EE /* Deploy */,
 			);
 		};
 /* End PBXProject section */
@@ -1039,31 +1021,6 @@
 			};
 			name = Release;
 		};
-		00EFC386150477B1004494EE /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = NO;
-				DEBUGGING_SYMBOLS = YES;
-				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
-				GCC_OPTIMIZATION_LEVEL = 0;
-				GCC_WARN_UNINITIALIZED_AUTOS = YES;
-				OTHER_CFLAGS = "";
-				OTHER_LDFLAGS = "";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-			};
-			name = Debug;
-		};
-		00EFC387150477B1004494EE /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = NO;
-				GCC_WARN_UNINITIALIZED_AUTOS = YES;
-				OTHER_CFLAGS = "";
-				OTHER_LDFLAGS = "";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-			};
-			name = Release;
-		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -1090,15 +1047,6 @@
 			buildConfigurations = (
 				000CE90614945F33003002C3 /* Debug */,
 				000CE90714945F33003002C3 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		00EFC385150477B1004494EE /* Build configuration list for PBXLegacyTarget "Deploy" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				00EFC386150477B1004494EE /* Debug */,
-				00EFC387150477B1004494EE /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
