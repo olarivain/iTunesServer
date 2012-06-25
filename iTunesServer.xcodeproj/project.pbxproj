@@ -214,6 +214,7 @@
 		00DA488C150B3CD30065963F /* libhb.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libhb.a; sourceTree = "<group>"; };
 		00DB3ED914B40EBF00B5963C /* MMTitle+MMTitle_Handbrake.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "MMTitle+MMTitle_Handbrake.h"; path = "domain/encoder/MMTitle+MMTitle_Handbrake.h"; sourceTree = "<group>"; };
 		00DB3EDA14B40EBF00B5963C /* MMTitle+MMTitle_Handbrake.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "MMTitle+MMTitle_Handbrake.m"; path = "domain/encoder/MMTitle+MMTitle_Handbrake.m"; sourceTree = "<group>"; };
+		00DC02281597E65D00F891C9 /* rpom.xml */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = rpom.xml; sourceTree = "<group>"; };
 		00EFC3AA15049B90004494EE /* MMTitleAssembler+iTunesServer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MMTitleAssembler+iTunesServer.h"; sourceTree = "<group>"; };
 		00EFC3AB15049B90004494EE /* MMTitleAssembler+iTunesServer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "MMTitleAssembler+iTunesServer.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -289,6 +290,7 @@
 				000CE8671494536E003002C3 /* Products */,
 				00776E81150C26AC002D96F5 /* test-harness */,
 				000CE96514947DAD003002C3 /* Rakefile */,
+				00DC02281597E65D00F891C9 /* rpom.xml */,
 			);
 			sourceTree = "<group>";
 		};
@@ -863,14 +865,14 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				HEADER_SEARCH_PATHS = (
-					"/usr/local/xcodeproducts/MediaManagement-x86/LATEST",
-					/usr/local/xcodeproducts/YARES/LATEST,
-					"/usr/local/xcodeproducts/KraCommons-x86/LATEST",
+					"/usr/local/raven/MediaManagementCommon-MacOS/1.0-LATEST",
+					"/usr/local/raven/yares/1.0-LATEST",
+					"/usr/local/raven/KraCommons-MacOS/1.0-LATEST",
 				);
 				LIBRARY_SEARCH_PATHS = (
-					"/usr/local/xcodeproducts/MediaManagement-x86/LATEST",
-					/usr/local/xcodeproducts/YARES/LATEST,
-					"/usr/local/xcodeproducts/KraCommons-x86/LATEST",
+					"/usr/local/raven/MediaManagementCommon-MacOS/1.0-LATEST",
+					"/usr/local/raven/yares/1.0-LATEST",
+					"/usr/local/raven/KraCommons-MacOS/1.0-LATEST",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.7;
 				ONLY_ACTIVE_ARCH = YES;
@@ -885,11 +887,11 @@
 					"-lMediaManagement-x86",
 					"-lKraCommons-x86",
 					"-force_load",
-					"/usr/local/xcodeproducts/KraCommons-x86/LATEST/libKraCommons-x86.a",
+					"/usr/local/raven/KraCommons-MacOS/1.0-LATEST/libKraCommons-x86.a",
 					"-force_load",
-					/usr/local/xcodeproducts/YARES/LATEST/libYARES.a,
+					"/usr/local/raven/yares/1.0-LATEST/libYARES.a",
 					"-force_load",
-					"/usr/local/xcodeproducts/MediaManagement-x86/LATEST/libMediaManagement-x86.a",
+					"/usr/local/raven/MediaManagementCommon-MacOS/1.0-LATEST/libMediaManagement-x86.a",
 				);
 				SDKROOT = macosx;
 			};
@@ -911,14 +913,14 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				HEADER_SEARCH_PATHS = (
-					"/usr/local/xcodeproducts/MediaManagement-x86/LATEST",
-					/usr/local/xcodeproducts/YARES/LATEST,
-					"/usr/local/xcodeproducts/KraCommons-x86/LATEST",
+					"/usr/local/raven/MediaManagementCommon-MacOS/1.0-LATEST",
+					"/usr/local/raven/yares/1.0-LATEST",
+					"/usr/local/raven/KraCommons-MacOS/1.0-LATEST",
 				);
 				LIBRARY_SEARCH_PATHS = (
-					"/usr/local/xcodeproducts/MediaManagement-x86/LATEST",
-					/usr/local/xcodeproducts/YARES/LATEST,
-					"/usr/local/xcodeproducts/KraCommons-x86/LATEST",
+					"/usr/local/raven/MediaManagementCommon-MacOS/1.0-LATEST",
+					"/usr/local/raven/yares/1.0-LATEST",
+					"/usr/local/raven/KraCommons-MacOS/1.0-LATEST",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.7;
 				OTHER_CFLAGS = "-D__LIBHB__";
@@ -928,11 +930,11 @@
 					"-lMediaManagement-x86",
 					"-lKraCommons-x86",
 					"-force_load",
-					"/usr/local/xcodeproducts/KraCommons-x86/LATEST/libKraCommons-x86.a",
+					"/usr/local/raven/KraCommons-MacOS/1.0-LATEST/libKraCommons-x86.a",
 					"-force_load",
-					/usr/local/xcodeproducts/YARES/LATEST/libYARES.a,
+					"/usr/local/raven/yares/1.0-LATEST/libYARES.a",
 					"-force_load",
-					"/usr/local/xcodeproducts/MediaManagement-x86/LATEST/libMediaManagement-x86.a",
+					"/usr/local/raven/MediaManagementCommon-MacOS/1.0-LATEST/libMediaManagement-x86.a",
 				);
 				SDKROOT = macosx;
 			};
@@ -943,6 +945,7 @@
 			buildSettings = {
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "iTunesServer/iTunesServer-Prefix.pch";
+				HEADER_SEARCH_PATHS = "${inherited}";
 				INFOPLIST_FILE = "iTunesServer/iTunesServer-Info.plist";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
@@ -952,6 +955,7 @@
 				OTHER_CFLAGS = "${inherited}";
 				OTHER_LDFLAGS = "${inherited}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				USER_HEADER_SEARCH_PATHS = "${inherited}";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -961,6 +965,7 @@
 			buildSettings = {
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "iTunesServer/iTunesServer-Prefix.pch";
+				HEADER_SEARCH_PATHS = "${inherited}";
 				INFOPLIST_FILE = "iTunesServer/iTunesServer-Info.plist";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
@@ -970,6 +975,7 @@
 				OTHER_CFLAGS = "${inherited}";
 				OTHER_LDFLAGS = "${inherited}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				USER_HEADER_SEARCH_PATHS = "${inherited}";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;

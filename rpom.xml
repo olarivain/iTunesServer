@@ -1,0 +1,31 @@
+<project>
+	<name>iTunes Server</name>
+	<groupId>org.kra.mediamanagement</groupId>
+	<version>1.0.20</version>
+	<scm>git</scm>
+	
+	<artifacts>
+		<artifact>
+			<artifactId>iTunesServer</artifactId>
+			<name>iTunesServer</name>
+			<silenceXcode>true</silenceXcode>
+			<target>
+				<name>iTunesServer</name>
+				<configuration>Release</configuration>
+				<buildFolder>Release</buildFolder>
+			</target>
+		</artifact>
+    
+    <artifact>
+      <artifactId>iTunesServer-PrefPane</artifactId>
+      <name>iTunesServer-PrefPane</name>
+      <silenceXcode>true</silenceXcode>
+      <target>
+        <name>iTunesServerPrefPane</name>
+        <configuration>Release</configuration>
+        <buildFolder>Release</buildFolder>
+      </target>
+		</artifact>
+	</artifacts>
+     
+</project>
