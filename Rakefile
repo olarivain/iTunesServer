@@ -24,3 +24,27 @@ end
 task :release do
 	raven.release
 end
+
+task :macmini do
+  raven.clean
+  raven.build
+  raven.install
+  # copy the app/pref pane first
+  puts "Deploying iTunesServer to MiniMoi.local"
+  appArchiveName = "iTunesServer-#{raven.version}.zip"
+  macMiniCmd = "scp -r target/#{appArchiveName} kra@MiniMoi.local:/Applications/ > /dev/null 2>&1"
+  system macMiniCmd
+
+  macMiniCmd = "scp -r target/iTunesServer-PrefPane-#{raven.version}.zip kra@MiniMoi.local:~/iTunesServerPrefPane/ > /dev/null 2>&1"
+	system macMiniCmd
+  
+  # kill current running app, then remove existing bundle. 
+  # Unzip new app bundle, and clean the mess: delete the .zip and the unfortunate dSYM file.
+  # then, restart iTunesServer
+  puts "Restarting iTunesServer App on MiniMoi.local"
+  remoteCommand = "killall -9 iTunesServer; cd /Applications; rm -rf iTunesServer.app; unzip -o #{appArchiveName}; rm -rf iTunesServer.app.dSYM #{appArchiveName}; open iTunesServer.app"
+  macMiniCmd = "ssh kra@MiniMoi.local '(#{remoteCommand}) > /dev/null 2>&1'"
+
+	system macMiniCmd
+
+end
