@@ -526,20 +526,20 @@ static ITSEncoder *sharedEncoder;
   int audioTrackCount = hb_list_count(handbrakeTitle->list_audio);
   // now, go through all selected audio tracks and add them
   NSArray *selectedAudioTracks = title.selectedAudioTracks;
-  int index = 0;
+  int outAudioIndex = 0;
   for(MMAudioTrack *selectedAudioTrack in selectedAudioTracks)
   {
     // same thing than with titles, grab the hb audio track index from MMAudioTrack
-    NSInteger audioIndex = [title indexOfAudioTrack: selectedAudioTrack];
+    NSInteger inAudioIndex = [title indexOfAudioTrack: selectedAudioTrack];
     // make sure input is safe
-    if(audioIndex > audioTrackCount)
+    if(inAudioIndex > audioTrackCount)
     {
       continue;
     }
     
     // let's create audio config now.
     // first, extract the relevant audio config from hb audio list so we can copy stuff over.
-    hb_audio_config_t *audioTemplateConfig = hb_list_item(handbrakeTitle->list_audio, (int) audioIndex);
+    hb_audio_config_t *audioTemplateConfig = hb_list_item(handbrakeTitle->list_audio, (int) inAudioIndex);
     
     
     // now is time to create the schedule audio config.
@@ -551,9 +551,9 @@ static ITSEncoder *sharedEncoder;
     hb_audio_config_init(audio);
     
     // then copy shit over from template
-    audio->in.track = audioIndex;
-    audio->out.track = index;
-    index++;
+    audio->in.track = inAudioIndex;
+    audio->out.track = outAudioIndex;
+    outAudioIndex++;
     
     // drop dynamic range just because the HB guys do it in their tool.
     audio->out.dynamic_range_compression = 0.7f;
@@ -584,8 +584,10 @@ static ITSEncoder *sharedEncoder;
       audio = (hb_audio_config_t *) calloc(1, sizeof(*audio));
       hb_audio_config_init(audio);
       // then copy shit over
-      audio->in.track = audioTemplateConfig->in.track;
-      audio->out.track = audio->in.track;
+      audio->in.track = inAudioIndex;
+      audio->out.track = outAudioIndex;
+      outAudioIndex++;
+      
       audio->out.dynamic_range_compression = 0.7f;
       
       // pick right passthru codec
