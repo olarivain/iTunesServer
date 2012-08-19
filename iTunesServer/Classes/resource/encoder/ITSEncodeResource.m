@@ -34,6 +34,10 @@
                                                                                  resource:self 
                                                                                  selector:@selector(scheduleResourceForEncode:) 
                                                                                 andMethod: POST];
+    HSResourceDescriptor *deleteResource = [HSResourceDescriptor descriptorWithPath: @"/encoder/{resourceId}"
+                                                                           resource:self
+                                                                           selector:@selector(deleteResource:)
+                                                                          andMethod: DELETE];
   
   return [NSArray arrayWithObjects: listResource, scanResource, encodeResource, nil];
 }
@@ -90,6 +94,23 @@
   [encoder scheduleTitleList: titleList];
   HSResponse *response = [HSResponse jsonResponse];
   response.object = params.pathParameters;
+  
+  return response;
+}
+
+- (HSResponse *) deleteResource: (HSRequestParameters *) params {
+  // passed ressources are double HTTP encoded (/ in path).
+  // YARES will HTTP escape once by design, take care of the second unescape explicitly here
+  NSString *encodedResourceId = [params.pathParameters objectForKey: @"resourceId"];
+  NSString *resourceId = [encodedResourceId stringByReplacingPercentEscapesUsingEncoding: NSUTF8StringEncoding];
+  
+  // now, delete the sucker
+  ITSEncoder *encoder = [ITSEncoder sharedEncoder];
+  NSError *error = [encoder deleteResource: resourceId];
+  
+  HSResponse *response = [HSResponse jsonResponse];
+  response.code = error == nil ? OK : BAD_REQUEST;
+  response.object = error.localizedDescription;
   
   return response;
 }

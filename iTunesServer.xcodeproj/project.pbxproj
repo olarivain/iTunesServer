@@ -161,6 +161,7 @@
 		0062B2971495DA7000160289 /* ITSFolderScanner.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ITSFolderScanner.m; sourceTree = "<group>"; };
 		0062B29A1495DA8600160289 /* ITSFolderItemList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ITSFolderItemList.h; sourceTree = "<group>"; };
 		0062B29B1495DA8600160289 /* ITSFolderItemList.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ITSFolderItemList.m; sourceTree = "<group>"; };
+		007643AA15E19E6E008F5CED /* ITSErrors.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ITSErrors.h; sourceTree = "<group>"; };
 		00776E82150C26AC002D96F5 /* blogs-test-harness.html */ = {isa = PBXFileReference; lastKnownFileType = text.html; path = "blogs-test-harness.html"; sourceTree = "<group>"; };
 		00776E83150C26AC002D96F5 /* CLI Load Test.jmx */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = "CLI Load Test.jmx"; sourceTree = "<group>"; };
 		00823F9814AE7A7900CEDDEB /* MMAudioTrack+MMAudioTrack_Handbrake.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "MMAudioTrack+MMAudioTrack_Handbrake.h"; path = "domain/encoder/MMAudioTrack+MMAudioTrack_Handbrake.h"; sourceTree = "<group>"; };
@@ -426,6 +427,7 @@
 				001F2FD814A81BED00086BB8 /* encoder */,
 				000CE8E814945D09003002C3 /* configuration */,
 				0062B2931495DA7000160289 /* scanner */,
+				007643AA15E19E6E008F5CED /* ITSErrors.h */,
 			);
 			name = domain;
 			sourceTree = "<group>";

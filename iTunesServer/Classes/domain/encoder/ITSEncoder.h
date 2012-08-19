@@ -41,9 +41,11 @@
 @property (nonatomic, readonly) MMTitle *activeTitle;
 
 - (MMTitleList *) scanPath: (NSString *) path;
+- (NSError *) deleteResource: (NSString *) resource;
 
 - (void) scheduleTitleList: (MMTitleList *) titleList;
 
 - (void) closeLibHB;
+
 
 @end

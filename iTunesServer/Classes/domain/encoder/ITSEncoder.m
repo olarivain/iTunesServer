@@ -18,6 +18,8 @@
 #import "ITSConfiguration.h"
 #import "ITSEncodingRepository.h"
 
+#import "ITSErrors.h"
+
 static ITSEncoder *sharedEncoder;
 
 @interface ITSEncoder()
@@ -703,8 +705,42 @@ static ITSEncoder *sharedEncoder;
   [self encodeNextTitleList];
 }
 
-- (void) closeLibHB {
+- (void) closeLibHB
+{
   hb_global_close();
+}
+
+#pragma mark - Deleting resources
+- (NSError *) deleteResource: (NSString *) resource
+{
+  ITSEncodingRepository *encodingRepository = [ITSEncodingRepository sharedInstance];
+  MMTitleList *deletedList = [encodingRepository titleListWithId: resource];
+  
+  // first, make sure we don't delete something in progress
+  if(activeTitleList == deletedList)
+  {
+    
+    NSString *errorMessage = [NSString stringWithFormat: @"Cannot delete %@ because it's currently encoding", deletedList.name];
+    NSDictionary *userInfo = [NSDictionary dictionaryWithObject: errorMessage forKey: NSLocalizedDescriptionKey];
+    return [NSError errorWithDomain: @"ITS"
+                               code: COULD_NOT_DELETE_ACTIVE
+                           userInfo: userInfo];
+  }
+  
+  if([scheduledTitles containsObject: deletedList]) {
+    NSString *errorMessage = [NSString stringWithFormat: @"Cannot delete %@ because it's scheduled for encoding", deletedList.name];
+    NSDictionary *userInfo = [NSDictionary dictionaryWithObject: errorMessage forKey: NSLocalizedDescriptionKey];
+    return [NSError errorWithDomain: @"ITS"
+                               code: COULD_NOT_DELETE_ACTIVE
+                           userInfo: userInfo];
+  }
+  
+  // now, delete the file
+  NSError *error = nil;
+  [fileManager removeItemAtPath: resource
+                          error: &error];
+  
+  return error;
 }
 
 @end
