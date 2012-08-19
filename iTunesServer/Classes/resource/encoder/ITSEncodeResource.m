@@ -39,7 +39,7 @@
                                                                            selector:@selector(deleteResource:)
                                                                           andMethod: DELETE];
   
-  return [NSArray arrayWithObjects: listResource, scanResource, encodeResource, nil];
+  return [NSArray arrayWithObjects: listResource, scanResource, encodeResource, deleteResource, nil];
 }
 
 - (HSResponse *) listResources: (HSRequestParameters*) params
@@ -110,7 +110,9 @@
   
   HSResponse *response = [HSResponse jsonResponse];
   response.code = error == nil ? OK : BAD_REQUEST;
-  response.object = error.localizedDescription;
+  NSMutableDictionary *dictionary = [NSMutableDictionary dictionaryWithCapacity: 1];
+  [dictionary setObjectNilSafe: error.localizedDescription forKey: @"error"];
+  response.object = dictionary;
   
   return response;
 }

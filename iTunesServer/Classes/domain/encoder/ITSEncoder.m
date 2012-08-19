@@ -717,7 +717,7 @@ static ITSEncoder *sharedEncoder;
   MMTitleList *deletedList = [encodingRepository titleListWithId: resource];
   
   // first, make sure we don't delete something in progress
-  if(activeTitleList == deletedList)
+  if(activeTitleList != nil && activeTitleList == deletedList)
   {
     
     NSString *errorMessage = [NSString stringWithFormat: @"Cannot delete %@ because it's currently encoding", deletedList.name];
