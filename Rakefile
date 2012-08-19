@@ -1,7 +1,7 @@
-require 'Raven.rb'
-require 'RavenArtifact.rb'
+require 'rubygems'
+require 'Raven'
+require 'RavenArtifact'
 
-include Rake::DSL
 
 raven = Raven.new()
 

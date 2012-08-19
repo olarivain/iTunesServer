@@ -418,7 +418,7 @@ static ITSEncoder *sharedEncoder;
   
   ITSConfigurationRepository *configurationRepository = [ITSConfigurationRepository sharedInstance];
   ITSConfiguration *configuration = [configurationRepository readConfiguration];
-  NSString *file = [NSString stringWithFormat: @"%@/%@-%02i.m4v", configuration.autoScanPath, titleList.name, activeTitle.index];
+  NSString *file = [NSString stringWithFormat: @"%@/%@-%02li.m4v", configuration.autoScanPath, titleList.name, activeTitle.index];
   
   NSLog(@"Encoding %@ titile %ld to %@", titleList.titleListId, titlePosition, file);
   job->file = [file cStringUsingEncoding: NSUTF8StringEncoding];
@@ -553,8 +553,8 @@ static ITSEncoder *sharedEncoder;
     hb_audio_config_init(audio);
     
     // then copy shit over from template
-    audio->in.track = inAudioIndex;
-    audio->out.track = outAudioIndex;
+    audio->in.track = (int) inAudioIndex;
+    audio->out.track = (int) outAudioIndex;
     outAudioIndex++;
     
     // drop dynamic range just because the HB guys do it in their tool.
@@ -586,8 +586,8 @@ static ITSEncoder *sharedEncoder;
       audio = (hb_audio_config_t *) calloc(1, sizeof(*audio));
       hb_audio_config_init(audio);
       // then copy shit over
-      audio->in.track = inAudioIndex;
-      audio->out.track = outAudioIndex;
+      audio->in.track = (int) inAudioIndex;
+      audio->out.track = (int) outAudioIndex;
       outAudioIndex++;
       
       audio->out.dynamic_range_compression = 0.7f;

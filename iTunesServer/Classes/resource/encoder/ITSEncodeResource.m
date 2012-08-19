@@ -111,7 +111,7 @@
   HSResponse *response = [HSResponse jsonResponse];
   response.code = error == nil ? OK : BAD_REQUEST;
   NSMutableDictionary *dictionary = [NSMutableDictionary dictionaryWithCapacity: 1];
-  [dictionary setObjectNilSafe: error.localizedDescription forKey: @"error"];
+  [dictionary setObjectNilSafe: error.localizedDescription forKey: NSLocalizedDescriptionKey];
   response.object = dictionary;
   
   return response;
