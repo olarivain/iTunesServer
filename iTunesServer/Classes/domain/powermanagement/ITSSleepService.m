@@ -39,7 +39,7 @@ static ITSSleepService *sharedInstance;
 
 - (void) preventSleep {
     IOReturn success = IOPMAssertionCreateWithName(kIOPMAssertionTypeNoDisplaySleep,
-                                           kIOPMAssertionLevelOn, (__bridge CFStringRef) @"itsSleepAssertion", &sleepAssertionID);
+                                           kIOPMAssertionLevelOn, CFSTR("itsSleepAssertion"), &sleepAssertionID);
     if(success != 0) {
         NSLog(@"WARNING: Could not obtain sleep assertion, the host will probably go to sleep before jobs are completed.");
     }
