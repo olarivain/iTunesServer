@@ -18,6 +18,8 @@
 #import "ITSConfiguration.h"
 #import "ITSEncodingRepository.h"
 
+#import "ITSSleepService.h"
+
 #import "ITSErrors.h"
 
 static ITSEncoder *sharedEncoder;
@@ -356,6 +358,9 @@ static ITSEncoder *sharedEncoder;
     // encoder is busy or nothing to encode, just return
     if([scheduledTitles count] == 0 && activeTitleList == nil) 
     {
+      // we can now reenable sleep, since we're done with our schedule.
+      ITSSleepService *sleepService = [ITSSleepService sharedInstance];
+      [sleepService enableSleep: YES];
       return;
     }
     
@@ -371,6 +376,10 @@ static ITSEncoder *sharedEncoder;
     // flag the encoder as "we're scheduling something, so don't mess with us here"
     encodeScheduleInProgress = YES;
   }
+  
+  // prevent host from going to sleep. You'll sleep when you reach brookly. Haha.
+  ITSSleepService *sleepService = [ITSSleepService sharedInstance];
+  [sleepService enableSleep: NO];
   
   NSLog(@"Scheduling encode for %@ with title %ld", activeTitleList.titleListId, activeTitle.index);
   // perform the scan so the handle is populated with the content.
