@@ -87,6 +87,8 @@
 		00DA48AF150B3CD30065963F /* libhb.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 00DA488C150B3CD30065963F /* libhb.a */; };
 		00DA48B0150B3D2E0065963F /* libavutil.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 00DA4863150B3CD30065963F /* libavutil.a */; };
 		00DB3EDB14B40EC000B5963C /* MMTitle+MMTitle_Handbrake.m in Sources */ = {isa = PBXBuildFile; fileRef = 00DB3EDA14B40EBF00B5963C /* MMTitle+MMTitle_Handbrake.m */; };
+		00E7F0BC1605172700EBA876 /* ITSSleepService.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E7F0BB1605172700EBA876 /* ITSSleepService.m */; };
+		00E7F0BE1605194500EBA876 /* IOKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 00E7F0BD1605194500EBA876 /* IOKit.framework */; };
 		00EFC3AC15049B90004494EE /* MMTitleAssembler+iTunesServer.m in Sources */ = {isa = PBXBuildFile; fileRef = 00EFC3AB15049B90004494EE /* MMTitleAssembler+iTunesServer.m */; };
 /* End PBXBuildFile section */
 
@@ -216,6 +218,9 @@
 		00DB3ED914B40EBF00B5963C /* MMTitle+MMTitle_Handbrake.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "MMTitle+MMTitle_Handbrake.h"; path = "domain/encoder/MMTitle+MMTitle_Handbrake.h"; sourceTree = "<group>"; };
 		00DB3EDA14B40EBF00B5963C /* MMTitle+MMTitle_Handbrake.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "MMTitle+MMTitle_Handbrake.m"; path = "domain/encoder/MMTitle+MMTitle_Handbrake.m"; sourceTree = "<group>"; };
 		00DC02281597E65D00F891C9 /* rpom.xml */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = rpom.xml; sourceTree = "<group>"; };
+		00E7F0BA1605172700EBA876 /* ITSSleepService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ITSSleepService.h; sourceTree = "<group>"; };
+		00E7F0BB1605172700EBA876 /* ITSSleepService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ITSSleepService.m; sourceTree = "<group>"; };
+		00E7F0BD1605194500EBA876 /* IOKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = IOKit.framework; path = System/Library/Frameworks/IOKit.framework; sourceTree = SDKROOT; };
 		00EFC3AA15049B90004494EE /* MMTitleAssembler+iTunesServer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MMTitleAssembler+iTunesServer.h"; sourceTree = "<group>"; };
 		00EFC3AB15049B90004494EE /* MMTitleAssembler+iTunesServer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "MMTitleAssembler+iTunesServer.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -225,6 +230,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				00E7F0BE1605194500EBA876 /* IOKit.framework in Frameworks */,
 				001F2F4B14A80CB300086BB8 /* libiconv.dylib in Frameworks */,
 				001F2F4914A80C6E00086BB8 /* AudioToolbox.framework in Frameworks */,
 				001F2F3F14A80B3700086BB8 /* libbz2.dylib in Frameworks */,
@@ -285,6 +291,7 @@
 		000CE85B1494536D003002C3 = {
 			isa = PBXGroup;
 			children = (
+				00E7F0BD1605194500EBA876 /* IOKit.framework */,
 				000CE8701494536E003002C3 /* iTunesServer */,
 				000CE8F614945F32003002C3 /* iTunesServerPrefPane */,
 				000CE8691494536E003002C3 /* Frameworks */,
@@ -426,6 +433,7 @@
 			children = (
 				001F2FD814A81BED00086BB8 /* encoder */,
 				000CE8E814945D09003002C3 /* configuration */,
+				00E7F0B81605171600EBA876 /* powermanagement */,
 				0062B2931495DA7000160289 /* scanner */,
 				007643AA15E19E6E008F5CED /* ITSErrors.h */,
 			);
@@ -634,6 +642,16 @@
 			path = HandBrake;
 			sourceTree = "<group>";
 		};
+		00E7F0B81605171600EBA876 /* powermanagement */ = {
+			isa = PBXGroup;
+			children = (
+				00E7F0BA1605172700EBA876 /* ITSSleepService.h */,
+				00E7F0BB1605172700EBA876 /* ITSSleepService.m */,
+			);
+			name = powermanagement;
+			path = domain/powermanagement;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -775,6 +793,7 @@
 				00823F9A14AE7A7900CEDDEB /* MMAudioTrack+MMAudioTrack_Handbrake.m in Sources */,
 				00DB3EDB14B40EC000B5963C /* MMTitle+MMTitle_Handbrake.m in Sources */,
 				00EFC3AC15049B90004494EE /* MMTitleAssembler+iTunesServer.m in Sources */,
+				00E7F0BC1605172700EBA876 /* ITSSleepService.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
