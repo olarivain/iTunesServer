@@ -5,11 +5,11 @@ custom_path = "./DevPaths.rb"
 if File.exists? custom_path then
 	custom_paths = eval(File.new(custom_path).read)
 	puts
-	puts "Using custom paths for OpenTable libraries from #{custom_path}."
+	puts "Using custom paths for libraries from #{custom_path}."
 else 
 	custom_paths = Hash.new
 	puts
-	puts "Released version of OpenTable libraries will be used. If you wish to use local version, create DevPaths.rb, see DevPaths-sample.rb for an example"
+	puts "Released version of libraries will be used. If you wish to use local version, create DevPaths.rb, see DevPaths-sample.rb for an example"
 end
 puts
 
@@ -32,6 +32,6 @@ target :iTunesServerPrefPane do
 end
 
 # now import OpenTable libraries
-dev_pod_or_released("MediaManagementCommon", "0.0.1", custom_paths[:MediaManagementCommon])
+dev_pod_or_released("MediaManagement", "0.0.1", custom_paths[:MediaManagement])
 dev_pod_or_released("KraCommons", "0.0.1", custom_paths[:KraCommons])
 dev_pod_or_released("YARES", "0.0.1", custom_paths[:YARES])
