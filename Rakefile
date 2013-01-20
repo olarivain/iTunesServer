@@ -1,42 +1,60 @@
 require 'rubygems'
-require 'Raven'
-require 'RavenArtifact'
+require 'xcodebuilder'
 
-
-raven = Raven.new()
+iTunesBuilder = XcodeBuilder::XcodeBuilder.new do |config|
+  # basic workspace config
+  config.build_dir = :derived
+  config.workspace_file_path = "iTunesServer.xcworkspace"
+  config.scheme = "iTunesServer"
+  config.configuration = "Release" 
+  config.app_name = "iTunesServer"
+  config.sdk = "macosx"
+  config.info_plist = "./iTunesServer/iTunesServer-Info.plist"
+  config.skip_dsym = true
+  config.skip_clean = false
+  config.verbose = false
+  config.increment_plist_version = true
+  config.tag_vcs = true
+  
+  # tag and release with git
+  config.release_using(:git) do |git|
+    git.branch = "test"
+  end
+end
 
 task :clean do
-	raven.clean
+  # dump temp build folder
+  FileUtils.rm_rf "./build"
+  FileUtils.rm_rf "./pkg"
+
+  # and cocoa pods artifacts
+  FileUtils.rm_rf iTunesBuilder.configuration.workspace_file_path
+  FileUtils.rm_rf "Podfile.lock"
 end
 
-task :resolve do
-	raven.resolve
+# pod requires a full clean and runs pod install
+task :pod => :clean do
+  system "pod install"
 end
 
-task :build, :configuration do |task, arg|
-	raven.build(arg.configuration)
+task :package => :pod do
+  iTunesBuilder.package
 end
 
-task :install do
-	raven.install
-end
-
-task :release do
-	raven.release
+task :release => :pod do
+  iTunesBuilder.release
 end
 
 # this task is 100% specific to my environment. Won't work for y'all.
-task :macmini do
-  raven.clean
-  raven.build
-  raven.install
+task :macmini => :package do
+
   # copy the app/pref pane first
   puts "Deploying iTunesServer to MiniMoi.local"
-  appArchiveName = "iTunesServer-#{raven.version}.zip"
+  appArchiveName = "iTunesServer-#{iTunesBuilder.configuration.build_number}.zip"
   macMiniCmd = "scp -r target/#{appArchiveName} kra@MiniMoi.local:/Applications/ > /dev/null 2>&1"
   system macMiniCmd
 
-  macMiniCmd = "scp -r target/iTunesServer-PrefPane-#{raven.version}.zip kra@MiniMoi.local:~/iTunesServerPrefPane/ > /dev/null 2>&1"
+  macMiniCmd = "scp -r target/iTunesServer-PrefPane-#{iTunesBuilder.configuration.build_number}.zip kra@MiniMoi.local:~/iTunesServerPrefPane/ > /dev/null 2>&1"
   system macMiniCmd
   
   # kill current running app, then remove existing bundle. 
