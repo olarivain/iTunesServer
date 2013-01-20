@@ -18,7 +18,7 @@ DerivedData
 
 # cocoa pod
 Pods
-iTunesServer.xcworkspace
+itunesServer.xcworkspace
 Podfile.lock
 
 # betabuilder artifacts
