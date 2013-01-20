@@ -90,6 +90,7 @@
 		00E7F0BC1605172700EBA876 /* ITSSleepService.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E7F0BB1605172700EBA876 /* ITSSleepService.m */; };
 		00E7F0BE1605194500EBA876 /* IOKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 00E7F0BD1605194500EBA876 /* IOKit.framework */; };
 		00EFC3AC15049B90004494EE /* MMTitleAssembler+iTunesServer.m in Sources */ = {isa = PBXBuildFile; fileRef = 00EFC3AB15049B90004494EE /* MMTitleAssembler+iTunesServer.m */; };
+		C1882C93CA87443EADA0E952 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B1D4B98758C44AE9BA8B640D /* libPods.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -223,6 +224,8 @@
 		00E7F0BD1605194500EBA876 /* IOKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = IOKit.framework; path = System/Library/Frameworks/IOKit.framework; sourceTree = SDKROOT; };
 		00EFC3AA15049B90004494EE /* MMTitleAssembler+iTunesServer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MMTitleAssembler+iTunesServer.h"; sourceTree = "<group>"; };
 		00EFC3AB15049B90004494EE /* MMTitleAssembler+iTunesServer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "MMTitleAssembler+iTunesServer.m"; sourceTree = "<group>"; };
+		882003A42B474D66B841D646 /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = SOURCE_ROOT; };
+		B1D4B98758C44AE9BA8B640D /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -272,6 +275,7 @@
 				00DA48AE150B3CD30065963F /* libyasm.a in Frameworks */,
 				00DA48AF150B3CD30065963F /* libhb.a in Frameworks */,
 				00DA48B0150B3D2E0065963F /* libavutil.a in Frameworks */,
+				C1882C93CA87443EADA0E952 /* libPods.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -291,7 +295,6 @@
 		000CE85B1494536D003002C3 = {
 			isa = PBXGroup;
 			children = (
-				00E7F0BD1605194500EBA876 /* IOKit.framework */,
 				000CE8701494536E003002C3 /* iTunesServer */,
 				000CE8F614945F32003002C3 /* iTunesServerPrefPane */,
 				000CE8691494536E003002C3 /* Frameworks */,
@@ -299,6 +302,7 @@
 				00776E81150C26AC002D96F5 /* test-harness */,
 				000CE96514947DAD003002C3 /* Rakefile */,
 				00DC02281597E65D00F891C9 /* rpom.xml */,
+				882003A42B474D66B841D646 /* Pods.xcconfig */,
 			);
 			sourceTree = "<group>";
 		};
@@ -314,6 +318,7 @@
 		000CE8691494536E003002C3 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				00E7F0BD1605194500EBA876 /* IOKit.framework */,
 				001F2EED14A805F500086BB8 /* HandBrake */,
 				001F2F4814A80C6E00086BB8 /* AudioToolbox.framework */,
 				001F2F4614A80C4D00086BB8 /* CoreAudioKit.framework */,
@@ -326,6 +331,7 @@
 				001F2F3A14A80AF700086BB8 /* libz.dylib */,
 				001F2F4A14A80CB300086BB8 /* libiconv.dylib */,
 				000CE86C1494536E003002C3 /* Other Frameworks */,
+				B1D4B98758C44AE9BA8B640D /* libPods.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -675,6 +681,7 @@
 				000CE8621494536E003002C3 /* Sources */,
 				000CE8631494536E003002C3 /* Frameworks */,
 				000CE8641494536E003002C3 /* Resources */,
+				5D8244DBC3F942FD8E901334 /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -765,6 +772,23 @@
 		};
 /* End PBXRezBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		5D8244DBC3F942FD8E901334 /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Pods-resources.sh\"\n";
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		000CE8621494536E003002C3 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -849,34 +873,17 @@
 		000CE8821494536E003002C3 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = YES;
 				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_OBJCPP_ARC_ABI = YES;
 				COPY_PHASE_STRIP = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
-				GCC_DYNAMIC_NO_PIC = NO;
-				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
 					"$(inherited)",
 				);
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
-				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
-				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
-				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
-				GCC_WARN_ABOUT_RETURN_TYPE = YES;
-				GCC_WARN_UNUSED_VARIABLE = YES;
-				HEADER_SEARCH_PATHS = (
-					"/usr/local/raven/MediaManagementCommon-MacOS/1.0-LATEST",
-					"/usr/local/raven/yares/1.0-LATEST",
-					"/usr/local/raven/KraCommons-MacOS/1.0-LATEST",
-				);
-				LIBRARY_SEARCH_PATHS = (
-					"/usr/local/raven/MediaManagementCommon-MacOS/1.0-LATEST",
-					"/usr/local/raven/yares/1.0-LATEST",
-					"/usr/local/raven/KraCommons-MacOS/1.0-LATEST",
-				);
 				MACOSX_DEPLOYMENT_TARGET = 10.7;
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_CFLAGS = (
@@ -884,79 +891,39 @@
 					"-DDEVELOPMENT",
 					"-DDEBUG_ENCODER=1",
 				);
-				OTHER_LDFLAGS = (
-					"-ObjC",
-					"-lYARES",
-					"-lMediaManagement-x86",
-					"-lKraCommons-x86",
-					"-force_load",
-					"/usr/local/raven/KraCommons-MacOS/1.0-LATEST/libKraCommons-x86.a",
-					"-force_load",
-					"/usr/local/raven/yares/1.0-LATEST/libYARES.a",
-					"-force_load",
-					"/usr/local/raven/MediaManagementCommon-MacOS/1.0-LATEST/libMediaManagement-x86.a",
-				);
 				SDKROOT = macosx;
+				VALID_ARCHS = "${ARCHS_STANDARD_64_BIT}";
 			};
 			name = Debug;
 		};
 		000CE8831494536E003002C3 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = YES;
 				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_OBJCPP_ARC_ABI = YES;
 				COPY_PHASE_STRIP = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				GCC_C_LANGUAGE_STANDARD = gnu99;
-				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
-				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
-				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
-				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
-				GCC_WARN_ABOUT_RETURN_TYPE = YES;
-				GCC_WARN_UNUSED_VARIABLE = YES;
-				HEADER_SEARCH_PATHS = (
-					"/usr/local/raven/MediaManagementCommon-MacOS/1.0-LATEST",
-					"/usr/local/raven/yares/1.0-LATEST",
-					"/usr/local/raven/KraCommons-MacOS/1.0-LATEST",
-				);
-				LIBRARY_SEARCH_PATHS = (
-					"/usr/local/raven/MediaManagementCommon-MacOS/1.0-LATEST",
-					"/usr/local/raven/yares/1.0-LATEST",
-					"/usr/local/raven/KraCommons-MacOS/1.0-LATEST",
-				);
 				MACOSX_DEPLOYMENT_TARGET = 10.7;
 				OTHER_CFLAGS = "-D__LIBHB__";
-				OTHER_LDFLAGS = (
-					"-ObjC",
-					"-lYARES",
-					"-lMediaManagement-x86",
-					"-lKraCommons-x86",
-					"-force_load",
-					"/usr/local/raven/KraCommons-MacOS/1.0-LATEST/libKraCommons-x86.a",
-					"-force_load",
-					"/usr/local/raven/yares/1.0-LATEST/libYARES.a",
-					"-force_load",
-					"/usr/local/raven/MediaManagementCommon-MacOS/1.0-LATEST/libMediaManagement-x86.a",
-				);
 				SDKROOT = macosx;
+				VALID_ARCHS = "${ARCHS_STANDARD_64_BIT}";
 			};
 			name = Release;
 		};
 		000CE8851494536E003002C3 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 882003A42B474D66B841D646 /* Pods.xcconfig */;
 			buildSettings = {
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "iTunesServer/iTunesServer-Prefix.pch";
-				HEADER_SEARCH_PATHS = "${inherited}";
 				INFOPLIST_FILE = "iTunesServer/iTunesServer-Info.plist";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/libraries/HandBrake\"",
 					"\"$(SRCROOT)/libraries/HandBrake/contrib\"",
 				);
-				OTHER_CFLAGS = "${inherited}";
-				OTHER_LDFLAGS = "${inherited}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				USER_HEADER_SEARCH_PATHS = "${inherited}";
 				WRAPPER_EXTENSION = app;
@@ -965,18 +932,16 @@
 		};
 		000CE8861494536E003002C3 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 882003A42B474D66B841D646 /* Pods.xcconfig */;
 			buildSettings = {
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "iTunesServer/iTunesServer-Prefix.pch";
-				HEADER_SEARCH_PATHS = "${inherited}";
 				INFOPLIST_FILE = "iTunesServer/iTunesServer-Info.plist";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/libraries/HandBrake\"",
 					"\"$(SRCROOT)/libraries/HandBrake/contrib\"",
 				);
-				OTHER_CFLAGS = "${inherited}";
-				OTHER_LDFLAGS = "${inherited}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				USER_HEADER_SEARCH_PATHS = "${inherited}";
 				WRAPPER_EXTENSION = app;
@@ -985,59 +950,32 @@
 		};
 		000CE90614945F33003002C3 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 882003A42B474D66B841D646 /* Pods.xcconfig */;
 			buildSettings = {
-				ALTERNATE_PERMISSIONS_FILES = (
-					x86_64,
-					i386,
-				);
-				ALWAYS_SEARCH_USER_PATHS = YES;
-				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
 				CLANG_ENABLE_OBJC_ARC = NO;
 				CLANG_WARN_OBJCPP_ARC_ABI = YES;
 				GCC_ENABLE_OBJC_GC = supported;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "iTunesServerPrefPane/iTunesServerPrefPane-Prefix.pch";
-				GCC_VERSION = "";
 				INFOPLIST_FILE = "iTunesServerPrefPane/iTunesServerPrefPane-Info.plist";
 				INSTALL_PATH = "$(HOME)/Library/PreferencePanes";
-				ONLY_ACTIVE_ARCH = NO;
-				OTHER_LDFLAGS = (
-					"-Objc",
-					"-all_load",
-					"-lKraCommons-x86",
-				);
 				PRODUCT_NAME = "iTunes Server";
-				SDKROOT = macosx;
-				VALID_ARCHS = "${inherited}";
 				WRAPPER_EXTENSION = prefPane;
 			};
 			name = Debug;
 		};
 		000CE90714945F33003002C3 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 882003A42B474D66B841D646 /* Pods.xcconfig */;
 			buildSettings = {
-				ALTERNATE_PERMISSIONS_FILES = (
-					x86_64,
-					i386,
-				);
-				ALWAYS_SEARCH_USER_PATHS = YES;
-				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
 				CLANG_ENABLE_OBJC_ARC = NO;
 				CLANG_WARN_OBJCPP_ARC_ABI = YES;
 				GCC_ENABLE_OBJC_GC = supported;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "iTunesServerPrefPane/iTunesServerPrefPane-Prefix.pch";
-				GCC_VERSION = "";
 				INFOPLIST_FILE = "iTunesServerPrefPane/iTunesServerPrefPane-Info.plist";
 				INSTALL_PATH = "$(HOME)/Library/PreferencePanes";
-				OTHER_LDFLAGS = (
-					"-Objc",
-					"-all_load",
-					"-lKraCommons-x86",
-				);
 				PRODUCT_NAME = "iTunes Server";
-				SDKROOT = macosx;
-				VALID_ARCHS = "${inherited}";
 				WRAPPER_EXTENSION = prefPane;
 			};
 			name = Release;
