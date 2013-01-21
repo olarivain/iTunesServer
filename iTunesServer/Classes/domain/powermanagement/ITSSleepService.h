@@ -10,8 +10,6 @@
 #import <IOKit/pwr_mgt/IOPMLib.h>
 
 @interface ITSSleepService : NSObject {
-    BOOL sleepEnabled;
-    IOPMAssertionID sleepAssertionID;
 }
 
 + (ITSSleepService *) sharedInstance;

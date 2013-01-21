@@ -14,7 +14,7 @@
 
 @interface ITSiTunesContentRepository : NSObject<SBApplicationDelegate>
 {
-  iTunesApplication *iTunes;
+	iTunesApplication *iTunes;
 }
 
 - (NSArray *) playlistHeaders;

@@ -11,7 +11,7 @@
 @class ITSConfiguration;
 
 @interface ITSConfigurationRepository : NSObject {
-  ITSConfiguration *configuration;
+	ITSConfiguration *configuration;
 }
 
 + (ITSConfigurationRepository *) sharedInstance;

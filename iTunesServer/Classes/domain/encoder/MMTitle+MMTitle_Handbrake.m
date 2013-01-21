@@ -16,20 +16,20 @@
 
 + (MMTitle *) titleWithIndex:(NSInteger)index andHandbrakeDuration:(NSInteger)duration
 {
-  return [[MMTitle alloc] initWithIndex: index andHandbrakeDuration: duration];
+	return [[MMTitle alloc] initWithIndex: index andHandbrakeDuration: duration];
 }
 
 - (id) initWithIndex: (NSInteger) anIndex andHandbrakeDuration: (NSInteger) aDuration
 {
-  self = [super init];
-  if(self)
-  {
-    index = anIndex;
-    audioTracks = [NSMutableArray arrayWithCapacity: 5];
-    subtitleTracks = [NSMutableArray arrayWithCapacity: 5];
-    duration = aDuration / 90000;
-  }
-  return self;
+	self = [super init];
+	if(self)
+	{
+		_index = anIndex;
+		_audioTracks = [NSMutableArray arrayWithCapacity: 5];
+		_subtitleTracks = [NSMutableArray arrayWithCapacity: 5];
+		_duration = aDuration / 90000;
+	}
+	return self;
 }
 
 @end

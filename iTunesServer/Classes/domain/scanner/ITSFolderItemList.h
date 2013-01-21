@@ -10,13 +10,12 @@
 
 @interface ITSFolderItemList : NSObject
 {
-  __strong NSString *basePath;
-  __strong NSMutableArray *items;
+
 }
 
 + (ITSFolderItemList*) folderItemListWithBasePath: (NSString *) path;
 
-@property (nonatomic, readonly) NSString *basePath;
+@property (nonatomic, strong, readonly) NSString *basePath;
 @property (nonatomic, readonly) NSArray *items;
 
 - (void) udpateBasePath: (NSString *) path;

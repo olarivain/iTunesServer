@@ -10,6 +10,13 @@
 
 static ITSSleepService *sharedInstance;
 
+@interface ITSSleepService() {
+	IOPMAssertionID _sleepAssertionID;
+}
+@property(nonatomic, assign, readwrite) BOOL sleepEnabled;
+
+@end
+
 @implementation ITSSleepService
 
 + (ITSSleepService *) sharedInstance {
@@ -23,14 +30,14 @@ static ITSSleepService *sharedInstance;
 - (void) enableSleep: (BOOL) allow {
     @synchronized(self) {
         // no change, just abort
-        if(allow == sleepEnabled) {
+        if(allow == self.sleepEnabled) {
             return;
         }
         
-        sleepEnabled = allow;
+        self.sleepEnabled = allow;
     }
     
-    if(sleepEnabled) {
+    if(self.sleepEnabled) {
         [self enableSleep];
     } else {
         [self preventSleep];
@@ -39,17 +46,17 @@ static ITSSleepService *sharedInstance;
 
 - (void) preventSleep {
     IOReturn success = IOPMAssertionCreateWithName(kIOPMAssertionTypeNoDisplaySleep,
-                                           kIOPMAssertionLevelOn, CFSTR("itsSleepAssertion"), &sleepAssertionID);
+												   kIOPMAssertionLevelOn, CFSTR("itsSleepAssertion"), &_sleepAssertionID);
     if(success != 0) {
-        NSLog(@"WARNING: Could not obtain sleep assertion, the host will probably go to sleep before jobs are completed.");
+        DDLogWarn(@"WARNING: Could not obtain sleep assertion, the host will probably go to sleep before jobs are completed.");
     }
 }
 
 - (void) enableSleep {
-    IOReturn success = IOPMAssertionRelease(sleepAssertionID);
+    IOReturn success = IOPMAssertionRelease(_sleepAssertionID);
     
     if(success != 0) {
-        NSLog(@"WARNING: Could not release sleep assertion, the host will not go to sleep anymore.");
+        DDLogWarn(@"WARNING: Could not release sleep assertion, the host will not go to sleep anymore.");
     }
 }
 

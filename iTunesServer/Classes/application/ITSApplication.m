@@ -15,15 +15,15 @@
 
 -(id) reloadConfiguration:(NSScriptCommand *)command
 {
-  ITSAppDelegate *theDelegate = (ITSAppDelegate *) self.delegate;
-  [theDelegate reloadConfiguration];
-  return nil;
+	ITSAppDelegate *theDelegate = (ITSAppDelegate *) self.delegate;
+	[theDelegate reloadConfiguration];
+	return nil;
 }
 
 - (ITSConfiguration *) configuration
 {
-  ITSConfigurationRepository *repository = [ITSConfigurationRepository sharedInstance];
-  return [repository readConfiguration];
+	ITSConfigurationRepository *repository = [ITSConfigurationRepository sharedInstance];
+	return [repository readConfiguration];
 }
 
 @end

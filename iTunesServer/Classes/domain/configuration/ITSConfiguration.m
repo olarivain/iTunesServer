@@ -12,7 +12,7 @@
 
 + (ITSConfiguration *) configuration
 {
-  return [[[ITSConfiguration alloc] init] autorelease];
+	return [[[ITSConfiguration alloc] init] autorelease];
 }
 
 - (void) dealloc {
@@ -28,13 +28,13 @@
 @synthesize encodingResourcePath;
 
 - (id) objectSpecifier
-{ 
-  NSApplication *application = [NSApplication sharedApplication];
-  NSScriptClassDescription *classDescription = (NSScriptClassDescription*) [application classDescription];
-  NSScriptObjectSpecifier *objectSpecifier = [application objectSpecifier];
-  
-  NSPropertySpecifier *specifier = [[[NSPropertySpecifier alloc] initWithContainerClassDescription: classDescription containerSpecifier: objectSpecifier key:@"configuration"] autorelease];
-  return specifier;
+{
+	NSApplication *application = [NSApplication sharedApplication];
+	NSScriptClassDescription *classDescription = (NSScriptClassDescription*) [application classDescription];
+	NSScriptObjectSpecifier *objectSpecifier = [application objectSpecifier];
+	
+	NSPropertySpecifier *specifier = [[[NSPropertySpecifier alloc] initWithContainerClassDescription: classDescription containerSpecifier: objectSpecifier key:@"configuration"] autorelease];
+	return specifier;
 }
 
 @end

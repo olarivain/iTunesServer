@@ -8,19 +8,8 @@
 
 #import <Foundation/Foundation.h>
 
-@interface ITSFolderItem : NSObject 
+@interface ITSFolderItem : NSObject
 {
-  __strong NSDictionary *attributes;
-  
-  __strong NSString *itemId;
-  __strong NSString *name;
-  __strong NSDate *lastKnownModificationDate;
-  
-  __strong NSString *destionationPath;
-  
-  NSInteger lastKnownSize;
-  
-  BOOL changed;
 }
 
 @property (nonatomic, readonly) NSString *itemId;

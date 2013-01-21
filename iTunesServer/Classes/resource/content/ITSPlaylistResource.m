@@ -33,7 +33,7 @@
   NSString *playlistID = [params.pathParameters objectForKey:@"playlistID"];
   
 #ifdef DEBUG
-  NSLog(@"Fetching playlist %@", playlistID);
+  DDLogInfo(@"Fetching playlist %@", playlistID);
 #endif
   
   MMPlaylist *playlist = [repository playlistWithPersistentID: playlistID];

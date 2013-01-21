@@ -10,9 +10,9 @@
 
 @class MMTitleList;
 
-@interface ITSEncodingRepository : NSObject 
+@interface ITSEncodingRepository : NSObject
 {
-  __strong NSMutableArray *availableResource;
+	__strong NSMutableArray *availableResource;
 }
 
 + (ITSEncodingRepository *) sharedInstance;

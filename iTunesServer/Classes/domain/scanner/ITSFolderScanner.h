@@ -12,12 +12,12 @@
 
 @interface ITSFolderScanner : NSObject<NSFileManagerDelegate>
 {
-  __strong ITSFolderItemList *folderItemList;
-  __strong NSTimer *timer;
-  __strong NSString *path;
-  __strong NSString *destinationPath;
-  BOOL isRunning;
-  BOOL stopped;
+	__strong ITSFolderItemList *folderItemList;
+	__strong NSTimer *timer;
+	__strong NSString *path;
+	__strong NSString *destinationPath;
+	BOOL isRunning;
+	BOOL stopped;
 }
 
 + (ITSFolderScanner *) folderScannerWithScannedPath: (NSString *) aPath;

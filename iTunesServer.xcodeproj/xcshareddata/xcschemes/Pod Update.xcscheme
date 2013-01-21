@@ -14,9 +14,9 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "000CE8F114945F32003002C3"
-               BuildableName = "iTunesServer.prefPane"
-               BlueprintName = "iTunesServerPrefPane"
+               BlueprintIdentifier = "007236C016AD3854008C1623"
+               BuildableName = "Pod Update"
+               BlueprintName = "Pod Update"
                ReferencedContainer = "container:iTunesServer.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -24,7 +24,7 @@
    </BuildAction>
    <TestAction
       selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
-      selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.GDB"
+      selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
       shouldUseLaunchSchemeArgsEnv = "YES"
       buildConfiguration = "Debug">
       <Testables>
@@ -32,16 +32,13 @@
    </TestAction>
    <LaunchAction
       selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
-      selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.GDB"
+      selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
       launchStyle = "0"
       useCustomWorkingDirectory = "NO"
       buildConfiguration = "Debug"
       ignoresPersistentStateOnLaunch = "NO"
       debugDocumentVersioning = "YES"
       allowLocationSimulation = "YES">
-      <PathRunnable
-         FilePath = "/Applications/System Preferences.app">
-      </PathRunnable>
       <AdditionalOptions>
       </AdditionalOptions>
    </LaunchAction>

@@ -10,68 +10,68 @@
 #import "ITSFolderItem.h"
 
 @interface ITSFolderItem()
-- (id) initWithId: (NSString *) anId andAttributes: (NSDictionary *) anAttributes;
+@property (nonatomic, readwrite) NSString *itemId;
+@property (nonatomic, readwrite) NSString *name;
+@property (nonatomic, readwrite) NSInteger lastKnownSize;
+@property (nonatomic, readwrite) NSDate *lastKnownModificationDate;
+@property (nonatomic, readwrite) BOOL changed;
+@property (nonatomic, readwrite, copy) NSDictionary *attributes;
 @end
 
 @implementation ITSFolderItem
 
-@synthesize itemId;
-@synthesize name;
-@synthesize lastKnownModificationDate;
-@synthesize lastKnownSize;
-@synthesize changed;
 
 + (ITSFolderItem *) folderItemWithId: (NSString *) anId andAttributes: (NSDictionary *) anAttributes
 {
-  return [[ITSFolderItem alloc] initWithId: anId andAttributes: anAttributes];
+	return [[ITSFolderItem alloc] initWithId: anId andAttributes: anAttributes];
 }
 
 - (id) initWithId: (NSString *) anId andAttributes: (NSDictionary *) anAttributes
 {
-  self = [super init];
-  if(self)
-  {
-    itemId = anId;
-    lastKnownSize = 0;
-    name = [itemId lastPathComponent];
-    [self updateWithAttributes: anAttributes];
-  }
-  return self;
+	self = [super init];
+	if(self)
+	{
+		self.itemId = anId;
+		self.lastKnownSize = 0;
+		self.name = [self.itemId lastPathComponent];
+		[self updateWithAttributes: anAttributes];
+	}
+	return self;
 }
 
 #pragma mark - Update item status
 - (void) updateWithAttributes:(NSDictionary *) anAattributes
 {
-  attributes = anAattributes;
-  
-  // file is busy, don't touch it
-  BOOL busy = [[attributes objectForKey: NSFileBusy] boolValue];
-  NSDate *modificationDate = [attributes fileModificationDate];
-  NSInteger size = [attributes fileSize];
-  
-  BOOL dateChanged = lastKnownModificationDate == nil || [modificationDate timeIntervalSinceDate: lastKnownModificationDate] != 0;
-  BOOL sizeChanged = lastKnownSize == 0 || size != lastKnownSize;
-  
-  // file has changed if any of the previous attributes has changed
-  // during the first pass, the file will be considered changed, due to stored attributes being nil.
-  // this is perfect because we can't make an assumption off the first pass.
-  changed = dateChanged || busy || sizeChanged;
-
-  lastKnownSize = size;
-  lastKnownModificationDate = modificationDate;
+	self.attributes = anAattributes;
+	
+	// file is busy, don't touch it
+	BOOL busy = [[self.attributes objectForKey: NSFileBusy] boolValue];
+	NSDate *modificationDate = [self.attributes fileModificationDate];
+	NSInteger size = [self.attributes fileSize];
+	
+	BOOL dateChanged = self.lastKnownModificationDate == nil || [modificationDate timeIntervalSinceDate: self.lastKnownModificationDate] != 0;
+	BOOL sizeChanged = self.lastKnownSize == 0 || size != self.lastKnownSize;
+	
+	// file has changed if any of the previous attributes has changed
+	// during the first pass, the file will be considered changed, due to stored attributes being nil.
+	// this is perfect because we can't make an assumption off the first pass.
+	self.changed = dateChanged || busy || sizeChanged;
+	
+	self.lastKnownSize = size;
+	self.lastKnownModificationDate = modificationDate;
 }
 
 #pragma mark - Whether an item still exists on disk
 - (BOOL) exists
 {
-  NSFileManager *fileManager = [NSFileManager defaultManager];
-  return [fileManager fileExistsAtPath: itemId];
+	NSFileManager *fileManager = [NSFileManager defaultManager];
+	return [fileManager fileExistsAtPath: self.itemId];
 }
 
 #pragma mark - Debug convenience
 - (void) logStatus
 {
-  NSLog(@"file %@ has been changed: %i", itemId, changed);
+	DDLogVerbose(@"file %@ has been changed: %i", self.itemId, self.changed);
 }
 
 @end

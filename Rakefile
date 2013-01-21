@@ -18,8 +18,24 @@ iTunesBuilder = XcodeBuilder::XcodeBuilder.new do |config|
   
   # tag and release with git
   config.release_using(:git) do |git|
-    git.branch = "test"
+    git.branch = "master"
   end
+end
+
+prefPaneBuilder = XcodeBuilder::XcodeBuilder.new do |config|
+  # basic workspace config
+  config.build_dir = :derived
+  config.workspace_file_path = "iTunesServer.xcworkspace"
+  config.scheme = "iTunesServerPrefPane"
+  config.configuration = "Release" 
+  config.app_name = "iTunesServer"
+  config.app_extension = "prefPane"
+  config.sdk = "macosx"
+  config.skip_dsym = true
+  config.skip_clean = false
+  config.verbose = false
+  config.increment_plist_version = false
+  config.tag_vcs = false
 end
 
 task :clean do
@@ -37,8 +53,13 @@ task :pod => :clean do
   system "pod install"
 end
 
+task :open => :pod do
+  system "open #{iTunesBuilder.configuration.workspace_file_path}"
+end
+
 task :package => :pod do
   iTunesBuilder.package
+  prefPaneBuilder.package
 end
 
 task :release => :pod do
@@ -51,10 +72,10 @@ task :macmini => :package do
   # copy the app/pref pane first
   puts "Deploying iTunesServer to MiniMoi.local"
   appArchiveName = "iTunesServer-#{iTunesBuilder.configuration.build_number}.zip"
-  macMiniCmd = "scp -r target/#{appArchiveName} kra@MiniMoi.local:/Applications/ > /dev/null 2>&1"
+  macMiniCmd = "scp -r #{iTunesBuilder.configuration.package_destination_path}/#{appArchiveName} kra@MiniMoi.local:/Applications/ > /dev/null 2>&1"
   system macMiniCmd
 
-  macMiniCmd = "scp -r target/iTunesServer-PrefPane-#{iTunesBuilder.configuration.build_number}.zip kra@MiniMoi.local:~/iTunesServerPrefPane/ > /dev/null 2>&1"
+  macMiniCmd = "scp -r #{iTunesBuilder.configuration.package_destination_path}/iTunesServer-PrefPane.zip kra@MiniMoi.local:~/iTunesServerPrefPane/ > /dev/null 2>&1"
   system macMiniCmd
   
   # kill current running app, then remove existing bundle. 

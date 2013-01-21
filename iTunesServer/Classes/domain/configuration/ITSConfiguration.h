@@ -10,14 +10,14 @@
 
 @interface ITSConfiguration : NSObject
 {
-  NSInteger port;
-  
-  BOOL autoScanEnabled;
-  NSString *autoScanPath;
-  
-  BOOL startOnLogin;
-  
-  NSString *encodingResourcePath;
+	NSInteger port;
+	
+	BOOL autoScanEnabled;
+	NSString *autoScanPath;
+	
+	BOOL startOnLogin;
+	
+	NSString *encodingResourcePath;
 }
 
 + (ITSConfiguration *) configuration;
