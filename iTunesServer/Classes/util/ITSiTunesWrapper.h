@@ -11,18 +11,6 @@
 @class SBElementArray;
 
 @interface ITSiTunesWrapper : NSObject {
-  __strong NSArray *ids;
-  __strong NSArray *names;
-  __strong NSArray *genres;
-  __strong NSArray *albums;
-  __strong NSArray *artists;
-  __strong NSArray *trackNumbers;
-  __strong NSArray *descriptions;
-  __strong NSArray *shows;
-  __strong NSArray *seasons;
-  __strong NSArray *episodes;
-  __strong NSArray *iTunesKinds;
-  __strong NSArray *duration;
 }
 
 @property (nonatomic, readwrite, strong) NSArray *ids;
@@ -37,6 +25,7 @@
 @property (nonatomic, readwrite, strong) NSArray *seasons;
 @property (nonatomic, readwrite, strong) NSArray *episodes;
 @property (nonatomic, readwrite, strong) NSArray *duration;
+@property (nonatomic, readwrite, strong) NSArray *unplayed;
 
 + (id) wrapper;
 + (id) wrapperWithArray: (SBElementArray*) array;
@@ -55,5 +44,6 @@
 - (NSString *) showForIndex: (NSUInteger) index;
 - (NSNumber *) seasonForIndex: (NSUInteger) index;
 - (NSNumber *) episodeForIndex: (NSUInteger) index;
+- (BOOL) unplayedForIndex: (NSUInteger) index;
 
 @end

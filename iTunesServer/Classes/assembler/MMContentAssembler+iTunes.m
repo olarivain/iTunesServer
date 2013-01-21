@@ -58,6 +58,7 @@
 		content.season = [wrapper seasonForIndex:i];
 		content.episodeNumber = [wrapper episodeForIndex:i];
 		content.duration = [wrapper durationForIndex: i];
+		content.unplayed = [wrapper unplayedForIndex: i];
 		[library addContent: content];
 	}
 	return library;
