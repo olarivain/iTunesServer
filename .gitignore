@@ -20,6 +20,7 @@ DerivedData
 Pods
 iTunesServer.xcworkspace
 Podfile.lock
+DevPaths.rb
 
 # betabuilder artifacts
 build.output
