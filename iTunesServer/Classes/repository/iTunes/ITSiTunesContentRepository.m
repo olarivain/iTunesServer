@@ -143,13 +143,17 @@
 		}
 		
 		track.name = content.name;
-		track.comment = content.description;
+		track.comment = content.description == nil ? @"" : content.description;
 		
 		if([content isTvShow])
 		{
 			track.episodeNumber = [content.episodeNumber intValue];
 			track.seasonNumber = [content.season intValue];
 			track.show = content.show == nil ? @"" : content.show;
+		} else {
+			track.episodeNumber = 0;
+			track.seasonNumber = 0;
+			track.show = @"";
 		}
 		
 		// this HAD to be done last. Go figure, iTunes. Meh.
