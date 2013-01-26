@@ -23,7 +23,7 @@
 - (NSArray*) resourceDescriptors
 {
 	HSResourceDescriptor *trackDescriptor = [HSResourceDescriptor descriptorWithPath: @"/library/{playlistId}/{trackId}" resource:self selector:@selector(updateTrack:) andMethod: POST];
-	HSResourceDescriptor *tracksDescriptor = [HSResourceDescriptor descriptorWithPath: @"/library/{playlistId}/" resource:self selector:@selector(updateTracks:) andMethod: POST];
+	HSResourceDescriptor *tracksDescriptor = [HSResourceDescriptor descriptorWithPath: @"/library/{playlistId}" resource:self selector:@selector(updateTracks:) andMethod: POST];
 	
 	return [NSArray arrayWithObjects: trackDescriptor, tracksDescriptor, nil];
 }

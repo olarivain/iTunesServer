@@ -149,7 +149,7 @@
 		{
 			track.episodeNumber = [content.episodeNumber intValue];
 			track.seasonNumber = [content.season intValue];
-			track.show = content.show;
+			track.show = content.show == nil ? @"" : content.show;
 		}
 		
 		// this HAD to be done last. Go figure, iTunes. Meh.
