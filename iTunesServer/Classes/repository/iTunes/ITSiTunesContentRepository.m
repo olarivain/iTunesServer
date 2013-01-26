@@ -142,25 +142,25 @@
 			DDLogInfo(@"track not found for id : %@", content.contentId);
 		}
 		
-		MMContentAssembler *assembler = [MMContentAssembler sharedInstance];
-		iTunesEVdK specialKind = [assembler videoKindFromContentKind: content.kind];
-		if(specialKind != -1)
-		{
-			track.videoKind = specialKind;
-			// if the kind has been updated, then we have to refetch
-			// the track, setting movie/tv show tags will otherwise fail.
-			track = [self trackWithContent: content];
-		}
-		
 		track.name = content.name;
 		track.comment = content.description;
-
+		
 		if([content isTvShow])
 		{
 			track.episodeNumber = [content.episodeNumber intValue];
 			track.seasonNumber = [content.season intValue];
 			track.show = content.show;
 		}
+		
+		// this HAD to be done last. Go figure, iTunes. Meh.
+		MMContentAssembler *assembler = [MMContentAssembler sharedInstance];
+		iTunesEVdK specialKind = [assembler videoKindFromContentKind: content.kind];
+		if(specialKind != -1)
+		{
+			track.videoKind = specialKind;
+		}
+		
+
 	}
 	
 }

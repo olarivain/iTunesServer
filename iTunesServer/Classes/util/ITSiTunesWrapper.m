@@ -109,12 +109,12 @@
 
 - (NSNumber *) seasonForIndex: (NSUInteger) index
 {
-	return [self number:self.seasons forIndex:index];
+	return [self nonZeroNumber:self.seasons forIndex:index];
 }
 
 - (NSNumber *) episodeForIndex: (NSUInteger) index
 {
-	return [self number:self.episodes forIndex:index];
+	return [self nonZeroNumber:self.episodes forIndex:index];
 }
 
 - (BOOL) unplayedForIndex: (NSUInteger) index
@@ -125,19 +125,17 @@
 #pragma mark - private out of bounds safe accessors
 - (NSString *) string: (NSArray*) array forIndex: (NSUInteger) index
 {
-	if(index < [array count])
-	{
-		return (NSString*) [array objectAtIndex: index];
-	}
-	return nil;
+	return (NSString*) [array boundSafeObjectAtIndex: index];
 }
 - (NSNumber *) number: (NSArray*) array forIndex: (NSUInteger) index
 {
-	if(index < [array count])
-	{
-		return (NSNumber*) [array objectAtIndex: index];
-	}
-	return nil;
+	return (NSNumber*) [array boundSafeObjectAtIndex: index];
+}
+
+- (NSNumber *) nonZeroNumber: (NSArray*) array forIndex: (NSUInteger) index
+{
+	NSNumber *number = (NSNumber*) [array boundSafeObjectAtIndex: index];
+	return number.intValue == 0 ? nil : number;
 }
 
 @end

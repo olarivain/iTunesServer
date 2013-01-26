@@ -49,6 +49,7 @@
 	MMContentAssembler *assembler = [MMContentAssembler sharedInstance];
 	
 	NSDictionary *dto = params.parameters;
+	NSString *playlistId = [params.pathParameters nullSafeForKey: @"playlistId"];
 	MMContent *track = [assembler createContent: dto];
 	
 	DDLogVerbose(@"Updating track %@", track.name);
