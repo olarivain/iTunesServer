@@ -968,7 +968,6 @@
 		};
 		000CE90614945F33003002C3 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 882003A42B474D66B841D646 /* Pods.xcconfig */;
 			buildSettings = {
 				CLANG_ENABLE_OBJC_ARC = NO;
 				CLANG_WARN_OBJCPP_ARC_ABI = YES;
@@ -985,7 +984,6 @@
 		};
 		000CE90714945F33003002C3 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 882003A42B474D66B841D646 /* Pods.xcconfig */;
 			buildSettings = {
 				CLANG_ENABLE_OBJC_ARC = NO;
 				CLANG_WARN_OBJCPP_ARC_ABI = YES;

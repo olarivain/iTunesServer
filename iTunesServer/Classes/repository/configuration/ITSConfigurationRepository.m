@@ -55,10 +55,10 @@ static ITSConfigurationRepository *sharedInstance;
 	
 	NSDictionary *dict = [defaults persistentDomainForName: @"com.kra.iTunesServer"];
 	
-	configuration.port = [dict integerForKey: ITUNES_SERVER_PORT_KEY];
-	configuration.autoScanEnabled = [dict integerForKey: AUTO_IMPORT_KEY];
+	configuration.port = [[dict objectForKey: ITUNES_SERVER_PORT_KEY] integerValue];
+	configuration.autoScanEnabled = [[dict objectForKey: AUTO_IMPORT_KEY] integerValue];
 	configuration.autoScanPath = [dict objectForKey: AUTO_IMPORT_PATH_KEY];
-	configuration.startOnLogin = [dict integerForKey: START_ON_LOGIN_KEY];
+	configuration.startOnLogin = [[dict objectForKey: START_ON_LOGIN_KEY] integerValue];
 	configuration.encodingResourcePath = [dict objectForKey: ENCODING_RESOURCE_PATH_KEY];
 }
 
@@ -66,11 +66,22 @@ static ITSConfigurationRepository *sharedInstance;
 {
 	[self readConfiguration];
 	NSMutableDictionary *dictionary = [NSMutableDictionary dictionaryWithCapacity: 4];
-	[dictionary setInteger: configuration.port forKey: ITUNES_SERVER_PORT_KEY];
-	[dictionary setInteger: configuration.autoScanEnabled forKey: AUTO_IMPORT_KEY];
-	[dictionary setObject:  configuration.autoScanPath forKey: AUTO_IMPORT_PATH_KEY];
-	[dictionary setInteger: configuration.startOnLogin forKey: START_ON_LOGIN_KEY];
-	[dictionary setObjectNilSafe: configuration.encodingResourcePath forKey:ENCODING_RESOURCE_PATH_KEY];
+	[dictionary setObject: [NSNumber numberWithInt: configuration.port]
+					forKey: ITUNES_SERVER_PORT_KEY];
+	[dictionary setObject: [NSNumber numberWithInt: configuration.autoScanEnabled]
+					forKey: AUTO_IMPORT_KEY];
+	[dictionary setObject: [NSNumber numberWithInt: configuration.startOnLogin]
+					forKey: START_ON_LOGIN_KEY];
+	
+	if(self.configuration.autoScanPath != nil) {
+		[dictionary setObject:  configuration.autoScanPath
+					   forKey: AUTO_IMPORT_PATH_KEY];
+	}
+	
+	if(self.configuration.encodingResourcePath != nil) {
+		[dictionary setObject: configuration.encodingResourcePath
+					   forKey:ENCODING_RESOURCE_PATH_KEY];
+	}
 	
 	NSUserDefaults *defaults = [[[NSUserDefaults alloc] init] autorelease];
 	[defaults addSuiteNamed:@"com.kra.iTunesServerShared"];
