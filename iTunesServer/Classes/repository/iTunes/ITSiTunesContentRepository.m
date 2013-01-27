@@ -144,6 +144,7 @@
 		
 		track.name = content.name;
 		track.comment = content.description == nil ? @"" : content.description;
+		track.unplayed = content.unplayed;
 		
 		if([content isTvShow])
 		{
