@@ -34,12 +34,17 @@
 																		   resource:self
 																		   selector:@selector(scheduleResourceForEncode:)
 																		  andMethod: POST];
+	
+	HSResourceDescriptor *deleteResources = [HSResourceDescriptor descriptorWithPath: @"/encoder"
+																			resource:self
+																			selector:@selector(deleteResources:)
+																		   andMethod: DELETE];
     HSResourceDescriptor *deleteResource = [HSResourceDescriptor descriptorWithPath: @"/encoder/{resourceId}"
                                                                            resource:self
                                                                            selector:@selector(deleteResource:)
                                                                           andMethod: DELETE];
 	
-	return [NSArray arrayWithObjects: listResource, scanResource, encodeResource, deleteResource, nil];
+	return [NSArray arrayWithObjects: listResource, scanResource, encodeResource, deleteResources, deleteResource, nil];
 }
 
 - (HSResponse *) listResources: (HSRequestParameters*) params
@@ -57,8 +62,6 @@
 
 - (HSResponse *) scanResource: (HSRequestParameters *) params
 {
-	// passed ressources are double HTTP encoded (/ in path).
-	// YARES will HTTP escape once by design, take care of the second unescape explicitly here
 	NSString *resourceId = [params.pathParameters objectForKey: @"resourceId"];
 	
 	// and ask encoder to scan that for us.
@@ -76,8 +79,6 @@
 - (HSResponse *) scheduleResourceForEncode: (HSRequestParameters *) params
 {
 	NSDictionary *titleListDto = params.parameters;
-	// passed ressources are double HTTP encoded (/ in path).
-	// YARES will HTTP escape once by design, take care of the second unescape explicitly here
 	NSString *resourceId = [params.pathParameters objectForKey: @"resourceId"];
 	
 	// Scan first, to be sure we have the right content
@@ -96,9 +97,30 @@
 	return response;
 }
 
+- (HSResponse *) deleteResources: (HSRequestParameters *) params {
+	
+	MMTitleAssembler *assembler = [MMTitleAssembler sharedInstance];
+	NSArray *titleListIds = [assembler createTitleListIDs: params.parameters];
+	
+	// now, delete the suckers
+	BOOL hasErrors = NO;
+	ITSEncoder *encoder = [ITSEncoder sharedEncoder];
+	for(NSString *resourceId in titleListIds) {
+		NSError *error = [encoder deleteResource: resourceId];
+		hasErrors |= error != nil;
+	}
+	
+	HSResponse *response = [HSResponse jsonResponse];
+	response.code = !hasErrors ? OK : BAD_REQUEST;
+	NSMutableDictionary *dictionary = [NSMutableDictionary dictionaryWithCapacity: 1];
+	[dictionary setObjectNilSafe: @"One or more resources could not be deleted"
+						  forKey: NSLocalizedDescriptionKey];
+	response.object = dictionary;
+	
+	return response;
+}
+
 - (HSResponse *) deleteResource: (HSRequestParameters *) params {
-	// passed ressources are double HTTP encoded (/ in path).
-	// YARES will HTTP escape once by design, take care of the second unescape explicitly here
 	NSString *encodedResourceId = [params.pathParameters objectForKey: @"resourceId"];
 	NSString *resourceId = [encodedResourceId stringByReplacingPercentEscapesUsingEncoding: NSUTF8StringEncoding];
 	
