@@ -424,7 +424,18 @@ static ITSEncoder *sharedEncoder;
 	
 	ITSConfigurationRepository *configurationRepository = [ITSConfigurationRepository sharedInstance];
 	ITSConfiguration *configuration = [configurationRepository readConfiguration];
-	NSString *file = [NSString stringWithFormat: @"%@/%@-%02li.m4v", configuration.autoScanPath, titleList.name, self.activeTitle.index];
+	
+	// strip extension out of the title name, if there is any
+	NSString *titleName = titleList.name;
+	if(titleName.pathExtension.length > 0) {
+		NSString *extension = [NSString stringWithFormat: @".%@", [titleList.name pathExtension]];
+		titleName = [titleName stringByReplacingOccurrencesOfString: extension withString: @""];
+	}
+	
+	// append title number if we have more than one title
+	NSString *suffix = titleList.titles.count == 1 ? @"" : [NSString stringWithFormat: @"-%02li", self.activeTitle.index];
+	// create the target file name now
+	NSString *file = [NSString stringWithFormat: @"%@/%@%@.m4v", configuration.autoScanPath, titleName, suffix];
 	
 	DDLogInfo(@"Encoding %@ titile %ld to %@", titleList.titleListId, titlePosition, file);
 	job->file = [file cStringUsingEncoding: NSUTF8StringEncoding];
