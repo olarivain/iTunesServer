@@ -44,11 +44,7 @@
 - (void) extractDestinationPath
 {
 	// kindly ask itunes for it's DB locatin, from there we'll derive the Auto import folder
-	CFArrayRef recentLibraries = CFPreferencesCopyAppValue((CFStringRef)@"iTunesRecentDatabasePaths",(CFStringRef)@"com.apple.iApps");
-	NSArray *libraryPaths = (__bridge NSArray*)recentLibraries;
-	NSString *libraryPath = [libraryPaths boundSafeObjectAtIndex: 0];
-	
-	CFRelease(recentLibraries);
+	NSString *libraryPath = (__bridge NSString *)(CFPreferencesCopyAppValue((CFStringRef)@"NSNavLastRootDirectory",(CFStringRef)@"com.apple.iTunes"));
 	
 	// path is invalid, get the hell out
 	if(libraryPath == nil)
@@ -58,27 +54,21 @@
 	}
 	
 	// build destination path
-	NSString *libraryFolder = [[libraryPath stringByExpandingTildeInPath] stringByDeletingLastPathComponent];
-	NSString *automaticallyImportPath = [NSString stringWithFormat: @"%@/iTunes Music/Automatically Add to iTunes/", libraryFolder];
+	NSString *libraryFolder = [libraryPath stringByExpandingTildeInPath];
+	NSString *automaticallyImportPath = [NSString stringWithFormat: @"%@/Automatically Add to iTunes.localized/", libraryFolder];
 	
 	// ask file manager if destination exists and is a folder, if not, get the hell out
 	BOOL isFolder = NO;
 	NSFileManager *fileManager = [NSFileManager defaultManager];
 	if(![fileManager fileExistsAtPath: automaticallyImportPath isDirectory: &isFolder] && !isFolder)
 	{
-		
-		automaticallyImportPath = [NSString stringWithFormat: @"%@/iTunes Media/Automatically Add to iTunes/", libraryFolder];
-		if(![fileManager fileExistsAtPath: automaticallyImportPath isDirectory: &isFolder] && !isFolder)
-		{
-			automaticallyImportPath = [NSString stringWithFormat: @"%@/iTunes Media/Automatically Add to iTunes.localized/", libraryFolder];
-			if(![fileManager fileExistsAtPath: automaticallyImportPath isDirectory: &isFolder] && !isFolder)
-			{
-				[self setScannedPath: nil];
-				return;
-			}
-		}
+		DDLogInfo(@"Could not find iTunes' auto import path, cancelling auto import feature.");
+		automaticallyImportPath = nil;
+		[self setScannedPath: nil];
+		return;
 	}
 	
+	DDLogInfo(@"Auto importing to iTunes folder at %@.", automaticallyImportPath);
 	// Now, we can set the destination path
 	destinationPath = automaticallyImportPath;
 }
