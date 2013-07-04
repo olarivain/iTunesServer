@@ -16,7 +16,7 @@ puts
 # loads local dev version of a pod if found, failing back to released version otherwise
 def dev_pod_or_released(name, version, dev_path)
 	if dev_path != nil && (File.exists? File.expand_path(dev_path)) then
-		pod name, :local => dev_path
+		pod name, :path => dev_path
 		puts "Using #{name} located at #{dev_path}"
 	else
 		pod name, "~> #{version}"
